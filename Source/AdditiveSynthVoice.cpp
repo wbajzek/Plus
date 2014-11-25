@@ -59,22 +59,23 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 {
     for (int i = 0; i < numPartials; i++)
     {
-        const double cyclesPerSample = (freq * (float)(i+1)) / getSampleRate();
-        const double angleDelta = cyclesPerSample * 2.0 * double_Pi;
+        double cyclesPerSample = (freq * (float)(i+1)) / getSampleRate();
+        double angleDelta = cyclesPerSample * 2.0 * double_Pi;
+        int startSampleForPartial = startSample;
+        int numSamplesForPartial = numSamples;
         
         if (angleDelta != 0.0)
         {
             
-            while (--numSamples >= 0)
+            while (--numSamplesForPartial >= 0)
             {
                 const float currentSample = (float) ((sin (currentAngles[i]) * partialLevels[i]) / (float)numPartials);
                 
                 for (int channelNum = outputBuffer.getNumChannels(); --channelNum >= 0;)
-                    outputBuffer.addSample(channelNum, startSample, currentSample);
+                    outputBuffer.addSample(channelNum, startSampleForPartial, currentSample);
                 
                 currentAngles[i] += angleDelta;
-                
-                ++startSample;
+                ++startSampleForPartial;
             }
         }
     }
