@@ -11,32 +11,15 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-double cyclesPerSecond = 440.0;
-double currentAngle = 0.0;
-double angleDelta = 0.0;
-double level = 0.5;
-float partialLevels[] = { 1.0, 0.5, 0.4, 0.3, 0.2, 0.1, 0.05, 0.025 };
-
 struct Partial
 {
-    double currentAngle;
-    double angleDelta;
     double cyclesPerSecond;
     float level;
 };
 
-Partial partials[8] =
-{
-    { 0.0, 0.0, 55.0, 0.5 },
-    { 0.0, 0.0, 110.0, 0.4 },
-    { 0.0, 0.0, 165.0, 0.3 },
-    { 0.0, 0.0, 220.0, 0.2 },
-    { 0.0, 0.0, 275.0, 0.1 },
-    { 0.0, 0.0, 330.0, 0.05 },
-    { 0.0, 0.0, 385.0, 0.025 },
-    { 0.0, 0.0, 440.0, 0.0125 },
+double freq = 110.0;
 
-};
+double partialLevels[8] = { 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1 };
 
 
 //==============================================================================
@@ -153,12 +136,6 @@ void PlusAudioProcessor::changeProgramName (int index, const String& newName)
 //==============================================================================
 void PlusAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    for (int i=0; i < 8; i++) {
-        partials[i].angleDelta = 0.0;
-        partials[i].currentAngle = 0.0;
-        partials[i].level = partialLevels[i];
-        partials[i].cyclesPerSecond = ((double) i) * cyclesPerSecond;
-    }
 }
 
 void PlusAudioProcessor::releaseResources()
@@ -181,29 +158,28 @@ void PlusAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& mi
     
     for (int i = 0; i < 8; i++)
     {
-        Partial p = partials[i];
-        const double cyclesPerSample = p.cyclesPerSecond / getSampleRate();
-        p.angleDelta = cyclesPerSample * 2.0 * double_Pi;
+        const double cyclesPerSample = (freq * (float)(i+1)) / getSampleRate();
+        const double angleDelta = cyclesPerSample * 2.0 * double_Pi;
         int startSample = 0;
         int numSamples = buffer.getNumSamples();
         
-        if (p.angleDelta != 0.0)
+        if (angleDelta != 0.0)
         {
+            double currentAngle = 0.0;
+
             while (--numSamples >= 0)
             {
-                const float currentSample = (float) ((sin (p.currentAngle) * p.level) / 8.0);
+                const float currentSample = (float) ((sin (currentAngle) * partialLevels[i]) / 8.0);
                 
-                for (int i = buffer.getNumChannels(); --i >= 0;)
-                    buffer.addSample(i, startSample, currentSample);
+                for (int channelNum = buffer.getNumChannels(); --channelNum >= 0;)
+                    buffer.addSample(channelNum, startSample, currentSample);
                 
-                p.currentAngle += p.angleDelta;
+                currentAngle += angleDelta;
                 
                 ++startSample;
-                
             }
         }
     }
-    
 }
 
 //==============================================================================
