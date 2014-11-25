@@ -17,25 +17,31 @@ double angleDelta = 0.0;
 double level = 0.5;
 float partialLevels[] = { 1.0, 0.5, 0.4, 0.3, 0.2, 0.1, 0.05, 0.025 };
 
-struct Partial {
+struct Partial
+{
     double currentAngle;
     double angleDelta;
     double cyclesPerSecond;
-    double level;
+    float level;
 };
 
-Partial partials[8];
+Partial partials[8] =
+{
+    { 0.0, 0.0, 55.0, 0.5 },
+    { 0.0, 0.0, 110.0, 0.4 },
+    { 0.0, 0.0, 165.0, 0.3 },
+    { 0.0, 0.0, 220.0, 0.2 },
+    { 0.0, 0.0, 275.0, 0.1 },
+    { 0.0, 0.0, 330.0, 0.05 },
+    { 0.0, 0.0, 385.0, 0.025 },
+    { 0.0, 0.0, 440.0, 0.0125 },
+
+};
 
 
 //==============================================================================
 PlusAudioProcessor::PlusAudioProcessor()
 {
-    for (int i=0; i < 8; i++) {
-        partials[i].angleDelta = 0.0;
-        partials[i].currentAngle = 0.0;
-        partials[i].level = partialLevels[i];
-        partials[i].cyclesPerSecond = ((double) i) * cyclesPerSecond;
-    }
 }
 
 PlusAudioProcessor::~PlusAudioProcessor()
