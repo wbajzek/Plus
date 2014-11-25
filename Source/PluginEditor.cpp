@@ -8,6 +8,7 @@
   ==============================================================================
 */
 
+#include "AdditiveSynth.h"
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
