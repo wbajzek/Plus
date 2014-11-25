@@ -18,9 +18,9 @@ struct Partial
 };
 
 double freq = 110.0;
-
-double partialLevels[8] = { 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1 };
-
+const int numPartials = 8;
+double partialLevels[numPartials] = { 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1 };
+double currentAngles[numPartials] = { 0.0 };
 
 //==============================================================================
 PlusAudioProcessor::PlusAudioProcessor()
@@ -156,7 +156,7 @@ void PlusAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& mi
     for (int i = getNumInputChannels(); i < getNumOutputChannels(); ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < numPartials; i++)
     {
         const double cyclesPerSample = (freq * (float)(i+1)) / getSampleRate();
         const double angleDelta = cyclesPerSample * 2.0 * double_Pi;
@@ -165,16 +165,15 @@ void PlusAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& mi
         
         if (angleDelta != 0.0)
         {
-            double currentAngle = 0.0;
 
             while (--numSamples >= 0)
             {
-                const float currentSample = (float) ((sin (currentAngle) * partialLevels[i]) / 8.0);
+                const float currentSample = (float) ((sin (currentAngles[i]) * partialLevels[i]) / 8.0);
                 
                 for (int channelNum = buffer.getNumChannels(); --channelNum >= 0;)
                     buffer.addSample(channelNum, startSample, currentSample);
                 
-                currentAngle += angleDelta;
+                currentAngles[i] += angleDelta;
                 
                 ++startSample;
             }
