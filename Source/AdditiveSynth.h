@@ -12,6 +12,15 @@
 const int numVoices = 8;
 const int numPartials = 16;
 
+enum Parameters
+{
+    // envelope
+    globalAttackParam,
+    globalDecayParam,
+    globalSustainParam,
+    globalReleaseParam,
+};
+
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "AdditiveSynthSound.h"
 #include "AdditiveSynthVoice.h"

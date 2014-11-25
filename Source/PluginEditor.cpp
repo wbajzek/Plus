@@ -18,7 +18,35 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    setSize (200, 200);
+    globalAttack.setSliderStyle(Slider::LinearBarVertical);
+    globalAttack.setRange(0.0, 127.0, 1.0);
+    globalAttack.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    globalAttack.setPopupDisplayEnabled(true, this);
+    globalAttack.setValue(1.0);
+    addAndMakeVisible(globalAttack);
+    
+    globalDecay.setSliderStyle(Slider::LinearBarVertical);
+    globalDecay.setRange(0.0, 127.0, 1.0);
+    globalDecay.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    globalDecay.setPopupDisplayEnabled(true, this);
+    globalDecay.setValue(1.0);
+    addAndMakeVisible(globalDecay);
+
+    globalSustain.setSliderStyle(Slider::LinearBarVertical);
+    globalSustain.setRange(0.0, 127.0, 1.0);
+    globalSustain.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    globalSustain.setPopupDisplayEnabled(true, this);
+    globalSustain.setValue(1.0);
+    addAndMakeVisible(globalSustain);
+
+    globalRelease.setSliderStyle(Slider::LinearBarVertical);
+    globalRelease.setRange(0.0, 127.0, 1.0);
+    globalRelease.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    globalRelease.setPopupDisplayEnabled(true, this);
+    globalRelease.setValue(1.0);
+    addAndMakeVisible(globalRelease);
+    
 }
 
 PlusAudioProcessorEditor::~PlusAudioProcessorEditor()
@@ -32,11 +60,12 @@ void PlusAudioProcessorEditor::paint (Graphics& g)
 
     g.setColour (Colours::black);
     g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), Justification::centred, 1);
 }
 
 void PlusAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    globalAttack.setBounds (40, 30, 20, getHeight() - 60);
+    globalDecay.setBounds (60, 30, 20, getHeight() - 60);
+    globalRelease.setBounds (80, 30, 20, getHeight() - 60);
+    globalSustain.setBounds (100, 30, 20, getHeight() - 60);
 }
