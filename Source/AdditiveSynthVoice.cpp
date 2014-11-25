@@ -8,7 +8,8 @@
 
 #include "AdditiveSynth.h"
 
-const double freq = 110.0;
+double freq = 110.0;
+double level = 0;
 const int numPartials = 16;
 double partialLevels[numPartials];
 double currentAngles[numPartials] = { 0.0 };
@@ -38,11 +39,14 @@ bool AdditiveSynthVoice::canPlaySound (SynthesiserSound* sound)
 
 void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float velocity, SynthesiserSound* /*sound*/, const int /*currrentPitchWheelPosition*/)
 {
-    
+    freq = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
+    level = 0.8;
+//    level = velocity/127;
 }
 
 void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
 {
+    level = 0.0;
 }
 
 void AdditiveSynthVoice::pitchWheelMoved (const int /*newValue*/)
@@ -64,12 +68,12 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
         int startSampleForPartial = startSample;
         int numSamplesForPartial = numSamples;
         
-        if (angleDelta != 0.0)
+        if (angleDelta != 0.0 && level > 0.0)
         {
             
             while (--numSamplesForPartial >= 0)
             {
-                const float currentSample = (float) ((sin (currentAngles[i]) * partialLevels[i]) / (float)numPartials);
+                const float currentSample = (float) ((sin (currentAngles[i]) * partialLevels[i]) / (float)numPartials) * level;
                 
                 for (int channelNum = outputBuffer.getNumChannels(); --channelNum >= 0;)
                     outputBuffer.addSample(channelNum, startSampleForPartial, currentSample);

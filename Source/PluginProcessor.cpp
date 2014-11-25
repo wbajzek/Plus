@@ -130,6 +130,7 @@ void PlusAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& mi
 {
     buffer.clear();
     int numSamples = buffer.getNumSamples();
+    keyboardState.processNextMidiBuffer(midiMessages, 0, numSamples, true);
 
     synth.renderNextBlock(buffer, midiMessages, 0, numSamples);
 }
