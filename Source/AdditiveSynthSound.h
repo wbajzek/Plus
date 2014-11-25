@@ -18,6 +18,8 @@ public:
     
     bool appliesToNote(const int /*midiNoteNumber*/);
     bool appliesToChannel(const int /*midiChannel*/);
+    
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AdditiveSynthSound);
 };
 
 #endif /* defined(__Plus__AdditiveSynthSound__) */

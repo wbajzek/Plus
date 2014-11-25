@@ -34,7 +34,7 @@ bool AdditiveSynthVoice::canPlaySound (SynthesiserSound* sound)
     return true;
 }
 
-void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float velocity, SynthesiserSound* /*sound*/, const int /*currrentPitchWheelPosition*/)
+void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float velocity, SynthesiserSound* /*sound*/, const int /*currentPitchWheelPosition*/)
 {
     freq = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
     level = 0.8;
