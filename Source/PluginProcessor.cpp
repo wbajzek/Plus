@@ -5,8 +5,10 @@
 //==============================================================================
 PlusAudioProcessor::PlusAudioProcessor()
 {
-    synth.addVoice(new AdditiveSynthVoice(parameters));
+    for (int i = 0; i < numVoices; i++)
+        synth.addVoice(new AdditiveSynthVoice(parameters));
     synth.addSound(new AdditiveSynthSound());
+    synth.setNoteStealingEnabled(true);
 }
 
 PlusAudioProcessor::~PlusAudioProcessor()

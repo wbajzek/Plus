@@ -8,11 +8,8 @@
 
 #include "AdditiveSynth.h"
 
-double freq = 110.0;
-double level = 0;
-const int numPartials = 16;
-double partialLevels[numPartials];
-double currentAngles[numPartials] = { 0.0 };
+
+
 
 
 AdditiveSynthVoice::AdditiveSynthVoice(float* parameters)
@@ -88,7 +85,10 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 
 bool AdditiveSynthVoice::isVoiceActive() const
 {
-    return true;
+    if (level > 0.0)
+        return true;
+    else
+        return false;
 }
 
 void AdditiveSynthVoice::aftertouchChanged (int newAftertouchValue)

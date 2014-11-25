@@ -44,6 +44,10 @@ private:
     };
     
     float* localParameters;
+    double freq = 110.0;
+    double level = 0;
+    double partialLevels[numPartials];
+    double currentAngles[numPartials] = { 0.0 };
 };
 
 #endif /* defined(__Plus__AdditiveSynthVoice__) */
