@@ -146,15 +146,7 @@ void PlusAudioProcessor::releaseResources()
 
 void PlusAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    
-    // In case we have more outputs than inputs, this code clears any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    // I've added this to avoid people getting screaming feedback
-    // when they first compile the plugin, but obviously you don't need to
-    // this code if your algorithm already fills all the output channels.
-    for (int i = getNumInputChannels(); i < getNumOutputChannels(); ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
+    buffer.clear();
     
     for (int i = 0; i < numPartials; i++)
     {
@@ -168,7 +160,7 @@ void PlusAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& mi
 
             while (--numSamples >= 0)
             {
-                const float currentSample = (float) ((sin (currentAngles[i]) * partialLevels[i]) / 8.0);
+                const float currentSample = (float) ((sin (currentAngles[i]) * partialLevels[i]) / (float)numPartials);
                 
                 for (int channelNum = buffer.getNumChannels(); --channelNum >= 0;)
                     buffer.addSample(channelNum, startSample, currentSample);
