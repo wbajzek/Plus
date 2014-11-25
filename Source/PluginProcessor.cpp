@@ -169,6 +169,7 @@ void PlusAudioProcessor::releaseResources()
 
 void PlusAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
+    
     // In case we have more outputs than inputs, this code clears any output
     // channels that didn't contain input data, (because these aren't
     // guaranteed to be empty - they may contain garbage).
@@ -177,55 +178,31 @@ void PlusAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& mi
     // this code if your algorithm already fills all the output channels.
     for (int i = getNumInputChannels(); i < getNumOutputChannels(); ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
-
-    double cyclesPerSample = cyclesPerSecond / getSampleRate();
-    angleDelta = cyclesPerSample * 2.0 * double_Pi;
-    int startSample = 0;
-    int numSamples = buffer.getNumSamples();
     
-    if (angleDelta != 0.0)
+    for (int i = 0; i < 8; i++)
     {
-        while (--numSamples >= 0)
+        Partial p = partials[i];
+        const double cyclesPerSample = p.cyclesPerSecond / getSampleRate();
+        p.angleDelta = cyclesPerSample * 2.0 * double_Pi;
+        int startSample = 0;
+        int numSamples = buffer.getNumSamples();
+        
+        if (p.angleDelta != 0.0)
         {
-            const float currentSample = (float) (sin (currentAngle) * level);
-            
-            for (int i = buffer.getNumChannels(); --i >= 0;)
-                buffer.addSample(i, startSample, currentSample);
-            
-            currentAngle += angleDelta;
-            
-            ++startSample;
-            
+            while (--numSamples >= 0)
+            {
+                const float currentSample = (float) ((sin (p.currentAngle) * p.level) / 8.0);
+                
+                for (int i = buffer.getNumChannels(); --i >= 0;)
+                    buffer.addSample(i, startSample, currentSample);
+                
+                p.currentAngle += p.angleDelta;
+                
+                ++startSample;
+                
+            }
         }
     }
-
-//
-//    for (int i = 0; i < sizeof(partials); i++)
-//    {
-//        Partial p = partials[i];
-//        double cyclesPerSample = p.cyclesPerSecond / getSampleRate();
-//        p.angleDelta = cyclesPerSample * 2.0 * double_Pi;
-//        int startSample = 0;
-//        int numSamples = buffer.getNumSamples();
-//        
-//        if (p.angleDelta != 0.0)
-//        {
-//            while (--numSamples >= 0)
-//            {
-//                const float currentSample = (float) (sin (p.currentAngle) * p.level);
-//                
-//                for (int i = buffer.getNumChannels(); --i >= 0;)
-//                    buffer.addSample(i, startSample, currentSample);
-//                // I get silence
-//                
-//                p.currentAngle += p.angleDelta;
-//                
-//                ++startSample;
-//                
-//            }
-//        }
-//    }
-//
     
 }
 
