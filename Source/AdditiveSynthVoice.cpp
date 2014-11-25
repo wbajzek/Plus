@@ -9,14 +9,17 @@
 #include "AdditiveSynth.h"
 
 const double freq = 110.0;
-const int numPartials = 8;
-double partialLevels[numPartials] = { 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1 };
+const int numPartials = 16;
+double partialLevels[numPartials];
 double currentAngles[numPartials] = { 0.0 };
 
 
 AdditiveSynthVoice::AdditiveSynthVoice(float* parameters)
 {
     localParameters = parameters;
+    double level = 0.8;
+    for (int i=0; i < numPartials; i++)
+        partialLevels[i]= level = level * 0.8f;
 }
 
 AdditiveSynthVoice::~AdditiveSynthVoice()
