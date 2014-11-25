@@ -153,8 +153,12 @@ void PlusAudioProcessor::changeProgramName (int index, const String& newName)
 //==============================================================================
 void PlusAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    for (int i=0; i < 8; i++) {
+        partials[i].angleDelta = 0.0;
+        partials[i].currentAngle = 0.0;
+        partials[i].level = partialLevels[i];
+        partials[i].cyclesPerSecond = ((double) i) * cyclesPerSecond;
+    }
 }
 
 void PlusAudioProcessor::releaseResources()
