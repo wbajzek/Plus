@@ -18,7 +18,7 @@ enum Parameters
     globalAttackParam,
     globalDecayParam,
     globalSustainParam,
-    globalReleaseParam,
+    globalReleaseParam
 };
 
 #include "../JuceLibraryCode/JuceHeader.h"

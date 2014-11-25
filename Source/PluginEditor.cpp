@@ -21,33 +21,37 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     // editor's size to whatever you need it to be.
     setSize (200, 200);
     globalAttack.setSliderStyle(Slider::LinearBarVertical);
-    globalAttack.setRange(0.0, 127.0, 1.0);
+    globalAttack.setRange(0.0, 10.0, 0.1);
     globalAttack.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalAttack.setPopupDisplayEnabled(true, this);
     globalAttack.setValue(1.0);
     addAndMakeVisible(globalAttack);
     
     globalDecay.setSliderStyle(Slider::LinearBarVertical);
-    globalDecay.setRange(0.0, 127.0, 1.0);
+    globalDecay.setRange(0.0, 10.0, 0.1);
     globalDecay.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalDecay.setPopupDisplayEnabled(true, this);
     globalDecay.setValue(1.0);
     addAndMakeVisible(globalDecay);
 
     globalSustain.setSliderStyle(Slider::LinearBarVertical);
-    globalSustain.setRange(0.0, 127.0, 1.0);
+    globalSustain.setRange(0.0, 1.0, 0.1);
     globalSustain.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalSustain.setPopupDisplayEnabled(true, this);
-    globalSustain.setValue(1.0);
+    globalSustain.setValue(0.8);
     addAndMakeVisible(globalSustain);
 
     globalRelease.setSliderStyle(Slider::LinearBarVertical);
-    globalRelease.setRange(0.0, 127.0, 1.0);
+    globalRelease.setRange(0.0, 10.0, 0.1);
     globalRelease.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalRelease.setPopupDisplayEnabled(true, this);
     globalRelease.setValue(1.0);
     addAndMakeVisible(globalRelease);
     
+    globalAttack.addListener(this);
+    globalDecay.addListener(this);
+    globalSustain.addListener(this);
+    globalRelease.addListener(this);
 }
 
 PlusAudioProcessorEditor::~PlusAudioProcessorEditor()
@@ -67,6 +71,18 @@ void PlusAudioProcessorEditor::resized()
 {
     globalAttack.setBounds (40, 30, 20, getHeight() - 60);
     globalDecay.setBounds (60, 30, 20, getHeight() - 60);
-    globalRelease.setBounds (80, 30, 20, getHeight() - 60);
-    globalSustain.setBounds (100, 30, 20, getHeight() - 60);
+    globalSustain.setBounds (80, 30, 20, getHeight() - 60);
+    globalRelease.setBounds (100, 30, 20, getHeight() - 60);
+}
+
+void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
+{
+    if (slider == &globalAttack)
+        processor.setParameter(0, globalAttack.getValue());
+    if (slider == &globalDecay)
+        processor.setParameter(1, globalDecay.getValue());
+    if (slider == &globalSustain)
+        processor.setParameter(2, globalSustain.getValue());
+    if (slider == &globalRelease)
+        processor.setParameter(3, globalRelease.getValue());
 }
