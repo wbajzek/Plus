@@ -26,7 +26,7 @@ AdditiveSynthVoice::~AdditiveSynthVoice()
 
 float AdditiveSynthVoice::getParameter(int index)
 {
-    return 0.0f;
+    return localParameters[index];
 }
 
 bool AdditiveSynthVoice::canPlaySound (SynthesiserSound* sound)
@@ -37,7 +37,7 @@ bool AdditiveSynthVoice::canPlaySound (SynthesiserSound* sound)
 void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float velocity, SynthesiserSound* /*sound*/, const int /*currentPitchWheelPosition*/)
 {
     freq = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
-    level = 0.8;
+    level = getParameter(2);
 //    level = velocity/127;
 }
 

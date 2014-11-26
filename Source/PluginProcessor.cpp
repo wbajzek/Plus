@@ -23,16 +23,17 @@ const String PlusAudioProcessor::getName() const
 
 int PlusAudioProcessor::getNumParameters()
 {
-    return 0;
+    return 4;
 }
 
 float PlusAudioProcessor::getParameter (int index)
 {
-    return 0.0f;
+    return parameters[index];
 }
 
 void PlusAudioProcessor::setParameter (int index, float newValue)
 {
+    parameters[index] = newValue;
 }
 
 const String PlusAudioProcessor::getParameterName (int index)

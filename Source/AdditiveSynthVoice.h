@@ -39,15 +39,14 @@ public:
 
     
 private:
-    enum Parameters
-    {
-    };
-    
+
     float* localParameters;
     double freq = 110.0;
     double level = 0;
     double partialLevels[numPartials];
     double currentAngles[numPartials] = { 0.0 };
+    
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AdditiveSynthVoice);
 };
 
 #endif /* defined(__Plus__AdditiveSynthVoice__) */
