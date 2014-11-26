@@ -15,7 +15,7 @@
 AdditiveSynthVoice::AdditiveSynthVoice(float* parameters)
 {
     localParameters = parameters;
-    double level = 0.8;
+    double level = 1.0;
     for (int i=0; i < numPartials; i++)
         partialLevels[i]= level = level * 0.8f;
 }
@@ -38,7 +38,7 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
 {
     freq = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
     velocity = midiVelocity;
-    envLevel = 0.0;
+    envLevel = 0.001;
     samplesSinceTrigger = 0;
 }
 
@@ -58,29 +58,32 @@ void AdditiveSynthVoice::controllerMoved (const int /*controllerNumber*/, const 
 
 void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int startSample, int numSamples)
 {
-    while (--numSamples >= 0)
+    if (envLevel > 0.000)
     {
-        float currentSample = 0.0;
-        const float amplitude = getAmplitude();
-        
-        for (int i = 0; i < numPartials; i++)
+        while (--numSamples >= 0)
         {
-            double cyclesPerSample = (freq * (float)(i+1)) / getSampleRate() +
-            ( i * getParameter(4) / 10 ) +
-            ( i * (getParameter(5) * amplitude));
-            double angleDelta = cyclesPerSample * 2.0 * double_Pi;
+            float currentSample = 0.0;
+            const float amplitude = getAmplitude();
             
-            if (angleDelta != 0.0)
+            for (int i = 0; i < numPartials; i++)
             {
-                currentSample += (float) ((sin (currentAngles[i]) * partialLevels[i]));
-                currentAngles[i] += angleDelta;
+                double cyclesPerSample = (freq * (float)(i+1)) / getSampleRate() +
+                ( i * getParameter(4) / 10 ) +
+                ( i * (getParameter(5) * amplitude));
+                double angleDelta = cyclesPerSample * 2.0 * double_Pi;
+                
+                if (angleDelta != 0.0)
+                {
+                    currentSample += (float) ((sin (currentAngles[i]) * partialLevels[i]));
+                    currentAngles[i] += angleDelta;
+                }
             }
-        }
+                
+            for (int channelNum = outputBuffer.getNumChannels(); --channelNum >= 0;)
+                outputBuffer.addSample(channelNum, startSample, (currentSample * amplitude / numPartials));
             
-        for (int channelNum = outputBuffer.getNumChannels(); --channelNum >= 0;)
-            outputBuffer.addSample(channelNum, startSample, (currentSample * amplitude / numPartials));
-        
-        ++startSample;
+            ++startSample;
+        }
     }
 }
 
