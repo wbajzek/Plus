@@ -37,14 +37,14 @@ bool AdditiveSynthVoice::canPlaySound (SynthesiserSound* sound)
 void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float velocity, SynthesiserSound* /*sound*/, const int /*currentPitchWheelPosition*/)
 {
     freq = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
-    level = 1.0;
+    level = 0.8;
     envLevel = 0.0;
     samplesSinceTrigger = 0;
 }
 
 void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
 {
-    level = 0.0;
+    envLevel = 0;
 }
 
 void AdditiveSynthVoice::pitchWheelMoved (const int /*newValue*/)
@@ -85,27 +85,27 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 
 float AdditiveSynthVoice::getAmplitude(int partial)
 {
-    const float secondsSinceTrigger = (float)samplesSinceTrigger/(float)getSampleRate() * 1000;
-    const float attackSeconds = getParameter(0) * 1000;
-    const float decaySeconds = attackSeconds + getParameter(1) * 1000;
+    const float sampleRate = (float)getSampleRate();
+    const float attack = getParameter(0) * sampleRate;
+    const float decay = attack + (getParameter(1) * sampleRate);
     const float sustainLevel = getParameter(2);
-    const float releaseSeconds = decaySeconds + getParameter(3) * 1000;
+    const float release = getParameter(3) * sampleRate;
     
     if (isKeyDown())
     {
-        if (attackSeconds > secondsSinceTrigger) // attack
-            envLevel = level * secondsSinceTrigger / attackSeconds;
-        else if (decaySeconds > secondsSinceTrigger) {
+        if (samplesSinceTrigger < attack)
+            envLevel = envLevel + (1.0 / attack);
+        else if (samplesSinceTrigger < attack + decay) {
             if (envLevel > sustainLevel)
-                envLevel = envLevel - level / decaySeconds;
+                envLevel = envLevel - (1.0/decay);
         }
         else
         {
-            envLevel = sustainLevel * level;
+            envLevel = sustainLevel;
         }
     }
     else if (envLevel > 0.0)
-        envLevel = sustainLevel - level / releaseSeconds;
+        envLevel = sustainLevel - level / release;
     else
         envLevel = 0.0;
     
