@@ -64,7 +64,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
         
         for (int i = 0; i < numPartials; i++)
         {
-            double cyclesPerSample = (freq * (float)(i+1)) / getSampleRate();
+            double cyclesPerSample = (freq * (float)(i+1)) / getSampleRate() + ( i * getParameter(4) / 10 );
             double angleDelta = cyclesPerSample * 2.0 * double_Pi;
             
             if (angleDelta != 0.0)

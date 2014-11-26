@@ -5,6 +5,7 @@
 //==============================================================================
 PlusAudioProcessor::PlusAudioProcessor()
 {
+    parameters[4] = 0.0; // partial scaling
     for (int i = 0; i < numVoices; i++)
         synth.addVoice(new AdditiveSynthVoice(parameters));
     synth.addSound(new AdditiveSynthSound());

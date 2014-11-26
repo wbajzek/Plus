@@ -48,10 +48,18 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     globalRelease.setValue(1.0);
     addAndMakeVisible(globalRelease);
     
+    partialScaling.setSliderStyle(Slider::LinearBarVertical);
+    partialScaling.setRange(-0.1, 0.1, 0.0001);
+    partialScaling.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialScaling.setPopupDisplayEnabled(true, this);
+    partialScaling.setValue(0.0);
+    addAndMakeVisible(partialScaling);
+    
     globalAttack.addListener(this);
     globalDecay.addListener(this);
     globalSustain.addListener(this);
     globalRelease.addListener(this);
+    partialScaling.addListener(this);
 }
 
 PlusAudioProcessorEditor::~PlusAudioProcessorEditor()
@@ -62,17 +70,19 @@ PlusAudioProcessorEditor::~PlusAudioProcessorEditor()
 void PlusAudioProcessorEditor::paint (Graphics& g)
 {
     g.fillAll (Colours::white);
-
     g.setColour (Colours::black);
     g.setFont (15.0f);
+    g.drawFittedText ("ADSR", 20, 0, 80, 30, Justification::centred, 1);
+    g.drawFittedText ("Stretch", 120, 0, 40, 30, Justification::centred, 1);
 }
 
 void PlusAudioProcessorEditor::resized()
 {
-    globalAttack.setBounds (40, 30, 20, getHeight() - 60);
-    globalDecay.setBounds (60, 30, 20, getHeight() - 60);
-    globalSustain.setBounds (80, 30, 20, getHeight() - 60);
-    globalRelease.setBounds (100, 30, 20, getHeight() - 60);
+    globalAttack.setBounds (20, 30, 20, getHeight() - 60);
+    globalDecay.setBounds (40, 30, 20, getHeight() - 60);
+    globalSustain.setBounds (60, 30, 20, getHeight() - 60);
+    globalRelease.setBounds (80, 30, 20, getHeight() - 60);
+    partialScaling.setBounds (130, 30, 20, getHeight() - 60);
 }
 
 void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
@@ -85,4 +95,6 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
         processor.setParameter(2, globalSustain.getValue());
     if (slider == &globalRelease)
         processor.setParameter(3, globalRelease.getValue());
+    if (slider == &partialScaling)
+        processor.setParameter(4, partialScaling.getValue());
 }
