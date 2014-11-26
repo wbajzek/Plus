@@ -37,7 +37,7 @@ public:
 
     bool isPlayingChannel (int midiChannel) const;
     
-    float getAmplitude(int partial);
+    float getAmplitude();
 
     
 private:

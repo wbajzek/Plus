@@ -44,7 +44,6 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float veloci
 
 void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
 {
-    envLevel = 0;
 }
 
 void AdditiveSynthVoice::pitchWheelMoved (const int /*newValue*/)
@@ -59,31 +58,30 @@ void AdditiveSynthVoice::controllerMoved (const int /*controllerNumber*/, const 
 
 void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int startSample, int numSamples)
 {
-    for (int i = 0; i < numPartials; i++)
+    while (--numSamples >= 0)
     {
-        double cyclesPerSample = (freq * (float)(i+1)) / getSampleRate();
-        double angleDelta = cyclesPerSample * 2.0 * double_Pi;
-        int startSampleForPartial = startSample;
-        int numSamplesForPartial = numSamples;
+        float currentSample = 0.0;
         
-        if (angleDelta != 0.0 && level > 0.0)
+        for (int i = 0; i < numPartials; i++)
         {
+            double cyclesPerSample = (freq * (float)(i+1)) / getSampleRate();
+            double angleDelta = cyclesPerSample * 2.0 * double_Pi;
             
-            while (--numSamplesForPartial >= 0)
+            if (angleDelta != 0.0)
             {
-                const float currentSample = (float) ((sin (currentAngles[i]) * getAmplitude(i)));
-                
-                for (int channelNum = outputBuffer.getNumChannels(); --channelNum >= 0;)
-                    outputBuffer.addSample(channelNum, startSampleForPartial, currentSample);
-                
+                currentSample += (float) ((sin (currentAngles[i]) * partialLevels[i]));
                 currentAngles[i] += angleDelta;
-                ++startSampleForPartial;
             }
         }
+            
+        for (int channelNum = outputBuffer.getNumChannels(); --channelNum >= 0;)
+            outputBuffer.addSample(channelNum, startSample, (currentSample * getAmplitude() / numPartials));
+        
+        ++startSample;
     }
 }
 
-float AdditiveSynthVoice::getAmplitude(int partial)
+float AdditiveSynthVoice::getAmplitude()
 {
     const float sampleRate = (float)getSampleRate();
     const float attack = getParameter(0) * sampleRate;
@@ -105,18 +103,18 @@ float AdditiveSynthVoice::getAmplitude(int partial)
         }
     }
     else if (envLevel > 0.0)
-        envLevel = sustainLevel - level / release;
+        envLevel = envLevel - 1.0 / release;
     else
         envLevel = 0.0;
     
     ++samplesSinceTrigger;
-    return partialLevels[partial] * envLevel / (float)numPartials * level;
+    return envLevel;
 }
 
 
 bool AdditiveSynthVoice::isVoiceActive() const
 {
-    if (level > 0.0)
+    if (envLevel > 0.0)
         return true;
     else
         return false;
