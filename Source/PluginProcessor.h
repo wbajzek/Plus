@@ -67,7 +67,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
 private:
-    float parameters[6];
+    float parameters[NUMBER_OF_PARAMETERS];
     Synthesiser synth;
     MidiKeyboardState keyboardState;
 

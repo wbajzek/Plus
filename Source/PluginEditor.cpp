@@ -24,7 +24,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     globalAttack.setRange(0.01, 10.0, 0.01);
     globalAttack.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalAttack.setPopupDisplayEnabled(true, this);
-    globalAttack.setValue(3.0);
+    globalAttack.setValue(0.01);
     addAndMakeVisible(globalAttack);
     
     globalDecay.setSliderStyle(Slider::LinearBarVertical);
