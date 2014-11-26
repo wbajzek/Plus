@@ -98,15 +98,15 @@ void PlusAudioProcessorEditor::resized()
 void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
 {
     if (slider == &globalAttack)
-        processor.setParameter(0, globalAttack.getValue());
+        processor.setParameter(ATTACK, globalAttack.getValue());
     if (slider == &globalDecay)
-        processor.setParameter(1, globalDecay.getValue());
+        processor.setParameter(DECAY, globalDecay.getValue());
     if (slider == &globalSustain)
-        processor.setParameter(2, globalSustain.getValue());
+        processor.setParameter(SUSTAIN, globalSustain.getValue());
     if (slider == &globalRelease)
-        processor.setParameter(3, globalRelease.getValue());
+        processor.setParameter(RELEASE, globalRelease.getValue());
     if (slider == &partialStretch)
-    processor.setParameter(4, partialStretch.getValue());
+    processor.setParameter(STRETCH, partialStretch.getValue());
     if (slider == &partialStretchEnvAmt)
-    processor.setParameter(5, partialStretchEnvAmt.getValue());
+    processor.setParameter(STRETCH_ENV_AMT, partialStretchEnvAmt.getValue());
 }

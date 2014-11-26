@@ -15,12 +15,12 @@ const int numPartials = 16;
 enum Parameters
 {
     // envelope
-    globalAttackParam,
-    globalDecayParam,
-    globalSustainParam,
-    globalReleaseParam,
-    partialStretch,
-    partialStretchEnvAmt
+    ATTACK,
+    DECAY,
+    SUSTAIN,
+    RELEASE,
+    STRETCH,
+    STRETCH_ENV_AMT
 };
 
 #include "../JuceLibraryCode/JuceHeader.h"

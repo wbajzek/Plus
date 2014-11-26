@@ -68,8 +68,8 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             for (int i = 0; i < numPartials; i++)
             {
                 double cyclesPerSample = (freq * (float)(i+1)) / getSampleRate() +
-                ( i * getParameter(4) / 10 ) +
-                ( i * (getParameter(5) * amplitude));
+                ( i * localParameters[STRETCH] / 10 ) +
+                ( i * (localParameters[STRETCH_ENV_AMT] * amplitude));
                 double angleDelta = cyclesPerSample * 2.0 * double_Pi;
                 
                 if (angleDelta != 0.0)
@@ -90,10 +90,10 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 float AdditiveSynthVoice::getAmplitude()
 {
     const float sampleRate = (float)getSampleRate();
-    const float attack = getParameter(0) * sampleRate;
-    const float decay = attack + (getParameter(1) * sampleRate);
-    const float sustainLevel = getParameter(2);
-    const float release = getParameter(3) * sampleRate;
+    const float attack = localParameters[ATTACK] * sampleRate;
+    const float decay = attack + (localParameters[DECAY] * sampleRate);
+    const float sustainLevel = localParameters[SUSTAIN];
+    const float release = localParameters[RELEASE] * sampleRate;
     
     if (isKeyDown())
     {
