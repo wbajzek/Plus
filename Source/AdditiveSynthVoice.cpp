@@ -37,8 +37,9 @@ bool AdditiveSynthVoice::canPlaySound (SynthesiserSound* sound)
 void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float velocity, SynthesiserSound* /*sound*/, const int /*currentPitchWheelPosition*/)
 {
     freq = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
-    level = getParameter(2);
-//    level = velocity/127;
+    level = 1.0;
+    envLevel = 0.0;
+    samplesSinceTrigger = 0;
 }
 
 void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
@@ -70,7 +71,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             
             while (--numSamplesForPartial >= 0)
             {
-                const float currentSample = (float) ((sin (currentAngles[i]) * partialLevels[i]) / (float)numPartials) * level;
+                const float currentSample = (float) ((sin (currentAngles[i]) * getAmplitude(i)));
                 
                 for (int channelNum = outputBuffer.getNumChannels(); --channelNum >= 0;)
                     outputBuffer.addSample(channelNum, startSampleForPartial, currentSample);
@@ -80,6 +81,36 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             }
         }
     }
+}
+
+float AdditiveSynthVoice::getAmplitude(int partial)
+{
+    const float secondsSinceTrigger = (float)samplesSinceTrigger/(float)getSampleRate() * 1000;
+    const float attackSeconds = getParameter(0) * 1000;
+    const float decaySeconds = attackSeconds + getParameter(1) * 1000;
+    const float sustainLevel = getParameter(2);
+    const float releaseSeconds = decaySeconds + getParameter(3) * 1000;
+    
+    if (isKeyDown())
+    {
+        if (attackSeconds > secondsSinceTrigger) // attack
+            envLevel = level * secondsSinceTrigger / attackSeconds;
+        else if (decaySeconds > secondsSinceTrigger) {
+            if (envLevel > sustainLevel)
+                envLevel = envLevel - level / decaySeconds;
+        }
+        else
+        {
+            envLevel = sustainLevel * level;
+        }
+    }
+    else if (envLevel > 0.0)
+        envLevel = sustainLevel - level / releaseSeconds;
+    else
+        envLevel = 0.0;
+    
+    ++samplesSinceTrigger;
+    return partialLevels[partial] * envLevel / (float)numPartials * level;
 }
 
 

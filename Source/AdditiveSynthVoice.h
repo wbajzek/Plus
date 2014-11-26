@@ -36,6 +36,8 @@ public:
     void setCurrentPlaybackSampleRate (double newRate);
 
     bool isPlayingChannel (int midiChannel) const;
+    
+    float getAmplitude(int partial);
 
     
 private:
@@ -43,8 +45,10 @@ private:
     float* localParameters;
     double freq = 110.0;
     double level = 0;
+    double envLevel = 0;
     double partialLevels[numPartials];
     double currentAngles[numPartials] = { 0.0 };
+    int samplesSinceTrigger = 0;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AdditiveSynthVoice);
 };
