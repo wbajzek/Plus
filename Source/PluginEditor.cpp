@@ -19,30 +19,30 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (200, 200);
+    setSize (180, 200);
     globalAttack.setSliderStyle(Slider::LinearBarVertical);
-    globalAttack.setRange(0.0, 10.0, 0.1);
+    globalAttack.setRange(0.01, 10.0, 0.01);
     globalAttack.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalAttack.setPopupDisplayEnabled(true, this);
     globalAttack.setValue(3.0);
     addAndMakeVisible(globalAttack);
     
     globalDecay.setSliderStyle(Slider::LinearBarVertical);
-    globalDecay.setRange(0.0, 10.0, 0.1);
+    globalDecay.setRange(0.01, 20.0, 0.01);
     globalDecay.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalDecay.setPopupDisplayEnabled(true, this);
     globalDecay.setValue(1.0);
     addAndMakeVisible(globalDecay);
 
     globalSustain.setSliderStyle(Slider::LinearBarVertical);
-    globalSustain.setRange(0.0, 1.0, 0.1);
+    globalSustain.setRange(0.0, 1.0, 0.01);
     globalSustain.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalSustain.setPopupDisplayEnabled(true, this);
     globalSustain.setValue(0.8);
     addAndMakeVisible(globalSustain);
 
     globalRelease.setSliderStyle(Slider::LinearBarVertical);
-    globalRelease.setRange(0.0, 10.0, 0.1);
+    globalRelease.setRange(0.01, 20.0, 0.01);
     globalRelease.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalRelease.setPopupDisplayEnabled(true, this);
     globalRelease.setValue(1.0);
