@@ -44,7 +44,7 @@ private:
 
     float* localParameters;
     double freq = 110.0;
-    double level = 0;
+    double velocity = 0;
     double envLevel = 0;
     double partialLevels[numPartials];
     double currentAngles[numPartials] = { 0.0 };

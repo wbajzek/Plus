@@ -34,10 +34,10 @@ bool AdditiveSynthVoice::canPlaySound (SynthesiserSound* sound)
     return true;
 }
 
-void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float velocity, SynthesiserSound* /*sound*/, const int /*currentPitchWheelPosition*/)
+void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVelocity, SynthesiserSound* /*sound*/, const int /*currentPitchWheelPosition*/)
 {
     freq = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
-    level = 0.8;
+    velocity = midiVelocity;
     envLevel = 0.0;
     samplesSinceTrigger = 0;
 }
@@ -92,18 +92,18 @@ float AdditiveSynthVoice::getAmplitude()
     if (isKeyDown())
     {
         if (samplesSinceTrigger < attack)
-            envLevel = envLevel + (1.0 / attack);
+            envLevel = envLevel + velocity / attack;
         else if (samplesSinceTrigger < attack + decay) {
-            if (envLevel > sustainLevel)
-                envLevel = envLevel - (1.0/decay);
+            if (envLevel > sustainLevel * velocity)
+                envLevel = envLevel - velocity / decay;
         }
         else
         {
-            envLevel = sustainLevel;
+            envLevel = sustainLevel * velocity;
         }
     }
     else if (envLevel > 0.0)
-        envLevel = envLevel - 1.0 / release;
+        envLevel = envLevel - velocity / release;
     else
         envLevel = 0.0;
     
