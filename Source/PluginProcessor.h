@@ -11,6 +11,7 @@
 #ifndef PLUGINPROCESSOR_H_INCLUDED
 #define PLUGINPROCESSOR_H_INCLUDED
 
+#include "AdditiveSynth.h"
 #include "../JuceLibraryCode/JuceHeader.h"
 
 

@@ -20,7 +20,25 @@ enum Parameters
     SUSTAIN,
     RELEASE,
     STRETCH,
-    STRETCH_ENV_AMT
+    STRETCH_ENV_AMT,
+    PARTIAL_1,
+    PARTIAL_2,
+    PARTIAL_3,
+    PARTIAL_4,
+    PARTIAL_5,
+    PARTIAL_6,
+    PARTIAL_7,
+    PARTIAL_8,
+    PARTIAL_9,
+    PARTIAL_10,
+    PARTIAL_11,
+    PARTIAL_12,
+    PARTIAL_13,
+    PARTIAL_14,
+    PARTIAL_15,
+    PARTIAL_16,
+    PARTIAL_LEVEL_ENV_AMT,
+    NUMBER_OF_PARAMETERS
 };
 
 #include "../JuceLibraryCode/JuceHeader.h"
