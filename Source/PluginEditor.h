@@ -38,7 +38,8 @@ private:
     Slider globalDecay;
     Slider globalSustain;
     Slider globalRelease;
-    Slider partialScaling;
+    Slider partialStretch;
+    Slider partialStretchEnvAmt;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlusAudioProcessorEditor)
 };

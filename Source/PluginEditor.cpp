@@ -19,7 +19,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (180, 200);
+    setSize (220, 200);
     globalAttack.setSliderStyle(Slider::LinearBarVertical);
     globalAttack.setRange(0.01, 10.0, 0.01);
     globalAttack.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
@@ -48,18 +48,26 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     globalRelease.setValue(1.0);
     addAndMakeVisible(globalRelease);
     
-    partialScaling.setSliderStyle(Slider::LinearBarVertical);
-    partialScaling.setRange(-0.1, 0.1, 0.0001);
-    partialScaling.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
-    partialScaling.setPopupDisplayEnabled(true, this);
-    partialScaling.setValue(0.0);
-    addAndMakeVisible(partialScaling);
+    partialStretch.setSliderStyle(Slider::LinearBarVertical);
+    partialStretch.setRange(-0.1, 0.1, 0.0001);
+    partialStretch.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialStretch.setPopupDisplayEnabled(true, this);
+    partialStretch.setValue(0.0);
+    addAndMakeVisible(partialStretch);
+    
+    partialStretchEnvAmt.setSliderStyle(Slider::LinearBarVertical);
+    partialStretchEnvAmt.setRange(-0.01, 0.01, 0.0001);
+    partialStretchEnvAmt.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialStretchEnvAmt.setPopupDisplayEnabled(true, this);
+    partialStretchEnvAmt.setValue(0.0);
+    addAndMakeVisible(partialStretchEnvAmt);
     
     globalAttack.addListener(this);
     globalDecay.addListener(this);
     globalSustain.addListener(this);
     globalRelease.addListener(this);
-    partialScaling.addListener(this);
+    partialStretch.addListener(this);
+    partialStretchEnvAmt.addListener(this);
 }
 
 PlusAudioProcessorEditor::~PlusAudioProcessorEditor()
@@ -74,6 +82,7 @@ void PlusAudioProcessorEditor::paint (Graphics& g)
     g.setFont (15.0f);
     g.drawFittedText ("ADSR", 20, 0, 80, 30, Justification::centred, 1);
     g.drawFittedText ("Stretch", 120, 0, 40, 30, Justification::centred, 1);
+    g.drawFittedText ("Env", 160, 0, 40, 30, Justification::centred, 1);
 }
 
 void PlusAudioProcessorEditor::resized()
@@ -82,7 +91,8 @@ void PlusAudioProcessorEditor::resized()
     globalDecay.setBounds (40, 30, 20, getHeight() - 60);
     globalSustain.setBounds (60, 30, 20, getHeight() - 60);
     globalRelease.setBounds (80, 30, 20, getHeight() - 60);
-    partialScaling.setBounds (130, 30, 20, getHeight() - 60);
+    partialStretch.setBounds (130, 30, 20, getHeight() - 60);
+    partialStretchEnvAmt.setBounds (170, 30, 20, getHeight() - 60);
 }
 
 void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
@@ -95,6 +105,8 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
         processor.setParameter(2, globalSustain.getValue());
     if (slider == &globalRelease)
         processor.setParameter(3, globalRelease.getValue());
-    if (slider == &partialScaling)
-        processor.setParameter(4, partialScaling.getValue());
+    if (slider == &partialStretch)
+    processor.setParameter(4, partialStretch.getValue());
+    if (slider == &partialStretchEnvAmt)
+    processor.setParameter(5, partialStretchEnvAmt.getValue());
 }

@@ -61,10 +61,13 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
     while (--numSamples >= 0)
     {
         float currentSample = 0.0;
+        const float amplitude = getAmplitude();
         
         for (int i = 0; i < numPartials; i++)
         {
-            double cyclesPerSample = (freq * (float)(i+1)) / getSampleRate() + ( i * getParameter(4) / 10 );
+            double cyclesPerSample = (freq * (float)(i+1)) / getSampleRate() +
+            ( i * getParameter(4) / 10 ) +
+            ( i * (getParameter(5) * amplitude));
             double angleDelta = cyclesPerSample * 2.0 * double_Pi;
             
             if (angleDelta != 0.0)
@@ -75,7 +78,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
         }
             
         for (int channelNum = outputBuffer.getNumChannels(); --channelNum >= 0;)
-            outputBuffer.addSample(channelNum, startSample, (currentSample * getAmplitude() / numPartials));
+            outputBuffer.addSample(channelNum, startSample, (currentSample * amplitude / numPartials));
         
         ++startSample;
     }
