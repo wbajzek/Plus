@@ -40,6 +40,22 @@ private:
     Slider globalRelease;
     Slider partialStretch;
     Slider partialStretchEnvAmt;
+    Slider partialLevel_1;
+    Slider partialLevel_2;
+    Slider partialLevel_3;
+    Slider partialLevel_4;
+    Slider partialLevel_5;
+    Slider partialLevel_6;
+    Slider partialLevel_7;
+    Slider partialLevel_8;
+    Slider partialLevel_9;
+    Slider partialLevel_10;
+    Slider partialLevel_11;
+    Slider partialLevel_12;
+    Slider partialLevel_13;
+    Slider partialLevel_14;
+    Slider partialLevel_15;
+    Slider partialLevel_16;
     Slider partialLevelEnvAmt;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlusAudioProcessorEditor)

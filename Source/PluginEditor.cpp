@@ -19,7 +19,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (260, 200);
+    setSize (600, 200);
     globalAttack.setSliderStyle(Slider::LinearBarVertical);
     globalAttack.setRange(0.01, 10.0, 0.01);
     globalAttack.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
@@ -69,12 +69,140 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialLevelEnvAmt.setValue(1.0);
     addAndMakeVisible(partialLevelEnvAmt);
     
+    partialLevel_1.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_1.setRange(0.0, 1.0, 0.001);
+    partialLevel_1.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_1.setPopupDisplayEnabled(true, this);
+    partialLevel_1.setValue(1.0);
+    addAndMakeVisible(partialLevel_1);
+    
+    partialLevel_2.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_2.setRange(0.0, 1.0, 0.001);
+    partialLevel_2.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_2.setPopupDisplayEnabled(true, this);
+    partialLevel_2.setValue(1.0);
+    addAndMakeVisible(partialLevel_2);
+    
+    partialLevel_3.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_3.setRange(0.0, 1.0, 0.001);
+    partialLevel_3.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_3.setPopupDisplayEnabled(true, this);
+    partialLevel_3.setValue(1.0);
+    addAndMakeVisible(partialLevel_3);
+    
+    partialLevel_4.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_4.setRange(0.0, 1.0, 0.001);
+    partialLevel_4.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_4.setPopupDisplayEnabled(true, this);
+    partialLevel_4.setValue(1.0);
+    addAndMakeVisible(partialLevel_4);
+    
+    partialLevel_5.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_5.setRange(0.0, 1.0, 0.001);
+    partialLevel_5.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_5.setPopupDisplayEnabled(true, this);
+    partialLevel_5.setValue(1.0);
+    addAndMakeVisible(partialLevel_5);
+    
+    partialLevel_6.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_6.setRange(0.0, 1.0, 0.001);
+    partialLevel_6.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_6.setPopupDisplayEnabled(true, this);
+    partialLevel_6.setValue(1.0);
+    addAndMakeVisible(partialLevel_6);
+    
+    partialLevel_7.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_7.setRange(0.0, 1.0, 0.001);
+    partialLevel_7.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_7.setPopupDisplayEnabled(true, this);
+    partialLevel_7.setValue(1.0);
+    addAndMakeVisible(partialLevel_7);
+    
+    partialLevel_8.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_8.setRange(0.0, 1.0, 0.001);
+    partialLevel_8.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_8.setPopupDisplayEnabled(true, this);
+    partialLevel_8.setValue(1.0);
+    addAndMakeVisible(partialLevel_8);
+    
+    partialLevel_9.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_9.setRange(0.0, 1.0, 0.001);
+    partialLevel_9.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_9.setPopupDisplayEnabled(true, this);
+    partialLevel_9.setValue(1.0);
+    addAndMakeVisible(partialLevel_9);
+    
+    partialLevel_10.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_10.setRange(0.0, 1.0, 0.001);
+    partialLevel_10.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_10.setPopupDisplayEnabled(true, this);
+    partialLevel_10.setValue(1.0);
+    addAndMakeVisible(partialLevel_10);
+    
+    partialLevel_11.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_11.setRange(0.0, 1.0, 0.001);
+    partialLevel_11.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_11.setPopupDisplayEnabled(true, this);
+    partialLevel_11.setValue(1.0);
+    addAndMakeVisible(partialLevel_11);
+    
+    partialLevel_12.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_12.setRange(0.0, 1.0, 0.001);
+    partialLevel_12.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_12.setPopupDisplayEnabled(true, this);
+    partialLevel_12.setValue(1.0);
+    addAndMakeVisible(partialLevel_12);
+    
+    partialLevel_13.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_13.setRange(0.0, 1.0, 0.001);
+    partialLevel_13.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_13.setPopupDisplayEnabled(true, this);
+    partialLevel_13.setValue(1.0);
+    addAndMakeVisible(partialLevel_13);
+    
+    partialLevel_14.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_14.setRange(0.0, 1.0, 0.001);
+    partialLevel_14.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_14.setPopupDisplayEnabled(true, this);
+    partialLevel_14.setValue(1.0);
+    addAndMakeVisible(partialLevel_14);
+    
+    partialLevel_15.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_15.setRange(0.0, 1.0, 0.001);
+    partialLevel_15.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_15.setPopupDisplayEnabled(true, this);
+    partialLevel_15.setValue(1.0);
+    addAndMakeVisible(partialLevel_15);
+    
+    partialLevel_16.setSliderStyle(Slider::LinearBarVertical);
+    partialLevel_16.setRange(0.0, 1.0, 0.001);
+    partialLevel_16.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialLevel_16.setPopupDisplayEnabled(true, this);
+    partialLevel_16.setValue(1.0);
+    addAndMakeVisible(partialLevel_16);
+    
     globalAttack.addListener(this);
     globalDecay.addListener(this);
     globalSustain.addListener(this);
     globalRelease.addListener(this);
     partialStretch.addListener(this);
     partialStretchEnvAmt.addListener(this);
+    partialLevel_1.addListener(this);
+    partialLevel_2.addListener(this);
+    partialLevel_3.addListener(this);
+    partialLevel_4.addListener(this);
+    partialLevel_5.addListener(this);
+    partialLevel_6.addListener(this);
+    partialLevel_7.addListener(this);
+    partialLevel_8.addListener(this);
+    partialLevel_9.addListener(this);
+    partialLevel_10.addListener(this);
+    partialLevel_11.addListener(this);
+    partialLevel_12.addListener(this);
+    partialLevel_13.addListener(this);
+    partialLevel_14.addListener(this);
+    partialLevel_15.addListener(this);
+    partialLevel_16.addListener(this);
     partialLevelEnvAmt.addListener(this);
 }
 
@@ -103,6 +231,22 @@ void PlusAudioProcessorEditor::resized()
     partialStretch.setBounds (130, 30, 20, getHeight() - 60);
     partialStretchEnvAmt.setBounds (170, 30, 20, getHeight() - 60);
     partialLevelEnvAmt.setBounds (220, 30, 20, getHeight() - 60);
+    partialLevel_1.setBounds (260, 30, 20, getHeight() - 60);
+    partialLevel_2.setBounds (280, 30, 20, getHeight() - 60);
+    partialLevel_3.setBounds (300, 30, 20, getHeight() - 60);
+    partialLevel_4.setBounds (320, 30, 20, getHeight() - 60);
+    partialLevel_5.setBounds (340, 30, 20, getHeight() - 60);
+    partialLevel_6.setBounds (360, 30, 20, getHeight() - 60);
+    partialLevel_7.setBounds (380, 30, 20, getHeight() - 60);
+    partialLevel_8.setBounds (400, 30, 20, getHeight() - 60);
+    partialLevel_9.setBounds (420, 30, 20, getHeight() - 60);
+    partialLevel_10.setBounds (440, 30, 20, getHeight() - 60);
+    partialLevel_11.setBounds (460, 30, 20, getHeight() - 60);
+    partialLevel_12.setBounds (480, 30, 20, getHeight() - 60);
+    partialLevel_13.setBounds (500, 30, 20, getHeight() - 60);
+    partialLevel_14.setBounds (520, 30, 20, getHeight() - 60);
+    partialLevel_15.setBounds (540, 30, 20, getHeight() - 60);
+    partialLevel_16.setBounds (560, 30, 20, getHeight() - 60);
 }
 
 void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
@@ -119,6 +263,41 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
         processor.setParameter(STRETCH, partialStretch.getValue());
     if (slider == &partialStretchEnvAmt)
         processor.setParameter(STRETCH_ENV_AMT, partialStretchEnvAmt.getValue());
+    
+    if (slider == &partialLevel_1)
+        processor.setParameter(PARTIAL_1, partialLevel_1.getValue());
+    if (slider == &partialLevel_2)
+        processor.setParameter(PARTIAL_2, partialLevel_2.getValue());
+    if (slider == &partialLevel_3)
+        processor.setParameter(PARTIAL_3, partialLevel_3.getValue());
+    if (slider == &partialLevel_4)
+        processor.setParameter(PARTIAL_4, partialLevel_4.getValue());
+    if (slider == &partialLevel_5)
+        processor.setParameter(PARTIAL_5, partialLevel_5.getValue());
+    if (slider == &partialLevel_6)
+        processor.setParameter(PARTIAL_6, partialLevel_6.getValue());
+    if (slider == &partialLevel_7)
+        processor.setParameter(PARTIAL_7, partialLevel_7.getValue());
+    if (slider == &partialLevel_8)
+        processor.setParameter(PARTIAL_8, partialLevel_8.getValue());
+    if (slider == &partialLevel_9)
+        processor.setParameter(PARTIAL_9, partialLevel_9.getValue());
+    if (slider == &partialLevel_10)
+        processor.setParameter(PARTIAL_10, partialLevel_10.getValue());
+    if (slider == &partialLevel_11)
+        processor.setParameter(PARTIAL_11, partialLevel_11.getValue());
+    if (slider == &partialLevel_12)
+        processor.setParameter(PARTIAL_12, partialLevel_12.getValue());
+    if (slider == &partialLevel_13)
+        processor.setParameter(PARTIAL_13, partialLevel_13.getValue());
+    if (slider == &partialLevel_14)
+        processor.setParameter(PARTIAL_14, partialLevel_14.getValue());
+    if (slider == &partialLevel_15)
+        processor.setParameter(PARTIAL_15, partialLevel_15.getValue());
+    if (slider == &partialLevel_16)
+        processor.setParameter(PARTIAL_16, partialLevel_16.getValue());
+    
+    
     if (slider == &partialLevelEnvAmt)
         processor.setParameter(PARTIAL_LEVEL_ENV_AMT, partialLevelEnvAmt.getValue());
 }
