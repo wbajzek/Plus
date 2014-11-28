@@ -122,6 +122,7 @@ void PlusAudioProcessor::changeProgramName (int index, const String& newName)
 //==============================================================================
 void PlusAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+    synth.setCurrentPlaybackSampleRate (sampleRate);
 }
 
 void PlusAudioProcessor::releaseResources()

@@ -3,7 +3,7 @@
 <JUCERPROJECT id="JOv5Bv" name="Plus" projectType="audioplug" version="1.0.0"
               bundleIdentifier="com.bajzek.william.Plus" includeBinaryInAppConfig="1"
               buildVST="0" buildVST3="0" buildAU="1" buildRTAS="0" buildAAX="0"
-              pluginName="Plus" pluginDesc="Plus" pluginManufacturer="bajzek"
+              pluginName="Plus" pluginDesc="Plus" pluginManufacturer="William Bajzek"
               pluginManufacturerCode="Manu" pluginCode="Plug" pluginChannelConfigs="{1, 1}, {2, 2}"
               pluginIsSynth="1" pluginWantsMidiIn="1" pluginProducesMidiOut="0"
               pluginSilenceInIsSilenceOut="0" pluginEditorRequiresKeys="0"
@@ -12,6 +12,15 @@
               companyName="William Bajzek">
   <MAINGROUP id="tjGPtr" name="Plus">
     <GROUP id="{400499B6-E5F0-E43E-4081-6377AEF3EFD4}" name="Source">
+      <FILE id="ryWEX9" name="AdditiveSynth.h" compile="0" resource="0" file="Source/AdditiveSynth.h"/>
+      <FILE id="Mrhm8D" name="AdditiveSynthSound.cpp" compile="1" resource="0"
+            file="Source/AdditiveSynthSound.cpp"/>
+      <FILE id="JHtIXs" name="AdditiveSynthSound.h" compile="0" resource="0"
+            file="Source/AdditiveSynthSound.h"/>
+      <FILE id="EkSPro" name="AdditiveSynthVoice.cpp" compile="1" resource="0"
+            file="Source/AdditiveSynthVoice.cpp"/>
+      <FILE id="oOh3sG" name="AdditiveSynthVoice.h" compile="0" resource="0"
+            file="Source/AdditiveSynthVoice.h"/>
       <FILE id="xSglg2" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="AitRAs" name="PluginProcessor.h" compile="0" resource="0"
