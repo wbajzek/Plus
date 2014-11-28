@@ -252,18 +252,14 @@ void PlusAudioProcessorEditor::resized()
 
 void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
 {
-    if (slider == &globalAttack) {
+    if (slider == &globalAttack)
         processor.getFloatParam(ATTACK)->updateProcessorAndHostFromUi(slider->getValue());
-        processor.setParameter(ATTACK, globalAttack.getValue());
-    }
     if (slider == &globalDecay)
-        processor.getFloatParam(DECAY)->updateProcessorAndHostFromUi(globalDecay.getValue());
-    if (slider == &globalSustain) {
+        processor.getFloatParam(DECAY)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &globalSustain)
         processor.getFloatParam(SUSTAIN)->updateProcessorAndHostFromUi(slider->getValue());
-        processor.setParameter(SUSTAIN, globalSustain.getValue());
-    }
     if (slider == &globalRelease)
-        processor.getFloatParam(RELEASE)->updateProcessorAndHostFromUi(globalRelease.getValue());
+        processor.getFloatParam(RELEASE)->updateProcessorAndHostFromUi(slider->getValue());
 
     if (slider == &partialStretch)
         processor.setParameter(STRETCH, partialStretch.getValue());

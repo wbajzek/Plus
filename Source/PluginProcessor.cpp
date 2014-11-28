@@ -3,16 +3,17 @@
 #include "AdditiveSynth.h"
 
 //==============================================================================
-PlusAudioProcessor::PlusAudioProcessor():
-    attack(0.01),
-    decay(1.0),
-    sustain(0.8),
-    release(1.0)
+PlusAudioProcessor::PlusAudioProcessor()
 {
+    parameters[ATTACK] = 1.0;
+    parameters[DECAY] = 1.0;
+    parameters[SUSTAIN] = 0.8;
+    parameters[RELEASE] = 1.0;
+
     initAllParameters();
-    
+
     parameters[STRETCH] = 0.0; // partial scaling
-    
+
     for (int i = 0; i < numVoices; i++)
         synth.addVoice(new AdditiveSynthVoice(parameters));
     synth.addSound(new AdditiveSynthSound());
@@ -22,10 +23,10 @@ PlusAudioProcessor::PlusAudioProcessor():
 
 void PlusAudioProcessor::initParameters()
 {
-    addFloatParam(ATTACK, "Attack", true, SAVE, &attack, 0.01, 10.0);
-    addFloatParam(DECAY, "Decay", true, SAVE, &decay, 0.01, 20.0);
-    addFloatParam(SUSTAIN, "Sustain", true, SAVE, &sustain, 0.0, 1.0);
-    addFloatParam(RELEASE, "Release", true, SAVE, &release, 0.01, 20.0);
+    addFloatParam(ATTACK, "Attack", true, SAVE, &parameters[ATTACK], 0.01, 10.0);
+    addFloatParam(DECAY, "Decay", true, SAVE, &parameters[DECAY], 0.01, 20.0);
+    addFloatParam(SUSTAIN, "Sustain", true, SAVE, &parameters[SUSTAIN], 0.8, 1.0);
+    addFloatParam(RELEASE, "Release", true, SAVE, &parameters[RELEASE], 0.01, 20.0);
 }
 
 PlusAudioProcessor::~PlusAudioProcessor()
@@ -95,7 +96,6 @@ void PlusAudioProcessor::runAfterParamChange(int paramIndex,UpdateFromFlags upda
         case RELEASE: {
             runAfterParamGroupUpdate();
             getParam(paramIndex)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
-            parameters[paramIndex] = getParameter(paramIndex);
             break;
         }
         default: break;
@@ -132,7 +132,7 @@ void PlusAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& mi
     buffer.clear();
     int numSamples = buffer.getNumSamples();
     keyboardState.processNextMidiBuffer(midiMessages, 0, numSamples, true);
-    
+
     synth.renderNextBlock(buffer, midiMessages, 0, numSamples);
 }
 
@@ -161,7 +161,7 @@ void PlusAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     //Convert the binary data saved in getStateInformation(...) back into XML.
     ScopedPointer<XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
-    
+
     // Check that it is valid XML and that the tag has name JucePlugin_Name.
     if (xmlState != 0 && xmlState->getTagName()==JucePlugin_Name){
         //Preload XML values into memory

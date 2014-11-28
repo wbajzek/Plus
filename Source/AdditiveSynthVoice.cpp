@@ -75,7 +75,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                     currentAngles[i] += angleDelta;
                 }
             }
-                
+            
             for (int channelNum = outputBuffer.getNumChannels(); --channelNum >= 0;)
                 outputBuffer.addSample(channelNum, startSample, (currentSample * amplitude / numPartials));
             
