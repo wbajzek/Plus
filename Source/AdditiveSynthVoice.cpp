@@ -11,9 +11,6 @@
 AdditiveSynthVoice::AdditiveSynthVoice(float* parameters)
 {
     localParameters = parameters;
-    double level = 1.0;
-    for (int i=0; i < numPartials; i++)
-        partialLevels[i]= level = level * 0.8f;
 }
 
 AdditiveSynthVoice::~AdditiveSynthVoice()
