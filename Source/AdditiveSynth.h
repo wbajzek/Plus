@@ -36,7 +36,6 @@ enum Params
     PARTIAL_14,
     PARTIAL_15,
     PARTIAL_16,
-    PARTIAL_LEVEL_ENV_AMT,
     NUMBER_OF_PARAMETERS
 };
 

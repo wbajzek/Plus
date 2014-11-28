@@ -17,9 +17,6 @@
 PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (600, 200);
     globalAttack.setSliderStyle(Slider::LinearBarVertical);
     globalAttack.setRange(0.01, 10.0, 0.01);
     globalAttack.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
@@ -174,13 +171,6 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialLevel_15.setValue(0.1);
     addAndMakeVisible(partialLevel_15);
 
-    partialLevel_16.setSliderStyle(Slider::LinearBarVertical);
-    partialLevel_16.setRange(0.0, 1.0, 0.001);
-    partialLevel_16.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
-    partialLevel_16.setPopupDisplayEnabled(true, this);
-    partialLevel_16.setValue(0.09);
-    addAndMakeVisible(partialLevel_16);
-
     globalAttack.addListener(this);
     globalDecay.addListener(this);
     globalSustain.addListener(this);
@@ -203,10 +193,10 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialLevel_14.addListener(this);
     partialLevel_15.addListener(this);
     partialLevel_16.addListener(this);
-    partialLevelEnvAmt.addListener(this);
     
     timerCallback();
     startTimer(50);
+    setSize (540, 200);
 }
 
 PlusAudioProcessorEditor::~PlusAudioProcessorEditor()
@@ -223,7 +213,6 @@ void PlusAudioProcessorEditor::paint (Graphics& g)
     g.drawFittedText ("Stretch", 120, 0, 40, 30, Justification::centred, 1);
     g.drawFittedText ("Env", 160, 0, 40, 30, Justification::centred, 1);
     g.drawFittedText ("Partial Levels", 220, 0, 320, 30, Justification::centred, 1);
-    g.drawFittedText ("Env", 550, 0, 40, 30, Justification::centred, 1);
 }
 
 void PlusAudioProcessorEditor::resized()
@@ -250,7 +239,6 @@ void PlusAudioProcessorEditor::resized()
     partialLevel_14.setBounds (480, 30, 20, getHeight() - 60);
     partialLevel_15.setBounds (500, 30, 20, getHeight() - 60);
     partialLevel_16.setBounds (520, 30, 20, getHeight() - 60);
-    partialLevelEnvAmt.setBounds (560, 30, 20, getHeight() - 60);
 }
 
 void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
@@ -302,9 +290,6 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
     if (slider == &partialLevel_16)
         processor.getFloatParam(PARTIAL_16)->updateProcessorAndHostFromUi(slider->getValue());
 
-
-    if (slider == &partialLevelEnvAmt)
-        processor.getFloatParam(PARTIAL_LEVEL_ENV_AMT)->updateProcessorAndHostFromUi(slider->getValue());
 }
 
 void PlusAudioProcessorEditor::timerCallback(){
@@ -399,9 +384,5 @@ void PlusAudioProcessorEditor::timerCallback(){
     param=processor.getFloatParam(PARTIAL_16);
     if (&partialLevel_16 && param->updateUiRequested()){
         partialLevel_16.setValue (param->uiGet(), dontSendNotification);
-    }
-    param=processor.getFloatParam(PARTIAL_LEVEL_ENV_AMT);
-    if (&partialLevelEnvAmt && param->updateUiRequested()){
-        partialLevelEnvAmt.setValue (param->uiGet(), dontSendNotification);
     }
 }

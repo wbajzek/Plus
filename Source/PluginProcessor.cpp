@@ -27,7 +27,6 @@ PlusAudioProcessor::PlusAudioProcessor()
     parameters[PARTIAL_14] = 0.02;
     parameters[PARTIAL_15] = 0.01;
     parameters[PARTIAL_16] = 0.01;
-    parameters[PARTIAL_LEVEL_ENV_AMT] = 0.0;
 
     initAllParameters();
 
@@ -63,7 +62,6 @@ void PlusAudioProcessor::initParameters()
     addFloatParam(PARTIAL_14, "Partial_14", true, SAVE, &parameters[PARTIAL_14], 0.0, 1.0);
     addFloatParam(PARTIAL_15, "Partial_15", true, SAVE, &parameters[PARTIAL_15], 0.0, 1.0);
     addFloatParam(PARTIAL_16, "Partial_15", true, SAVE, &parameters[PARTIAL_16], 0.0, 1.0);
-    addFloatParam(PARTIAL_LEVEL_ENV_AMT, "Partial_Lvl_Env_Amt", true, SAVE, &parameters[PARTIAL_LEVEL_ENV_AMT], -1.0, 1.0);
 }
 
 PlusAudioProcessor::~PlusAudioProcessor()
@@ -151,7 +149,6 @@ void PlusAudioProcessor::runAfterParamGroupUpdate()
     getParam(PARTIAL_14)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(PARTIAL_15)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(PARTIAL_16)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
-    getParam(PARTIAL_LEVEL_ENV_AMT)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
 }
 
 const String PlusAudioProcessor::getParameterText (int index)

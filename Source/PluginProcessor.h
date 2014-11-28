@@ -64,33 +64,6 @@ private:
     Synthesiser synth;
     MidiKeyboardState keyboardState;
 
-    float attack;
-    float decay;
-    float sustain;
-    float release;
-
-    float stretch;
-    float stretch_env;
-
-    float partial_1;
-    float partial_2;
-    float partial_3;
-    float partial_4;
-    float partial_5;
-    float partial_6;
-    float partial_7;
-    float partial_8;
-    float partial_9;
-    float partial_10;
-    float partial_11;
-    float partial_12;
-    float partial_13;
-    float partial_14;
-    float partial_15;
-    float partial_16;
-
-    float partial_env;
-
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlusAudioProcessor)
 };
 

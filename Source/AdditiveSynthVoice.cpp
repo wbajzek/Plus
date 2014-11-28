@@ -68,8 +68,8 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 
                 if (angleDelta != 0.0)
                 {
-                    currentSample += (float) ((sin (currentAngles[i]) *
-                                               (localParameters[PartialToParamMapping[i]] * amplitude * localParameters[PARTIAL_LEVEL_ENV_AMT])));
+                    currentSample += (float) (sin (currentAngles[i]) *
+                                               (localParameters[PartialToParamMapping[i]] * amplitude));
                     currentAngles[i] += angleDelta;
                 }
             }
