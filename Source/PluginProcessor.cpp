@@ -3,49 +3,35 @@
 #include "AdditiveSynth.h"
 
 //==============================================================================
-PlusAudioProcessor::PlusAudioProcessor()
+PlusAudioProcessor::PlusAudioProcessor():
+    attack(0.01),
+    decay(1.0),
+    sustain(0.8),
+    release(1.0)
 {
+    initAllParameters();
+    
     parameters[STRETCH] = 0.0; // partial scaling
+    
     for (int i = 0; i < numVoices; i++)
         synth.addVoice(new AdditiveSynthVoice(parameters));
     synth.addSound(new AdditiveSynthSound());
     synth.setNoteStealingEnabled(true);
+
+}
+
+void PlusAudioProcessor::initParameters()
+{
+    addFloatParam(ATTACK, "Attack", true, SAVE, &attack, 0.01, 10.0);
+    addFloatParam(DECAY, "Decay", true, SAVE, &decay, 0.01, 20.0);
+    addFloatParam(SUSTAIN, "Sustain", true, SAVE, &sustain, 0.0, 1.0);
+    addFloatParam(RELEASE, "Release", true, SAVE, &release, 0.01, 20.0);
 }
 
 PlusAudioProcessor::~PlusAudioProcessor()
 {
 }
 
-//==============================================================================
-const String PlusAudioProcessor::getName() const
-{
-    return JucePlugin_Name;
-}
-
-int PlusAudioProcessor::getNumParameters()
-{
-    return 4;
-}
-
-float PlusAudioProcessor::getParameter (int index)
-{
-    return parameters[index];
-}
-
-void PlusAudioProcessor::setParameter (int index, float newValue)
-{
-    parameters[index] = newValue;
-}
-
-const String PlusAudioProcessor::getParameterName (int index)
-{
-    return String();
-}
-
-const String PlusAudioProcessor::getParameterText (int index)
-{
-    return String();
-}
 
 const String PlusAudioProcessor::getInputChannelName (int channelIndex) const
 {
@@ -67,29 +53,6 @@ bool PlusAudioProcessor::isOutputChannelStereoPair (int index) const
     return true;
 }
 
-bool PlusAudioProcessor::acceptsMidi() const
-{
-   #if JucePlugin_WantsMidiInput
-    return true;
-   #else
-    return false;
-   #endif
-}
-
-bool PlusAudioProcessor::producesMidi() const
-{
-   #if JucePlugin_ProducesMidiOutput
-    return true;
-   #else
-    return false;
-   #endif
-}
-
-bool PlusAudioProcessor::silenceInProducesSilenceOut() const
-{
-    return false;
-}
-
 double PlusAudioProcessor::getTailLengthSeconds() const
 {
     return 0.0;
@@ -98,7 +61,7 @@ double PlusAudioProcessor::getTailLengthSeconds() const
 int PlusAudioProcessor::getNumPrograms()
 {
     return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
-                // so this should be at least 1, even if you're not really implementing programs.
+    // so this should be at least 1, even if you're not really implementing programs.
 }
 
 int PlusAudioProcessor::getCurrentProgram()
@@ -119,6 +82,39 @@ void PlusAudioProcessor::changeProgramName (int index, const String& newName)
 {
 }
 
+
+void PlusAudioProcessor::runAfterParamChange(int paramIndex,UpdateFromFlags updateFromFlag)
+{
+    switch(paramIndex){
+        case ATTACK: {
+        }
+        case DECAY: {
+        }
+        case SUSTAIN: {
+        }
+        case RELEASE: {
+            runAfterParamGroupUpdate();
+            getParam(paramIndex)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+            parameters[paramIndex] = getParameter(paramIndex);
+            break;
+        }
+        default: break;
+    }
+}
+
+void PlusAudioProcessor::runAfterParamGroupUpdate()
+{
+    getParam(ATTACK)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(DECAY)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(SUSTAIN)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(RELEASE)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+}
+
+const String PlusAudioProcessor::getParameterText (int index)
+{
+    return String (getParameter(index), 1024);
+}
+
 //==============================================================================
 void PlusAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
@@ -136,7 +132,7 @@ void PlusAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& mi
     buffer.clear();
     int numSamples = buffer.getNumSamples();
     keyboardState.processNextMidiBuffer(midiMessages, 0, numSamples, true);
-
+    
     synth.renderNextBlock(buffer, midiMessages, 0, numSamples);
 }
 
@@ -154,15 +150,25 @@ AudioProcessorEditor* PlusAudioProcessor::createEditor()
 //==============================================================================
 void PlusAudioProcessor::getStateInformation (MemoryBlock& destData)
 {
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
+    //Save all the parameter values into an XML tag with name JucePlugin_Name.
+    XmlElement xml(JucePlugin_Name);
+    saveXml(&xml,false,true);
+    //Save it as binary data
+    copyXmlToBinary (xml, destData);
 }
 
 void PlusAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
+    //Convert the binary data saved in getStateInformation(...) back into XML.
+    ScopedPointer<XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
+    
+    // Check that it is valid XML and that the tag has name JucePlugin_Name.
+    if (xmlState != 0 && xmlState->getTagName()==JucePlugin_Name){
+        //Preload XML values into memory
+        readXml(xmlState, true);
+        //Update the parameter values from the preloaded XML values
+        updateProcessorHostAndUiFromXml(true,true,true);
+    }
 }
 
 //==============================================================================

@@ -9,13 +9,12 @@
 #ifndef Plus_AdditiveSynth_h
 #define Plus_AdditiveSynth_h
 
-const int numVoices = 12;
+const int numVoices = 8;
 const int numPartials = 16;
 
-enum Parameters
+enum Params
 {
-    // envelope
-    ATTACK,
+    ATTACK = 0,
     DECAY,
     SUSTAIN,
     RELEASE,
@@ -41,7 +40,9 @@ enum Parameters
     NUMBER_OF_PARAMETERS
 };
 
+#define AU_LOGGING
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "PluginParameters.h"
 #include "AdditiveSynthSound.h"
 #include "AdditiveSynthVoice.h"
 

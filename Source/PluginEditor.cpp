@@ -26,7 +26,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     globalAttack.setPopupDisplayEnabled(true, this);
     globalAttack.setValue(0.02);
     addAndMakeVisible(globalAttack);
-    
+
     globalDecay.setSliderStyle(Slider::LinearBarVertical);
     globalDecay.setRange(0.01, 20.0, 0.01);
     globalDecay.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
@@ -47,14 +47,14 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     globalRelease.setPopupDisplayEnabled(true, this);
     globalRelease.setValue(1.0);
     addAndMakeVisible(globalRelease);
-    
+
     partialStretch.setSliderStyle(Slider::LinearBarVertical);
     partialStretch.setRange(-0.1, 0.1, 0.0001);
     partialStretch.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretch.setPopupDisplayEnabled(true, this);
     partialStretch.setValue(0.0);
     addAndMakeVisible(partialStretch);
-    
+
     partialStretchEnvAmt.setSliderStyle(Slider::LinearBarVertical);
     partialStretchEnvAmt.setRange(-0.01, 0.01, 0.0001);
     partialStretchEnvAmt.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
@@ -68,119 +68,119 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialLevelEnvAmt.setPopupDisplayEnabled(true, this);
     partialLevelEnvAmt.setValue(1.0);
     addAndMakeVisible(partialLevelEnvAmt);
-    
+
     partialLevel_1.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_1.setRange(0.0, 1.0, 0.001);
     partialLevel_1.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_1.setPopupDisplayEnabled(true, this);
     partialLevel_1.setValue(1.0);
     addAndMakeVisible(partialLevel_1);
-    
+
     partialLevel_2.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_2.setRange(0.0, 1.0, 0.001);
     partialLevel_2.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_2.setPopupDisplayEnabled(true, this);
     partialLevel_2.setValue(0.5);
     addAndMakeVisible(partialLevel_2);
-    
+
     partialLevel_3.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_3.setRange(0.0, 1.0, 0.001);
     partialLevel_3.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_3.setPopupDisplayEnabled(true, this);
     partialLevel_3.setValue(0.4);
     addAndMakeVisible(partialLevel_3);
-    
+
     partialLevel_4.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_4.setRange(0.0, 1.0, 0.001);
     partialLevel_4.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_4.setPopupDisplayEnabled(true, this);
     partialLevel_4.setValue(0.3);
     addAndMakeVisible(partialLevel_4);
-    
+
     partialLevel_5.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_5.setRange(0.0, 1.0, 0.001);
     partialLevel_5.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_5.setPopupDisplayEnabled(true, this);
     partialLevel_5.setValue(0.25);
     addAndMakeVisible(partialLevel_5);
-    
+
     partialLevel_6.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_6.setRange(0.0, 1.0, 0.001);
     partialLevel_6.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_6.setPopupDisplayEnabled(true, this);
     partialLevel_6.setValue(0.2);
     addAndMakeVisible(partialLevel_6);
-    
+
     partialLevel_7.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_7.setRange(0.0, 1.0, 0.001);
     partialLevel_7.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_7.setPopupDisplayEnabled(true, this);
     partialLevel_7.setValue(0.18);
     addAndMakeVisible(partialLevel_7);
-    
+
     partialLevel_8.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_8.setRange(0.0, 1.0, 0.001);
     partialLevel_8.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_8.setPopupDisplayEnabled(true, this);
     partialLevel_8.setValue(0.16);
     addAndMakeVisible(partialLevel_8);
-    
+
     partialLevel_9.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_9.setRange(0.0, 1.0, 0.001);
     partialLevel_9.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_9.setPopupDisplayEnabled(true, this);
     partialLevel_9.setValue(0.14);
     addAndMakeVisible(partialLevel_9);
-    
+
     partialLevel_10.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_10.setRange(0.0, 1.0, 0.001);
     partialLevel_10.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_10.setPopupDisplayEnabled(true, this);
     partialLevel_10.setValue(0.15);
     addAndMakeVisible(partialLevel_10);
-    
+
     partialLevel_11.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_11.setRange(0.0, 1.0, 0.001);
     partialLevel_11.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_11.setPopupDisplayEnabled(true, this);
     partialLevel_11.setValue(0.14);
     addAndMakeVisible(partialLevel_11);
-    
+
     partialLevel_12.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_12.setRange(0.0, 1.0, 0.001);
     partialLevel_12.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_12.setPopupDisplayEnabled(true, this);
     partialLevel_12.setValue(0.13);
     addAndMakeVisible(partialLevel_12);
-    
+
     partialLevel_13.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_13.setRange(0.0, 1.0, 0.001);
     partialLevel_13.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_13.setPopupDisplayEnabled(true, this);
     partialLevel_13.setValue(0.12);
     addAndMakeVisible(partialLevel_13);
-    
+
     partialLevel_14.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_14.setRange(0.0, 1.0, 0.001);
     partialLevel_14.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_14.setPopupDisplayEnabled(true, this);
     partialLevel_14.setValue(0.11);
     addAndMakeVisible(partialLevel_14);
-    
+
     partialLevel_15.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_15.setRange(0.0, 1.0, 0.001);
     partialLevel_15.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_15.setPopupDisplayEnabled(true, this);
     partialLevel_15.setValue(0.1);
     addAndMakeVisible(partialLevel_15);
-    
+
     partialLevel_16.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_16.setRange(0.0, 1.0, 0.001);
     partialLevel_16.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_16.setPopupDisplayEnabled(true, this);
     partialLevel_16.setValue(0.09);
     addAndMakeVisible(partialLevel_16);
-    
+
     globalAttack.addListener(this);
     globalDecay.addListener(this);
     globalSustain.addListener(this);
@@ -252,19 +252,24 @@ void PlusAudioProcessorEditor::resized()
 
 void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
 {
-    if (slider == &globalAttack)
+    if (slider == &globalAttack) {
+        processor.getFloatParam(ATTACK)->updateProcessorAndHostFromUi(slider->getValue());
         processor.setParameter(ATTACK, globalAttack.getValue());
+    }
     if (slider == &globalDecay)
-        processor.setParameter(DECAY, globalDecay.getValue());
-    if (slider == &globalSustain)
+        processor.getFloatParam(DECAY)->updateProcessorAndHostFromUi(globalDecay.getValue());
+    if (slider == &globalSustain) {
+        processor.getFloatParam(SUSTAIN)->updateProcessorAndHostFromUi(slider->getValue());
         processor.setParameter(SUSTAIN, globalSustain.getValue());
+    }
     if (slider == &globalRelease)
-        processor.setParameter(RELEASE, globalRelease.getValue());
+        processor.getFloatParam(RELEASE)->updateProcessorAndHostFromUi(globalRelease.getValue());
+
     if (slider == &partialStretch)
         processor.setParameter(STRETCH, partialStretch.getValue());
     if (slider == &partialStretchEnvAmt)
         processor.setParameter(STRETCH_ENV_AMT, partialStretchEnvAmt.getValue());
-    
+
     if (slider == &partialLevel_1)
         processor.setParameter(PARTIAL_1, partialLevel_1.getValue());
     if (slider == &partialLevel_2)
@@ -297,8 +302,27 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
         processor.setParameter(PARTIAL_15, partialLevel_15.getValue());
     if (slider == &partialLevel_16)
         processor.setParameter(PARTIAL_16, partialLevel_16.getValue());
-    
-    
+
+
     if (slider == &partialLevelEnvAmt)
         processor.setParameter(PARTIAL_LEVEL_ENV_AMT, partialLevelEnvAmt.getValue());
+}
+
+void PlusAudioProcessorEditor::timerCallback(){
+    FloatParam *attack=processor.getFloatParam(ATTACK);
+    if (&globalAttack && attack->updateUiRequested()){
+        globalAttack.setValue (attack->uiGet(), dontSendNotification);
+    }
+    FloatParam *decay=processor.getFloatParam(DECAY);
+    if (&globalDecay && decay->updateUiRequested()){
+        globalDecay.setValue (decay->uiGet(), dontSendNotification);
+    }
+    FloatParam *sustain=processor.getFloatParam(SUSTAIN);
+    if (&globalSustain && sustain->updateUiRequested()){
+        globalSustain.setValue (sustain->uiGet(), dontSendNotification);
+    }
+    FloatParam *release=processor.getFloatParam(RELEASE);
+    if (&globalRelease && release->updateUiRequested()){
+        globalRelease.setValue (release->uiGet(), dontSendNotification);
+    }
 }

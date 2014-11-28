@@ -12,13 +12,12 @@
 #define PLUGINPROCESSOR_H_INCLUDED
 
 #include "AdditiveSynth.h"
-#include "../JuceLibraryCode/JuceHeader.h"
 
 
 //==============================================================================
 /**
 */
-class PlusAudioProcessor  : public AudioProcessor
+class PlusAudioProcessor  : public PluginProcessor
 {
 public:
     //==============================================================================
@@ -36,23 +35,12 @@ public:
     bool hasEditor() const override;
 
     //==============================================================================
-    const String getName() const override;
-
-    int getNumParameters() override;
-    float getParameter (int index) override;
-    void setParameter (int index, float newValue) override;
-
-    const String getParameterName (int index) override;
-    const String getParameterText (int index) override;
 
     const String getInputChannelName (int channelIndex) const override;
     const String getOutputChannelName (int channelIndex) const override;
     bool isInputChannelStereoPair (int index) const override;
     bool isOutputChannelStereoPair (int index) const override;
 
-    bool acceptsMidi() const override;
-    bool producesMidi() const override;
-    bool silenceInProducesSilenceOut() const override;
     double getTailLengthSeconds() const override;
 
     //==============================================================================
@@ -61,15 +49,47 @@ public:
     void setCurrentProgram (int index) override;
     const String getProgramName (int index) override;
     void changeProgramName (int index, const String& newName) override;
+    void runAfterParamChange(int paramIndex,UpdateFromFlags updateFromFlag);
+    void runAfterParamGroupUpdate();
+    const String getParameterText (int index);
 
     //==============================================================================
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    void initParameters();
+
 private:
     float parameters[NUMBER_OF_PARAMETERS];
     Synthesiser synth;
     MidiKeyboardState keyboardState;
+
+    float attack;
+    float decay;
+    float sustain;
+    float release;
+
+    float stretch;
+    float stretch_env;
+
+    float partial_1;
+    float partial_2;
+    float partial_3;
+    float partial_4;
+    float partial_5;
+    float partial_6;
+    float partial_7;
+    float partial_8;
+    float partial_9;
+    float partial_10;
+    float partial_11;
+    float partial_12;
+    float partial_13;
+    float partial_14;
+    float partial_15;
+    float partial_16;
+
+    float partial_env;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlusAudioProcessor)
 };

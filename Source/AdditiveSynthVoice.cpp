@@ -8,10 +8,6 @@
 
 #include "AdditiveSynth.h"
 
-
-
-
-
 AdditiveSynthVoice::AdditiveSynthVoice(float* parameters)
 {
     localParameters = parameters;
@@ -134,7 +130,6 @@ void AdditiveSynthVoice::aftertouchChanged (int newAftertouchValue)
 
 void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
 {
-    
 }
 
 bool AdditiveSynthVoice::isPlayingChannel (int midiChannel) const
