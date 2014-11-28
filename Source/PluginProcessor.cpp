@@ -61,7 +61,7 @@ void PlusAudioProcessor::initParameters()
     addFloatParam(PARTIAL_13, "Partial_13", true, SAVE, &parameters[PARTIAL_13], 0.0, 1.0);
     addFloatParam(PARTIAL_14, "Partial_14", true, SAVE, &parameters[PARTIAL_14], 0.0, 1.0);
     addFloatParam(PARTIAL_15, "Partial_15", true, SAVE, &parameters[PARTIAL_15], 0.0, 1.0);
-    addFloatParam(PARTIAL_16, "Partial_15", true, SAVE, &parameters[PARTIAL_16], 0.0, 1.0);
+    addFloatParam(PARTIAL_16, "Partial_16", true, SAVE, &parameters[PARTIAL_16], 0.0, 1.0);
 }
 
 PlusAudioProcessor::~PlusAudioProcessor()
