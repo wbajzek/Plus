@@ -5,14 +5,32 @@
 //==============================================================================
 PlusAudioProcessor::PlusAudioProcessor()
 {
-    parameters[ATTACK] = 1.0;
+    parameters[ATTACK] = 0.01;
     parameters[DECAY] = 1.0;
     parameters[SUSTAIN] = 0.8;
     parameters[RELEASE] = 1.0;
+    parameters[STRETCH] = 0.0;
+    parameters[STRETCH_ENV_AMT] = 0.0;
+    parameters[PARTIAL_1] = 1.0;
+    parameters[PARTIAL_2] = 0.5;
+    parameters[PARTIAL_3] = 0.45;
+    parameters[PARTIAL_4] = 0.4;
+    parameters[PARTIAL_5] = 0.35;
+    parameters[PARTIAL_6] = 0.3;
+    parameters[PARTIAL_7] = 0.25;
+    parameters[PARTIAL_8] = 0.2;
+    parameters[PARTIAL_9] = 0.15;
+    parameters[PARTIAL_10] = 0.1;
+    parameters[PARTIAL_11] = 0.05;
+    parameters[PARTIAL_12] = 0.04;
+    parameters[PARTIAL_13] = 0.03;
+    parameters[PARTIAL_14] = 0.02;
+    parameters[PARTIAL_15] = 0.01;
+    parameters[PARTIAL_16] = 0.01;
+    parameters[PARTIAL_LEVEL_ENV_AMT] = 0.0;
 
     initAllParameters();
 
-    parameters[STRETCH] = 0.0; // partial scaling
 
     for (int i = 0; i < numVoices; i++)
         synth.addVoice(new AdditiveSynthVoice(parameters));
@@ -25,8 +43,27 @@ void PlusAudioProcessor::initParameters()
 {
     addFloatParam(ATTACK, "Attack", true, SAVE, &parameters[ATTACK], 0.01, 10.0);
     addFloatParam(DECAY, "Decay", true, SAVE, &parameters[DECAY], 0.01, 20.0);
-    addFloatParam(SUSTAIN, "Sustain", true, SAVE, &parameters[SUSTAIN], 0.8, 1.0);
+    addFloatParam(SUSTAIN, "Sustain", true, SAVE, &parameters[SUSTAIN], 0.0, 1.0);
     addFloatParam(RELEASE, "Release", true, SAVE, &parameters[RELEASE], 0.01, 20.0);
+    addFloatParam(STRETCH, "Stretch", true, SAVE, &parameters[STRETCH], -1.0, 1.0);
+    addFloatParam(STRETCH_ENV_AMT, "Stretch_Env_Amt", true, SAVE, &parameters[STRETCH_ENV_AMT], -1.0, 1.0);
+    addFloatParam(PARTIAL_1, "Partial_1", true, SAVE, &parameters[PARTIAL_1], 0.0, 1.0);
+    addFloatParam(PARTIAL_2, "Partial_2", true, SAVE, &parameters[PARTIAL_2], 0.0, 1.0);
+    addFloatParam(PARTIAL_3, "Partial_3", true, SAVE, &parameters[PARTIAL_3], 0.0, 1.0);
+    addFloatParam(PARTIAL_4, "Partial_4", true, SAVE, &parameters[PARTIAL_4], 0.0, 1.0);
+    addFloatParam(PARTIAL_5, "Partial_5", true, SAVE, &parameters[PARTIAL_5], 0.0, 1.0);
+    addFloatParam(PARTIAL_6, "Partial_6", true, SAVE, &parameters[PARTIAL_6], 0.0, 1.0);
+    addFloatParam(PARTIAL_7, "Partial_7", true, SAVE, &parameters[PARTIAL_7], 0.0, 1.0);
+    addFloatParam(PARTIAL_8, "Partial_8", true, SAVE, &parameters[PARTIAL_8], 0.0, 1.0);
+    addFloatParam(PARTIAL_9, "Partial_9", true, SAVE, &parameters[PARTIAL_9], 0.0, 1.0);
+    addFloatParam(PARTIAL_10, "Partial_10", true, SAVE, &parameters[PARTIAL_10], 0.0, 1.0);
+    addFloatParam(PARTIAL_11, "Partial_11", true, SAVE, &parameters[PARTIAL_11], 0.0, 1.0);
+    addFloatParam(PARTIAL_12, "Partial_12", true, SAVE, &parameters[PARTIAL_12], 0.0, 1.0);
+    addFloatParam(PARTIAL_13, "Partial_13", true, SAVE, &parameters[PARTIAL_13], 0.0, 1.0);
+    addFloatParam(PARTIAL_14, "Partial_14", true, SAVE, &parameters[PARTIAL_14], 0.0, 1.0);
+    addFloatParam(PARTIAL_15, "Partial_15", true, SAVE, &parameters[PARTIAL_15], 0.0, 1.0);
+    addFloatParam(PARTIAL_16, "Partial_15", true, SAVE, &parameters[PARTIAL_16], 0.0, 1.0);
+    addFloatParam(PARTIAL_LEVEL_ENV_AMT, "Partial_Lvl_Env_Amt", true, SAVE, &parameters[PARTIAL_LEVEL_ENV_AMT], -1.0, 1.0);
 }
 
 PlusAudioProcessor::~PlusAudioProcessor()
@@ -86,20 +123,8 @@ void PlusAudioProcessor::changeProgramName (int index, const String& newName)
 
 void PlusAudioProcessor::runAfterParamChange(int paramIndex,UpdateFromFlags updateFromFlag)
 {
-    switch(paramIndex){
-        case ATTACK: {
-        }
-        case DECAY: {
-        }
-        case SUSTAIN: {
-        }
-        case RELEASE: {
-            runAfterParamGroupUpdate();
-            getParam(paramIndex)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
-            break;
-        }
-        default: break;
-    }
+  runAfterParamGroupUpdate();
+  getParam(paramIndex)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
 }
 
 void PlusAudioProcessor::runAfterParamGroupUpdate()
@@ -108,6 +133,25 @@ void PlusAudioProcessor::runAfterParamGroupUpdate()
     getParam(DECAY)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(SUSTAIN)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(RELEASE)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(STRETCH)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(STRETCH_ENV_AMT)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_1)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_2)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_3)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_4)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_5)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_6)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_7)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_8)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_9)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_10)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_11)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_12)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_13)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_14)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_15)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_16)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LEVEL_ENV_AMT)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
 }
 
 const String PlusAudioProcessor::getParameterText (int index)

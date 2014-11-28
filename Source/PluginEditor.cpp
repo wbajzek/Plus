@@ -262,46 +262,46 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
         processor.getFloatParam(RELEASE)->updateProcessorAndHostFromUi(slider->getValue());
 
     if (slider == &partialStretch)
-        processor.setParameter(STRETCH, partialStretch.getValue());
+        processor.getFloatParam(STRETCH)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialStretchEnvAmt)
-        processor.setParameter(STRETCH_ENV_AMT, partialStretchEnvAmt.getValue());
+        processor.getFloatParam(STRETCH_ENV_AMT)->updateProcessorAndHostFromUi(slider->getValue());
 
     if (slider == &partialLevel_1)
-        processor.setParameter(PARTIAL_1, partialLevel_1.getValue());
+        processor.getFloatParam(PARTIAL_1)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_2)
-        processor.setParameter(PARTIAL_2, partialLevel_2.getValue());
+        processor.getFloatParam(PARTIAL_2)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_3)
-        processor.setParameter(PARTIAL_3, partialLevel_3.getValue());
+        processor.getFloatParam(PARTIAL_3)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_4)
-        processor.setParameter(PARTIAL_4, partialLevel_4.getValue());
+        processor.getFloatParam(PARTIAL_4)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_5)
-        processor.setParameter(PARTIAL_5, partialLevel_5.getValue());
+        processor.getFloatParam(PARTIAL_5)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_6)
-        processor.setParameter(PARTIAL_6, partialLevel_6.getValue());
+        processor.getFloatParam(PARTIAL_6)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_7)
-        processor.setParameter(PARTIAL_7, partialLevel_7.getValue());
+        processor.getFloatParam(PARTIAL_7)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_8)
-        processor.setParameter(PARTIAL_8, partialLevel_8.getValue());
+        processor.getFloatParam(PARTIAL_8)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_9)
-        processor.setParameter(PARTIAL_9, partialLevel_9.getValue());
+        processor.getFloatParam(PARTIAL_9)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_10)
-        processor.setParameter(PARTIAL_10, partialLevel_10.getValue());
+        processor.getFloatParam(PARTIAL_10)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_11)
-        processor.setParameter(PARTIAL_11, partialLevel_11.getValue());
+        processor.getFloatParam(PARTIAL_11)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_12)
-        processor.setParameter(PARTIAL_12, partialLevel_12.getValue());
+        processor.getFloatParam(PARTIAL_12)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_13)
-        processor.setParameter(PARTIAL_13, partialLevel_13.getValue());
+        processor.getFloatParam(PARTIAL_13)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_14)
-        processor.setParameter(PARTIAL_14, partialLevel_14.getValue());
+        processor.getFloatParam(PARTIAL_14)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_15)
-        processor.setParameter(PARTIAL_15, partialLevel_15.getValue());
+        processor.getFloatParam(PARTIAL_15)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_16)
-        processor.setParameter(PARTIAL_16, partialLevel_16.getValue());
+        processor.getFloatParam(PARTIAL_16)->updateProcessorAndHostFromUi(slider->getValue());
 
 
     if (slider == &partialLevelEnvAmt)
-        processor.setParameter(PARTIAL_LEVEL_ENV_AMT, partialLevelEnvAmt.getValue());
+        processor.getFloatParam(PARTIAL_LEVEL_ENV_AMT)->updateProcessorAndHostFromUi(slider->getValue());
 }
 
 void PlusAudioProcessorEditor::timerCallback(){

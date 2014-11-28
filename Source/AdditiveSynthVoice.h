@@ -68,7 +68,6 @@ private:
     double partialLevels[numPartials];
     double currentAngles[numPartials] = { 0.0 };
     int samplesSinceTrigger = 0;
-    double sampleRate;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AdditiveSynthVoice);
 };

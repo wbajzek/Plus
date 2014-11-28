@@ -33,6 +33,7 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
     velocity = midiVelocity;
     envLevel = 0.001;
     samplesSinceTrigger = 0;
+    
 }
 
 void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
@@ -61,10 +62,10 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             for (int i = 0; i < numPartials; i++)
             {
                 double cyclesPerSample = (freq * (float)(i+1)) / getSampleRate() +
-                ( i * localParameters[STRETCH] / 10 ) +
-                ( i * (localParameters[STRETCH_ENV_AMT] * amplitude));
+                    ( i * localParameters[STRETCH] / 10 ) +
+                    ( i * (localParameters[STRETCH_ENV_AMT] * amplitude));
                 double angleDelta = cyclesPerSample * 2.0 * double_Pi;
-                
+
                 if (angleDelta != 0.0)
                 {
                     currentSample += (float) ((sin (currentAngles[i]) *
@@ -73,8 +74,9 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                 }
             }
             
+            float calculatedSample = (currentSample * amplitude / numPartials);
             for (int channelNum = outputBuffer.getNumChannels(); --channelNum >= 0;)
-                outputBuffer.addSample(channelNum, startSample, (currentSample * amplitude / numPartials));
+                outputBuffer.addSample(channelNum, startSample, calculatedSample);
             
             ++startSample;
         }
