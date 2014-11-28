@@ -18,7 +18,7 @@
 //==============================================================================
 /**
 */
-class PlusAudioProcessorEditor  : public AudioProcessorEditor, private Slider::Listener
+class PlusAudioProcessorEditor  : public AudioProcessorEditor, private Slider::Listener, public Timer
 {
 public:
     PlusAudioProcessorEditor (PlusAudioProcessor&);

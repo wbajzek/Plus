@@ -204,6 +204,9 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialLevel_15.addListener(this);
     partialLevel_16.addListener(this);
     partialLevelEnvAmt.addListener(this);
+    
+    timerCallback();
+    startTimer(50);
 }
 
 PlusAudioProcessorEditor::~PlusAudioProcessorEditor()
@@ -305,20 +308,100 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
 }
 
 void PlusAudioProcessorEditor::timerCallback(){
-    FloatParam *attack=processor.getFloatParam(ATTACK);
-    if (&globalAttack && attack->updateUiRequested()){
-        globalAttack.setValue (attack->uiGet(), dontSendNotification);
+    FloatParam *param=processor.getFloatParam(ATTACK);
+    if (&globalAttack && param->updateUiRequested()){
+        globalAttack.setValue (param->uiGet(), dontSendNotification);
     }
-    FloatParam *decay=processor.getFloatParam(DECAY);
-    if (&globalDecay && decay->updateUiRequested()){
-        globalDecay.setValue (decay->uiGet(), dontSendNotification);
+    param=processor.getFloatParam(DECAY);
+    if (&globalDecay && param->updateUiRequested()){
+        globalDecay.setValue (param->uiGet(), dontSendNotification);
     }
-    FloatParam *sustain=processor.getFloatParam(SUSTAIN);
-    if (&globalSustain && sustain->updateUiRequested()){
-        globalSustain.setValue (sustain->uiGet(), dontSendNotification);
+    param=processor.getFloatParam(SUSTAIN);
+    if (&globalSustain && param->updateUiRequested()){
+        globalSustain.setValue (param->uiGet(), dontSendNotification);
     }
-    FloatParam *release=processor.getFloatParam(RELEASE);
-    if (&globalRelease && release->updateUiRequested()){
-        globalRelease.setValue (release->uiGet(), dontSendNotification);
+    param=processor.getFloatParam(RELEASE);
+    if (&globalRelease && param->updateUiRequested()){
+        globalRelease.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(RELEASE);
+    if (&globalRelease && param->updateUiRequested()){
+        globalRelease.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(STRETCH);
+    if (&partialStretch && param->updateUiRequested()){
+        partialStretch.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(STRETCH_ENV_AMT);
+    if (&partialStretchEnvAmt && param->updateUiRequested()){
+        partialStretchEnvAmt.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_1);
+    if (&partialLevel_1 && param->updateUiRequested()){
+        partialLevel_1.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_2);
+    if (&partialLevel_2 && param->updateUiRequested()){
+        partialLevel_2.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_3);
+    if (&partialLevel_3 && param->updateUiRequested()){
+        partialLevel_3.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_4);
+    if (&partialLevel_4 && param->updateUiRequested()){
+        partialLevel_4.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_5);
+    if (&partialLevel_5 && param->updateUiRequested()){
+        partialLevel_5.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_6);
+    if (&partialLevel_6 && param->updateUiRequested()){
+        partialLevel_6.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_7);
+    if (&partialLevel_7 && param->updateUiRequested()){
+        partialLevel_7.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_8);
+    if (&partialLevel_8 && param->updateUiRequested()){
+        partialLevel_8.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_9);
+    if (&partialLevel_9 && param->updateUiRequested()){
+        partialLevel_9.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_10);
+    if (&partialLevel_10 && param->updateUiRequested()){
+        partialLevel_10.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_11);
+    if (&partialLevel_11 && param->updateUiRequested()){
+        partialLevel_11.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_12);
+    if (&partialLevel_12 && param->updateUiRequested()){
+        partialLevel_12.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_13);
+    if (&partialLevel_13 && param->updateUiRequested()){
+        partialLevel_13.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_14);
+    if (&partialLevel_14 && param->updateUiRequested()){
+        partialLevel_14.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_15);
+    if (&partialLevel_15 && param->updateUiRequested()){
+        partialLevel_15.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_16);
+    if (&partialLevel_16 && param->updateUiRequested()){
+        partialLevel_16.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_LEVEL_ENV_AMT);
+    if (&partialLevelEnvAmt && param->updateUiRequested()){
+        partialLevelEnvAmt.setValue (param->uiGet(), dontSendNotification);
     }
 }
