@@ -63,11 +63,14 @@ private:
 
     float* localParameters;
     double freq = 110.0;
+    int noteNumber;
     double velocity = 0;
     double envLevel = 0;
     double partialLevels[numPartials];
     double currentAngles[numPartials] = { 0.0 };
     int samplesSinceTrigger = 0;
+    
+    float calculateFrequency(int currentPitchWheelPosition);
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AdditiveSynthVoice);
 };

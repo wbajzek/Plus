@@ -27,9 +27,10 @@ bool AdditiveSynthVoice::canPlaySound (SynthesiserSound* sound)
     return true;
 }
 
-void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVelocity, SynthesiserSound* /*sound*/, const int /*currentPitchWheelPosition*/)
+void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVelocity, SynthesiserSound* /*sound*/, const int currentPitchWheelPosition)
 {
-    freq = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
+    noteNumber = midiNoteNumber;
+    freq = calculateFrequency(currentPitchWheelPosition);
     velocity = midiVelocity;
     envLevel = 0.001;
     samplesSinceTrigger = 0;
@@ -40,9 +41,15 @@ void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
 {
 }
 
-void AdditiveSynthVoice::pitchWheelMoved (const int /*newValue*/)
+float AdditiveSynthVoice::calculateFrequency(int currentPitchWheelPosition)
 {
-    
+    float pbCents = ( (float)currentPitchWheelPosition / 16383.0) * (400.0) + -200.0;
+    return MidiMessage::getMidiNoteInHertz(noteNumber) * pow(2, pbCents/1200);
+}
+
+void AdditiveSynthVoice::pitchWheelMoved (const int currentPitchWheelPosition)
+{
+    freq = calculateFrequency(currentPitchWheelPosition);
 }
 
 void AdditiveSynthVoice::controllerMoved (const int /*controllerNumber*/, const int /*newValue*/)
