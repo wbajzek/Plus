@@ -33,12 +33,15 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
     freq = calculateFrequency(currentPitchWheelPosition);
     velocity = midiVelocity;
     envLevel = 0.001;
+    releaseEnvLevel = envLevel;
     samplesSinceTrigger = 0;
     
 }
 
 void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
 {
+    samplesSinceTrigger = 0;
+    releaseEnvLevel = envLevel;
 }
 
 float AdditiveSynthVoice::calculateFrequency(int currentPitchWheelPosition)
@@ -94,39 +97,33 @@ float AdditiveSynthVoice::getAmplitude()
 {
     const float sampleRate = (float)getSampleRate();
     const float attack = localParameters[ATTACK] * sampleRate;
-    const float decay = attack + (localParameters[DECAY] * sampleRate);
+    const float decay = localParameters[DECAY] * sampleRate;
     const float sustainLevel = localParameters[SUSTAIN];
     const float release = localParameters[RELEASE] * sampleRate;
     
     if (isKeyDown())
     {
         if (samplesSinceTrigger < attack)
-            envLevel = envLevel + velocity / attack;
-        else if (samplesSinceTrigger < attack + decay) {
-            if (envLevel > sustainLevel * velocity)
-                envLevel = envLevel - velocity / decay;
-        }
-        else
+            envLevel = samplesSinceTrigger * velocity / attack;
+        else if (samplesSinceTrigger < attack + decay)
         {
-            envLevel = sustainLevel * velocity;
+            const float amp = ((sustainLevel * velocity) - velocity) / decay;
+            envLevel = ((samplesSinceTrigger - attack) * amp) + velocity;
         }
     }
     else if (envLevel > 0.0)
-        envLevel = envLevel - velocity / release;
+    {
+        const float amp = (0 - releaseEnvLevel) / release;
+        envLevel = ((samplesSinceTrigger) * amp) + releaseEnvLevel;
+    }
     else
+    {
+        clearCurrentNote();
         envLevel = 0.0;
-    
+        releaseEnvLevel = 0.0;
+    }
     ++samplesSinceTrigger;
     return envLevel;
-}
-
-
-bool AdditiveSynthVoice::isVoiceActive() const
-{
-    if (envLevel > 0.0)
-        return true;
-    else
-        return false;
 }
 
 void AdditiveSynthVoice::aftertouchChanged (int newAftertouchValue)

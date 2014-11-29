@@ -48,8 +48,6 @@ public:
     
     void renderNextBlock (AudioSampleBuffer& outputBuffer, int startSample, int numSamples);
     
-    bool isVoiceActive() const;
-    
     void aftertouchChanged (int newAftertouchValue);
     
     void setCurrentPlaybackSampleRate (double newRate);
@@ -66,6 +64,7 @@ private:
     int noteNumber;
     double velocity = 0;
     double envLevel = 0;
+    double releaseEnvLevel = 0;
     double partialLevels[numPartials];
     double currentAngles[numPartials] = { 0.0 };
     int samplesSinceTrigger = 0;
