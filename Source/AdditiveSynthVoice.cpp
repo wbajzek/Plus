@@ -41,6 +41,11 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
 void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
 {
     samplesSinceTrigger = 0;
+    if (!allowTailOff)
+    {
+        envLevel = 0.0;
+        clearCurrentNote();
+    }
     releaseEnvLevel = envLevel;
 }
 
