@@ -70,6 +70,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
     if (envLevel > 0.000)
     {
         const float sampleRate = getSampleRate();
+        const float nyquist = sampleRate/2.0;
         const float double_Pi_2 = 2.0 * double_Pi;
 
         while (--numSamples >= 0)
@@ -85,15 +86,19 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                 stretchEnvAmt += localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
                 if (localParameters[PartialToParamMapping[i]] != 0.0)
                 {
-                    const float partialFreq = (freq * (float)(i+1));
-                    double cyclesPerSample = (partialFreq + (partialFreq * stretch) + (partialFreq * stretchEnvAmt * amplitude)) / sampleRate;
-                    double angleDelta = cyclesPerSample * double_Pi_2;
-
-                    if (angleDelta != 0.0)
+                    const float partialBaseFreq = (freq * (float)(i+1));
+                    const float partialFreq = (partialBaseFreq + (partialBaseFreq * stretch) + (partialBaseFreq * stretchEnvAmt * amplitude));
+                    if (partialFreq < nyquist)
                     {
-                        currentSample += (float) (sin (currentAngles[i]) *
-                                                  (localParameters[PartialToParamMapping[i]] * amplitude));
-                        currentAngles[i] += angleDelta;
+                        double cyclesPerSample = partialFreq / sampleRate;
+                        double angleDelta = cyclesPerSample * double_Pi_2;
+                        
+                        if (angleDelta != 0.0)
+                        {
+                            currentSample += (float) (sin (currentAngles[i]) *
+                                                      (localParameters[PartialToParamMapping[i]] * amplitude));
+                            currentAngles[i] += angleDelta;
+                        }                        
                     }
                 }
                 stretch += localParameters[STRETCH] + localParameters[STRETCH_FINE];
