@@ -45,18 +45,32 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     addAndMakeVisible(globalRelease);
 
     partialStretch.setSliderStyle(Slider::LinearBarVertical);
-    partialStretch.setRange(-0.5, 0.5, 0.001);
+    partialStretch.setRange(-1.0, 1.0, 0.01);
     partialStretch.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretch.setPopupDisplayEnabled(true, this);
     partialStretch.setValue(0.0);
     addAndMakeVisible(partialStretch);
 
+    partialStretchFine.setSliderStyle(Slider::LinearBarVertical);
+    partialStretchFine.setRange(-0.1, 0.1, 0.001);
+    partialStretchFine.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialStretchFine.setPopupDisplayEnabled(true, this);
+    partialStretchFine.setValue(0.0);
+    addAndMakeVisible(partialStretchFine);
+
     partialStretchEnvAmt.setSliderStyle(Slider::LinearBarVertical);
-    partialStretchEnvAmt.setRange(-1.0, 1.0, 0.0001);
+    partialStretchEnvAmt.setRange(-1.0, 1.0, 0.01);
     partialStretchEnvAmt.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretchEnvAmt.setPopupDisplayEnabled(true, this);
     partialStretchEnvAmt.setValue(0.0);
     addAndMakeVisible(partialStretchEnvAmt);
+
+    partialStretchEnvAmtFine.setSliderStyle(Slider::LinearBarVertical);
+    partialStretchEnvAmtFine.setRange(-0.1, 0.1, 0.0001);
+    partialStretchEnvAmtFine.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialStretchEnvAmtFine.setPopupDisplayEnabled(true, this);
+    partialStretchEnvAmtFine.setValue(0.0);
+    addAndMakeVisible(partialStretchEnvAmtFine);
 
     partialLevelEnvAmt.setSliderStyle(Slider::LinearBarVertical);
     partialLevelEnvAmt.setRange(0.0, 2.0, 0.001);
@@ -169,20 +183,22 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialLevel_15.setPopupDisplayEnabled(true, this);
     partialLevel_15.setValue(0.0);
     addAndMakeVisible(partialLevel_15);
-    
+
     partialLevel_16.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_16.setRange(0.0, 1.0, 0.001);
     partialLevel_16.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_16.setPopupDisplayEnabled(true, this);
     partialLevel_16.setValue(0.0);
     addAndMakeVisible(partialLevel_16);
-    
+
     globalAttack.addListener(this);
     globalDecay.addListener(this);
     globalSustain.addListener(this);
     globalRelease.addListener(this);
     partialStretch.addListener(this);
+    partialStretchFine.addListener(this);
     partialStretchEnvAmt.addListener(this);
+    partialStretchEnvAmtFine.addListener(this);
     partialLevel_1.addListener(this);
     partialLevel_2.addListener(this);
     partialLevel_3.addListener(this);
@@ -199,10 +215,10 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialLevel_14.addListener(this);
     partialLevel_15.addListener(this);
     partialLevel_16.addListener(this);
-    
+
     timerCallback();
     startTimer(50);
-    setSize (560, 200);
+    setSize (600, 200);
 }
 
 PlusAudioProcessorEditor::~PlusAudioProcessorEditor()
@@ -216,8 +232,8 @@ void PlusAudioProcessorEditor::paint (Graphics& g)
     g.setColour (Colours::black);
     g.setFont (15.0f);
     g.drawFittedText ("ADSR", 20, 0, 80, 30, Justification::centred, 1);
-    g.drawFittedText ("Stretch", 120, 0, 40, 30, Justification::centred, 1);
-    g.drawFittedText ("Env", 160, 0, 40, 30, Justification::centred, 1);
+    g.drawFittedText ("Stretch", 120, 0, 60, 30, Justification::centred, 1);
+    g.drawFittedText ("Env", 180, 0, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Partial Levels", 220, 0, 320, 30, Justification::centred, 1);
 }
 
@@ -228,23 +244,25 @@ void PlusAudioProcessorEditor::resized()
     globalSustain.setBounds (60, 30, 20, getHeight() - 60);
     globalRelease.setBounds (80, 30, 20, getHeight() - 60);
     partialStretch.setBounds (130, 30, 20, getHeight() - 60);
-    partialStretchEnvAmt.setBounds (170, 30, 20, getHeight() - 60);
-    partialLevel_1.setBounds (220, 30, 20, getHeight() - 60);
-    partialLevel_2.setBounds (240, 30, 20, getHeight() - 60);
-    partialLevel_3.setBounds (260, 30, 20, getHeight() - 60);
-    partialLevel_4.setBounds (280, 30, 20, getHeight() - 60);
-    partialLevel_5.setBounds (300, 30, 20, getHeight() - 60);
-    partialLevel_6.setBounds (320, 30, 20, getHeight() - 60);
-    partialLevel_7.setBounds (340, 30, 20, getHeight() - 60);
-    partialLevel_8.setBounds (360, 30, 20, getHeight() - 60);
-    partialLevel_9.setBounds (380, 30, 20, getHeight() - 60);
-    partialLevel_10.setBounds (400, 30, 20, getHeight() - 60);
-    partialLevel_11.setBounds (420, 30, 20, getHeight() - 60);
-    partialLevel_12.setBounds (440, 30, 20, getHeight() - 60);
-    partialLevel_13.setBounds (460, 30, 20, getHeight() - 60);
-    partialLevel_14.setBounds (480, 30, 20, getHeight() - 60);
-    partialLevel_15.setBounds (500, 30, 20, getHeight() - 60);
-    partialLevel_16.setBounds (520, 30, 20, getHeight() - 60);
+    partialStretchFine.setBounds (150, 30, 20, getHeight() - 60);
+    partialStretchEnvAmt.setBounds (190, 30, 20, getHeight() - 60);
+    partialStretchEnvAmtFine.setBounds (210, 30, 20, getHeight() - 60);
+    partialLevel_1.setBounds (250, 30, 20, getHeight() - 60);
+    partialLevel_2.setBounds (270, 30, 20, getHeight() - 60);
+    partialLevel_3.setBounds (290, 30, 20, getHeight() - 60);
+    partialLevel_4.setBounds (310, 30, 20, getHeight() - 60);
+    partialLevel_5.setBounds (330, 30, 20, getHeight() - 60);
+    partialLevel_6.setBounds (350, 30, 20, getHeight() - 60);
+    partialLevel_7.setBounds (370, 30, 20, getHeight() - 60);
+    partialLevel_8.setBounds (390, 30, 20, getHeight() - 60);
+    partialLevel_9.setBounds (410, 30, 20, getHeight() - 60);
+    partialLevel_10.setBounds (430, 30, 20, getHeight() - 60);
+    partialLevel_11.setBounds (450, 30, 20, getHeight() - 60);
+    partialLevel_12.setBounds (470, 30, 20, getHeight() - 60);
+    partialLevel_13.setBounds (490, 30, 20, getHeight() - 60);
+    partialLevel_14.setBounds (510, 30, 20, getHeight() - 60);
+    partialLevel_15.setBounds (530, 30, 20, getHeight() - 60);
+    partialLevel_16.setBounds (550, 30, 20, getHeight() - 60);
 }
 
 void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
@@ -260,8 +278,12 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
 
     if (slider == &partialStretch)
         processor.getFloatParam(STRETCH)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialStretchFine)
+        processor.getFloatParam(STRETCH_FINE)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialStretchEnvAmt)
         processor.getFloatParam(STRETCH_ENV_AMT)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialStretchEnvAmtFine)
+        processor.getFloatParam(STRETCH_ENV_AMT_FINE)->updateProcessorAndHostFromUi(slider->getValue());
 
     if (slider == &partialLevel_1)
         processor.getFloatParam(PARTIAL_1)->updateProcessorAndHostFromUi(slider->getValue());
@@ -315,17 +337,21 @@ void PlusAudioProcessorEditor::timerCallback(){
     if (&globalRelease && param->updateUiRequested()){
         globalRelease.setValue (param->uiGet(), dontSendNotification);
     }
-    param=processor.getFloatParam(RELEASE);
-    if (&globalRelease && param->updateUiRequested()){
-        globalRelease.setValue (param->uiGet(), dontSendNotification);
-    }
     param=processor.getFloatParam(STRETCH);
     if (&partialStretch && param->updateUiRequested()){
         partialStretch.setValue (param->uiGet(), dontSendNotification);
     }
+    param=processor.getFloatParam(STRETCH_FINE);
+    if (&partialStretchFine && param->updateUiRequested()){
+        partialStretchFine.setValue (param->uiGet(), dontSendNotification);
+    }
     param=processor.getFloatParam(STRETCH_ENV_AMT);
     if (&partialStretchEnvAmt && param->updateUiRequested()){
         partialStretchEnvAmt.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(STRETCH_ENV_AMT_FINE);
+    if (&partialStretchEnvAmtFine && param->updateUiRequested()){
+        partialStretchEnvAmtFine.setValue (param->uiGet(), dontSendNotification);
     }
     param=processor.getFloatParam(PARTIAL_1);
     if (&partialLevel_1 && param->updateUiRequested()){

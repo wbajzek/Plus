@@ -35,7 +35,7 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
     envLevel = 0.001;
     releaseEnvLevel = envLevel;
     samplesSinceTrigger = 0;
-    
+
 }
 
 void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
@@ -62,7 +62,7 @@ void AdditiveSynthVoice::pitchWheelMoved (const int currentPitchWheelPosition)
 
 void AdditiveSynthVoice::controllerMoved (const int /*controllerNumber*/, const int /*newValue*/)
 {
-    
+
 }
 
 void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int startSample, int numSamples)
@@ -79,16 +79,16 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             const float masterAmplitude = amplitude / numPartials;
             double stretch = 0.0;
             double stretchEnvAmt = 0.0;
-            
+
             for (int i = 0; i < numPartials; i++)
             {
-                stretchEnvAmt += localParameters[STRETCH_ENV_AMT];
+                stretchEnvAmt += localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
                 if (localParameters[PartialToParamMapping[i]] != 0.0)
                 {
                     const float partialFreq = (freq * (float)(i+1));
                     double cyclesPerSample = (partialFreq + (partialFreq * stretch) + (partialFreq * stretchEnvAmt * amplitude)) / sampleRate;
                     double angleDelta = cyclesPerSample * double_Pi_2;
-                    
+
                     if (angleDelta != 0.0)
                     {
                         currentSample += (float) (sin (currentAngles[i]) *
@@ -96,13 +96,13 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         currentAngles[i] += angleDelta;
                     }
                 }
-                stretch += localParameters[STRETCH];
+                stretch += localParameters[STRETCH] + localParameters[STRETCH_FINE];
             }
-            
+
             float calculatedSample = currentSample * masterAmplitude;
             for (int channelNum = outputBuffer.getNumChannels(); --channelNum >= 0;)
                 outputBuffer.addSample(channelNum, startSample, calculatedSample);
-            
+
             ++startSample;
         }
     }
@@ -115,7 +115,7 @@ float AdditiveSynthVoice::getAmplitude()
     const float decay = localParameters[DECAY] * sampleRate;
     const float sustainLevel = localParameters[SUSTAIN];
     const float release = localParameters[RELEASE] * sampleRate;
-    
+
     if (isKeyDown())
     {
         if (samplesSinceTrigger < attack)
@@ -143,7 +143,7 @@ float AdditiveSynthVoice::getAmplitude()
 
 void AdditiveSynthVoice::aftertouchChanged (int newAftertouchValue)
 {
-    
+
 }
 
 void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)

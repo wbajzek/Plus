@@ -34,13 +34,15 @@ private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     PlusAudioProcessor& processor;
-    
+
     Slider globalAttack;
     Slider globalDecay;
     Slider globalSustain;
     Slider globalRelease;
     Slider partialStretch;
+    Slider partialStretchFine;
     Slider partialStretchEnvAmt;
+    Slider partialStretchEnvAmtFine;
     Slider partialLevel_1;
     Slider partialLevel_2;
     Slider partialLevel_3;

@@ -10,7 +10,9 @@ PlusAudioProcessor::PlusAudioProcessor()
     parameters[SUSTAIN] = 0.8;
     parameters[RELEASE] = 1.0;
     parameters[STRETCH] = 0.0;
+    parameters[STRETCH_FINE] = 0.0;
     parameters[STRETCH_ENV_AMT] = 0.0;
+    parameters[STRETCH_ENV_AMT_FINE] = 0.0;
     parameters[PARTIAL_1] = 1.0;
     parameters[PARTIAL_2] = 0.0;
     parameters[PARTIAL_3] = 0.0;
@@ -44,8 +46,10 @@ void PlusAudioProcessor::initParameters()
     addFloatParam(DECAY, "Decay", true, SAVE, &parameters[DECAY], 0.01, 20.0);
     addFloatParam(SUSTAIN, "Sustain", true, SAVE, &parameters[SUSTAIN], 0.0, 1.0);
     addFloatParam(RELEASE, "Release", true, SAVE, &parameters[RELEASE], 0.01, 20.0);
-    addFloatParam(STRETCH, "Stretch", true, SAVE, &parameters[STRETCH], -0.5, 0.5);
+    addFloatParam(STRETCH, "Stretch", true, SAVE, &parameters[STRETCH], -1.0, 1.0);
+    addFloatParam(STRETCH_FINE, "Stretch_Fine", true, SAVE, &parameters[STRETCH_FINE], -0.1, 0.1);
     addFloatParam(STRETCH_ENV_AMT, "Stretch_Env_Amt", true, SAVE, &parameters[STRETCH_ENV_AMT], -1.0, 1.0);
+    addFloatParam(STRETCH_ENV_AMT_FINE, "Stretch_Env_Amt_Fine", true, SAVE, &parameters[STRETCH_ENV_AMT_FINE], -0.1, 0.1);
     addFloatParam(PARTIAL_1, "Partial_1", true, SAVE, &parameters[PARTIAL_1], 0.0, 1.0);
     addFloatParam(PARTIAL_2, "Partial_2", true, SAVE, &parameters[PARTIAL_2], 0.0, 1.0);
     addFloatParam(PARTIAL_3, "Partial_3", true, SAVE, &parameters[PARTIAL_3], 0.0, 1.0);
@@ -132,7 +136,9 @@ void PlusAudioProcessor::runAfterParamGroupUpdate()
     getParam(SUSTAIN)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(RELEASE)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(STRETCH)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(STRETCH_FINE)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(STRETCH_ENV_AMT)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(STRETCH_ENV_AMT_FINE)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(PARTIAL_1)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(PARTIAL_2)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(PARTIAL_3)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
