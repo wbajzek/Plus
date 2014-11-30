@@ -1,6 +1,6 @@
-#include "PluginProcessor.h"
-#include "PluginEditor.h"
 #include "AdditiveSynth.h"
+#include "PlusAudioProcessor.h"
+#include "PlusAudioProcessorEditor.h"
 
 //==============================================================================
 PlusAudioProcessor::PlusAudioProcessor()
