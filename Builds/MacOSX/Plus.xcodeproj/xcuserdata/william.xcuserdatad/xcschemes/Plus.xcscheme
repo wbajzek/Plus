@@ -58,7 +58,7 @@
          </ExecutionAction>
       </PreActions>
       <PathRunnable
-         FilePath = "/Applications/GarageBand.app">
+         FilePath = "/Applications/GarageBand 6.0.5/GarageBand 6.0.5.app">
       </PathRunnable>
       <MacroExpansion>
          <BuildableReference
