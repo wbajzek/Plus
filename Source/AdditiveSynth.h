@@ -9,7 +9,7 @@
 #ifndef Plus_AdditiveSynth_h
 #define Plus_AdditiveSynth_h
 
-const int numVoices = 8;
+const int numVoices = 12;
 const int numPartials = 16;
 
 enum Params
