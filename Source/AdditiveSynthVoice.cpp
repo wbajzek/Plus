@@ -83,7 +83,6 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 
             for (int i = 0; i < numPartials; i++)
             {
-                stretchEnvAmt += localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
                 if (localParameters[PartialToParamMapping[i]] != 0.0)
                 {
                     const float partialBaseFreq = (freq * (float)(i+1));
@@ -102,6 +101,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                     }
                 }
                 stretch += localParameters[STRETCH] + localParameters[STRETCH_FINE];
+                stretchEnvAmt += localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
             }
 
             float calculatedSample = currentSample * masterAmplitude;
