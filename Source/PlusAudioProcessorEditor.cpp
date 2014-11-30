@@ -218,7 +218,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
 
     timerCallback();
     startTimer(50);
-    setSize (600, 200);
+    setSize (590, 300);
 }
 
 PlusAudioProcessorEditor::~PlusAudioProcessorEditor()
@@ -234,7 +234,7 @@ void PlusAudioProcessorEditor::paint (Graphics& g)
     g.drawFittedText ("ADSR", 20, 0, 80, 30, Justification::centred, 1);
     g.drawFittedText ("Stretch", 120, 0, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Env", 180, 0, 60, 30, Justification::centred, 1);
-    g.drawFittedText ("Partial Levels", 220, 0, 320, 30, Justification::centred, 1);
+    g.drawFittedText ("Partial Levels", 250, 0, 320, 30, Justification::centred, 1);
 }
 
 void PlusAudioProcessorEditor::resized()
