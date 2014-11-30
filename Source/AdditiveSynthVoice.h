@@ -65,7 +65,6 @@ private:
     double velocity = 0;
     double envLevel = 0;
     double releaseEnvLevel = 0;
-    double partialLevels[numPartials];
     double currentAngles[numPartials] = { 0.0 };
     int samplesSinceTrigger = 0;
     

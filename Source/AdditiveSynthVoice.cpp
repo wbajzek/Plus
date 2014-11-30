@@ -65,6 +65,13 @@ void AdditiveSynthVoice::controllerMoved (const int /*controllerNumber*/, const 
 
 }
 
+double scaleRange(double in, double oldMin, double oldMax, double newMin, double newMax)
+{
+    if (oldMax == oldMin)
+        return 0.0;
+    return (in / ((oldMax - oldMin) / (newMax - newMin))) + newMin;
+}
+
 void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int startSample, int numSamples)
 {
     if (envLevel > 0.000)
@@ -72,6 +79,18 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
         const float sampleRate = getSampleRate();
         const float nyquist = sampleRate/2.0;
         const float double_Pi_2 = 2.0 * double_Pi;
+        
+        // precompute this somehow
+        double minPartialLevel = localParameters[PartialToParamMapping[0]];
+        double maxPartialLevel = localParameters[PartialToParamMapping[0]];
+        for (int i = 0; i < numPartials; i++)
+        {
+            if (localParameters[PartialToParamMapping[i]] < minPartialLevel)
+                minPartialLevel = localParameters[PartialToParamMapping[i]];
+            if (localParameters[PartialToParamMapping[i]] > maxPartialLevel)
+                maxPartialLevel = localParameters[PartialToParamMapping[i]];
+        }
+        
 
         while (--numSamples >= 0)
         {
@@ -94,8 +113,11 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         
                         if (angleDelta != 0.0)
                         {
+                            const float partialLevel = (localParameters[PartialToParamMapping[i]] * amplitude);
+                            const double scaledLevel = scaleRange(partialLevel, minPartialLevel, maxPartialLevel, 0.0, 1.0);
+                            
                             currentSample += (float) (sin (currentAngles[i]) *
-                                                      (localParameters[PartialToParamMapping[i]] * amplitude));
+                                                      scaledLevel);
                             currentAngles[i] += angleDelta;
                         }                        
                     }
@@ -112,6 +134,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
         }
     }
 }
+
 
 float AdditiveSynthVoice::getAmplitude()
 {
