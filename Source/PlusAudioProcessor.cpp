@@ -12,21 +12,21 @@ PlusAudioProcessor::PlusAudioProcessor()
     parameters[STRETCH] = 0.0;
     parameters[STRETCH_ENV_AMT] = 0.0;
     parameters[PARTIAL_1] = 1.0;
-    parameters[PARTIAL_2] = 0.5;
-    parameters[PARTIAL_3] = 0.45;
-    parameters[PARTIAL_4] = 0.4;
-    parameters[PARTIAL_5] = 0.35;
-    parameters[PARTIAL_6] = 0.3;
-    parameters[PARTIAL_7] = 0.25;
-    parameters[PARTIAL_8] = 0.2;
-    parameters[PARTIAL_9] = 0.15;
-    parameters[PARTIAL_10] = 0.1;
-    parameters[PARTIAL_11] = 0.05;
-    parameters[PARTIAL_12] = 0.04;
-    parameters[PARTIAL_13] = 0.03;
-    parameters[PARTIAL_14] = 0.02;
-    parameters[PARTIAL_15] = 0.01;
-    parameters[PARTIAL_16] = 0.01;
+    parameters[PARTIAL_2] = 0.0;
+    parameters[PARTIAL_3] = 0.0;
+    parameters[PARTIAL_4] = 0.0;
+    parameters[PARTIAL_5] = 0.0;
+    parameters[PARTIAL_6] = 0.0;
+    parameters[PARTIAL_7] = 0.0;
+    parameters[PARTIAL_8] = 0.0;
+    parameters[PARTIAL_9] = 0.0;
+    parameters[PARTIAL_10] = 0.0;
+    parameters[PARTIAL_11] = 0.0;
+    parameters[PARTIAL_12] = 0.0;
+    parameters[PARTIAL_13] = 0.0;
+    parameters[PARTIAL_14] = 0.0;
+    parameters[PARTIAL_15] = 0.0;
+    parameters[PARTIAL_16] = 0.0;
 
     initAllParameters();
 
