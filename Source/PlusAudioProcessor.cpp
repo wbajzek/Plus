@@ -44,7 +44,7 @@ void PlusAudioProcessor::initParameters()
     addFloatParam(DECAY, "Decay", true, SAVE, &parameters[DECAY], 0.01, 20.0);
     addFloatParam(SUSTAIN, "Sustain", true, SAVE, &parameters[SUSTAIN], 0.0, 1.0);
     addFloatParam(RELEASE, "Release", true, SAVE, &parameters[RELEASE], 0.01, 20.0);
-    addFloatParam(STRETCH, "Stretch", true, SAVE, &parameters[STRETCH], -0.1, 0.1);
+    addFloatParam(STRETCH, "Stretch", true, SAVE, &parameters[STRETCH], -0.5, 0.5);
     addFloatParam(STRETCH_ENV_AMT, "Stretch_Env_Amt", true, SAVE, &parameters[STRETCH_ENV_AMT], -1.0, 1.0);
     addFloatParam(PARTIAL_1, "Partial_1", true, SAVE, &parameters[PARTIAL_1], 0.0, 1.0);
     addFloatParam(PARTIAL_2, "Partial_2", true, SAVE, &parameters[PARTIAL_2], 0.0, 1.0);

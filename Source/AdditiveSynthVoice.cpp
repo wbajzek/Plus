@@ -82,19 +82,21 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             
             for (int i = 0; i < numPartials; i++)
             {
-                stretch += localParameters[STRETCH];
                 stretchEnvAmt += localParameters[STRETCH_ENV_AMT];
-                
-                double cyclesPerSample = (freq * i+1) / sampleRate +
-                    stretch + ( stretchEnvAmt * amplitude);
-                double angleDelta = cyclesPerSample * double_Pi_2;
-
-                if (angleDelta != 0.0)
+                if (localParameters[PartialToParamMapping[i]] != 0.0)
                 {
-                    currentSample += (float) (sin (currentAngles[i]) *
-                                               (localParameters[PartialToParamMapping[i]] * amplitude));
-                    currentAngles[i] += angleDelta;
+                    const float partialFreq = (freq * (float)(i+1));
+                    double cyclesPerSample = (partialFreq + (partialFreq * stretch) + (partialFreq * stretchEnvAmt * amplitude)) / sampleRate;
+                    double angleDelta = cyclesPerSample * double_Pi_2;
+                    
+                    if (angleDelta != 0.0)
+                    {
+                        currentSample += (float) (sin (currentAngles[i]) *
+                                                  (localParameters[PartialToParamMapping[i]] * amplitude));
+                        currentAngles[i] += angleDelta;
+                    }
                 }
+                stretch += localParameters[STRETCH];
             }
             
             float calculatedSample = currentSample * masterAmplitude;

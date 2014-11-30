@@ -45,14 +45,14 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     addAndMakeVisible(globalRelease);
 
     partialStretch.setSliderStyle(Slider::LinearBarVertical);
-    partialStretch.setRange(-0.1, 0.1, 0.0001);
+    partialStretch.setRange(-0.5, 0.5, 0.001);
     partialStretch.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretch.setPopupDisplayEnabled(true, this);
     partialStretch.setValue(0.0);
     addAndMakeVisible(partialStretch);
 
     partialStretchEnvAmt.setSliderStyle(Slider::LinearBarVertical);
-    partialStretchEnvAmt.setRange(-0.01, 0.01, 0.0001);
+    partialStretchEnvAmt.setRange(-1.0, 1.0, 0.0001);
     partialStretchEnvAmt.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretchEnvAmt.setPopupDisplayEnabled(true, this);
     partialStretchEnvAmt.setValue(0.0);
