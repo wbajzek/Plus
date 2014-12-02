@@ -67,14 +67,23 @@ private:
     double velocity = 0;
     double envLevel = 0;
     double releaseEnvLevel = 0;
-    double currentAngles[numPartials] = { 0.0 };
-    double stretchedCurrentAngles[numPartials] = { 0.0 };
+    int stretchedIndices[numPartials] = { 0 };
     int samplesSinceTrigger = 0;
     double minPartialLevel = 0.0;
     double maxPartialLevel = 0.0;
-    const float double_Pi_2 = 2.0 * double_Pi;
+    double waveTable[waveTableLength];
+    double partialLevels[numPartials] = { 0.0 };
 
     float calculateFrequency(int currentPitchWheelPosition);
+    
+    
+    double scaleRange(double in, double oldMin, double oldMax, double newMin, double newMax)
+    {
+        if (oldMax == oldMin)
+            return 0.0;
+        return (in / ((oldMax - oldMin) / (newMax - newMin))) + newMin;
+    }
+
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AdditiveSynthVoice);
 };

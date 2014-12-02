@@ -45,6 +45,9 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
             minPartialLevel = localParameters[PartialToParamMapping[i]];
         if (localParameters[PartialToParamMapping[i]] > maxPartialLevel)
             maxPartialLevel = localParameters[PartialToParamMapping[i]];
+        
+        partialLevels[i] = scaleRange(localParameters[PartialToParamMapping[i]], minPartialLevel, maxPartialLevel, 0.0, 1.0);
+
     }
 }
 
@@ -75,24 +78,17 @@ void AdditiveSynthVoice::controllerMoved (const int /*controllerNumber*/, const 
 
 }
 
-double scaleRange(double in, double oldMin, double oldMax, double newMin, double newMax)
-{
-    if (oldMax == oldMin)
-        return 0.0;
-    return (in / ((oldMax - oldMin) / (newMax - newMin))) + newMin;
-}
-
 void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int startSample, int numSamples)
 {
     if (envLevel > 0.000)
     {
         const float sampleRate = getSampleRate();
         const float nyquist = sampleRate/2.0;
-        const float double_Pi_2 = 2.0 * double_Pi;
-        
+        const double frqTI = waveTableLength/sampleRate;
+
         const double stretchInc = localParameters[STRETCH] + localParameters[STRETCH_FINE];
         const double stretchEnvAmtInc = localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
-
+        
         while (--numSamples >= 0)
         {
             float currentSample = 0.0;
@@ -105,39 +101,19 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             {
                 if (localParameters[PartialToParamMapping[i]] != 0.0)
                 {
+                    const double partialFreq = (freq * (float)(i+1));
+                    const double stretchedFreq = (partialFreq + (partialFreq * stretch) + (partialFreq * stretchEnvAmt * amplitude));
+                    const double stretchedIncrement = frqTI * stretchedFreq;
                     
-                    const double partialLevel = (localParameters[PartialToParamMapping[i]] * amplitude);
-                    const double scaledLevel = scaleRange(partialLevel, minPartialLevel, maxPartialLevel, 0.0, 1.0);
+                    double partialSample = 0.0;
                     
-                    // unstretched
-                    const float partialFreq = (freq * (float)(i+1));
-                    if (partialFreq < nyquist)
+                    if (stretchedFreq < nyquist)
                     {
-                        const double cyclesPerSample = partialFreq / sampleRate;
-                        const double angleDelta = cyclesPerSample * double_Pi_2;
-                        
-                        if (angleDelta != 0.0)
-                        {
-                            currentSample += (float) (sin (currentAngles[i]) *
-                                                      scaledLevel);
-                            currentAngles[i] += angleDelta;
-                        }
+                        partialSample += waveTable[stretchedIndices[i]];
+                        if ((stretchedIndices[i] += stretchedIncrement) >= waveTableLength)
+                            stretchedIndices[i] -= waveTableLength;
                     }
-                    
-                    // stretched
-                    const float stretchedPartialFreq = (partialFreq + (partialFreq * stretch) + (partialFreq * stretchEnvAmt * amplitude));
-                    if (stretchedPartialFreq < nyquist)
-                    {
-                        const double cyclesPerSample = stretchedPartialFreq / sampleRate;
-                        const double angleDelta = cyclesPerSample * double_Pi_2;
-                        
-                        if (angleDelta != 0.0)
-                        {
-                            currentSample += (float) (sin (stretchedCurrentAngles[i]) *
-                                                      scaledLevel);
-                            stretchedCurrentAngles[i] += angleDelta;
-                        }                        
-                    }
+                    currentSample += partialSample * partialLevels[i];
                 }
                 stretch += stretchInc;
                 stretchEnvAmt += stretchEnvAmtInc;
