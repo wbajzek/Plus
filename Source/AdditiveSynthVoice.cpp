@@ -113,7 +113,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         
                         if (angleDelta != 0.0)
                         {
-                            const float partialLevel = (localParameters[PartialToParamMapping[i]] * amplitude);
+                            const double partialLevel = (localParameters[PartialToParamMapping[i]] * amplitude);
                             const double scaledLevel = scaleRange(partialLevel, minPartialLevel, maxPartialLevel, 0.0, 1.0);
                             
                             currentSample += (float) (sin (currentAngles[i]) *

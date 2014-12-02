@@ -59,24 +59,24 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     addAndMakeVisible(partialStretchFine);
 
     partialStretchEnvAmt.setSliderStyle(Slider::LinearBarVertical);
-    partialStretchEnvAmt.setRange(-1.0, 1.0, 0.01);
+    partialStretchEnvAmt.setRange(0.0, 2.0, 0.01);
     partialStretchEnvAmt.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretchEnvAmt.setPopupDisplayEnabled(true, this);
     partialStretchEnvAmt.setValue(0.0);
     addAndMakeVisible(partialStretchEnvAmt);
 
     partialStretchEnvAmtFine.setSliderStyle(Slider::LinearBarVertical);
-    partialStretchEnvAmtFine.setRange(-0.1, 0.1, 0.0001);
+    partialStretchEnvAmtFine.setRange(-0.0, 0.1, 0.0001);
     partialStretchEnvAmtFine.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretchEnvAmtFine.setPopupDisplayEnabled(true, this);
     partialStretchEnvAmtFine.setValue(0.0);
     addAndMakeVisible(partialStretchEnvAmtFine);
 
     partialLevelEnvAmt.setSliderStyle(Slider::LinearBarVertical);
-    partialLevelEnvAmt.setRange(0.0, 2.0, 0.001);
+    partialLevelEnvAmt.setRange(0.0, 1.0, 0.001);
     partialLevelEnvAmt.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevelEnvAmt.setPopupDisplayEnabled(true, this);
-    partialLevelEnvAmt.setValue(1.0);
+    partialLevelEnvAmt.setValue(0.0);
     addAndMakeVisible(partialLevelEnvAmt);
 
     partialLevel_1.setSliderStyle(Slider::LinearBarVertical);
