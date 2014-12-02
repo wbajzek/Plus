@@ -89,7 +89,8 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
         const float nyquist = sampleRate/2.0;
         const float double_Pi_2 = 2.0 * double_Pi;
         
-
+        const double stretchInc = localParameters[STRETCH] + localParameters[STRETCH_FINE];
+        const double stretchEnvAmtInc = localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
 
         while (--numSamples >= 0)
         {
@@ -121,8 +122,8 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         }                        
                     }
                 }
-                stretch += localParameters[STRETCH] + localParameters[STRETCH_FINE];
-                stretchEnvAmt += localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
+                stretch += stretchInc;
+                stretchEnvAmt += stretchEnvAmtInc;
             }
 
             float calculatedSample = currentSample * masterAmplitude;
