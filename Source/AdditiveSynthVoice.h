@@ -69,6 +69,7 @@ private:
     int samplesSinceTrigger = 0;
     double minPartialLevel = 0.0;
     double maxPartialLevel = 0.0;
+    const float double_Pi_2 = 2.0 * double_Pi;
 
     float calculateFrequency(int currentPitchWheelPosition);
     
