@@ -29,6 +29,8 @@ const int PartialToParamMapping[16] =
     PARTIAL_16
 };
 
+const int waveTableLength = 128 * 1024;
+
 class AdditiveSynthVoice : public SynthesiserVoice
 {
 public:
