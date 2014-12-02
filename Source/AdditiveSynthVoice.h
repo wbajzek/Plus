@@ -38,11 +38,11 @@ public:
     
     bool canPlaySound (SynthesiserSound* sound);
     
-    void startNote (const int midiNoteNumber, const float velocity, SynthesiserSound* /*sound*/, const int /*currrentPitchWheelPosition*/);
+    void startNote (const int midiNoteNumber, const float velocity, SynthesiserSound* /*sound*/, const int currrentPitchWheelPosition);
     
     void stopNote (float velocity, const bool allowTailOff);
     
-    void pitchWheelMoved (const int /*newValue*/);
+    void pitchWheelMoved (const int newValue);
     
     void controllerMoved (const int /*controllerNumber*/, const int /*newValue*/);
     
