@@ -89,6 +89,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
         const float sampleRate = getSampleRate();
         const float nyquist = sampleRate/2.0;
         const float double_Pi_2 = 2.0 * double_Pi;
+        
         const double stretchInc = localParameters[STRETCH] + localParameters[STRETCH_FINE];
         const double stretchEnvAmtInc = localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
 
