@@ -82,7 +82,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
     {
         const float sampleRate = getSampleRate();
         const float nyquist = sampleRate/2.0;
-        
+        const float double_Pi_2 = 2.0 * double_Pi;
         const double stretchInc = localParameters[STRETCH] + localParameters[STRETCH_FINE];
         const double stretchEnvAmtInc = localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
 
@@ -98,21 +98,37 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             {
                 if (localParameters[PartialToParamMapping[i]] != 0.0)
                 {
-                    const float partialBaseFreq = (freq * (float)(i+1));
-                    const float partialFreq = (partialBaseFreq + (partialBaseFreq * stretch) + (partialBaseFreq * stretchEnvAmt * amplitude));
+                    
+                    const double partialLevel = (localParameters[PartialToParamMapping[i]] * amplitude);
+                    const double scaledLevel = scaleRange(partialLevel, minPartialLevel, maxPartialLevel, 0.0, 1.0);
+                    
+                    // unstretched
+                    const float partialFreq = (freq * (float)(i+1));
                     if (partialFreq < nyquist)
                     {
-                        double cyclesPerSample = partialFreq / sampleRate;
-                        double angleDelta = cyclesPerSample * double_Pi_2;
+                        const double cyclesPerSample = partialFreq / sampleRate;
+                        const double angleDelta = cyclesPerSample * double_Pi_2;
                         
                         if (angleDelta != 0.0)
                         {
-                            const double partialLevel = (localParameters[PartialToParamMapping[i]] * amplitude);
-                            const double scaledLevel = scaleRange(partialLevel, minPartialLevel, maxPartialLevel, 0.0, 1.0);
-                            
                             currentSample += (float) (sin (currentAngles[i]) *
                                                       scaledLevel);
                             currentAngles[i] += angleDelta;
+                        }
+                    }
+                    
+                    // stretched
+                    const float stretchedPartialFreq = (partialFreq + (partialFreq * stretch) + (partialFreq * stretchEnvAmt * amplitude));
+                    if (stretchedPartialFreq < nyquist)
+                    {
+                        const double cyclesPerSample = stretchedPartialFreq / sampleRate;
+                        const double angleDelta = cyclesPerSample * double_Pi_2;
+                        
+                        if (angleDelta != 0.0)
+                        {
+                            currentSample += (float) (sin (stretchedCurrentAngles[i]) *
+                                                      scaledLevel);
+                            stretchedCurrentAngles[i] += angleDelta;
                         }                        
                     }
                 }

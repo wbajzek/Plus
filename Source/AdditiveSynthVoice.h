@@ -66,6 +66,7 @@ private:
     double envLevel = 0;
     double releaseEnvLevel = 0;
     double currentAngles[numPartials] = { 0.0 };
+    double stretchedCurrentAngles[numPartials] = { 0.0 };
     int samplesSinceTrigger = 0;
     double minPartialLevel = 0.0;
     double maxPartialLevel = 0.0;
