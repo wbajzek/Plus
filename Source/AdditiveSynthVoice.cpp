@@ -17,11 +17,6 @@ AdditiveSynthVoice::~AdditiveSynthVoice()
 {
 }
 
-float AdditiveSynthVoice::getParameter(int index)
-{
-    return localParameters[index];
-}
-
 bool AdditiveSynthVoice::canPlaySound (SynthesiserSound* sound)
 {
     return true;
