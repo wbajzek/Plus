@@ -36,6 +36,15 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
     releaseEnvLevel = envLevel;
     samplesSinceTrigger = 0;
 
+    // precompute normalization of partials
+    minPartialLevel = maxPartialLevel = 0.0;
+    for (int i = 0; i < numPartials; i++)
+    {
+        if (localParameters[PartialToParamMapping[i]] < minPartialLevel)
+            minPartialLevel = localParameters[PartialToParamMapping[i]];
+        if (localParameters[PartialToParamMapping[i]] > maxPartialLevel)
+            maxPartialLevel = localParameters[PartialToParamMapping[i]];
+    }
 }
 
 void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
@@ -80,17 +89,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
         const float nyquist = sampleRate/2.0;
         const float double_Pi_2 = 2.0 * double_Pi;
         
-        // precompute this somehow
-        double minPartialLevel = localParameters[PartialToParamMapping[0]];
-        double maxPartialLevel = localParameters[PartialToParamMapping[0]];
-        for (int i = 0; i < numPartials; i++)
-        {
-            if (localParameters[PartialToParamMapping[i]] < minPartialLevel)
-                minPartialLevel = localParameters[PartialToParamMapping[i]];
-            if (localParameters[PartialToParamMapping[i]] > maxPartialLevel)
-                maxPartialLevel = localParameters[PartialToParamMapping[i]];
-        }
-        
+
 
         while (--numSamples >= 0)
         {

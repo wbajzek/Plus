@@ -67,7 +67,9 @@ private:
     double releaseEnvLevel = 0;
     double currentAngles[numPartials] = { 0.0 };
     int samplesSinceTrigger = 0;
-    
+    double minPartialLevel = 0.0;
+    double maxPartialLevel = 0.0;
+
     float calculateFrequency(int currentPitchWheelPosition);
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AdditiveSynthVoice);
