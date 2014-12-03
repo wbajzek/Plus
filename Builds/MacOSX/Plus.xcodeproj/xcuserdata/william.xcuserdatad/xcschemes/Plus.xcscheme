@@ -58,7 +58,7 @@
          </ExecutionAction>
       </PreActions>
       <PathRunnable
-         FilePath = "/Applications/GarageBand 6.0.5/GarageBand 6.0.5.app">
+         FilePath = "/Applications/Ableton Live 9 Suite.app">
       </PathRunnable>
       <MacroExpansion>
          <BuildableReference
