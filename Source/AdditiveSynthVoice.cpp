@@ -178,3 +178,9 @@ bool AdditiveSynthVoice::isPlayingChannel (int midiChannel) const
 {
     return true;
 }
+
+bool AdditiveSynthVoice::isVoiceActive() const
+{
+    return envLevel > 0.0;
+}
+

@@ -71,6 +71,8 @@ public:
 
     bool isPlayingChannel (int midiChannel) const;
     
+    bool isVoiceActive() const;
+    
     float getAmplitude();
 
     
