@@ -9,7 +9,7 @@
 #ifndef __Plus__AdditiveSynthVoice__
 #define __Plus__AdditiveSynthVoice__
 
-const int PartialToParamMapping[16] =
+const int PartialToParamMapping[numPartials] =
 {
     PARTIAL_1,
     PARTIAL_2,
@@ -26,10 +26,25 @@ const int PartialToParamMapping[16] =
     PARTIAL_13,
     PARTIAL_14,
     PARTIAL_15,
-    PARTIAL_16
+    PARTIAL_16,
+    PARTIAL_17,
+    PARTIAL_18,
+    PARTIAL_19,
+    PARTIAL_20,
+    PARTIAL_21,
+    PARTIAL_22,
+    PARTIAL_23,
+    PARTIAL_24,
+    PARTIAL_25,
+    PARTIAL_26,
+    PARTIAL_27,
+    PARTIAL_28,
+    PARTIAL_29,
+    PARTIAL_30,
+    PARTIAL_31,
+    PARTIAL_32,
 };
 
-const int waveTableLength = 128 * 1024;
 
 class AdditiveSynthVoice : public SynthesiserVoice
 {

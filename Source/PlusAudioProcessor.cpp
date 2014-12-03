@@ -29,6 +29,22 @@ PlusAudioProcessor::PlusAudioProcessor()
     parameters[PARTIAL_14] = 0.0;
     parameters[PARTIAL_15] = 0.0;
     parameters[PARTIAL_16] = 0.0;
+    parameters[PARTIAL_17] = 0.0;
+    parameters[PARTIAL_18] = 0.0;
+    parameters[PARTIAL_19] = 0.0;
+    parameters[PARTIAL_20] = 0.0;
+    parameters[PARTIAL_21] = 0.0;
+    parameters[PARTIAL_22] = 0.0;
+    parameters[PARTIAL_23] = 0.0;
+    parameters[PARTIAL_24] = 0.0;
+    parameters[PARTIAL_25] = 0.0;
+    parameters[PARTIAL_26] = 0.0;
+    parameters[PARTIAL_27] = 0.0;
+    parameters[PARTIAL_28] = 0.0;
+    parameters[PARTIAL_29] = 0.0;
+    parameters[PARTIAL_30] = 0.0;
+    parameters[PARTIAL_31] = 0.0;
+    parameters[PARTIAL_32] = 0.0;
 
     initAllParameters();
 
@@ -72,6 +88,22 @@ void PlusAudioProcessor::initParameters()
     addFloatParam(PARTIAL_14, "Partial_14", true, SAVE, &parameters[PARTIAL_14], 0.0, 1.0);
     addFloatParam(PARTIAL_15, "Partial_15", true, SAVE, &parameters[PARTIAL_15], 0.0, 1.0);
     addFloatParam(PARTIAL_16, "Partial_16", true, SAVE, &parameters[PARTIAL_16], 0.0, 1.0);
+    addFloatParam(PARTIAL_17, "Partial_17", true, SAVE, &parameters[PARTIAL_17], 0.0, 1.0);
+    addFloatParam(PARTIAL_18, "Partial_18", true, SAVE, &parameters[PARTIAL_18], 0.0, 1.0);
+    addFloatParam(PARTIAL_19, "Partial_19", true, SAVE, &parameters[PARTIAL_19], 0.0, 1.0);
+    addFloatParam(PARTIAL_20, "Partial_20", true, SAVE, &parameters[PARTIAL_20], 0.0, 1.0);
+    addFloatParam(PARTIAL_21, "Partial_21", true, SAVE, &parameters[PARTIAL_21], 0.0, 1.0);
+    addFloatParam(PARTIAL_22, "Partial_22", true, SAVE, &parameters[PARTIAL_22], 0.0, 1.0);
+    addFloatParam(PARTIAL_23, "Partial_23", true, SAVE, &parameters[PARTIAL_23], 0.0, 1.0);
+    addFloatParam(PARTIAL_24, "Partial_24", true, SAVE, &parameters[PARTIAL_24], 0.0, 1.0);
+    addFloatParam(PARTIAL_25, "Partial_25", true, SAVE, &parameters[PARTIAL_25], 0.0, 1.0);
+    addFloatParam(PARTIAL_26, "Partial_26", true, SAVE, &parameters[PARTIAL_26], 0.0, 1.0);
+    addFloatParam(PARTIAL_27, "Partial_27", true, SAVE, &parameters[PARTIAL_27], 0.0, 1.0);
+    addFloatParam(PARTIAL_28, "Partial_28", true, SAVE, &parameters[PARTIAL_28], 0.0, 1.0);
+    addFloatParam(PARTIAL_29, "Partial_29", true, SAVE, &parameters[PARTIAL_29], 0.0, 1.0);
+    addFloatParam(PARTIAL_30, "Partial_30", true, SAVE, &parameters[PARTIAL_30], 0.0, 1.0);
+    addFloatParam(PARTIAL_31, "Partial_31", true, SAVE, &parameters[PARTIAL_31], 0.0, 1.0);
+    addFloatParam(PARTIAL_32, "Partial_32", true, SAVE, &parameters[PARTIAL_32], 0.0, 1.0);
 }
 
 PlusAudioProcessor::~PlusAudioProcessor()
