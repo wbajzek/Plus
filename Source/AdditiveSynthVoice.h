@@ -49,13 +49,13 @@ const int PartialToParamMapping[numPartials] =
 class AdditiveSynthVoice : public SynthesiserVoice
 {
 public:
-    AdditiveSynthVoice(float* parameters, double* waveTable);
+    AdditiveSynthVoice(float* parameters);
     ~AdditiveSynthVoice();
     float getParameter(int index);
     
     bool canPlaySound (SynthesiserSound* sound);
     
-    void startNote (const int midiNoteNumber, const float velocity, SynthesiserSound* /*sound*/, const int currrentPitchWheelPosition);
+    void startNote (const int midiNoteNumber, const float velocity, SynthesiserSound* /*sound*/, const int currentPitchWheelPosition);
     
     void stopNote (float velocity, const bool allowTailOff);
     
@@ -77,7 +77,7 @@ public:
 private:
 
     float* localParameters;
-    double* localWaveTable;
+    double waveTable[waveTableLength];
     double freq = 110.0;
     int noteNumber;
     double velocity = 0;

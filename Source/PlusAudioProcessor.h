@@ -61,7 +61,6 @@ public:
 
 private:
     float parameters[NUMBER_OF_PARAMETERS];
-    double waveTable[waveTableLength];
     Synthesiser synth;
     MidiKeyboardState keyboardState;
 

@@ -8,10 +8,15 @@
 
 #include "AdditiveSynth.h"
 
-AdditiveSynthVoice::AdditiveSynthVoice(float* parameters, double* waveTable)
+AdditiveSynthVoice::AdditiveSynthVoice(float* parameters)
 {
     localParameters = parameters;
-    localWaveTable = waveTable;
+    double phaseIncrement = 2.0 * double_Pi / (float)waveTableLength;
+    double phase = 0.0;
+    for (int i = 0; i < waveTableLength; i++) {
+        waveTable[i] = sin(phase);
+        phase += phaseIncrement;
+    }
 }
 
 AdditiveSynthVoice::~AdditiveSynthVoice()
@@ -42,19 +47,15 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
             maxPartialLevel = localParameters[PartialToParamMapping[i]];
         
         partialLevels[i] = scaleRange(localParameters[PartialToParamMapping[i]], minPartialLevel, maxPartialLevel, 0.0, 1.0);
-
+        stretchedIndices[i] = 0.0;
     }
 }
 
 void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
 {
     samplesSinceTrigger = 0;
-    if (!allowTailOff)
-    {
-        envLevel = 0.0;
-        clearCurrentNote();
-    }
     releaseEnvLevel = envLevel;
+    clearCurrentNote();
 }
 
 float AdditiveSynthVoice::calculateFrequency(int currentPitchWheelPosition)
@@ -104,7 +105,11 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                     
                     if (stretchedFreq < nyquist)
                     {
-                        partialSample += localWaveTable[stretchedIndices[i]];
+                        while (stretchedIndices[i] < 0)
+                            stretchedIndices[i] += waveTableLength;
+                        
+                        partialSample += waveTable[stretchedIndices[i]];
+
                         if ((stretchedIndices[i] += stretchedIncrement) >= waveTableLength)
                             stretchedIndices[i] -= waveTableLength;
                     }
@@ -135,17 +140,20 @@ float AdditiveSynthVoice::getAmplitude()
     if (isKeyDown())
     {
         if (samplesSinceTrigger < attack)
+        {
             envLevel = samplesSinceTrigger * velocity / attack;
+        }
         else if (samplesSinceTrigger < attack + decay)
         {
             const float amp = ((sustainLevel * velocity) - velocity) / decay;
             envLevel = ((samplesSinceTrigger - attack) * amp) + velocity;
         }
     }
-    else if (envLevel > 0.0)
+    else if (envLevel > 0.0 && samplesSinceTrigger <= release)
     {
-        const float amp = (0 - releaseEnvLevel) / release;
-        envLevel = ((samplesSinceTrigger) * amp) + releaseEnvLevel;
+        // something wrong with this calculation! It is producing a negative level.
+        const float amp = 0 - releaseEnvLevel / release;
+        envLevel = (samplesSinceTrigger * amp) + releaseEnvLevel;
     }
     else
     {
