@@ -34,7 +34,7 @@ const int waveTableLength = 128 * 1024;
 class AdditiveSynthVoice : public SynthesiserVoice
 {
 public:
-    AdditiveSynthVoice(float* parameters);
+    AdditiveSynthVoice(float* parameters, double* waveTable);
     ~AdditiveSynthVoice();
     float getParameter(int index);
     
@@ -62,6 +62,7 @@ public:
 private:
 
     float* localParameters;
+    double* localWaveTable;
     double freq = 110.0;
     int noteNumber;
     double velocity = 0;
@@ -71,7 +72,6 @@ private:
     int samplesSinceTrigger = 0;
     double minPartialLevel = 0.0;
     double maxPartialLevel = 0.0;
-    double waveTable[waveTableLength];
     double partialLevels[numPartials] = { 0.0 };
 
     float calculateFrequency(int currentPitchWheelPosition);

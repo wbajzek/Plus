@@ -8,15 +8,10 @@
 
 #include "AdditiveSynth.h"
 
-AdditiveSynthVoice::AdditiveSynthVoice(float* parameters)
+AdditiveSynthVoice::AdditiveSynthVoice(float* parameters, double* waveTable)
 {
     localParameters = parameters;
-    double phaseIncrement = 2.0 * double_Pi / (float)waveTableLength;
-    double phase = 0.0;
-    for (int i = 0; i < waveTableLength; i++) {
-        waveTable[i] = sin(phase);
-        phase += phaseIncrement;
-    }
+    localWaveTable = waveTable;
 }
 
 AdditiveSynthVoice::~AdditiveSynthVoice()
@@ -109,7 +104,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                     
                     if (stretchedFreq < nyquist)
                     {
-                        partialSample += waveTable[stretchedIndices[i]];
+                        partialSample += localWaveTable[stretchedIndices[i]];
                         if ((stretchedIndices[i] += stretchedIncrement) >= waveTableLength)
                             stretchedIndices[i] -= waveTableLength;
                     }

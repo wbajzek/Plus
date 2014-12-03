@@ -32,9 +32,15 @@ PlusAudioProcessor::PlusAudioProcessor()
 
     initAllParameters();
 
-
+    double phaseIncrement = 2.0 * double_Pi / (float)waveTableLength;
+    double phase = 0.0;
+    for (int i = 0; i < waveTableLength; i++) {
+        waveTable[i] = sin(phase);
+        phase += phaseIncrement;
+    }
+    
     for (int i = 0; i < numVoices; i++)
-        synth.addVoice(new AdditiveSynthVoice(parameters));
+        synth.addVoice(new AdditiveSynthVoice(parameters, waveTable));
     synth.addSound(new AdditiveSynthSound());
     synth.setNoteStealingEnabled(true);
 
