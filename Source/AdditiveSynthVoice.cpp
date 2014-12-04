@@ -99,7 +99,9 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                     const float stretchedFreq = (partialFrequencies[i] + (partialFrequencies[i] * stretchEnvAmt));
                     if (stretchedFreq < nyquist)
                     {
-                        const long stretchedIncrement = (long)(frqTI * stretchedFreq * 65536);
+                        // this '16' business is converting floating point to fixed for the sake of performance.
+                        // and oh boy, does it improve performance.
+                        const long stretchedIncrement = (long)(frqTI * stretchedFreq) << 16;
 
                         currentSample += waveTable[(stretchedIndices[i]+0x8000) >> 16] * partialLevels[i];
                         stretchedIndices[i] = (stretchedIndices[i] + stretchedIncrement) % i32waveTableLength;
@@ -108,9 +110,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                 stretchEnvAmt += stretchEnvAmtInc * amplitude;
             }
             
-            jassert(-1.0 <= currentSample <= 1.0);
             float calculatedSample = currentSample * masterAmplitude;
-            jassert(-1.0 <= calculatedSample <= 1.0);
             
             for (int channelNum = outputBuffer.getNumChannels(); --channelNum >= 0;)
                 outputBuffer.addSample(channelNum, startSample, calculatedSample);
