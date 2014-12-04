@@ -49,12 +49,12 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
             maxPartialLevel = localParameters[PartialToParamMapping[i]];
         
         partialLevels[i] = scaleRange(localParameters[PartialToParamMapping[i]], minPartialLevel, maxPartialLevel, 0.0, 1.0);
-        partialFrequencies[i] = freq * ((float)i + 1.0);
-        if (i > 0)
+        if (i == 0)
+            partialFrequencies[i] = freq;
+        else
         {
-            partialFrequencies[i] += partialFrequencies[i] * stretch;
+            partialFrequencies[i] = freq * (float)i+1.0 + (freq * (1.0 + stretch));
             partialStretchAmounts[i] = stretch;
-            stretch += stretch;
         }
         stretchedIndices[i] = 0.0;
     }
