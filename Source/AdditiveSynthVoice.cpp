@@ -15,6 +15,7 @@ AdditiveSynthVoice::AdditiveSynthVoice(float* parameters)
     double phase = 0.0;
     for (int i = 0; i < waveTableLength; i++) {
         waveTable[i] = sin(phase);
+        jassert(-1.0 <= waveTable[i] <= 1.0);
         phase += phaseIncrement;
     }
 }
@@ -82,7 +83,6 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 {
     if (envLevel > 0.000)
     {
-
         const float stretchEnvAmtInc = localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
         
         while (--numSamples >= 0)
@@ -97,19 +97,21 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                 if (localParameters[PartialToParamMapping[i]] != 0.0)
                 {
                     const float stretchedFreq = (partialFrequencies[i] + (partialFrequencies[i] * stretchEnvAmt));
-                    const float stretchedIncrement = frqTI * stretchedFreq;
-                    
                     if (stretchedFreq < nyquist)
                     {
+                        const long stretchedIncrement = (long)(frqTI * stretchedFreq * 65536);
 
-                        currentSample += waveTable[stretchedIndices[i]] * partialLevels[i];
-                        stretchedIndices[i] = (int)(stretchedIndices[i] + stretchedIncrement) % waveTableLength;
+                        currentSample += waveTable[(stretchedIndices[i]+0x8000) >> 16] * partialLevels[i];
+                        stretchedIndices[i] = (stretchedIndices[i] + stretchedIncrement) % i32waveTableLength;
                     }
                 }
                 stretchEnvAmt += stretchEnvAmtInc * amplitude;
             }
             
+            jassert(-1.0 <= currentSample <= 1.0);
             float calculatedSample = currentSample * masterAmplitude;
+            jassert(-1.0 <= calculatedSample <= 1.0);
+            
             for (int channelNum = outputBuffer.getNumChannels(); --channelNum >= 0;)
                 outputBuffer.addSample(channelNum, startSample, calculatedSample);
 

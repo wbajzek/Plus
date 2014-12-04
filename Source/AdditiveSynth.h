@@ -9,9 +9,10 @@
 #ifndef Plus_AdditiveSynth_h
 #define Plus_AdditiveSynth_h
 
-const int numVoices = 8;
+const int numVoices = 16;
 const int numPartials = 32;
-const int waveTableLength = 128 * 1024;
+const int waveTableLength = 32 * 1024;
+const unsigned long i32waveTableLength = waveTableLength * 65536;
 
 enum Params
 {
