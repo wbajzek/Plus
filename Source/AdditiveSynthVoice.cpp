@@ -39,6 +39,7 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
 
     // precompute normalization of partials
     minPartialLevel = maxPartialLevel = 0.0;
+    float stretch = localParameters[STRETCH] + localParameters[STRETCH_FINE];
     for (int i = 0; i < numPartials; i++)
     {
         if (localParameters[PartialToParamMapping[i]] < minPartialLevel)
@@ -47,6 +48,9 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
             maxPartialLevel = localParameters[PartialToParamMapping[i]];
         
         partialLevels[i] = scaleRange(localParameters[PartialToParamMapping[i]], minPartialLevel, maxPartialLevel, 0.0, 1.0);
+        partialFrequencies[i] = freq * ((float)i + 1.0);
+        partialFrequencies[i] += partialFrequencies[i] * stretch;
+        stretch += stretch;
         stretchedIndices[i] = 0.0;
     }
 }
@@ -78,47 +82,33 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 {
     if (envLevel > 0.000)
     {
-        const float sampleRate = getSampleRate();
-        const float nyquist = sampleRate/2.0;
-        const double frqTI = waveTableLength/sampleRate;
 
-        const double stretchInc = localParameters[STRETCH] + localParameters[STRETCH_FINE];
-        const double stretchEnvAmtInc = localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
+        const float stretchEnvAmtInc = localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
         
         while (--numSamples >= 0)
         {
             float currentSample = 0.0;
             const float amplitude = getAmplitude();
             const float masterAmplitude = amplitude / numPartials;
-            double stretch = 0.0;
-            double stretchEnvAmt = 0.0;
+            float stretchEnvAmt = 0.0;
 
             for (int i = 0; i < numPartials; i++)
             {
                 if (localParameters[PartialToParamMapping[i]] != 0.0)
                 {
-                    const double partialFreq = (freq * (float)(i+1));
-                    const double stretchedFreq = (partialFreq + (partialFreq * stretch) + (partialFreq * stretchEnvAmt * amplitude));
-                    const double stretchedIncrement = frqTI * stretchedFreq;
-                    
-                    double partialSample = 0.0;
+                    const float stretchedFreq = (partialFrequencies[i] + (partialFrequencies[i] * stretchEnvAmt));
+                    const float stretchedIncrement = frqTI * stretchedFreq;
                     
                     if (stretchedFreq < nyquist)
                     {
-                        while (stretchedIndices[i] < 0)
-                            stretchedIndices[i] += waveTableLength;
-                        
-                        partialSample += waveTable[stretchedIndices[i]];
 
-                        if ((stretchedIndices[i] += stretchedIncrement) >= waveTableLength)
-                            stretchedIndices[i] -= waveTableLength;
+                        currentSample += waveTable[stretchedIndices[i]] * partialLevels[i];
+                        stretchedIndices[i] = (int)(stretchedIndices[i] + stretchedIncrement) % waveTableLength;
                     }
-                    currentSample += partialSample * partialLevels[i];
                 }
-                stretch += stretchInc;
-                stretchEnvAmt += stretchEnvAmtInc;
+                stretchEnvAmt += stretchEnvAmtInc * amplitude;
             }
-
+            
             float calculatedSample = currentSample * masterAmplitude;
             for (int channelNum = outputBuffer.getNumChannels(); --channelNum >= 0;)
                 outputBuffer.addSample(channelNum, startSample, calculatedSample);
@@ -172,6 +162,9 @@ void AdditiveSynthVoice::aftertouchChanged (int newAftertouchValue)
 
 void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
 {
+    sampleRate = newRate;
+    nyquist = sampleRate/2.0;
+    frqTI = waveTableLength/sampleRate;
 }
 
 bool AdditiveSynthVoice::isPlayingChannel (int midiChannel) const
