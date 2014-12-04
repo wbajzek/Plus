@@ -88,6 +88,7 @@ private:
     float nyquist;
     float sampleRate;
     float frqTI;
+    
     int samplesSinceTrigger = 0;
     double minPartialLevel = 0.0;
     double maxPartialLevel = 0.0;
@@ -95,6 +96,12 @@ private:
     double partialFrequencies[numPartials] = { 0.0 };
     double partialStretchAmounts[numPartials] = { 0.0 };
     long stretchedIndices[numPartials] = { 0 };
+    
+    int attack = 0;
+    int decay = 0;
+    float sustainLevel = 0.0;
+    int release = 0;
+    double envIncrement = 0.0;
 
     float calculateFrequency(int currentPitchWheelPosition);
     

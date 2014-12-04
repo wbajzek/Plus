@@ -38,6 +38,11 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
     releaseEnvLevel = envLevel;
     samplesSinceTrigger = 0;
 
+    attack = localParameters[ATTACK] * sampleRate;
+    decay = localParameters[DECAY] * sampleRate;
+    sustainLevel = localParameters[SUSTAIN] * velocity;
+    release = localParameters[RELEASE] * sampleRate;
+    
     // precompute normalization of partials
     minPartialLevel = maxPartialLevel = 0.0;
     float stretch = localParameters[STRETCH] + localParameters[STRETCH_FINE];
@@ -121,6 +126,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                 outputBuffer.addSample(channelNum, startSample, calculatedSample);
 
             ++startSample;
+            ++samplesSinceTrigger;
         }
     }
 }
@@ -128,37 +134,30 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 
 float AdditiveSynthVoice::getAmplitude()
 {
-    const float sampleRate = (float)getSampleRate();
-    const float attack = localParameters[ATTACK] * sampleRate;
-    const float decay = localParameters[DECAY] * sampleRate;
-    const float sustainLevel = localParameters[SUSTAIN];
-    const float release = localParameters[RELEASE] * sampleRate;
-
     if (isKeyDown())
     {
-        if (samplesSinceTrigger < attack)
+        if (samplesSinceTrigger == 0)
+            envIncrement = velocity / attack;
+        else if (samplesSinceTrigger == attack) // decay portion
         {
-            envLevel = samplesSinceTrigger * velocity / attack;
+            envIncrement = - (envLevel  - sustainLevel) / decay;
         }
-        else if (samplesSinceTrigger < attack + decay)
-        {
-            const float amp = ((sustainLevel * velocity) - velocity) / decay;
-            envLevel = ((samplesSinceTrigger - attack) * amp) + velocity;
-        }
+        else if (samplesSinceTrigger == attack + decay) // sustain portion
+            envIncrement = 0.0;
     }
-    else if (envLevel > 0.0 && samplesSinceTrigger <= release)
+    else if (envLevel > 0.0 && samplesSinceTrigger == 0)
     {
-        // something wrong with this calculation! It is producing a negative level.
-        const float amp = 0 - releaseEnvLevel / release;
-        envLevel = (samplesSinceTrigger * amp) + releaseEnvLevel;
+        envIncrement = - envLevel / release;
     }
-    else
+    else if (envLevel == 0.0)
     {
         clearCurrentNote();
         envLevel = 0.0;
         releaseEnvLevel = 0.0;
+        envIncrement = 0.0;
     }
-    ++samplesSinceTrigger;
+    envLevel += envIncrement;
+
     return envLevel;
 }
 
