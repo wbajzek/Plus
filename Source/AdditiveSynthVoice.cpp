@@ -111,7 +111,8 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         stretchedIndices[i] = (stretchedIndices[i] + stretchedIncrement) % i32waveTableLength;
                     }
                 }
-                stretchEnvAmt += stretchEnvAmtInc * amplitude;
+                if (i == 0)
+                    stretchEnvAmt += stretchEnvAmtInc * amplitude;
             }
             
             float calculatedSample = currentSample * masterAmplitude;
