@@ -93,7 +93,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
         {
             float currentSample = 0.0;
             const float amplitude = getAmplitude();
-            const float masterAmplitude = amplitude / numPartials;
+            const float masterAmplitude = amplitude / numPartials * 4; // * 4 fudge factor to make the synth reasonably louder
             float stretchEnvAmt = 0.0;
 
             for (int i = 0; i < numPartials; i++)
