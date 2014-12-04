@@ -53,7 +53,8 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
         if (i > 0)
         {
             partialFrequencies[i] += partialFrequencies[i] * stretch;
-            partialStretchAmounts[i] = stretch += stretch;
+            partialStretchAmounts[i] = stretch;
+            stretch += stretch;
         }
         stretchedIndices[i] = 0.0;
     }
