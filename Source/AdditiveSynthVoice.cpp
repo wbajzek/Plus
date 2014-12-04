@@ -101,7 +101,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                 if (localParameters[PartialToParamMapping[i]] != 0.0)
                 {
                     const float stretchedFreq = (partialFrequencies[i] + (partialFrequencies[i] * (partialStretchAmounts[i] * stretchEnvAmt)));
-                    if (stretchedFreq < nyquist)
+                    if (0 < stretchedFreq < nyquist)
                     {
                         // this '16' business is converting floating point to fixed for the sake of performance.
                         // and oh boy, does it improve performance.
