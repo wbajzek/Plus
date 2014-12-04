@@ -51,7 +51,7 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
         partialLevels[i] = scaleRange(localParameters[PartialToParamMapping[i]], minPartialLevel, maxPartialLevel, 0.0, 1.0);
         partialFrequencies[i] = freq * ((float)i + 1.0);
         partialFrequencies[i] += partialFrequencies[i] * stretch;
-        stretch += stretch;
+        partialStretchAmounts[i] = stretch += stretch;
         stretchedIndices[i] = 0.0;
     }
 }
@@ -96,7 +96,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             {
                 if (localParameters[PartialToParamMapping[i]] != 0.0)
                 {
-                    const float stretchedFreq = (partialFrequencies[i] + (partialFrequencies[i] * stretchEnvAmt));
+                    const float stretchedFreq = (partialFrequencies[i] + (partialFrequencies[i] * (partialStretchAmounts[i] * stretchEnvAmt)));
                     if (stretchedFreq < nyquist)
                     {
                         // this '16' business is converting floating point to fixed for the sake of performance.

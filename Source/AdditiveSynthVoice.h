@@ -93,6 +93,7 @@ private:
     double maxPartialLevel = 0.0;
     double partialLevels[numPartials] = { 0.0 };
     double partialFrequencies[numPartials] = { 0.0 };
+    double partialStretchAmounts[numPartials] = { 0.0 };
     long stretchedIndices[numPartials] = { 0 };
 
     float calculateFrequency(int currentPitchWheelPosition);
