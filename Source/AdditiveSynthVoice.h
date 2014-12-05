@@ -90,6 +90,7 @@ private:
     float frqTI;
     
     int samplesSinceTrigger = 0;
+    float coefficient = 0.0;
     double minPartialLevel = 0.0;
     double maxPartialLevel = 0.0;
     double partialLevels[numPartials] = { 0.0 };

@@ -134,30 +134,24 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 
 float AdditiveSynthVoice::getAmplitude()
 {
-    if (isKeyDown())
+    bool keyIsDown = isKeyDown();
+    if (keyIsDown)
     {
         if (samplesSinceTrigger == 0)
             envIncrement = velocity / attack;
         else if (samplesSinceTrigger == attack) // decay portion
-        {
-            envIncrement = - (envLevel  - sustainLevel) / decay;
-        }
-        else if (samplesSinceTrigger == attack + decay) // sustain portion
-            envIncrement = 0.0;
+            coefficient = (log(sustainLevel) - log(envLevel)) / decay;
     }
     else if (envLevel > 0.0 && samplesSinceTrigger == 0)
-    {
-        envIncrement = - envLevel / release;
-    }
-    else if (envLevel == 0.0)
-    {
-        clearCurrentNote();
+        coefficient = (log(0.001) - log(envLevel)) / release;
+    else if (samplesSinceTrigger == release)
         envLevel = 0.0;
-        releaseEnvLevel = 0.0;
-        envIncrement = 0.0;
-    }
-    envLevel += envIncrement;
 
+    if (keyIsDown && samplesSinceTrigger < attack)
+        envLevel += envIncrement;
+    else
+        envLevel += coefficient * envLevel;
+    
     return envLevel;
 }
 
