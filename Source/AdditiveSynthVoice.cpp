@@ -45,7 +45,6 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
     
     // precompute normalization of partials
     minPartialLevel = maxPartialLevel = 0.0;
-    float stretch = localParameters[STRETCH] + localParameters[STRETCH_FINE];
     for (int i = 0; i < numPartials; i++)
     {
         if (localParameters[PartialToParamMapping[i]] < minPartialLevel)
@@ -54,13 +53,7 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
             maxPartialLevel = localParameters[PartialToParamMapping[i]];
         
         partialLevels[i] = scaleRange(localParameters[PartialToParamMapping[i]], minPartialLevel, maxPartialLevel, 0.0, 1.0);
-        if (i == 0)
-            partialFrequencies[i] = freq;
-        else
-        {
-            partialFrequencies[i] = freq * (float)i+1.0 + (freq * (1.0 + stretch));
-            partialStretchAmounts[i] = stretch;
-        }
+
         stretchedIndices[i] = 0.0;
     }
 }
@@ -92,6 +85,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 {
     if (envLevel > 0.000)
     {
+        const float stretch = localParameters[STRETCH] + localParameters[STRETCH_FINE];
         const float stretchEnvAmtInc = localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
         
         while (--numSamples >= 0)
@@ -103,17 +97,23 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 
             for (int i = 0; i < numPartials; i++)
             {
-                if (localParameters[PartialToParamMapping[i]] != 0.0)
+                if (localParameters[PartialToParamMapping[i]] > 0.0)
                 {
-                    const float stretchedFreq = (partialFrequencies[i] + (partialFrequencies[i] * (partialStretchAmounts[i] * stretchEnvAmt)));
-                    if (0 < stretchedFreq < nyquist)
+                    float partialFreq = freq;
+                    if (i > 0)
+                    {
+                        partialFreq *= (float)i+1.0;
+                        partialFreq += (freq * (1.0 + stretch)) + (partialFreq * (stretch * stretchEnvAmt));
+                    }
+                    if (20 < partialFreq < nyquist)
                     {
                         // this '16' business is converting floating point to fixed for the sake of performance.
                         // and oh boy, does it improve performance.
-                        const long stretchedIncrement = (long)(frqTI * stretchedFreq) << 16;
+                        const long increment = (long)(frqTI * partialFreq) << 16;
 
-                        currentSample += waveTable[(stretchedIndices[i]+0x8000) >> 16] * partialLevels[i];
-                        stretchedIndices[i] = (stretchedIndices[i] + stretchedIncrement) % i32waveTableLength;
+                        currentSample += waveTable[(stretchedIndices[i]+0x8000) >> 16] * localParameters[PartialToParamMapping[i]];
+
+                        stretchedIndices[i] = stretchedIndices[i] + increment & ((waveTableLength << 16) - 1);
                     }
                 }
                 if (i == 0)
