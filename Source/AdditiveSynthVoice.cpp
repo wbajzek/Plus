@@ -56,6 +56,8 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
 
         stretchedIndices[i] = 0.0;
     }
+    
+    envelopeState = ATTACK_STATE;
 }
 
 void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
@@ -135,41 +137,59 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 float AdditiveSynthVoice::getAmplitude()
 {
     bool keyIsDown = isKeyDown();
-    if (keyIsDown)
-    {
-        if (samplesSinceTrigger == 0)
-        {
+    switch (envelopeState) {
+        case ATTACK_STATE:
             if (attack == 0.0)
             {
                 envLevel = velocity;
                 envIncrement = 0.0;
+                envelopeState = DECAY_STATE;
             }
             else
+            {
                 envIncrement = velocity / attack;
-            coefficient = 0.0;
-        }
-        else if (samplesSinceTrigger == attack) // decay portion
-        {
-            envIncrement = 0.0;
-            coefficient = (log(sustainLevel * velocity) - log(envLevel)) / decay;
-        }
-        else if (samplesSinceTrigger == attack + decay)
-        {
-            envIncrement = 0.0;
-            if (sustainLevel == 0.0)
-                coefficient = (log(0.001) - log(sustainLevel * velocity)) / release;
+                envLevel += envIncrement;
+            }
+            if (samplesSinceTrigger > attack)
+            {
+                envelopeState = DECAY_STATE;
+                // add a tiny fudge factor when calculating the end level because it doesn't work
+                // when it's exactly 0.0
+                coefficient = (log((sustainLevel * velocity) + 0.0001) - log(envLevel)) / decay;
+            }
+            if (!keyIsDown)
+            {
+                envelopeState = RELEASE_STATE;
+                coefficient = (log(0.001) - log(envLevel)) / release;
+            }
+            break;
+        case DECAY_STATE:
+            if (samplesSinceTrigger > attack + decay)
+                envelopeState = SUSTAIN_STATE;
+            else if (!keyIsDown)
+            {
+                envelopeState = RELEASE_STATE;
+                coefficient = (log(0.001) - log(envLevel)) / release;
+            }
             else
-                coefficient = 0.0;
-        }
+                envLevel += coefficient * envLevel;
+            break;
+        case SUSTAIN_STATE:
+            envLevel = sustainLevel * velocity;
+            if (!keyIsDown)
+            {
+                envelopeState = RELEASE_STATE;
+                coefficient = (log(0.001) - log(envLevel)) / release;
+            }
+            break;
+        case RELEASE_STATE:
+            envLevel += coefficient * envLevel;
+            if (envLevel < 0.001)
+            {
+                envLevel = 0.0;
+            }
+            break;
     }
-    else if (envLevel > 0.0 && samplesSinceTrigger == 0)
-        coefficient = (log(0.001) - log(envLevel)) / release;
-    else if (samplesSinceTrigger == release)
-        envLevel = 0.0;
-
-    envLevel += envIncrement;
-    envLevel += coefficient * envLevel;
-    
     return envLevel;
 }
 

@@ -9,6 +9,13 @@
 #ifndef __Plus__AdditiveSynthVoice__
 #define __Plus__AdditiveSynthVoice__
 
+enum EnvelopeState {
+    ATTACK_STATE,
+    DECAY_STATE,
+    SUSTAIN_STATE,
+    RELEASE_STATE
+};
+
 const int PartialToParamMapping[numPartials] =
 {
     PARTIAL_1,
@@ -88,6 +95,7 @@ private:
     float nyquist;
     float sampleRate;
     float frqTI;
+    int envelopeState = 0;
     
     int samplesSinceTrigger = 0;
     float coefficient = 0.0;
