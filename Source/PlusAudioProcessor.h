@@ -61,7 +61,7 @@ public:
 
 private:
     float parameters[NUMBER_OF_PARAMETERS];
-    Synthesiser synth;
+    AdditiveSynthesiser synth;
     MidiKeyboardState keyboardState;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlusAudioProcessor)

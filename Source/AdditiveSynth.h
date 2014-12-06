@@ -63,6 +63,7 @@ enum Params
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginParameters.h"
 #include "AdditiveSynthSound.h"
+#include "AdditiveSynthesiser.h"
 #include "AdditiveSynthVoice.h"
 
 #endif

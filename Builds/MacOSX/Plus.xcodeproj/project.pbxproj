@@ -45,6 +45,7 @@
 		91639D45E0FBABC8E9026843 /* CAMutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CA804C56C54697C5424BD85 /* CAMutex.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		94023756C4AC707B01B365C1 /* juce_VST3_Wrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = F36EA8E61CA0315CFDF7AC02 /* juce_VST3_Wrapper.mm */; };
 		942A44B3253F2B7CF95824FC /* AUMIDIBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80CD252917279EE721DB3E4 /* AUMIDIBase.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		98C329FB554F6D7DC0FB2A5D /* AdditiveSynthesiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D3DF255E6A0B6D3A80EB171 /* AdditiveSynthesiser.cpp */; };
 		A50A29E3C0FE7988CA66EE7D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8721232296E36478ADC1393D /* Carbon.framework */; };
 		A80D8D7D6E88CA330A2054E7 /* AUMIDIEffectBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F183078A9CC176511B8244EB /* AUMIDIEffectBase.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		A824F1C5779751F4274F9D86 /* AUScopeElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEECB37F8406B0BA8E6C7EC8 /* AUScopeElement.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -385,6 +386,7 @@
 		5CFDCE108229E03DF847207A /* juce_LassoComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_LassoComponent.h; path = ../../JuceLibraryCode/modules/juce_gui_basics/mouse/juce_LassoComponent.h; sourceTree = SOURCE_ROOT; };
 		5D0FDA4F1C17DACF6584017A /* juce_Typeface.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_Typeface.cpp; path = ../../JuceLibraryCode/modules/juce_graphics/fonts/juce_Typeface.cpp; sourceTree = SOURCE_ROOT; };
 		5D3BF8F0C1587A287B9E95F9 /* juce_CoreAudioFormat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_CoreAudioFormat.h; path = ../../JuceLibraryCode/modules/juce_audio_formats/codecs/juce_CoreAudioFormat.h; sourceTree = SOURCE_ROOT; };
+		5D3DF255E6A0B6D3A80EB171 /* AdditiveSynthesiser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AdditiveSynthesiser.cpp; path = ../../Source/AdditiveSynthesiser.cpp; sourceTree = SOURCE_ROOT; };
 		5D61FE55997CDB476C13A469 /* juce_URL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_URL.cpp; path = ../../JuceLibraryCode/modules/juce_core/network/juce_URL.cpp; sourceTree = SOURCE_ROOT; };
 		5DB79E78CD343AE17FA58F3F /* juce_BooleanPropertyComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_BooleanPropertyComponent.cpp; path = ../../JuceLibraryCode/modules/juce_gui_basics/properties/juce_BooleanPropertyComponent.cpp; sourceTree = SOURCE_ROOT; };
 		5DCA095EB69C5805750C5DEF /* AdditiveSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AdditiveSynth.h; path = ../../Source/AdditiveSynth.h; sourceTree = SOURCE_ROOT; };
@@ -813,6 +815,7 @@
 		CCF33749C411C3CE2E5573B9 /* juce_linux_SystemTrayIcon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_linux_SystemTrayIcon.cpp; path = ../../JuceLibraryCode/modules/juce_gui_extra/native/juce_linux_SystemTrayIcon.cpp; sourceTree = SOURCE_ROOT; };
 		CD196856F317B5215DC724C8 /* juce_events.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = juce_events.mm; path = ../../JuceLibraryCode/modules/juce_events/juce_events.mm; sourceTree = SOURCE_ROOT; };
 		CD9A06BB0A2748BD0D813426 /* juce_ArrayAllocationBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_ArrayAllocationBase.h; path = ../../JuceLibraryCode/modules/juce_core/containers/juce_ArrayAllocationBase.h; sourceTree = SOURCE_ROOT; };
+		CDFD2E9A3BD092C4CCEB9DD1 /* AdditiveSynthesiser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AdditiveSynthesiser.h; path = ../../Source/AdditiveSynthesiser.h; sourceTree = SOURCE_ROOT; };
 		CE1B4005A6ECB81542543C8A /* AUCarbonViewDispatch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AUCarbonViewDispatch.cpp; path = Extras/CoreAudio/AudioUnits/AUPublic/AUCarbonViewBase/AUCarbonViewDispatch.cpp; sourceTree = DEVELOPER_DIR; };
 		CE31DBC126680AB1B3200819 /* juce_OutputStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_OutputStream.h; path = ../../JuceLibraryCode/modules/juce_core/streams/juce_OutputStream.h; sourceTree = SOURCE_ROOT; };
 		CE4288B8830EFF9001ECC268 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
@@ -1454,6 +1457,8 @@
 				910D092DE0166B2A6993BB79 /* PlusAudioProcessorEditor.cpp */,
 				7D6EC5F199D75F14215932DD /* PlusAudioProcessorEditor.h */,
 				5DCA095EB69C5805750C5DEF /* AdditiveSynth.h */,
+				5D3DF255E6A0B6D3A80EB171 /* AdditiveSynthesiser.cpp */,
+				CDFD2E9A3BD092C4CCEB9DD1 /* AdditiveSynthesiser.h */,
 				B08872F32292A927BE1233E1 /* AdditiveSynthSound.cpp */,
 				F4FE60CF6FE5A577BEB5C05C /* AdditiveSynthSound.h */,
 				E176FB9A9FE4E5B780CF5990 /* AdditiveSynthVoice.cpp */,
@@ -2837,6 +2842,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98C329FB554F6D7DC0FB2A5D /* AdditiveSynthesiser.cpp in Sources */,
 				46C93BC676EAA64C8346A19D /* PlusAudioProcessor.cpp in Sources */,
 				594B9BBDEBFF49E36458175A /* PlusAudioProcessorEditor.cpp in Sources */,
 				32615210C34F583391230CFB /* AdditiveSynthSound.cpp in Sources */,

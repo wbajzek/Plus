@@ -12,6 +12,10 @@
               companyName="William Bajzek">
   <MAINGROUP id="tjGPtr" name="Plus">
     <GROUP id="{400499B6-E5F0-E43E-4081-6377AEF3EFD4}" name="Source">
+      <FILE id="XV2XfX" name="AdditiveSynthesiser.cpp" compile="1" resource="0"
+            file="Source/AdditiveSynthesiser.cpp"/>
+      <FILE id="gLgRyK" name="AdditiveSynthesiser.h" compile="0" resource="0"
+            file="Source/AdditiveSynthesiser.h"/>
       <FILE id="htGQ1K" name="PlusAudioProcessor.cpp" compile="1" resource="0"
             file="Source/PlusAudioProcessor.cpp"/>
       <FILE id="wFKAW9" name="PlusAudioProcessor.h" compile="0" resource="0"
