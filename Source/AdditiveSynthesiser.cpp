@@ -36,17 +36,7 @@ SynthesiserVoice* AdditiveSynthesiser::findVoiceToSteal (SynthesiserSound* sound
 
         }
     }
-    
-    
-    // The oldest note that's playing with the target pitch playing is ideal..
-    for (int i = 0; i < usableVoices.size(); ++i)
-    {
-        SynthesiserVoice* const voice = usableVoices.getUnchecked (i);
-        
-        if (voice->getCurrentlyPlayingNote() == midiNoteNumber)
-            return voice;
-    }
-    
+
     // steal the oldest note
     return usableVoices[0];
 }
