@@ -19,9 +19,9 @@ File.open('../Source/SineWavetable.h','w') do |f|
 HEADER
 
 
-  f.write "const unsigned int waveTableLength = #{wavetable_length};\n"
+  f.write "const unsigned int waveTableLength = #{wavetable_length.to_i};\n"
   f.write "const unsigned long i32waveTableLength = waveTableLength << 16;\n"
-  f.write "const float waveTable[] = {\n"
+  f.write "const double waveTable[] = {\n"
   wavetable_length.to_i.times do
     f.write "#{Math::sin(phase)},\n"
     phase += phase_increment
