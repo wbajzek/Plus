@@ -11,8 +11,6 @@
 
 const int numVoices = 16;
 const int numPartials = 32;
-const int waveTableLength = 32 * 1024;
-const unsigned long i32waveTableLength = waveTableLength * 65536;
 
 enum Params
 {
@@ -64,6 +62,7 @@ enum Params
 #include "PluginParameters.h"
 #include "AdditiveSynthSound.h"
 #include "AdditiveSynthesiser.h"
+#include "SineWavetable.h"
 #include "AdditiveSynthVoice.h"
 
 #endif

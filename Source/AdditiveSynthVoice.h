@@ -86,7 +86,6 @@ public:
 private:
 
     float* localParameters;
-    double waveTable[waveTableLength];
     double freq = 110.0;
     int noteNumber;
     double velocity = 0;

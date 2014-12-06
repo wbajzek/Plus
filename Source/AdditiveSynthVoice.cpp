@@ -11,13 +11,6 @@
 AdditiveSynthVoice::AdditiveSynthVoice(float* parameters)
 {
     localParameters = parameters;
-    double phaseIncrement = 2.0 * double_Pi / (float)waveTableLength;
-    double phase = 0.0;
-    for (int i = 0; i < waveTableLength; i++) {
-        waveTable[i] = sin(phase);
-        jassert(-1.0 <= waveTable[i] <= 1.0);
-        phase += phaseIncrement;
-    }
 }
 
 AdditiveSynthVoice::~AdditiveSynthVoice()
