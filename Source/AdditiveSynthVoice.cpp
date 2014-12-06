@@ -101,7 +101,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         if (i > 0)
                             partialFreq += partialFreq * stretch * stretchEnvAmt;
                     }
-                    if (20 < partialFreq < nyquist)
+                    if (20 < partialFreq && partialFreq < nyquist)
                     {
                         // this '16' business is converting floating point to fixed for the sake of performance.
                         // and oh boy, does it improve performance.
