@@ -133,12 +133,25 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
     }
 }
 
+float getSegmentCoefficient(float startLevel, float endLevel, int durationInSamples) {
+    // add a tiny fudge factor when calculating the end level because it doesn't work
+    // when it's exactly 0.0
+    return (log((endLevel) + 0.0001) - log(startLevel)) / durationInSamples;
+}
 
 float AdditiveSynthVoice::getAmplitude()
 {
     bool keyIsDown = isKeyDown();
     switch (envelopeState) {
         case ATTACK_STATE:
+            if (samplesSinceTrigger == 0)
+                envIncrement = velocity / attack;
+            else if (samplesSinceTrigger > attack)
+            {
+                envelopeState = DECAY_STATE;
+                coefficient = getSegmentCoefficient(envLevel, sustainLevel * velocity, decay);
+            }
+
             if (attack == 0.0)
             {
                 envLevel = velocity;
@@ -146,21 +159,12 @@ float AdditiveSynthVoice::getAmplitude()
                 envelopeState = DECAY_STATE;
             }
             else
-            {
-                envIncrement = velocity / attack;
                 envLevel += envIncrement;
-            }
-            if (samplesSinceTrigger > attack)
-            {
-                envelopeState = DECAY_STATE;
-                // add a tiny fudge factor when calculating the end level because it doesn't work
-                // when it's exactly 0.0
-                coefficient = (log((sustainLevel * velocity) + 0.0001) - log(envLevel)) / decay;
-            }
+
             if (!keyIsDown)
             {
                 envelopeState = RELEASE_STATE;
-                coefficient = (log(0.001) - log(envLevel)) / release;
+                coefficient = getSegmentCoefficient(envLevel, 0.0, release);
             }
             break;
         case DECAY_STATE:
@@ -169,7 +173,7 @@ float AdditiveSynthVoice::getAmplitude()
             else if (!keyIsDown)
             {
                 envelopeState = RELEASE_STATE;
-                coefficient = (log(0.001) - log(envLevel)) / release;
+                coefficient = getSegmentCoefficient(envLevel, 0.0, release);
             }
             else
                 envLevel += coefficient * envLevel;
@@ -179,7 +183,7 @@ float AdditiveSynthVoice::getAmplitude()
             if (!keyIsDown)
             {
                 envelopeState = RELEASE_STATE;
-                coefficient = (log(0.001) - log(envLevel)) / release;
+                coefficient = getSegmentCoefficient(envLevel, 0.0, release);
             }
             break;
         case RELEASE_STATE:
