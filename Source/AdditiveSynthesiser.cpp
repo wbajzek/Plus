@@ -38,5 +38,5 @@ SynthesiserVoice* AdditiveSynthesiser::findVoiceToSteal (SynthesiserSound* sound
     }
 
     // steal the oldest note
-    return usableVoices[0];
+    return usableVoices[voices.size()-1];
 }
