@@ -88,7 +88,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             float currentSample = 0.0;
             const float amplitude = getAmplitude();
             const float masterAmplitude = amplitude / numPartials * 4; // * 4 fudge factor to make the synth reasonably louder
-            float stretchEnvAmt = 0.0;
+            float stretchEnvAmt = stretchEnvAmtInc * amplitude;
 
             for (int i = 0; i < numPartials; i++)
             {
@@ -97,8 +97,9 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                     float partialFreq = freq;
                     if (i > 0)
                     {
-                        partialFreq *= (float)i+1.0;
-                        partialFreq += (freq * (1.0 + stretch)) + (partialFreq * (stretch * stretchEnvAmt));
+                        partialFreq += (freq * ((float)i + stretch));
+                        if (i > 0)
+                            partialFreq += partialFreq * stretch * stretchEnvAmt;
                     }
                     if (20 < partialFreq < nyquist)
                     {
@@ -111,8 +112,6 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         stretchedIndices[i] = stretchedIndices[i] + increment & ((waveTableLength << 16) - 1);
                     }
                 }
-                if (i == 0)
-                    stretchEnvAmt += stretchEnvAmtInc * amplitude;
             }
             
             float calculatedSample = currentSample * masterAmplitude;
