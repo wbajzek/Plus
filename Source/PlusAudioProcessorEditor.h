@@ -139,6 +139,38 @@ private:
     Slider partialPan_30;
     Slider partialPan_31;
     Slider partialPan_32;
+    Slider partialLfoAmt_1;
+    Slider partialLfoAmt_2;
+    Slider partialLfoAmt_3;
+    Slider partialLfoAmt_4;
+    Slider partialLfoAmt_5;
+    Slider partialLfoAmt_6;
+    Slider partialLfoAmt_7;
+    Slider partialLfoAmt_8;
+    Slider partialLfoAmt_9;
+    Slider partialLfoAmt_10;
+    Slider partialLfoAmt_11;
+    Slider partialLfoAmt_12;
+    Slider partialLfoAmt_13;
+    Slider partialLfoAmt_14;
+    Slider partialLfoAmt_15;
+    Slider partialLfoAmt_16;
+    Slider partialLfoAmt_17;
+    Slider partialLfoAmt_18;
+    Slider partialLfoAmt_19;
+    Slider partialLfoAmt_20;
+    Slider partialLfoAmt_21;
+    Slider partialLfoAmt_22;
+    Slider partialLfoAmt_23;
+    Slider partialLfoAmt_24;
+    Slider partialLfoAmt_25;
+    Slider partialLfoAmt_26;
+    Slider partialLfoAmt_27;
+    Slider partialLfoAmt_28;
+    Slider partialLfoAmt_29;
+    Slider partialLfoAmt_30;
+    Slider partialLfoAmt_31;
+    Slider partialLfoAmt_32;
     Slider partialLevelEnvAmt;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlusAudioProcessorEditor)

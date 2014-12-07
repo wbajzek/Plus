@@ -109,6 +109,38 @@ PlusAudioProcessor::PlusAudioProcessor()
     parameters[PARTIAL_PAN_30] = 0.0;
     parameters[PARTIAL_PAN_31] = 0.0;
     parameters[PARTIAL_PAN_32] = 0.0;
+    parameters[PARTIAL_LFO_AMT_1] = 0.0;
+    parameters[PARTIAL_LFO_AMT_2] = 0.0;
+    parameters[PARTIAL_LFO_AMT_3] = 0.0;
+    parameters[PARTIAL_LFO_AMT_4] = 0.0;
+    parameters[PARTIAL_LFO_AMT_5] = 0.0;
+    parameters[PARTIAL_LFO_AMT_6] = 0.0;
+    parameters[PARTIAL_LFO_AMT_7] = 0.0;
+    parameters[PARTIAL_LFO_AMT_8] = 0.0;
+    parameters[PARTIAL_LFO_AMT_9] = 0.0;
+    parameters[PARTIAL_LFO_AMT_10] = 0.0;
+    parameters[PARTIAL_LFO_AMT_11] = 0.0;
+    parameters[PARTIAL_LFO_AMT_12] = 0.0;
+    parameters[PARTIAL_LFO_AMT_13] = 0.0;
+    parameters[PARTIAL_LFO_AMT_14] = 0.0;
+    parameters[PARTIAL_LFO_AMT_15] = 0.0;
+    parameters[PARTIAL_LFO_AMT_16] = 0.0;
+    parameters[PARTIAL_LFO_AMT_17] = 0.0;
+    parameters[PARTIAL_LFO_AMT_18] = 0.0;
+    parameters[PARTIAL_LFO_AMT_19] = 0.0;
+    parameters[PARTIAL_LFO_AMT_20] = 0.0;
+    parameters[PARTIAL_LFO_AMT_21] = 0.0;
+    parameters[PARTIAL_LFO_AMT_22] = 0.0;
+    parameters[PARTIAL_LFO_AMT_23] = 0.0;
+    parameters[PARTIAL_LFO_AMT_24] = 0.0;
+    parameters[PARTIAL_LFO_AMT_25] = 0.0;
+    parameters[PARTIAL_LFO_AMT_26] = 0.0;
+    parameters[PARTIAL_LFO_AMT_27] = 0.0;
+    parameters[PARTIAL_LFO_AMT_28] = 0.0;
+    parameters[PARTIAL_LFO_AMT_29] = 0.0;
+    parameters[PARTIAL_LFO_AMT_30] = 0.0;
+    parameters[PARTIAL_LFO_AMT_31] = 0.0;
+    parameters[PARTIAL_LFO_AMT_32] = 0.0;
 
     initAllParameters();
 
@@ -225,6 +257,38 @@ void PlusAudioProcessor::initParameters()
     addFloatParam(PARTIAL_PAN_30, "Partial_Pan30", true, SAVE, &parameters[PARTIAL_PAN_30], -1.0, 1.0);
     addFloatParam(PARTIAL_PAN_31, "Partial_Pan31", true, SAVE, &parameters[PARTIAL_PAN_31], -1.0, 1.0);
     addFloatParam(PARTIAL_PAN_32, "Partial_Pan32", true, SAVE, &parameters[PARTIAL_PAN_32], -1.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_1, "Partial_LfoAmt1", true, SAVE, &parameters[PARTIAL_LFO_AMT_1], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_2, "Partial_LfoAmt2", true, SAVE, &parameters[PARTIAL_LFO_AMT_2], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_3, "Partial_LfoAmt3", true, SAVE, &parameters[PARTIAL_LFO_AMT_3], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_4, "Partial_LfoAmt4", true, SAVE, &parameters[PARTIAL_LFO_AMT_4], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_5, "Partial_LfoAmt5", true, SAVE, &parameters[PARTIAL_LFO_AMT_5], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_6, "Partial_LfoAmt6", true, SAVE, &parameters[PARTIAL_LFO_AMT_6], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_7, "Partial_LfoAmt7", true, SAVE, &parameters[PARTIAL_LFO_AMT_7], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_8, "Partial_LfoAmt8", true, SAVE, &parameters[PARTIAL_LFO_AMT_8], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_9, "Partial_LfoAmt9", true, SAVE, &parameters[PARTIAL_LFO_AMT_9], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_10, "Partial_LfoAmt10", true, SAVE, &parameters[PARTIAL_LFO_AMT_10], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_11, "Partial_LfoAmt11", true, SAVE, &parameters[PARTIAL_LFO_AMT_11], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_12, "Partial_LfoAmt12", true, SAVE, &parameters[PARTIAL_LFO_AMT_12], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_13, "Partial_LfoAmt13", true, SAVE, &parameters[PARTIAL_LFO_AMT_13], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_14, "Partial_LfoAmt14", true, SAVE, &parameters[PARTIAL_LFO_AMT_14], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_15, "Partial_LfoAmt15", true, SAVE, &parameters[PARTIAL_LFO_AMT_15], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_16, "Partial_LfoAmt16", true, SAVE, &parameters[PARTIAL_LFO_AMT_16], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_17, "Partial_LfoAmt17", true, SAVE, &parameters[PARTIAL_LFO_AMT_17], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_18, "Partial_LfoAmt18", true, SAVE, &parameters[PARTIAL_LFO_AMT_18], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_19, "Partial_LfoAmt19", true, SAVE, &parameters[PARTIAL_LFO_AMT_19], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_20, "Partial_LfoAmt20", true, SAVE, &parameters[PARTIAL_LFO_AMT_20], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_21, "Partial_LfoAmt21", true, SAVE, &parameters[PARTIAL_LFO_AMT_21], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_22, "Partial_LfoAmt22", true, SAVE, &parameters[PARTIAL_LFO_AMT_22], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_23, "Partial_LfoAmt23", true, SAVE, &parameters[PARTIAL_LFO_AMT_23], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_24, "Partial_LfoAmt24", true, SAVE, &parameters[PARTIAL_LFO_AMT_24], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_25, "Partial_LfoAmt25", true, SAVE, &parameters[PARTIAL_LFO_AMT_25], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_26, "Partial_LfoAmt26", true, SAVE, &parameters[PARTIAL_LFO_AMT_26], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_27, "Partial_LfoAmt27", true, SAVE, &parameters[PARTIAL_LFO_AMT_27], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_28, "Partial_LfoAmt28", true, SAVE, &parameters[PARTIAL_LFO_AMT_28], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_29, "Partial_LfoAmt29", true, SAVE, &parameters[PARTIAL_LFO_AMT_29], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_30, "Partial_LfoAmt30", true, SAVE, &parameters[PARTIAL_LFO_AMT_30], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_31, "Partial_LfoAmt31", true, SAVE, &parameters[PARTIAL_LFO_AMT_31], 0.0, 1.0);
+    addFloatParam(PARTIAL_LFO_AMT_32, "Partial_LfoAmt32", true, SAVE, &parameters[PARTIAL_LFO_AMT_32], 0.0, 1.0);
 }
 
 PlusAudioProcessor::~PlusAudioProcessor()
@@ -394,6 +458,38 @@ void PlusAudioProcessor::runAfterParamGroupUpdate()
     getParam(PARTIAL_PAN_30)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(PARTIAL_PAN_31)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(PARTIAL_PAN_32)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_1)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_2)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_3)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_4)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_5)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_6)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_7)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_8)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_9)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_10)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_11)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_12)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_13)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_14)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_15)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_16)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_17)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_18)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_19)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_20)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_21)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_22)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_23)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_24)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_25)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_26)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_27)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_28)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_29)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_30)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_31)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_LFO_AMT_32)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
 }
 
 const String PlusAudioProcessor::getParameterText (int index)
