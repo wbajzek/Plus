@@ -204,6 +204,7 @@ private:
     float sampleRate;
     float frqTI;
     int envelopeState = 0;
+    float modWheel = 0.0;
 
     unsigned long samplesSinceTrigger = 0;
     float coefficient = 0.0;

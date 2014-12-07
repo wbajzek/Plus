@@ -154,6 +154,9 @@ enum Params
     NUMBER_OF_PARAMETERS
 };
 
+enum MidiControls {
+    MOD_WHEEL_CONTROL = 1
+};
 #define AU_LOGGING
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginParameters.h"

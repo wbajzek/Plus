@@ -72,9 +72,15 @@ void AdditiveSynthVoice::pitchWheelMoved (const int currentPitchWheelPosition)
     freq = calculateFrequency(currentPitchWheelPosition);
 }
 
-void AdditiveSynthVoice::controllerMoved (const int /*controllerNumber*/, const int /*newValue*/)
+void AdditiveSynthVoice::controllerMoved (const int controllerNumber, const int newValue)
 {
-
+    switch (controllerNumber) {
+        case MOD_WHEEL_CONTROL:
+            modWheel = (float)newValue / 3.0 / 127.0;
+            break;
+        default:
+            break;
+    }
 }
 
 void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int startSample, int numSamples)
@@ -91,15 +97,16 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             const float masterAmplitude = amplitude / numPartials * 4; // * 4 fudge factor to make the synth reasonably louder
             float stretchEnvAmt = stretchEnvAmtInc * amplitude;
             float stretch = localParameters[STRETCH] + localParameters[STRETCH_FINE];
+            float localFreq = freq + (freq * modWheel * lfoLevel);
 
             for (int i = 0; i < numPartials; i++)
             {
                 if (localParameters[PartialLevelToParamMapping[i]] > 0.0)
                 {
-                    float partialFreq = freq + (freq * localParameters[PartialTuneToParamMapping[i]]);
+                    float partialFreq = localFreq + (localFreq * localParameters[PartialTuneToParamMapping[i]]);
                     if (i > 0)
                     {
-                        partialFreq += (freq * ((float)i + stretch));
+                        partialFreq += (localFreq * ((float)i + stretch));
                         if (i > 0)
                             partialFreq += partialFreq * stretch * stretchEnvAmt;
                     }
