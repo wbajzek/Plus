@@ -80,7 +80,6 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 {
     if (envLevel > 0.000)
     {
-        const float stretch = localParameters[STRETCH] + localParameters[STRETCH_FINE];
         const float stretchEnvAmtInc = localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
         
         while (--numSamples >= 0)
@@ -89,6 +88,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             const float amplitude = getAmplitude();
             const float masterAmplitude = amplitude / numPartials * 4; // * 4 fudge factor to make the synth reasonably louder
             float stretchEnvAmt = stretchEnvAmtInc * amplitude;
+            float stretch = localParameters[STRETCH] + localParameters[STRETCH_FINE];
 
             for (int i = 0; i < numPartials; i++)
             {
@@ -112,6 +112,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         stretchedIndices[i] = stretchedIndices[i] + increment & ((waveTableLength << 16) - 1);
                     }
                 }
+                stretch += stretch;
             }
             
             float calculatedSample = currentSample * masterAmplitude;

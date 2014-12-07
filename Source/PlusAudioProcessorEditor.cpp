@@ -52,7 +52,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     addAndMakeVisible(partialStretch);
 
     partialStretchFine.setSliderStyle(Slider::LinearBarVertical);
-    partialStretchFine.setRange(-0.1, 0.1, 0.001);
+    partialStretchFine.setRange(-0.01, 0.01, 0.0001);
     partialStretchFine.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretchFine.setPopupDisplayEnabled(true, this);
     partialStretchFine.setValue(0.0);
