@@ -58,10 +58,12 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     void initParameters();
+    void initVoices();
 
 private:
     float parameters[NUMBER_OF_PARAMETERS];
     int lfoShape = 0;
+    int numberOfVoices = 8;
     AdditiveSynthesiser synth;
     MidiKeyboardState keyboardState;
 

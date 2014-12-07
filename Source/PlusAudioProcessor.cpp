@@ -143,14 +143,28 @@ PlusAudioProcessor::PlusAudioProcessor()
     parameters[PARTIAL_LFO_AMT_32] = 0.0;
     parameters[LFO_FREQ] = 20.0;
     parameters[LFO_SHAPE] = SINE_WAVE_TABLE;
+    parameters[NUMBER_OF_VOICES] = 8;
 
     initAllParameters();
-
-    for (int i = 0; i < numVoices; i++)
-        synth.addVoice(new AdditiveSynthVoice(parameters, &lfoShape));
+    initVoices();
+    
     synth.addSound(new AdditiveSynthSound());
     synth.setNoteStealingEnabled(true);
+}
 
+PlusAudioProcessor::~PlusAudioProcessor()
+{
+    synth.clearVoices();
+    synth.clearSounds();
+}
+
+void PlusAudioProcessor::initVoices()
+{
+    synth.clearVoices();
+    
+    for (int i = 0; i < numberOfVoices; i++)
+        synth.addVoice(new AdditiveSynthVoice(parameters, &lfoShape));
+    Logger::writeToLog(String(synth.getNumVoices()));
 }
 
 void PlusAudioProcessor::initParameters()
@@ -293,10 +307,7 @@ void PlusAudioProcessor::initParameters()
     addFloatParam(PARTIAL_LFO_AMT_32, "Partial_LfoAmt32", true, SAVE, &parameters[PARTIAL_LFO_AMT_32], 0.0, 1.0);
     addFloatParam(LFO_FREQ, "Lfo_Frequency", true, SAVE, &parameters[LFO_FREQ], 0.0, 1000.0);
     addIntParam(LFO_SHAPE, "Lfo_Shape", true, SAVE, &lfoShape, SINE_WAVE_TABLE, NUMBER_OF_WAVE_TABLES);
-}
-
-PlusAudioProcessor::~PlusAudioProcessor()
-{
+    addIntParam(NUMBER_OF_VOICES, "Number_Of_Voices", true, SAVE, &numberOfVoices, 1, 20);
 }
 
 
@@ -362,8 +373,6 @@ void PlusAudioProcessor::runAfterParamGroupUpdate()
     getParam(DECAY)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(SUSTAIN)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(RELEASE)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
-    getParam(LFO_FREQ)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
-    getParam(LFO_SHAPE)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(STRETCH)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(STRETCH_FINE)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(STRETCH_ENV_AMT)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
@@ -496,6 +505,9 @@ void PlusAudioProcessor::runAfterParamGroupUpdate()
     getParam(PARTIAL_LFO_AMT_30)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(PARTIAL_LFO_AMT_31)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(PARTIAL_LFO_AMT_32)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(LFO_FREQ)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(LFO_SHAPE)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(NUMBER_OF_VOICES)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
 }
 
 const String PlusAudioProcessor::getParameterText (int index)

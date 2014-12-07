@@ -152,6 +152,7 @@ enum Params
     PARTIAL_LFO_AMT_32,
     LFO_FREQ,
     LFO_SHAPE,
+    NUMBER_OF_VOICES,
     NUMBER_OF_PARAMETERS
 };
 

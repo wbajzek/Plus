@@ -42,6 +42,7 @@ private:
     Slider globalRelease;
     Slider lfoFrequency;
     ComboBox lfoShape;
+    ComboBox numberOfVoices;
     Slider partialStretch;
     Slider partialStretchFine;
     Slider partialStretchEnvAmt;
