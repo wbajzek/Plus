@@ -40,12 +40,12 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
     minPartialLevel = maxPartialLevel = 0.0;
     for (int i = 0; i < numPartials; i++)
     {
-        if (localParameters[PartialToParamMapping[i]] < minPartialLevel)
-            minPartialLevel = localParameters[PartialToParamMapping[i]];
-        if (localParameters[PartialToParamMapping[i]] > maxPartialLevel)
-            maxPartialLevel = localParameters[PartialToParamMapping[i]];
+        if (localParameters[PartialLevelToParamMapping[i]] < minPartialLevel)
+            minPartialLevel = localParameters[PartialLevelToParamMapping[i]];
+        if (localParameters[PartialLevelToParamMapping[i]] > maxPartialLevel)
+            maxPartialLevel = localParameters[PartialLevelToParamMapping[i]];
         
-        partialLevels[i] = scaleRange(localParameters[PartialToParamMapping[i]], minPartialLevel, maxPartialLevel, 0.0, 1.0);
+        partialLevels[i] = scaleRange(localParameters[PartialLevelToParamMapping[i]], minPartialLevel, maxPartialLevel, 0.0, 1.0);
 
         stretchedIndices[i] = 0.0;
     }
@@ -92,12 +92,12 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 
             for (int i = 0; i < numPartials; i++)
             {
-                if (localParameters[PartialToParamMapping[i]] > 0.0)
+                if (localParameters[PartialLevelToParamMapping[i]] > 0.0)
                 {
                     float partialFreq = freq;
                     if (i > 0)
                     {
-                        partialFreq += (freq * ((float)i + stretch));
+                        partialFreq += ((freq + (freq * localParameters[PartialTuneToParamMapping[i]])) * ((float)i + stretch));
                         if (i > 0)
                             partialFreq += partialFreq * stretch * stretchEnvAmt;
                     }
@@ -107,7 +107,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         // and oh boy, does it improve performance.
                         const long increment = (long)(frqTI * partialFreq) << 16;
 
-                        currentSample += waveTable[(stretchedIndices[i]+0x8000) >> 16] * localParameters[PartialToParamMapping[i]];
+                        currentSample += waveTable[(stretchedIndices[i]+0x8000) >> 16] * localParameters[PartialLevelToParamMapping[i]];
 
                         stretchedIndices[i] = stretchedIndices[i] + increment & ((waveTableLength << 16) - 1);
                     }

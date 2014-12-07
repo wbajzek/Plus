@@ -310,6 +310,237 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialLevel_32.setValue(0.0);
     addAndMakeVisible(partialLevel_32);
 
+    partialTune_1.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_1.setRange(-1.0, 1.0, 0.001);
+    partialTune_1.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_1.setPopupDisplayEnabled(true, this);
+    partialTune_1.setValue(1.0);
+    addAndMakeVisible(partialTune_1);
+
+    partialTune_2.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_2.setRange(-1.0, 1.0, 0.001);
+    partialTune_2.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_2.setPopupDisplayEnabled(true, this);
+    partialTune_2.setValue(0.0);
+    addAndMakeVisible(partialTune_2);
+
+    partialTune_3.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_3.setRange(-1.0, 1.0, 0.001);
+    partialTune_3.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_3.setPopupDisplayEnabled(true, this);
+    partialTune_3.setValue(0.0);
+    addAndMakeVisible(partialTune_3);
+
+    partialTune_4.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_4.setRange(-1.0, 1.0, 0.001);
+    partialTune_4.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_4.setPopupDisplayEnabled(true, this);
+    partialTune_4.setValue(0.0);
+    addAndMakeVisible(partialTune_4);
+
+    partialTune_5.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_5.setRange(-1.0, 1.0, 0.001);
+    partialTune_5.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_5.setPopupDisplayEnabled(true, this);
+    partialTune_5.setValue(0.0);
+    addAndMakeVisible(partialTune_5);
+
+    partialTune_6.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_6.setRange(-1.0, 1.0, 0.001);
+    partialTune_6.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_6.setPopupDisplayEnabled(true, this);
+    partialTune_6.setValue(0.0);
+    addAndMakeVisible(partialTune_6);
+
+    partialTune_7.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_7.setRange(-1.0, 1.0, 0.001);
+    partialTune_7.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_7.setPopupDisplayEnabled(true, this);
+    partialTune_7.setValue(0.0);
+    addAndMakeVisible(partialTune_7);
+
+    partialTune_8.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_8.setRange(-1.0, 1.0, 0.001);
+    partialTune_8.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_8.setPopupDisplayEnabled(true, this);
+    partialTune_8.setValue(0.0);
+    addAndMakeVisible(partialTune_8);
+
+    partialTune_9.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_9.setRange(-1.0, 1.0, 0.001);
+    partialTune_9.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_9.setPopupDisplayEnabled(true, this);
+    partialTune_9.setValue(0.0);
+    addAndMakeVisible(partialTune_9);
+
+    partialTune_10.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_10.setRange(-1.0, 1.0, 0.001);
+    partialTune_10.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_10.setPopupDisplayEnabled(true, this);
+    partialTune_10.setValue(0.0);
+    addAndMakeVisible(partialTune_10);
+
+    partialTune_11.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_11.setRange(-1.0, 1.0, 0.001);
+    partialTune_11.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_11.setPopupDisplayEnabled(true, this);
+    partialTune_11.setValue(0.0);
+    addAndMakeVisible(partialTune_11);
+
+    partialTune_12.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_12.setRange(-1.0, 1.0, 0.001);
+    partialTune_12.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_12.setPopupDisplayEnabled(true, this);
+    partialTune_12.setValue(0.0);
+    addAndMakeVisible(partialTune_12);
+
+    partialTune_13.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_13.setRange(-1.0, 1.0, 0.001);
+    partialTune_13.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_13.setPopupDisplayEnabled(true, this);
+    partialTune_13.setValue(0.0);
+    addAndMakeVisible(partialTune_13);
+
+    partialTune_14.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_14.setRange(-1.0, 1.0, 0.001);
+    partialTune_14.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_14.setPopupDisplayEnabled(true, this);
+    partialTune_14.setValue(0.0);
+    addAndMakeVisible(partialTune_14);
+
+    partialTune_15.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_15.setRange(-1.0, 1.0, 0.001);
+    partialTune_15.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_15.setPopupDisplayEnabled(true, this);
+    partialTune_15.setValue(0.0);
+    addAndMakeVisible(partialTune_15);
+
+    partialTune_16.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_16.setRange(-1.0, 1.0, 0.001);
+    partialTune_16.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_16.setPopupDisplayEnabled(true, this);
+    partialTune_16.setValue(0.0);
+    addAndMakeVisible(partialTune_16);
+
+    partialTune_16.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_16.setRange(-1.0, 1.0, 0.001);
+    partialTune_16.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_16.setPopupDisplayEnabled(true, this);
+    partialTune_16.setValue(0.0);
+    addAndMakeVisible(partialTune_16);
+
+    partialTune_17.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_17.setRange(-1.0, 1.0, 0.001);
+    partialTune_17.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_17.setPopupDisplayEnabled(true, this);
+    partialTune_17.setValue(0.0);
+    addAndMakeVisible(partialTune_17);
+
+    partialTune_18.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_18.setRange(-1.0, 1.0, 0.001);
+    partialTune_18.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_18.setPopupDisplayEnabled(true, this);
+    partialTune_18.setValue(0.0);
+    addAndMakeVisible(partialTune_18);
+
+    partialTune_19.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_19.setRange(-1.0, 1.0, 0.001);
+    partialTune_19.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_19.setPopupDisplayEnabled(true, this);
+    partialTune_19.setValue(0.0);
+    addAndMakeVisible(partialTune_19);
+
+    partialTune_20.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_20.setRange(-1.0, 1.0, 0.001);
+    partialTune_20.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_20.setPopupDisplayEnabled(true, this);
+    partialTune_20.setValue(0.0);
+    addAndMakeVisible(partialTune_20);
+
+    partialTune_21.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_21.setRange(-1.0, 1.0, 0.001);
+    partialTune_21.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_21.setPopupDisplayEnabled(true, this);
+    partialTune_21.setValue(0.0);
+    addAndMakeVisible(partialTune_21);
+
+    partialTune_22.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_22.setRange(-1.0, 1.0, 0.001);
+    partialTune_22.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_22.setPopupDisplayEnabled(true, this);
+    partialTune_22.setValue(0.0);
+    addAndMakeVisible(partialTune_22);
+
+    partialTune_23.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_23.setRange(-1.0, 1.0, 0.001);
+    partialTune_23.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_23.setPopupDisplayEnabled(true, this);
+    partialTune_23.setValue(0.0);
+    addAndMakeVisible(partialTune_23);
+
+    partialTune_24.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_24.setRange(-1.0, 1.0, 0.001);
+    partialTune_24.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_24.setPopupDisplayEnabled(true, this);
+    partialTune_24.setValue(0.0);
+    addAndMakeVisible(partialTune_24);
+
+    partialTune_25.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_25.setRange(-1.0, 1.0, 0.001);
+    partialTune_25.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_25.setPopupDisplayEnabled(true, this);
+    partialTune_25.setValue(0.0);
+    addAndMakeVisible(partialTune_25);
+
+    partialTune_26.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_26.setRange(-1.0, 1.0, 0.001);
+    partialTune_26.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_26.setPopupDisplayEnabled(true, this);
+    partialTune_26.setValue(0.0);
+    addAndMakeVisible(partialTune_26);
+
+    partialTune_27.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_27.setRange(-1.0, 1.0, 0.001);
+    partialTune_27.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_27.setPopupDisplayEnabled(true, this);
+    partialTune_27.setValue(0.0);
+    addAndMakeVisible(partialTune_27);
+
+    partialTune_28.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_28.setRange(-1.0, 1.0, 0.001);
+    partialTune_28.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_28.setPopupDisplayEnabled(true, this);
+    partialTune_28.setValue(0.0);
+    addAndMakeVisible(partialTune_28);
+
+    partialTune_29.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_29.setRange(-1.0, 1.0, 0.001);
+    partialTune_29.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_29.setPopupDisplayEnabled(true, this);
+    partialTune_29.setValue(0.0);
+    addAndMakeVisible(partialTune_29);
+
+    partialTune_30.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_30.setRange(-1.0, 1.0, 0.001);
+    partialTune_30.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_30.setPopupDisplayEnabled(true, this);
+    partialTune_30.setValue(0.0);
+    addAndMakeVisible(partialTune_30);
+
+    partialTune_31.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_31.setRange(-1.0, 1.0, 0.001);
+    partialTune_31.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_31.setPopupDisplayEnabled(true, this);
+    partialTune_31.setValue(0.0);
+    addAndMakeVisible(partialTune_31);
+
+    partialTune_32.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialTune_32.setRange(0.0, 1.0, 0.001);
+    partialTune_32.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialTune_32.setPopupDisplayEnabled(true, this);
+    partialTune_32.setValue(0.0);
+    addAndMakeVisible(partialTune_32);
+
     globalAttack.addListener(this);
     globalDecay.addListener(this);
     globalSustain.addListener(this);
@@ -350,6 +581,38 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialLevel_30.addListener(this);
     partialLevel_31.addListener(this);
     partialLevel_32.addListener(this);
+    partialTune_1.addListener(this);
+    partialTune_2.addListener(this);
+    partialTune_3.addListener(this);
+    partialTune_4.addListener(this);
+    partialTune_5.addListener(this);
+    partialTune_6.addListener(this);
+    partialTune_7.addListener(this);
+    partialTune_8.addListener(this);
+    partialTune_9.addListener(this);
+    partialTune_10.addListener(this);
+    partialTune_11.addListener(this);
+    partialTune_12.addListener(this);
+    partialTune_13.addListener(this);
+    partialTune_14.addListener(this);
+    partialTune_15.addListener(this);
+    partialTune_16.addListener(this);
+    partialTune_17.addListener(this);
+    partialTune_18.addListener(this);
+    partialTune_19.addListener(this);
+    partialTune_20.addListener(this);
+    partialTune_21.addListener(this);
+    partialTune_22.addListener(this);
+    partialTune_23.addListener(this);
+    partialTune_24.addListener(this);
+    partialTune_25.addListener(this);
+    partialTune_26.addListener(this);
+    partialTune_27.addListener(this);
+    partialTune_28.addListener(this);
+    partialTune_29.addListener(this);
+    partialTune_30.addListener(this);
+    partialTune_31.addListener(this);
+    partialTune_32.addListener(this);
 
     timerCallback();
     startTimer(50);
@@ -374,46 +637,82 @@ void PlusAudioProcessorEditor::paint (Graphics& g)
 
 void PlusAudioProcessorEditor::resized()
 {
-    globalAttack.setBounds (20, 30, 20, getHeight() - 60);
-    globalDecay.setBounds (40, 30, 20, getHeight() - 60);
-    globalSustain.setBounds (60, 30, 20, getHeight() - 60);
-    globalRelease.setBounds (80, 30, 20, getHeight() - 60);
-    partialStretch.setBounds (130, 30, 20, getHeight() - 60);
-    partialStretchFine.setBounds (150, 30, 20, getHeight() - 60);
-    partialStretchEnvAmt.setBounds (190, 30, 20, getHeight() - 60);
-    partialStretchEnvAmtFine.setBounds (210, 30, 20, getHeight() - 60);
-    partialLevel_1.setBounds (250, 30, 20, getHeight() - 60);
-    partialLevel_2.setBounds (270, 30, 20, getHeight() - 60);
-    partialLevel_3.setBounds (290, 30, 20, getHeight() - 60);
-    partialLevel_4.setBounds (310, 30, 20, getHeight() - 60);
-    partialLevel_5.setBounds (330, 30, 20, getHeight() - 60);
-    partialLevel_6.setBounds (350, 30, 20, getHeight() - 60);
-    partialLevel_7.setBounds (370, 30, 20, getHeight() - 60);
-    partialLevel_8.setBounds (390, 30, 20, getHeight() - 60);
-    partialLevel_9.setBounds (410, 30, 20, getHeight() - 60);
-    partialLevel_10.setBounds (430, 30, 20, getHeight() - 60);
-    partialLevel_11.setBounds (450, 30, 20, getHeight() - 60);
-    partialLevel_12.setBounds (470, 30, 20, getHeight() - 60);
-    partialLevel_13.setBounds (490, 30, 20, getHeight() - 60);
-    partialLevel_14.setBounds (510, 30, 20, getHeight() - 60);
-    partialLevel_15.setBounds (530, 30, 20, getHeight() - 60);
-    partialLevel_16.setBounds (550, 30, 20, getHeight() - 60);
-    partialLevel_17.setBounds (570, 30, 20, getHeight() - 60);
-    partialLevel_18.setBounds (590, 30, 20, getHeight() - 60);
-    partialLevel_19.setBounds (610, 30, 20, getHeight() - 60);
-    partialLevel_20.setBounds (630, 30, 20, getHeight() - 60);
-    partialLevel_21.setBounds (650, 30, 20, getHeight() - 60);
-    partialLevel_22.setBounds (670, 30, 20, getHeight() - 60);
-    partialLevel_23.setBounds (690, 30, 20, getHeight() - 60);
-    partialLevel_24.setBounds (710, 30, 20, getHeight() - 60);
-    partialLevel_25.setBounds (730, 30, 20, getHeight() - 60);
-    partialLevel_26.setBounds (750, 30, 20, getHeight() - 60);
-    partialLevel_27.setBounds (770, 30, 20, getHeight() - 60);
-    partialLevel_28.setBounds (790, 30, 20, getHeight() - 60);
-    partialLevel_29.setBounds (810, 30, 20, getHeight() - 60);
-    partialLevel_30.setBounds (830, 30, 20, getHeight() - 60);
-    partialLevel_31.setBounds (850, 30, 20, getHeight() - 60);
-    partialLevel_32.setBounds (870, 30, 20, getHeight() - 60);
+    int topRowHeight = 200;
+    int topRowTop = 30;
+    int tuneRowTop = 240;
+    int tuneRowHeight = 20;
+    globalAttack.setBounds (20, topRowTop, 20, topRowHeight);
+    globalDecay.setBounds (40, topRowTop, 20, topRowHeight);
+    globalSustain.setBounds (60, topRowTop, 20, topRowHeight);
+    globalRelease.setBounds (80, topRowTop, 20, topRowHeight);
+    partialStretch.setBounds (130, topRowTop, 20, topRowHeight);
+    partialStretchFine.setBounds (150, topRowTop, 20, topRowHeight);
+    partialStretchEnvAmt.setBounds (190, topRowTop, 20, topRowHeight);
+    partialStretchEnvAmtFine.setBounds (210, topRowTop, 20, topRowHeight);
+    partialLevel_1.setBounds (250, topRowTop, 20, topRowHeight);
+    partialLevel_2.setBounds (270, topRowTop, 20, topRowHeight);
+    partialLevel_3.setBounds (290, topRowTop, 20, topRowHeight);
+    partialLevel_4.setBounds (310, topRowTop, 20, topRowHeight);
+    partialLevel_5.setBounds (330, topRowTop, 20, topRowHeight);
+    partialLevel_6.setBounds (350, topRowTop, 20, topRowHeight);
+    partialLevel_7.setBounds (370, topRowTop, 20, topRowHeight);
+    partialLevel_8.setBounds (390, topRowTop, 20, topRowHeight);
+    partialLevel_9.setBounds (410, topRowTop, 20, topRowHeight);
+    partialLevel_10.setBounds (430, topRowTop, 20, topRowHeight);
+    partialLevel_11.setBounds (450, topRowTop, 20, topRowHeight);
+    partialLevel_12.setBounds (470, topRowTop, 20, topRowHeight);
+    partialLevel_13.setBounds (490, topRowTop, 20, topRowHeight);
+    partialLevel_14.setBounds (510, topRowTop, 20, topRowHeight);
+    partialLevel_15.setBounds (530, topRowTop, 20, topRowHeight);
+    partialLevel_16.setBounds (550, topRowTop, 20, topRowHeight);
+    partialLevel_17.setBounds (570, topRowTop, 20, topRowHeight);
+    partialLevel_18.setBounds (590, topRowTop, 20, topRowHeight);
+    partialLevel_19.setBounds (610, topRowTop, 20, topRowHeight);
+    partialLevel_20.setBounds (630, topRowTop, 20, topRowHeight);
+    partialLevel_21.setBounds (650, topRowTop, 20, topRowHeight);
+    partialLevel_22.setBounds (670, topRowTop, 20, topRowHeight);
+    partialLevel_23.setBounds (690, topRowTop, 20, topRowHeight);
+    partialLevel_24.setBounds (710, topRowTop, 20, topRowHeight);
+    partialLevel_25.setBounds (730, topRowTop, 20, topRowHeight);
+    partialLevel_26.setBounds (750, topRowTop, 20, topRowHeight);
+    partialLevel_27.setBounds (770, topRowTop, 20, topRowHeight);
+    partialLevel_28.setBounds (790, topRowTop, 20, topRowHeight);
+    partialLevel_29.setBounds (810, topRowTop, 20, topRowHeight);
+    partialLevel_30.setBounds (830, topRowTop, 20, topRowHeight);
+    partialLevel_31.setBounds (850, topRowTop, 20, topRowHeight);
+    partialLevel_32.setBounds (870, topRowTop, 20, topRowHeight);
+    partialTune_1.setBounds (250, tuneRowTop, 20, tuneRowHeight);
+    partialTune_2.setBounds (270, tuneRowTop, 20, tuneRowHeight);
+    partialTune_3.setBounds (290, tuneRowTop, 20, tuneRowHeight);
+    partialTune_4.setBounds (310, tuneRowTop, 20, tuneRowHeight);
+    partialTune_5.setBounds (330, tuneRowTop, 20, tuneRowHeight);
+    partialTune_6.setBounds (350, tuneRowTop, 20, tuneRowHeight);
+    partialTune_7.setBounds (370, tuneRowTop, 20, tuneRowHeight);
+    partialTune_8.setBounds (390, tuneRowTop, 20, tuneRowHeight);
+    partialTune_9.setBounds (410, tuneRowTop, 20, tuneRowHeight);
+    partialTune_10.setBounds (430, tuneRowTop, 20, tuneRowHeight);
+    partialTune_11.setBounds (450, tuneRowTop, 20, tuneRowHeight);
+    partialTune_12.setBounds (470, tuneRowTop, 20, tuneRowHeight);
+    partialTune_13.setBounds (490, tuneRowTop, 20, tuneRowHeight);
+    partialTune_14.setBounds (510, tuneRowTop, 20, tuneRowHeight);
+    partialTune_15.setBounds (530, tuneRowTop, 20, tuneRowHeight);
+    partialTune_16.setBounds (550, tuneRowTop, 20, tuneRowHeight);
+    partialTune_17.setBounds (570, tuneRowTop, 20, tuneRowHeight);
+    partialTune_18.setBounds (590, tuneRowTop, 20, tuneRowHeight);
+    partialTune_19.setBounds (610, tuneRowTop, 20, tuneRowHeight);
+    partialTune_20.setBounds (630, tuneRowTop, 20, tuneRowHeight);
+    partialTune_21.setBounds (650, tuneRowTop, 20, tuneRowHeight);
+    partialTune_22.setBounds (670, tuneRowTop, 20, tuneRowHeight);
+    partialTune_23.setBounds (690, tuneRowTop, 20, tuneRowHeight);
+    partialTune_24.setBounds (710, tuneRowTop, 20, tuneRowHeight);
+    partialTune_25.setBounds (730, tuneRowTop, 20, tuneRowHeight);
+    partialTune_26.setBounds (750, tuneRowTop, 20, tuneRowHeight);
+    partialTune_27.setBounds (770, tuneRowTop, 20, tuneRowHeight);
+    partialTune_28.setBounds (790, tuneRowTop, 20, tuneRowHeight);
+    partialTune_29.setBounds (810, tuneRowTop, 20, tuneRowHeight);
+    partialTune_30.setBounds (830, tuneRowTop, 20, tuneRowHeight);
+    partialTune_31.setBounds (850, tuneRowTop, 20, tuneRowHeight);
+    partialTune_32.setBounds (870, tuneRowTop, 20, tuneRowHeight);
 }
 
 void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
@@ -500,6 +799,71 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
         processor.getFloatParam(PARTIAL_31)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLevel_32)
         processor.getFloatParam(PARTIAL_32)->updateProcessorAndHostFromUi(slider->getValue());
+
+    if (slider == &partialTune_1)
+        processor.getFloatParam(PARTIAL_TUNE_1)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_2)
+        processor.getFloatParam(PARTIAL_TUNE_2)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_3)
+        processor.getFloatParam(PARTIAL_TUNE_3)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_4)
+        processor.getFloatParam(PARTIAL_TUNE_4)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_5)
+        processor.getFloatParam(PARTIAL_TUNE_5)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_6)
+        processor.getFloatParam(PARTIAL_TUNE_6)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_7)
+        processor.getFloatParam(PARTIAL_TUNE_7)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_8)
+        processor.getFloatParam(PARTIAL_TUNE_8)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_9)
+        processor.getFloatParam(PARTIAL_TUNE_9)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_10)
+        processor.getFloatParam(PARTIAL_TUNE_10)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_11)
+        processor.getFloatParam(PARTIAL_TUNE_11)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_12)
+        processor.getFloatParam(PARTIAL_TUNE_12)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_13)
+        processor.getFloatParam(PARTIAL_TUNE_13)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_14)
+        processor.getFloatParam(PARTIAL_TUNE_14)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_15)
+        processor.getFloatParam(PARTIAL_TUNE_15)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_16)
+        processor.getFloatParam(PARTIAL_TUNE_16)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_17)
+        processor.getFloatParam(PARTIAL_TUNE_17)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_18)
+        processor.getFloatParam(PARTIAL_TUNE_18)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_19)
+        processor.getFloatParam(PARTIAL_TUNE_19)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_20)
+        processor.getFloatParam(PARTIAL_TUNE_20)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_21)
+        processor.getFloatParam(PARTIAL_TUNE_21)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_22)
+        processor.getFloatParam(PARTIAL_TUNE_22)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_23)
+        processor.getFloatParam(PARTIAL_TUNE_23)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_24)
+        processor.getFloatParam(PARTIAL_TUNE_24)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_25)
+        processor.getFloatParam(PARTIAL_TUNE_25)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_26)
+        processor.getFloatParam(PARTIAL_TUNE_26)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_27)
+        processor.getFloatParam(PARTIAL_TUNE_27)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_28)
+        processor.getFloatParam(PARTIAL_TUNE_28)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_29)
+        processor.getFloatParam(PARTIAL_TUNE_29)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_30)
+        processor.getFloatParam(PARTIAL_TUNE_30)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_31)
+        processor.getFloatParam(PARTIAL_TUNE_31)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialTune_32)
+        processor.getFloatParam(PARTIAL_TUNE_32)->updateProcessorAndHostFromUi(slider->getValue());
 
 }
 
@@ -663,5 +1027,133 @@ void PlusAudioProcessorEditor::timerCallback(){
     param=processor.getFloatParam(PARTIAL_32);
     if (&partialLevel_32 && param->updateUiRequested()){
         partialLevel_32.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_1);
+    if (&partialTune_1 && param->updateUiRequested()){
+        partialTune_1.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_2);
+    if (&partialTune_2 && param->updateUiRequested()){
+        partialTune_2.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_3);
+    if (&partialTune_3 && param->updateUiRequested()){
+        partialTune_3.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_4);
+    if (&partialTune_4 && param->updateUiRequested()){
+        partialTune_4.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_5);
+    if (&partialTune_5 && param->updateUiRequested()){
+        partialTune_5.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_6);
+    if (&partialTune_6 && param->updateUiRequested()){
+        partialTune_6.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_7);
+    if (&partialTune_7 && param->updateUiRequested()){
+        partialTune_7.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_8);
+    if (&partialTune_8 && param->updateUiRequested()){
+        partialTune_8.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_9);
+    if (&partialTune_9 && param->updateUiRequested()){
+        partialTune_9.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_10);
+    if (&partialTune_10 && param->updateUiRequested()){
+        partialTune_10.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_11);
+    if (&partialTune_11 && param->updateUiRequested()){
+        partialTune_11.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_12);
+    if (&partialTune_12 && param->updateUiRequested()){
+        partialTune_12.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_13);
+    if (&partialTune_13 && param->updateUiRequested()){
+        partialTune_13.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_14);
+    if (&partialTune_14 && param->updateUiRequested()){
+        partialTune_14.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_15);
+    if (&partialTune_15 && param->updateUiRequested()){
+        partialTune_15.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_16);
+    if (&partialTune_16 && param->updateUiRequested()){
+        partialTune_16.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_17);
+    if (&partialTune_17 && param->updateUiRequested()){
+        partialTune_17.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_18);
+    if (&partialTune_18 && param->updateUiRequested()){
+        partialTune_18.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_19);
+    if (&partialTune_19 && param->updateUiRequested()){
+        partialTune_19.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_20);
+    if (&partialTune_20 && param->updateUiRequested()){
+        partialTune_20.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_21);
+    if (&partialTune_21 && param->updateUiRequested()){
+        partialTune_21.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_22);
+    if (&partialTune_22 && param->updateUiRequested()){
+        partialTune_22.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_23);
+    if (&partialTune_23 && param->updateUiRequested()){
+        partialTune_23.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_24);
+    if (&partialTune_24 && param->updateUiRequested()){
+        partialTune_24.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_25);
+    if (&partialTune_25 && param->updateUiRequested()){
+        partialTune_25.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_26);
+    if (&partialTune_26 && param->updateUiRequested()){
+        partialTune_26.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_27);
+    if (&partialTune_27 && param->updateUiRequested()){
+        partialTune_27.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_28);
+    if (&partialTune_28 && param->updateUiRequested()){
+        partialTune_28.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_29);
+    if (&partialTune_29 && param->updateUiRequested()){
+        partialTune_29.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_30);
+    if (&partialTune_30 && param->updateUiRequested()){
+        partialTune_30.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_31);
+    if (&partialTune_31 && param->updateUiRequested()){
+        partialTune_31.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_TUNE_32);
+    if (&partialTune_32 && param->updateUiRequested()){
+        partialTune_32.setValue (param->uiGet(), dontSendNotification);
     }
 }
