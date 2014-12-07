@@ -59,7 +59,6 @@ void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
 {
     samplesSinceTrigger = 0;
     releaseEnvLevel = envLevel;
-    clearCurrentNote();
 }
 
 float AdditiveSynthVoice::calculateFrequency(int currentPitchWheelPosition)
@@ -197,6 +196,7 @@ float AdditiveSynthVoice::getAmplitude()
             if (envLevel < 0.001)
             {
                 envLevel = 0.0;
+                clearCurrentNote();
             }
             break;
     }
