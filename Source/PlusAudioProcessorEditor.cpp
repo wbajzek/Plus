@@ -52,10 +52,10 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     lfoFrequency.setValue(1.0);
     addAndMakeVisible(lfoFrequency);
     
-    lfoShape.addItem("Sine",1);
-    lfoShape.addItem("Triangle",2);
-    lfoShape.addItem("Saw",3);
-    lfoShape.addItem("Ramp",4);
+    lfoShape.addItem("Sine",SINE_WAVE_TABLE);
+    lfoShape.addItem("Triangle",TRIANGLE_WAVE_TABLE);
+    lfoShape.addItem("Saw",SAW_WAVE_TABLE);
+    lfoShape.addItem("Ramp",RAMP_WAVE_TABLE);
     lfoShape.setWantsKeyboardFocus(false);
     lfoShape.setItemEnabled(0, false);
     lfoShape.setEditableText(false);

@@ -22,13 +22,14 @@ enum WaveTables {
   SINE_WAVE_TABLE = 1,
   TRIANGLE_WAVE_TABLE,
   SAW_WAVE_TABLE,
-  RAMP_WAVE_TABLE
+  RAMP_WAVE_TABLE,
+  NUMBER_OF_WAVE_TABLES
 };
 
 #include "SineWaveTable.h"
+#include "TriangleWaveTable.h"
 #include "SawWaveTable.h"
 #include "RampWaveTable.h"
-#include "TriangleWaveTable.h"
 
 #endif  // WAVETABLES_H_INCLUDED
 HEADER
@@ -117,11 +118,21 @@ File.open('../Source/WaveTables/SawWaveTable.h','w') do |f|
 HEADER
 
   f.write "const double sawWaveTable[] = {\n"
+
+  rise = 100
+  fall = wavetable_length.to_i - rise
   phase = 1.0
-  phase_increment = 2.0 / wavetable_length
-  wavetable_length.to_i.times do
+  phase_increment = 2.0 / fall
+  fall.times do
     f.write "#{phase},\n"
     phase -= phase_increment
+  end
+  # smooth rise back to top
+  phase = -1.0
+  phase_increment = 2.0 / rise
+  rise.times do
+    f.write "#{phase},\n"
+    phase += phase_increment
   end
   f.write "};\n"
 
@@ -145,11 +156,21 @@ File.open('../Source/WaveTables/RampWaveTable.h','w') do |f|
 HEADER
 
   f.write "const double rampWaveTable[] = {\n"
+
+  rise = wavetable_length.to_i - 100
+  fall = wavetable_length.to_i - rise
   phase = -1.0
-  phase_increment = 2.0 / wavetable_length
-  wavetable_length.to_i.times do
+  phase_increment = 2.0 / rise
+  rise.times do
     f.write "#{phase},\n"
     phase += phase_increment
+  end
+  # smooth fall to bottom
+  phase = 1.0
+  phase_increment = 2.0 / fall
+  fall.times do
+    f.write "#{phase},\n"
+    phase -= phase_increment
   end
   f.write "};\n"
 

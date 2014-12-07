@@ -18,12 +18,13 @@ enum WaveTables {
   SINE_WAVE_TABLE = 1,
   TRIANGLE_WAVE_TABLE,
   SAW_WAVE_TABLE,
-  RAMP_WAVE_TABLE
+  RAMP_WAVE_TABLE,
+  NUMBER_OF_WAVE_TABLES
 };
 
 #include "SineWaveTable.h"
+#include "TriangleWaveTable.h"
 #include "SawWaveTable.h"
 #include "RampWaveTable.h"
-#include "TriangleWaveTable.h"
 
 #endif  // WAVETABLES_H_INCLUDED

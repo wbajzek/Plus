@@ -292,7 +292,7 @@ void PlusAudioProcessor::initParameters()
     addFloatParam(PARTIAL_LFO_AMT_31, "Partial_LfoAmt31", true, SAVE, &parameters[PARTIAL_LFO_AMT_31], 0.0, 1.0);
     addFloatParam(PARTIAL_LFO_AMT_32, "Partial_LfoAmt32", true, SAVE, &parameters[PARTIAL_LFO_AMT_32], 0.0, 1.0);
     addFloatParam(LFO_FREQ, "Lfo_Frequency", true, SAVE, &parameters[LFO_FREQ], 0.0, 1000.0);
-    addIntParam(LFO_SHAPE, "Lfo_SHAPE", true, SAVE, &lfoShape, SINE_WAVE_TABLE, RAMP_WAVE_TABLE);
+    addIntParam(LFO_SHAPE, "Lfo_Shape", true, SAVE, &lfoShape, SINE_WAVE_TABLE, NUMBER_OF_WAVE_TABLES);
 }
 
 PlusAudioProcessor::~PlusAudioProcessor()
