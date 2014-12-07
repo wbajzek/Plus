@@ -118,10 +118,10 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 
                         float panRight = (1.0 + localParameters[PartialPanToParamMapping[i]]) / 2.0;
                         float panLeft  = 1.0 - panRight;
-                        currentSampleLeft += (waveTable[(stretchedIndices[i]+0x8000) >> 16]
-                            * localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]]))
+                        currentSampleLeft += (sineWaveTable[(stretchedIndices[i]+0x8000) >> 16]
+                            * (localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]])))
                             * panLeft;
-                        currentSampleRight += (waveTable[(stretchedIndices[i]+0x8000) >> 16]
+                        currentSampleRight += (sineWaveTable[(stretchedIndices[i]+0x8000) >> 16]
                             * (localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]])))
                             * panRight;
 
@@ -131,11 +131,8 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                 stretch += stretch;
             }
 
-            float calculatedSampleLeft = currentSampleLeft * masterAmplitude;
-            float calculatedSampleRight = currentSampleRight * masterAmplitude;
-
-            outputBuffer.addSample(0, startSample, calculatedSampleLeft);
-            outputBuffer.addSample(1, startSample, calculatedSampleRight);
+            outputBuffer.addSample(0, startSample, currentSampleLeft * masterAmplitude);
+            outputBuffer.addSample(1, startSample, currentSampleRight * masterAmplitude);
 
             ++startSample;
             tick();
