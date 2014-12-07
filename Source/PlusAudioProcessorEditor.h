@@ -39,6 +39,8 @@ private:
     Slider globalDecay;
     Slider globalSustain;
     Slider globalRelease;
+    Slider lfoFrequency;
+    Slider lfoShape;
     Slider partialStretch;
     Slider partialStretchFine;
     Slider partialStretchEnvAmt;

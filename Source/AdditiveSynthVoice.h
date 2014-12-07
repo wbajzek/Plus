@@ -196,21 +196,23 @@ private:
     float* localParameters;
     double freq = 110.0;
     int noteNumber;
-    double velocity = 0;
-    double envLevel = 0;
-    double releaseEnvLevel = 0;
+    double velocity = 0.0;
+    double envLevel = 0.0;
+    double lfoLevel = 0.0;
+    double releaseEnvLevel = 0.0;
     float nyquist;
     float sampleRate;
     float frqTI;
     int envelopeState = 0;
 
-    int samplesSinceTrigger = 0;
+    unsigned long samplesSinceTrigger = 0;
     float coefficient = 0.0;
     double minPartialLevel = 0.0;
     double maxPartialLevel = 0.0;
     double partialLevels[numPartials] = { 0.0 };
     double partialStretchAmounts[numPartials] = { 0.0 };
     long stretchedIndices[numPartials] = { 0 };
+    unsigned int lfoIndex = 0;
 
     int attack = 0;
     int decay = 0;
@@ -219,7 +221,7 @@ private:
     double envIncrement = 0.0;
 
     float calculateFrequency(int currentPitchWheelPosition);
-
+    void tick();
 
     double scaleRange(double in, double oldMin, double oldMax, double newMin, double newMax)
     {

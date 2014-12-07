@@ -18,6 +18,7 @@ enum Params
     DECAY,
     SUSTAIN,
     RELEASE,
+    LFO_FREQ,
     STRETCH,
     STRETCH_FINE,
     STRETCH_ENV_AMT,

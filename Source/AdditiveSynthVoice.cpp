@@ -26,6 +26,7 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
 {
     noteNumber = midiNoteNumber;
     freq = calculateFrequency(currentPitchWheelPosition);
+    lfoIndex = 0;
     velocity = midiVelocity;
     envLevel = 0.001;
     releaseEnvLevel = envLevel;
@@ -108,9 +109,14 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         // and oh boy, does it improve performance.
                         const long increment = (long)(frqTI * partialFreq) << 16;
 
-                        float pan = (1.0 + localParameters[PartialPanToParamMapping[i]]) / 2.0;
-                        currentSampleLeft += waveTable[(stretchedIndices[i]+0x8000) >> 16] * localParameters[PartialLevelToParamMapping[i]] * (1.0 - pan);
-                        currentSampleRight += waveTable[(stretchedIndices[i]+0x8000) >> 16] * localParameters[PartialLevelToParamMapping[i]] * pan;
+                        float panRight = (1.0 + localParameters[PartialPanToParamMapping[i]]) / 2.0;
+                        float panLeft  = 1.0 - panRight;
+                        currentSampleLeft += (waveTable[(stretchedIndices[i]+0x8000) >> 16]
+                            * localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]]))
+                            * panLeft;
+                        currentSampleRight += (waveTable[(stretchedIndices[i]+0x8000) >> 16]
+                            * (localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]])))
+                            * panRight;
 
                         stretchedIndices[i] = stretchedIndices[i] + increment & ((waveTableLength << 16) - 1);
                     }
@@ -125,7 +131,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             outputBuffer.addSample(1, startSample, calculatedSampleRight);
 
             ++startSample;
-            ++samplesSinceTrigger;
+            tick();
         }
     }
 }
@@ -214,5 +220,14 @@ bool AdditiveSynthVoice::isPlayingChannel (int midiChannel) const
 bool AdditiveSynthVoice::isVoiceActive() const
 {
     return envLevel > 0.0;
+}
+
+void AdditiveSynthVoice::tick()
+{
+    ++samplesSinceTrigger;
+    lfoLevel = waveTable[lfoIndex];
+    if ((lfoIndex += (frqTI * localParameters[LFO_FREQ])) >= waveTableLength)
+        lfoIndex -= waveTableLength;
+    
 }
 

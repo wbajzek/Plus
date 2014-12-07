@@ -44,6 +44,13 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     globalRelease.setValue(1.0);
     addAndMakeVisible(globalRelease);
 
+    lfoFrequency.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    lfoFrequency.setRange(0.01, 1000.0, 0.01);
+    lfoFrequency.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    lfoFrequency.setPopupDisplayEnabled(true, this);
+    lfoFrequency.setValue(1.0);
+    addAndMakeVisible(lfoFrequency);
+
     partialStretch.setSliderStyle(Slider::LinearBarVertical);
     partialStretch.setRange(-1.0, 1.0, 0.01);
     partialStretch.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
@@ -314,7 +321,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialTune_1.setRange(-1.0, 1.0, 0.001);
     partialTune_1.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_1.setPopupDisplayEnabled(true, this);
-    partialTune_1.setValue(1.0);
+    partialTune_1.setValue(0.0);
     addAndMakeVisible(partialTune_1);
 
     partialTune_2.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
@@ -545,7 +552,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialPan_1.setRange(-1.0, 1.0, 0.001);
     partialPan_1.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_1.setPopupDisplayEnabled(true, this);
-    partialPan_1.setValue(1.0);
+    partialPan_1.setValue(0.0);
     addAndMakeVisible(partialPan_1);
 
     partialPan_2.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
@@ -776,7 +783,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialLfoAmt_1.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_1.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_1.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_1.setValue(1.0);
+    partialLfoAmt_1.setValue(0.0);
     addAndMakeVisible(partialLfoAmt_1);
 
     partialLfoAmt_2.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
@@ -1007,6 +1014,9 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     globalDecay.addListener(this);
     globalSustain.addListener(this);
     globalRelease.addListener(this);
+
+    lfoFrequency.addListener(this);
+
     partialStretch.addListener(this);
     partialStretchFine.addListener(this);
     partialStretchEnvAmt.addListener(this);
@@ -1162,6 +1172,7 @@ void PlusAudioProcessorEditor::paint (Graphics& g)
     g.drawFittedText ("LFO", 200, 238, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Tune", 200, 268, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Pan", 200, 298, 60, 30, Justification::centred, 1);
+    g.drawFittedText ("LFO Freq", 20, 238, 60, 30, Justification::centred, 1);
 }
 
 void PlusAudioProcessorEditor::resized()
@@ -1179,6 +1190,7 @@ void PlusAudioProcessorEditor::resized()
     globalDecay.setBounds (40, topRowTop, 20, topRowHeight);
     globalSustain.setBounds (60, topRowTop, 20, topRowHeight);
     globalRelease.setBounds (80, topRowTop, 20, topRowHeight);
+    lfoFrequency.setBounds (90, lfoRowTop, 20, lfoRowHeight);
     partialStretch.setBounds (130, topRowTop, 20, topRowHeight);
     partialStretchFine.setBounds (150, topRowTop, 20, topRowHeight);
     partialStretchEnvAmt.setBounds (190, topRowTop, 20, topRowHeight);
@@ -1323,6 +1335,9 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
         processor.getFloatParam(SUSTAIN)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &globalRelease)
         processor.getFloatParam(RELEASE)->updateProcessorAndHostFromUi(slider->getValue());
+
+    if (slider == &lfoFrequency)
+        processor.getFloatParam(LFO_FREQ)->updateProcessorAndHostFromUi(slider->getValue());
 
     if (slider == &partialStretch)
         processor.getFloatParam(STRETCH)->updateProcessorAndHostFromUi(slider->getValue());
@@ -1611,6 +1626,10 @@ void PlusAudioProcessorEditor::timerCallback(){
     param=processor.getFloatParam(RELEASE);
     if (&globalRelease && param->updateUiRequested()){
         globalRelease.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(LFO_FREQ);
+    if (&lfoFrequency && param->updateUiRequested()){
+        lfoFrequency.setValue (param->uiGet(), dontSendNotification);
     }
     param=processor.getFloatParam(STRETCH);
     if (&partialStretch && param->updateUiRequested()){
