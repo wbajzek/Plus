@@ -18,7 +18,6 @@ enum Params
     DECAY,
     SUSTAIN,
     RELEASE,
-    LFO_FREQ,
     STRETCH,
     STRETCH_FINE,
     STRETCH_ENV_AMT,
@@ -151,6 +150,8 @@ enum Params
     PARTIAL_LFO_AMT_30,
     PARTIAL_LFO_AMT_31,
     PARTIAL_LFO_AMT_32,
+    LFO_FREQ,
+    LFO_SHAPE,
     NUMBER_OF_PARAMETERS
 };
 

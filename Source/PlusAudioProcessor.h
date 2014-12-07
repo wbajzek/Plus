@@ -61,6 +61,7 @@ public:
 
 private:
     float parameters[NUMBER_OF_PARAMETERS];
+    int lfoShape = 0;
     AdditiveSynthesiser synth;
     MidiKeyboardState keyboardState;
 

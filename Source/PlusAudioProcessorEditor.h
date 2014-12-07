@@ -18,7 +18,7 @@
 //==============================================================================
 /**
 */
-class PlusAudioProcessorEditor  : public AudioProcessorEditor, private Slider::Listener, public Timer
+class PlusAudioProcessorEditor  : public AudioProcessorEditor, private Slider::Listener, private ComboBoxListener, public Timer
 {
 public:
     PlusAudioProcessorEditor (PlusAudioProcessor&);
@@ -28,6 +28,7 @@ public:
     void paint (Graphics&) override;
     void resized() override;
     void sliderValueChanged (Slider* slider) override;
+    void comboBoxChanged (ComboBox* comboBox) override;
     void timerCallback();
 
 private:
@@ -40,7 +41,7 @@ private:
     Slider globalSustain;
     Slider globalRelease;
     Slider lfoFrequency;
-    Slider lfoShape;
+    ComboBox lfoShape;
     Slider partialStretch;
     Slider partialStretchFine;
     Slider partialStretchEnvAmt;

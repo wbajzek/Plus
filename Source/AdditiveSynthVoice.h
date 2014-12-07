@@ -164,7 +164,7 @@ const int PartialLfoAmtToParamMapping[numPartials] =
 class AdditiveSynthVoice : public SynthesiserVoice
 {
 public:
-    AdditiveSynthVoice(float* parameters);
+    AdditiveSynthVoice(float* parameters, int* lfoShape);
     ~AdditiveSynthVoice();
     float getParameter(int index);
 
@@ -192,8 +192,9 @@ public:
 
 
 private:
-
+    
     float* localParameters;
+    int* localLfoShape;
     double freq = 110.0;
     int noteNumber;
     double velocity = 0.0;

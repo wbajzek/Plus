@@ -9,7 +9,6 @@ PlusAudioProcessor::PlusAudioProcessor()
     parameters[DECAY] = 1.0;
     parameters[SUSTAIN] = 0.8;
     parameters[RELEASE] = 1.0;
-    parameters[LFO_FREQ] = 20.0;
     parameters[STRETCH] = 0.0;
     parameters[STRETCH_FINE] = 0.0;
     parameters[STRETCH_ENV_AMT] = 0.0;
@@ -142,11 +141,13 @@ PlusAudioProcessor::PlusAudioProcessor()
     parameters[PARTIAL_LFO_AMT_30] = 0.0;
     parameters[PARTIAL_LFO_AMT_31] = 0.0;
     parameters[PARTIAL_LFO_AMT_32] = 0.0;
+    parameters[LFO_FREQ] = 20.0;
+    parameters[LFO_SHAPE] = SINE_WAVE_TABLE;
 
     initAllParameters();
 
     for (int i = 0; i < numVoices; i++)
-        synth.addVoice(new AdditiveSynthVoice(parameters));
+        synth.addVoice(new AdditiveSynthVoice(parameters, &lfoShape));
     synth.addSound(new AdditiveSynthSound());
     synth.setNoteStealingEnabled(true);
 
@@ -158,7 +159,6 @@ void PlusAudioProcessor::initParameters()
     addFloatParam(DECAY, "Decay", true, SAVE, &parameters[DECAY], 0.01, 20.0);
     addFloatParam(SUSTAIN, "Sustain", true, SAVE, &parameters[SUSTAIN], 0.0, 1.0);
     addFloatParam(RELEASE, "Release", true, SAVE, &parameters[RELEASE], 0.01, 20.0);
-    addFloatParam(LFO_FREQ, "Lfo_Frequency", true, SAVE, &parameters[LFO_FREQ], 0.0, 1000.0);
     addFloatParam(STRETCH, "Stretch", true, SAVE, &parameters[STRETCH], -1.0, 1.0);
     addFloatParam(STRETCH_FINE, "Stretch_Fine", true, SAVE, &parameters[STRETCH_FINE], -0.01, 0.01);
     addFloatParam(STRETCH_ENV_AMT, "Stretch_Env_Amt", true, SAVE, &parameters[STRETCH_ENV_AMT], 0.0, 2.0);
@@ -291,6 +291,8 @@ void PlusAudioProcessor::initParameters()
     addFloatParam(PARTIAL_LFO_AMT_30, "Partial_LfoAmt30", true, SAVE, &parameters[PARTIAL_LFO_AMT_30], 0.0, 1.0);
     addFloatParam(PARTIAL_LFO_AMT_31, "Partial_LfoAmt31", true, SAVE, &parameters[PARTIAL_LFO_AMT_31], 0.0, 1.0);
     addFloatParam(PARTIAL_LFO_AMT_32, "Partial_LfoAmt32", true, SAVE, &parameters[PARTIAL_LFO_AMT_32], 0.0, 1.0);
+    addFloatParam(LFO_FREQ, "Lfo_Frequency", true, SAVE, &parameters[LFO_FREQ], 0.0, 1000.0);
+    addIntParam(LFO_SHAPE, "Lfo_SHAPE", true, SAVE, &lfoShape, SINE_WAVE_TABLE, RAMP_WAVE_TABLE);
 }
 
 PlusAudioProcessor::~PlusAudioProcessor()
@@ -361,6 +363,7 @@ void PlusAudioProcessor::runAfterParamGroupUpdate()
     getParam(SUSTAIN)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(RELEASE)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(LFO_FREQ)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(LFO_SHAPE)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(STRETCH)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(STRETCH_FINE)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(STRETCH_ENV_AMT)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);

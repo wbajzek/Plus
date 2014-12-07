@@ -16,6 +16,8 @@
     </GROUP>
     <GROUP id="{400499B6-E5F0-E43E-4081-6377AEF3EFD4}" name="Source">
       <GROUP id="{1C9A9DCF-3246-3101-8F3A-47D424470EC0}" name="WaveTables">
+        <FILE id="LqYz2v" name="TriangleWaveTable.h" compile="0" resource="0"
+              file="Source/WaveTables/TriangleWaveTable.h"/>
         <FILE id="UcX3Bm" name="RampWaveTable.h" compile="0" resource="0" file="Source/WaveTables/RampWaveTable.h"/>
         <FILE id="XKj4GL" name="SawWaveTable.h" compile="0" resource="0" file="Source/WaveTables/SawWaveTable.h"/>
         <FILE id="JEuN5l" name="SineWaveTable.h" compile="0" resource="0" file="Source/WaveTables/SineWaveTable.h"/>

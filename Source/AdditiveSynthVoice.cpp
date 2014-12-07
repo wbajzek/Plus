@@ -8,9 +8,10 @@
 
 #include "AdditiveSynth.h"
 
-AdditiveSynthVoice::AdditiveSynthVoice(float* parameters)
+AdditiveSynthVoice::AdditiveSynthVoice(float* parameters, int* lfoShape)
 {
     localParameters = parameters;
+    localLfoShape = lfoShape;
 }
 
 AdditiveSynthVoice::~AdditiveSynthVoice()
@@ -93,9 +94,8 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
         {
             float currentSampleLeft = 0.0;
             float currentSampleRight = 0.0;
-            const float amplitude = getAmplitude();
-            const float masterAmplitude = amplitude / numPartials * 4; // * 4 fudge factor to make the synth reasonably louder
-            float stretchEnvAmt = stretchEnvAmtInc * amplitude;
+            const float masterAmplitude = envLevel / numPartials * 4; // * 4 fudge factor to make the synth reasonably louder
+            float stretchEnvAmt = stretchEnvAmtInc * envLevel;
             float stretch = localParameters[STRETCH] + localParameters[STRETCH_FINE];
             float localFreq = freq + (freq * modWheel * lfoLevel);
 
@@ -228,10 +228,28 @@ bool AdditiveSynthVoice::isVoiceActive() const
 
 void AdditiveSynthVoice::tick()
 {
-    ++samplesSinceTrigger;
-    lfoLevel = waveTable[lfoIndex];
+    getAmplitude();
+
+    switch (*localLfoShape) {
+        case SINE_WAVE_TABLE:
+            lfoLevel = sineWaveTable[lfoIndex];
+            break;
+        case TRIANGLE_WAVE_TABLE:
+            lfoLevel = triangleWaveTable[lfoIndex];
+            break;
+        case SAW_WAVE_TABLE:
+            lfoLevel = sawWaveTable[lfoIndex];
+            break;
+        case RAMP_WAVE_TABLE:
+            lfoLevel = rampWaveTable[lfoIndex];
+            break;
+        default:
+            break;
+    }
+    
     if ((lfoIndex += (frqTI * localParameters[LFO_FREQ])) >= waveTableLength)
         lfoIndex -= waveTableLength;
-    
+
+    ++samplesSinceTrigger;
 }
 

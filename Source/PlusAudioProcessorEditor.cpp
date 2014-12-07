@@ -16,6 +16,7 @@
 PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
+    
     globalAttack.setSliderStyle(Slider::LinearBarVertical);
     globalAttack.setRange(0.01, 10.0, 0.01);
     globalAttack.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
@@ -50,6 +51,16 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     lfoFrequency.setPopupDisplayEnabled(true, this);
     lfoFrequency.setValue(1.0);
     addAndMakeVisible(lfoFrequency);
+    
+    lfoShape.addItem("Sine",1);
+    lfoShape.addItem("Triangle",2);
+    lfoShape.addItem("Saw",3);
+    lfoShape.addItem("Ramp",4);
+    lfoShape.setWantsKeyboardFocus(false);
+    lfoShape.setItemEnabled(0, false);
+    lfoShape.setEditableText(false);
+    lfoShape.setSelectedId(1);
+    addAndMakeVisible(lfoShape);
 
     partialStretch.setSliderStyle(Slider::LinearBarVertical);
     partialStretch.setRange(-1.0, 1.0, 0.01);
@@ -1016,6 +1027,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     globalRelease.addListener(this);
 
     lfoFrequency.addListener(this);
+    lfoShape.addListener(this);
 
     partialStretch.addListener(this);
     partialStretchFine.addListener(this);
@@ -1173,6 +1185,7 @@ void PlusAudioProcessorEditor::paint (Graphics& g)
     g.drawFittedText ("Tune", 200, 268, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Pan", 200, 298, 60, 30, Justification::centred, 1);
     g.drawFittedText ("LFO Freq", 20, 238, 60, 30, Justification::centred, 1);
+    g.drawFittedText ("LFO Shape", 20, 268, 60, 30, Justification::centred, 1);
 }
 
 void PlusAudioProcessorEditor::resized()
@@ -1190,7 +1203,6 @@ void PlusAudioProcessorEditor::resized()
     globalDecay.setBounds (40, topRowTop, 20, topRowHeight);
     globalSustain.setBounds (60, topRowTop, 20, topRowHeight);
     globalRelease.setBounds (80, topRowTop, 20, topRowHeight);
-    lfoFrequency.setBounds (90, lfoRowTop, 20, lfoRowHeight);
     partialStretch.setBounds (130, topRowTop, 20, topRowHeight);
     partialStretchFine.setBounds (150, topRowTop, 20, topRowHeight);
     partialStretchEnvAmt.setBounds (190, topRowTop, 20, topRowHeight);
@@ -1323,6 +1335,8 @@ void PlusAudioProcessorEditor::resized()
     partialLfoAmt_30.setBounds (830, lfoRowTop, 20, lfoRowHeight);
     partialLfoAmt_31.setBounds (850, lfoRowTop, 20, lfoRowHeight);
     partialLfoAmt_32.setBounds (870, lfoRowTop, 20, lfoRowHeight);
+    lfoFrequency.setBounds (90, lfoRowTop, 20, lfoRowHeight);
+    lfoShape.setBounds (90, tuneRowTop, 90, tuneRowHeight);
 }
 
 void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
@@ -1610,7 +1624,16 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
 
 }
 
-void PlusAudioProcessorEditor::timerCallback(){
+void PlusAudioProcessorEditor::comboBoxChanged (ComboBox* comboBox)
+{
+    Logger::writeToLog("comboBox changed");
+    if (comboBox == &lfoShape)
+        processor.getIntParam(LFO_SHAPE)->updateProcessorAndHostFromUi(comboBox->getSelectedId());
+}
+
+
+void PlusAudioProcessorEditor::timerCallback()
+{
     FloatParam *param=processor.getFloatParam(ATTACK);
     if (&globalAttack && param->updateUiRequested()){
         globalAttack.setValue (param->uiGet(), dontSendNotification);
@@ -2158,5 +2181,9 @@ void PlusAudioProcessorEditor::timerCallback(){
     param=processor.getFloatParam(PARTIAL_LFO_AMT_32);
     if (&partialLfoAmt_32 && param->updateUiRequested()){
         partialLfoAmt_32.setValue (param->uiGet(), dontSendNotification);
+    }
+    IntParam *intParam= processor.getIntParam(LFO_SHAPE);
+    if (&lfoShape && param->updateUiRequested()){
+        lfoShape.setSelectedId(intParam->uiGet(), dontSendNotification);
     }
 }
