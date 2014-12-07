@@ -535,11 +535,242 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     addAndMakeVisible(partialTune_31);
 
     partialTune_32.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
-    partialTune_32.setRange(0.0, 1.0, 0.001);
+    partialTune_32.setRange(-1.0, 1.0, 0.001);
     partialTune_32.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_32.setPopupDisplayEnabled(true, this);
     partialTune_32.setValue(0.0);
     addAndMakeVisible(partialTune_32);
+
+    partialPan_1.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_1.setRange(-1.0, 1.0, 0.001);
+    partialPan_1.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_1.setPopupDisplayEnabled(true, this);
+    partialPan_1.setValue(1.0);
+    addAndMakeVisible(partialPan_1);
+
+    partialPan_2.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_2.setRange(-1.0, 1.0, 0.001);
+    partialPan_2.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_2.setPopupDisplayEnabled(true, this);
+    partialPan_2.setValue(0.0);
+    addAndMakeVisible(partialPan_2);
+
+    partialPan_3.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_3.setRange(-1.0, 1.0, 0.001);
+    partialPan_3.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_3.setPopupDisplayEnabled(true, this);
+    partialPan_3.setValue(0.0);
+    addAndMakeVisible(partialPan_3);
+
+    partialPan_4.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_4.setRange(-1.0, 1.0, 0.001);
+    partialPan_4.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_4.setPopupDisplayEnabled(true, this);
+    partialPan_4.setValue(0.0);
+    addAndMakeVisible(partialPan_4);
+
+    partialPan_5.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_5.setRange(-1.0, 1.0, 0.001);
+    partialPan_5.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_5.setPopupDisplayEnabled(true, this);
+    partialPan_5.setValue(0.0);
+    addAndMakeVisible(partialPan_5);
+
+    partialPan_6.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_6.setRange(-1.0, 1.0, 0.001);
+    partialPan_6.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_6.setPopupDisplayEnabled(true, this);
+    partialPan_6.setValue(0.0);
+    addAndMakeVisible(partialPan_6);
+
+    partialPan_7.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_7.setRange(-1.0, 1.0, 0.001);
+    partialPan_7.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_7.setPopupDisplayEnabled(true, this);
+    partialPan_7.setValue(0.0);
+    addAndMakeVisible(partialPan_7);
+
+    partialPan_8.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_8.setRange(-1.0, 1.0, 0.001);
+    partialPan_8.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_8.setPopupDisplayEnabled(true, this);
+    partialPan_8.setValue(0.0);
+    addAndMakeVisible(partialPan_8);
+
+    partialPan_9.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_9.setRange(-1.0, 1.0, 0.001);
+    partialPan_9.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_9.setPopupDisplayEnabled(true, this);
+    partialPan_9.setValue(0.0);
+    addAndMakeVisible(partialPan_9);
+
+    partialPan_10.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_10.setRange(-1.0, 1.0, 0.001);
+    partialPan_10.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_10.setPopupDisplayEnabled(true, this);
+    partialPan_10.setValue(0.0);
+    addAndMakeVisible(partialPan_10);
+
+    partialPan_11.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_11.setRange(-1.0, 1.0, 0.001);
+    partialPan_11.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_11.setPopupDisplayEnabled(true, this);
+    partialPan_11.setValue(0.0);
+    addAndMakeVisible(partialPan_11);
+
+    partialPan_12.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_12.setRange(-1.0, 1.0, 0.001);
+    partialPan_12.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_12.setPopupDisplayEnabled(true, this);
+    partialPan_12.setValue(0.0);
+    addAndMakeVisible(partialPan_12);
+
+    partialPan_13.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_13.setRange(-1.0, 1.0, 0.001);
+    partialPan_13.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_13.setPopupDisplayEnabled(true, this);
+    partialPan_13.setValue(0.0);
+    addAndMakeVisible(partialPan_13);
+
+    partialPan_14.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_14.setRange(-1.0, 1.0, 0.001);
+    partialPan_14.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_14.setPopupDisplayEnabled(true, this);
+    partialPan_14.setValue(0.0);
+    addAndMakeVisible(partialPan_14);
+
+    partialPan_15.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_15.setRange(-1.0, 1.0, 0.001);
+    partialPan_15.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_15.setPopupDisplayEnabled(true, this);
+    partialPan_15.setValue(0.0);
+    addAndMakeVisible(partialPan_15);
+
+    partialPan_16.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_16.setRange(-1.0, 1.0, 0.001);
+    partialPan_16.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_16.setPopupDisplayEnabled(true, this);
+    partialPan_16.setValue(0.0);
+    addAndMakeVisible(partialPan_16);
+
+    partialPan_16.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_16.setRange(-1.0, 1.0, 0.001);
+    partialPan_16.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_16.setPopupDisplayEnabled(true, this);
+    partialPan_16.setValue(0.0);
+    addAndMakeVisible(partialPan_16);
+
+    partialPan_17.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_17.setRange(-1.0, 1.0, 0.001);
+    partialPan_17.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_17.setPopupDisplayEnabled(true, this);
+    partialPan_17.setValue(0.0);
+    addAndMakeVisible(partialPan_17);
+
+    partialPan_18.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_18.setRange(-1.0, 1.0, 0.001);
+    partialPan_18.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_18.setPopupDisplayEnabled(true, this);
+    partialPan_18.setValue(0.0);
+    addAndMakeVisible(partialPan_18);
+
+    partialPan_19.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_19.setRange(-1.0, 1.0, 0.001);
+    partialPan_19.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_19.setPopupDisplayEnabled(true, this);
+    partialPan_19.setValue(0.0);
+    addAndMakeVisible(partialPan_19);
+
+    partialPan_20.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_20.setRange(-1.0, 1.0, 0.001);
+    partialPan_20.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_20.setPopupDisplayEnabled(true, this);
+    partialPan_20.setValue(0.0);
+    addAndMakeVisible(partialPan_20);
+
+    partialPan_21.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_21.setRange(-1.0, 1.0, 0.001);
+    partialPan_21.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_21.setPopupDisplayEnabled(true, this);
+    partialPan_21.setValue(0.0);
+    addAndMakeVisible(partialPan_21);
+
+    partialPan_22.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_22.setRange(-1.0, 1.0, 0.001);
+    partialPan_22.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_22.setPopupDisplayEnabled(true, this);
+    partialPan_22.setValue(0.0);
+    addAndMakeVisible(partialPan_22);
+
+    partialPan_23.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_23.setRange(-1.0, 1.0, 0.001);
+    partialPan_23.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_23.setPopupDisplayEnabled(true, this);
+    partialPan_23.setValue(0.0);
+    addAndMakeVisible(partialPan_23);
+
+    partialPan_24.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_24.setRange(-1.0, 1.0, 0.001);
+    partialPan_24.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_24.setPopupDisplayEnabled(true, this);
+    partialPan_24.setValue(0.0);
+    addAndMakeVisible(partialPan_24);
+
+    partialPan_25.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_25.setRange(-1.0, 1.0, 0.001);
+    partialPan_25.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_25.setPopupDisplayEnabled(true, this);
+    partialPan_25.setValue(0.0);
+    addAndMakeVisible(partialPan_25);
+
+    partialPan_26.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_26.setRange(-1.0, 1.0, 0.001);
+    partialPan_26.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_26.setPopupDisplayEnabled(true, this);
+    partialPan_26.setValue(0.0);
+    addAndMakeVisible(partialPan_26);
+
+    partialPan_27.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_27.setRange(-1.0, 1.0, 0.001);
+    partialPan_27.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_27.setPopupDisplayEnabled(true, this);
+    partialPan_27.setValue(0.0);
+    addAndMakeVisible(partialPan_27);
+
+    partialPan_28.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_28.setRange(-1.0, 1.0, 0.001);
+    partialPan_28.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_28.setPopupDisplayEnabled(true, this);
+    partialPan_28.setValue(0.0);
+    addAndMakeVisible(partialPan_28);
+
+    partialPan_29.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_29.setRange(-1.0, 1.0, 0.001);
+    partialPan_29.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_29.setPopupDisplayEnabled(true, this);
+    partialPan_29.setValue(0.0);
+    addAndMakeVisible(partialPan_29);
+
+    partialPan_30.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_30.setRange(-1.0, 1.0, 0.001);
+    partialPan_30.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_30.setPopupDisplayEnabled(true, this);
+    partialPan_30.setValue(0.0);
+    addAndMakeVisible(partialPan_30);
+
+    partialPan_31.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_31.setRange(-1.0, 1.0, 0.001);
+    partialPan_31.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_31.setPopupDisplayEnabled(true, this);
+    partialPan_31.setValue(0.0);
+    addAndMakeVisible(partialPan_31);
+
+    partialPan_32.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    partialPan_32.setRange(-1.0, 1.0, 0.001);
+    partialPan_32.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    partialPan_32.setPopupDisplayEnabled(true, this);
+    partialPan_32.setValue(0.0);
+    addAndMakeVisible(partialPan_32);
 
     globalAttack.addListener(this);
     globalDecay.addListener(this);
@@ -613,10 +844,42 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialTune_30.addListener(this);
     partialTune_31.addListener(this);
     partialTune_32.addListener(this);
+    partialPan_1.addListener(this);
+    partialPan_2.addListener(this);
+    partialPan_3.addListener(this);
+    partialPan_4.addListener(this);
+    partialPan_5.addListener(this);
+    partialPan_6.addListener(this);
+    partialPan_7.addListener(this);
+    partialPan_8.addListener(this);
+    partialPan_9.addListener(this);
+    partialPan_10.addListener(this);
+    partialPan_11.addListener(this);
+    partialPan_12.addListener(this);
+    partialPan_13.addListener(this);
+    partialPan_14.addListener(this);
+    partialPan_15.addListener(this);
+    partialPan_16.addListener(this);
+    partialPan_17.addListener(this);
+    partialPan_18.addListener(this);
+    partialPan_19.addListener(this);
+    partialPan_20.addListener(this);
+    partialPan_21.addListener(this);
+    partialPan_22.addListener(this);
+    partialPan_23.addListener(this);
+    partialPan_24.addListener(this);
+    partialPan_25.addListener(this);
+    partialPan_26.addListener(this);
+    partialPan_27.addListener(this);
+    partialPan_28.addListener(this);
+    partialPan_29.addListener(this);
+    partialPan_30.addListener(this);
+    partialPan_31.addListener(this);
+    partialPan_32.addListener(this);
 
     timerCallback();
     startTimer(50);
-    setSize (910, 300);
+    setSize (910, 310);
 }
 
 PlusAudioProcessorEditor::~PlusAudioProcessorEditor()
@@ -633,14 +896,19 @@ void PlusAudioProcessorEditor::paint (Graphics& g)
     g.drawFittedText ("Stretch", 120, 0, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Env", 180, 0, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Partial Levels", 250, 0, 640, 30, Justification::centred, 1);
+    g.drawFittedText ("Tune", 200, 238, 60, 30, Justification::centred, 1);
+    g.drawFittedText ("Pan", 200, 268, 60, 30, Justification::centred, 1);
 }
 
 void PlusAudioProcessorEditor::resized()
 {
     int topRowHeight = 200;
     int topRowTop = 30;
-    int tuneRowTop = 240;
+    int tuneRowTop = 245;
+    int panRowTop = 275;
     int tuneRowHeight = 20;
+    int panRowHeight = 20;
+
     globalAttack.setBounds (20, topRowTop, 20, topRowHeight);
     globalDecay.setBounds (40, topRowTop, 20, topRowHeight);
     globalSustain.setBounds (60, topRowTop, 20, topRowHeight);
@@ -713,6 +981,38 @@ void PlusAudioProcessorEditor::resized()
     partialTune_30.setBounds (830, tuneRowTop, 20, tuneRowHeight);
     partialTune_31.setBounds (850, tuneRowTop, 20, tuneRowHeight);
     partialTune_32.setBounds (870, tuneRowTop, 20, tuneRowHeight);
+    partialPan_1.setBounds (250, panRowTop, 20, panRowHeight);
+    partialPan_2.setBounds (270, panRowTop, 20, panRowHeight);
+    partialPan_3.setBounds (290, panRowTop, 20, panRowHeight);
+    partialPan_4.setBounds (310, panRowTop, 20, panRowHeight);
+    partialPan_5.setBounds (330, panRowTop, 20, panRowHeight);
+    partialPan_6.setBounds (350, panRowTop, 20, panRowHeight);
+    partialPan_7.setBounds (370, panRowTop, 20, panRowHeight);
+    partialPan_8.setBounds (390, panRowTop, 20, panRowHeight);
+    partialPan_9.setBounds (410, panRowTop, 20, panRowHeight);
+    partialPan_10.setBounds (430, panRowTop, 20, panRowHeight);
+    partialPan_11.setBounds (450, panRowTop, 20, panRowHeight);
+    partialPan_12.setBounds (470, panRowTop, 20, panRowHeight);
+    partialPan_13.setBounds (490, panRowTop, 20, panRowHeight);
+    partialPan_14.setBounds (510, panRowTop, 20, panRowHeight);
+    partialPan_15.setBounds (530, panRowTop, 20, panRowHeight);
+    partialPan_16.setBounds (550, panRowTop, 20, panRowHeight);
+    partialPan_17.setBounds (570, panRowTop, 20, panRowHeight);
+    partialPan_18.setBounds (590, panRowTop, 20, panRowHeight);
+    partialPan_19.setBounds (610, panRowTop, 20, panRowHeight);
+    partialPan_20.setBounds (630, panRowTop, 20, panRowHeight);
+    partialPan_21.setBounds (650, panRowTop, 20, panRowHeight);
+    partialPan_22.setBounds (670, panRowTop, 20, panRowHeight);
+    partialPan_23.setBounds (690, panRowTop, 20, panRowHeight);
+    partialPan_24.setBounds (710, panRowTop, 20, panRowHeight);
+    partialPan_25.setBounds (730, panRowTop, 20, panRowHeight);
+    partialPan_26.setBounds (750, panRowTop, 20, panRowHeight);
+    partialPan_27.setBounds (770, panRowTop, 20, panRowHeight);
+    partialPan_28.setBounds (790, panRowTop, 20, panRowHeight);
+    partialPan_29.setBounds (810, panRowTop, 20, panRowHeight);
+    partialPan_30.setBounds (830, panRowTop, 20, panRowHeight);
+    partialPan_31.setBounds (850, panRowTop, 20, panRowHeight);
+    partialPan_32.setBounds (870, panRowTop, 20, panRowHeight);
 }
 
 void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
@@ -864,6 +1164,71 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
         processor.getFloatParam(PARTIAL_TUNE_31)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialTune_32)
         processor.getFloatParam(PARTIAL_TUNE_32)->updateProcessorAndHostFromUi(slider->getValue());
+
+    if (slider == &partialPan_1)
+        processor.getFloatParam(PARTIAL_PAN_1)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_2)
+        processor.getFloatParam(PARTIAL_PAN_2)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_3)
+        processor.getFloatParam(PARTIAL_PAN_3)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_4)
+        processor.getFloatParam(PARTIAL_PAN_4)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_5)
+        processor.getFloatParam(PARTIAL_PAN_5)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_6)
+        processor.getFloatParam(PARTIAL_PAN_6)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_7)
+        processor.getFloatParam(PARTIAL_PAN_7)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_8)
+        processor.getFloatParam(PARTIAL_PAN_8)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_9)
+        processor.getFloatParam(PARTIAL_PAN_9)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_10)
+        processor.getFloatParam(PARTIAL_PAN_10)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_11)
+        processor.getFloatParam(PARTIAL_PAN_11)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_12)
+        processor.getFloatParam(PARTIAL_PAN_12)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_13)
+        processor.getFloatParam(PARTIAL_PAN_13)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_14)
+        processor.getFloatParam(PARTIAL_PAN_14)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_15)
+        processor.getFloatParam(PARTIAL_PAN_15)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_16)
+        processor.getFloatParam(PARTIAL_PAN_16)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_17)
+        processor.getFloatParam(PARTIAL_PAN_17)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_18)
+        processor.getFloatParam(PARTIAL_PAN_18)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_19)
+        processor.getFloatParam(PARTIAL_PAN_19)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_20)
+        processor.getFloatParam(PARTIAL_PAN_20)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_21)
+        processor.getFloatParam(PARTIAL_PAN_21)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_22)
+        processor.getFloatParam(PARTIAL_PAN_22)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_23)
+        processor.getFloatParam(PARTIAL_PAN_23)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_24)
+        processor.getFloatParam(PARTIAL_PAN_24)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_25)
+        processor.getFloatParam(PARTIAL_PAN_25)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_26)
+        processor.getFloatParam(PARTIAL_PAN_26)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_27)
+        processor.getFloatParam(PARTIAL_PAN_27)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_28)
+        processor.getFloatParam(PARTIAL_PAN_28)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_29)
+        processor.getFloatParam(PARTIAL_PAN_29)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_30)
+        processor.getFloatParam(PARTIAL_PAN_30)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_31)
+        processor.getFloatParam(PARTIAL_PAN_31)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialPan_32)
+        processor.getFloatParam(PARTIAL_PAN_32)->updateProcessorAndHostFromUi(slider->getValue());
 
 }
 
@@ -1155,5 +1520,133 @@ void PlusAudioProcessorEditor::timerCallback(){
     param=processor.getFloatParam(PARTIAL_TUNE_32);
     if (&partialTune_32 && param->updateUiRequested()){
         partialTune_32.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_1);
+    if (&partialPan_1 && param->updateUiRequested()){
+        partialPan_1.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_2);
+    if (&partialPan_2 && param->updateUiRequested()){
+        partialPan_2.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_3);
+    if (&partialPan_3 && param->updateUiRequested()){
+        partialPan_3.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_4);
+    if (&partialPan_4 && param->updateUiRequested()){
+        partialPan_4.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_5);
+    if (&partialPan_5 && param->updateUiRequested()){
+        partialPan_5.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_6);
+    if (&partialPan_6 && param->updateUiRequested()){
+        partialPan_6.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_7);
+    if (&partialPan_7 && param->updateUiRequested()){
+        partialPan_7.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_8);
+    if (&partialPan_8 && param->updateUiRequested()){
+        partialPan_8.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_9);
+    if (&partialPan_9 && param->updateUiRequested()){
+        partialPan_9.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_10);
+    if (&partialPan_10 && param->updateUiRequested()){
+        partialPan_10.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_11);
+    if (&partialPan_11 && param->updateUiRequested()){
+        partialPan_11.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_12);
+    if (&partialPan_12 && param->updateUiRequested()){
+        partialPan_12.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_13);
+    if (&partialPan_13 && param->updateUiRequested()){
+        partialPan_13.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_14);
+    if (&partialPan_14 && param->updateUiRequested()){
+        partialPan_14.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_15);
+    if (&partialPan_15 && param->updateUiRequested()){
+        partialPan_15.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_16);
+    if (&partialPan_16 && param->updateUiRequested()){
+        partialPan_16.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_17);
+    if (&partialPan_17 && param->updateUiRequested()){
+        partialPan_17.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_18);
+    if (&partialPan_18 && param->updateUiRequested()){
+        partialPan_18.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_19);
+    if (&partialPan_19 && param->updateUiRequested()){
+        partialPan_19.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_20);
+    if (&partialPan_20 && param->updateUiRequested()){
+        partialPan_20.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_21);
+    if (&partialPan_21 && param->updateUiRequested()){
+        partialPan_21.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_22);
+    if (&partialPan_22 && param->updateUiRequested()){
+        partialPan_22.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_23);
+    if (&partialPan_23 && param->updateUiRequested()){
+        partialPan_23.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_24);
+    if (&partialPan_24 && param->updateUiRequested()){
+        partialPan_24.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_25);
+    if (&partialPan_25 && param->updateUiRequested()){
+        partialPan_25.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_26);
+    if (&partialPan_26 && param->updateUiRequested()){
+        partialPan_26.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_27);
+    if (&partialPan_27 && param->updateUiRequested()){
+        partialPan_27.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_28);
+    if (&partialPan_28 && param->updateUiRequested()){
+        partialPan_28.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_29);
+    if (&partialPan_29 && param->updateUiRequested()){
+        partialPan_29.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_30);
+    if (&partialPan_30 && param->updateUiRequested()){
+        partialPan_30.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_31);
+    if (&partialPan_31 && param->updateUiRequested()){
+        partialPan_31.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_PAN_32);
+    if (&partialPan_32 && param->updateUiRequested()){
+        partialPan_32.setValue (param->uiGet(), dontSendNotification);
     }
 }

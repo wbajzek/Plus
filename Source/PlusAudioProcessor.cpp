@@ -77,6 +77,38 @@ PlusAudioProcessor::PlusAudioProcessor()
     parameters[PARTIAL_TUNE_30] = 0.0;
     parameters[PARTIAL_TUNE_31] = 0.0;
     parameters[PARTIAL_TUNE_32] = 0.0;
+    parameters[PARTIAL_PAN_1] = 0.0;
+    parameters[PARTIAL_PAN_2] = 0.0;
+    parameters[PARTIAL_PAN_3] = 0.0;
+    parameters[PARTIAL_PAN_4] = 0.0;
+    parameters[PARTIAL_PAN_5] = 0.0;
+    parameters[PARTIAL_PAN_6] = 0.0;
+    parameters[PARTIAL_PAN_7] = 0.0;
+    parameters[PARTIAL_PAN_8] = 0.0;
+    parameters[PARTIAL_PAN_9] = 0.0;
+    parameters[PARTIAL_PAN_10] = 0.0;
+    parameters[PARTIAL_PAN_11] = 0.0;
+    parameters[PARTIAL_PAN_12] = 0.0;
+    parameters[PARTIAL_PAN_13] = 0.0;
+    parameters[PARTIAL_PAN_14] = 0.0;
+    parameters[PARTIAL_PAN_15] = 0.0;
+    parameters[PARTIAL_PAN_16] = 0.0;
+    parameters[PARTIAL_PAN_17] = 0.0;
+    parameters[PARTIAL_PAN_18] = 0.0;
+    parameters[PARTIAL_PAN_19] = 0.0;
+    parameters[PARTIAL_PAN_20] = 0.0;
+    parameters[PARTIAL_PAN_21] = 0.0;
+    parameters[PARTIAL_PAN_22] = 0.0;
+    parameters[PARTIAL_PAN_23] = 0.0;
+    parameters[PARTIAL_PAN_24] = 0.0;
+    parameters[PARTIAL_PAN_25] = 0.0;
+    parameters[PARTIAL_PAN_26] = 0.0;
+    parameters[PARTIAL_PAN_27] = 0.0;
+    parameters[PARTIAL_PAN_28] = 0.0;
+    parameters[PARTIAL_PAN_29] = 0.0;
+    parameters[PARTIAL_PAN_30] = 0.0;
+    parameters[PARTIAL_PAN_31] = 0.0;
+    parameters[PARTIAL_PAN_32] = 0.0;
 
     initAllParameters();
 
@@ -161,6 +193,38 @@ void PlusAudioProcessor::initParameters()
     addFloatParam(PARTIAL_TUNE_30, "Partial_Tune30", true, SAVE, &parameters[PARTIAL_TUNE_30], -1.0, 1.0);
     addFloatParam(PARTIAL_TUNE_31, "Partial_Tune31", true, SAVE, &parameters[PARTIAL_TUNE_31], -1.0, 1.0);
     addFloatParam(PARTIAL_TUNE_32, "Partial_Tune32", true, SAVE, &parameters[PARTIAL_TUNE_32], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_1, "Partial_Pan1", true, SAVE, &parameters[PARTIAL_PAN_1], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_2, "Partial_Pan2", true, SAVE, &parameters[PARTIAL_PAN_2], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_3, "Partial_Pan3", true, SAVE, &parameters[PARTIAL_PAN_3], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_4, "Partial_Pan4", true, SAVE, &parameters[PARTIAL_PAN_4], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_5, "Partial_Pan5", true, SAVE, &parameters[PARTIAL_PAN_5], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_6, "Partial_Pan6", true, SAVE, &parameters[PARTIAL_PAN_6], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_7, "Partial_Pan7", true, SAVE, &parameters[PARTIAL_PAN_7], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_8, "Partial_Pan8", true, SAVE, &parameters[PARTIAL_PAN_8], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_9, "Partial_Pan9", true, SAVE, &parameters[PARTIAL_PAN_9], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_10, "Partial_Pan10", true, SAVE, &parameters[PARTIAL_PAN_10], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_11, "Partial_Pan11", true, SAVE, &parameters[PARTIAL_PAN_11], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_12, "Partial_Pan12", true, SAVE, &parameters[PARTIAL_PAN_12], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_13, "Partial_Pan13", true, SAVE, &parameters[PARTIAL_PAN_13], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_14, "Partial_Pan14", true, SAVE, &parameters[PARTIAL_PAN_14], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_15, "Partial_Pan15", true, SAVE, &parameters[PARTIAL_PAN_15], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_16, "Partial_Pan16", true, SAVE, &parameters[PARTIAL_PAN_16], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_17, "Partial_Pan17", true, SAVE, &parameters[PARTIAL_PAN_17], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_18, "Partial_Pan18", true, SAVE, &parameters[PARTIAL_PAN_18], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_19, "Partial_Pan19", true, SAVE, &parameters[PARTIAL_PAN_19], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_20, "Partial_Pan20", true, SAVE, &parameters[PARTIAL_PAN_20], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_21, "Partial_Pan21", true, SAVE, &parameters[PARTIAL_PAN_21], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_22, "Partial_Pan22", true, SAVE, &parameters[PARTIAL_PAN_22], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_23, "Partial_Pan23", true, SAVE, &parameters[PARTIAL_PAN_23], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_24, "Partial_Pan24", true, SAVE, &parameters[PARTIAL_PAN_24], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_25, "Partial_Pan25", true, SAVE, &parameters[PARTIAL_PAN_25], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_26, "Partial_Pan26", true, SAVE, &parameters[PARTIAL_PAN_26], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_27, "Partial_Pan27", true, SAVE, &parameters[PARTIAL_PAN_27], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_28, "Partial_Pan28", true, SAVE, &parameters[PARTIAL_PAN_28], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_29, "Partial_Pan29", true, SAVE, &parameters[PARTIAL_PAN_29], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_30, "Partial_Pan30", true, SAVE, &parameters[PARTIAL_PAN_30], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_31, "Partial_Pan31", true, SAVE, &parameters[PARTIAL_PAN_31], -1.0, 1.0);
+    addFloatParam(PARTIAL_PAN_32, "Partial_Pan32", true, SAVE, &parameters[PARTIAL_PAN_32], -1.0, 1.0);
 }
 
 PlusAudioProcessor::~PlusAudioProcessor()
@@ -298,6 +362,38 @@ void PlusAudioProcessor::runAfterParamGroupUpdate()
     getParam(PARTIAL_TUNE_30)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(PARTIAL_TUNE_31)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(PARTIAL_TUNE_32)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_1)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_2)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_3)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_4)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_5)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_6)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_7)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_8)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_9)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_10)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_11)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_12)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_13)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_14)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_15)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_16)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_17)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_18)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_19)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_20)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_21)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_22)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_23)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_24)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_25)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_26)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_27)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_28)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_29)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_30)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_31)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(PARTIAL_PAN_32)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
 }
 
 const String PlusAudioProcessor::getParameterText (int index)

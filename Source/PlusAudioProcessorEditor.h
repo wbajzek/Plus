@@ -107,6 +107,38 @@ private:
     Slider partialTune_30;
     Slider partialTune_31;
     Slider partialTune_32;
+    Slider partialPan_1;
+    Slider partialPan_2;
+    Slider partialPan_3;
+    Slider partialPan_4;
+    Slider partialPan_5;
+    Slider partialPan_6;
+    Slider partialPan_7;
+    Slider partialPan_8;
+    Slider partialPan_9;
+    Slider partialPan_10;
+    Slider partialPan_11;
+    Slider partialPan_12;
+    Slider partialPan_13;
+    Slider partialPan_14;
+    Slider partialPan_15;
+    Slider partialPan_16;
+    Slider partialPan_17;
+    Slider partialPan_18;
+    Slider partialPan_19;
+    Slider partialPan_20;
+    Slider partialPan_21;
+    Slider partialPan_22;
+    Slider partialPan_23;
+    Slider partialPan_24;
+    Slider partialPan_25;
+    Slider partialPan_26;
+    Slider partialPan_27;
+    Slider partialPan_28;
+    Slider partialPan_29;
+    Slider partialPan_30;
+    Slider partialPan_31;
+    Slider partialPan_32;
     Slider partialLevelEnvAmt;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlusAudioProcessorEditor)

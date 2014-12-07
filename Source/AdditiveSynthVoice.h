@@ -88,6 +88,42 @@ const int PartialTuneToParamMapping[numPartials] =
     PARTIAL_TUNE_32,
 };
 
+const int PartialPanToParamMapping[numPartials] =
+{
+    PARTIAL_PAN_1,
+    PARTIAL_PAN_2,
+    PARTIAL_PAN_3,
+    PARTIAL_PAN_4,
+    PARTIAL_PAN_5,
+    PARTIAL_PAN_6,
+    PARTIAL_PAN_7,
+    PARTIAL_PAN_8,
+    PARTIAL_PAN_9,
+    PARTIAL_PAN_10,
+    PARTIAL_PAN_11,
+    PARTIAL_PAN_12,
+    PARTIAL_PAN_13,
+    PARTIAL_PAN_14,
+    PARTIAL_PAN_15,
+    PARTIAL_PAN_16,
+    PARTIAL_PAN_17,
+    PARTIAL_PAN_18,
+    PARTIAL_PAN_19,
+    PARTIAL_PAN_20,
+    PARTIAL_PAN_21,
+    PARTIAL_PAN_22,
+    PARTIAL_PAN_23,
+    PARTIAL_PAN_24,
+    PARTIAL_PAN_25,
+    PARTIAL_PAN_26,
+    PARTIAL_PAN_27,
+    PARTIAL_PAN_28,
+    PARTIAL_PAN_29,
+    PARTIAL_PAN_30,
+    PARTIAL_PAN_31,
+    PARTIAL_PAN_32,
+};
+
 
 class AdditiveSynthVoice : public SynthesiserVoice
 {
