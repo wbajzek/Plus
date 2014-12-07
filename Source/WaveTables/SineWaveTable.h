@@ -10,9 +10,7 @@
 
 #ifndef SINEWAVETABLE_H_INCLUDED
 #define SINEWAVETABLE_H_INCLUDED
-const unsigned int waveTableLength = 32768;
-const unsigned long i32waveTableLength = waveTableLength << 16;
-const double waveTable[] = {
+const double sineWaveTable[] = {
 0.0,
 0.0001917475973107033,
 0.00038349518757139556,

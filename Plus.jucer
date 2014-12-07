@@ -12,10 +12,15 @@
               companyName="William Bajzek">
   <MAINGROUP id="tjGPtr" name="Plus">
     <GROUP id="{E9E2DA2B-33FE-5C6C-5697-C0ACFD41AA73}" name="Utils">
-      <FILE id="D2APEW" name="sine.rb" compile="0" resource="0" file="Utils/sine.rb"/>
+      <FILE id="muoG3s" name="wavetables.rb" compile="0" resource="1" file="Utils/wavetables.rb"/>
     </GROUP>
     <GROUP id="{400499B6-E5F0-E43E-4081-6377AEF3EFD4}" name="Source">
-      <FILE id="Rhx0FX" name="SineWavetable.h" compile="0" resource="0" file="Source/SineWavetable.h"/>
+      <GROUP id="{1C9A9DCF-3246-3101-8F3A-47D424470EC0}" name="WaveTables">
+        <FILE id="UcX3Bm" name="RampWaveTable.h" compile="0" resource="0" file="Source/WaveTables/RampWaveTable.h"/>
+        <FILE id="XKj4GL" name="SawWaveTable.h" compile="0" resource="0" file="Source/WaveTables/SawWaveTable.h"/>
+        <FILE id="JEuN5l" name="SineWaveTable.h" compile="0" resource="0" file="Source/WaveTables/SineWaveTable.h"/>
+        <FILE id="sLeiNE" name="WaveTables.h" compile="0" resource="0" file="Source/WaveTables/WaveTables.h"/>
+      </GROUP>
       <FILE id="XV2XfX" name="AdditiveSynthesiser.cpp" compile="1" resource="0"
             file="Source/AdditiveSynthesiser.cpp"/>
       <FILE id="gLgRyK" name="AdditiveSynthesiser.h" compile="0" resource="0"

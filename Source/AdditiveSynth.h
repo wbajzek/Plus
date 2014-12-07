@@ -162,7 +162,7 @@ enum MidiControls {
 #include "PluginParameters.h"
 #include "AdditiveSynthSound.h"
 #include "AdditiveSynthesiser.h"
-#include "SineWavetable.h"
+#include "WaveTables.h"
 #include "AdditiveSynthVoice.h"
 
 #endif
