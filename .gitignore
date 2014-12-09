@@ -2,3 +2,4 @@ JuceLibraryCode
 Builds/MacOSX/build
 Builds/MacOSX/Plus.xcodeproj/xcuserdata/
 Builds/MacOSX/Plus.xcodeproj/project.xcworkspace/xcuserdata/
+Utils/scl
