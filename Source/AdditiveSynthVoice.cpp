@@ -85,7 +85,7 @@ void AdditiveSynthVoice::controllerMoved (const int controllerNumber, const int 
 
 void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int startSample, int numSamples)
 {
-    if (envLevel > 0.000)
+    if (envLevel > 0.000 && sampleRate > 0 && nyquist > 0)
     {
         const float stretchEnvAmtInc = localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
 
@@ -106,8 +106,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                     if (i > 0)
                     {
                         partialFreq += (localFreq * ((float)i + stretch));
-                        if (i > 0)
-                            partialFreq += partialFreq * stretch * stretchEnvAmt;
+                        partialFreq += partialFreq * stretch * stretchEnvAmt;
                     }
                     if (20 < partialFreq && partialFreq < nyquist)
                     {
@@ -227,6 +226,7 @@ bool AdditiveSynthVoice::isVoiceActive() const
 
 void AdditiveSynthVoice::tick()
 {
+    setCurrentPlaybackSampleRate(getSampleRate());
     getAmplitude();
 
     switch (*localLfoShape) {
@@ -246,9 +246,9 @@ void AdditiveSynthVoice::tick()
             break;
     }
     
-    if ((lfoIndex += (frqTI * localParameters[LFO_FREQ])) >= waveTableLength)
+    lfoIndex += frqTI * localParameters[LFO_FREQ];
+    while (lfoIndex >= waveTableLength)
         lfoIndex -= waveTableLength;
 
     ++samplesSinceTrigger;
 }
-

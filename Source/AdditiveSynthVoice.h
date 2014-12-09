@@ -181,15 +181,14 @@ public:
     void renderNextBlock (AudioSampleBuffer& outputBuffer, int startSample, int numSamples);
 
     void aftertouchChanged (int newAftertouchValue);
-
+    
     void setCurrentPlaybackSampleRate (double newRate);
-
+    
     bool isPlayingChannel (int midiChannel) const;
 
     bool isVoiceActive() const;
 
     float getAmplitude();
-
 
 private:
     
@@ -201,9 +200,9 @@ private:
     double envLevel = 0.0;
     double lfoLevel = 0.0;
     double releaseEnvLevel = 0.0;
-    float nyquist;
-    float sampleRate;
-    float frqTI;
+    double nyquist;
+    double sampleRate;
+    double frqTI;
     int envelopeState = 0;
     float modWheel = 0.0;
 

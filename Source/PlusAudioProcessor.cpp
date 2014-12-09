@@ -164,7 +164,10 @@ void PlusAudioProcessor::initVoices()
     
     for (int i = 0; i < numberOfVoices; i++)
         synth.addVoice(new AdditiveSynthVoice(parameters, &lfoShape));
-    Logger::writeToLog(String(synth.getNumVoices()));
+    
+    // make sure all the voices know the current sample rate
+    double sampleRate = synth.getSampleRate();
+    synth.setCurrentPlaybackSampleRate (sampleRate);
 }
 
 void PlusAudioProcessor::initParameters()
@@ -532,7 +535,7 @@ void PlusAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& mi
     buffer.clear();
     int numSamples = buffer.getNumSamples();
     keyboardState.processNextMidiBuffer(midiMessages, 0, numSamples, true);
-
+    synth.setCurrentPlaybackSampleRate (synth.getSampleRate());
     synth.renderNextBlock(buffer, midiMessages, 0, numSamples);
 }
 
