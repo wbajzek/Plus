@@ -40,3 +40,13 @@ SynthesiserVoice* AdditiveSynthesiser::findVoiceToSteal (SynthesiserSound* sound
     // steal the oldest note
     return usableVoices[voices.size()-1];
 }
+
+void AdditiveSynthesiser::refreshCurrentPlaybackSampleRate ()
+{
+    double sampleRate = getSampleRate();
+    
+    allNotesOff (0, false);
+
+    for (int i = voices.size(); --i >= 0;)
+        voices.getUnchecked (i)->setCurrentPlaybackSampleRate (sampleRate);
+}

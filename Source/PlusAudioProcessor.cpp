@@ -168,8 +168,7 @@ void PlusAudioProcessor::initVoices()
         synth.addVoice(new AdditiveSynthVoice(parameters, &lfoShape, &scale, &scaleRoot));
     
     // make sure all the voices know the current sample rate
-    double sampleRate = synth.getSampleRate();
-    synth.setCurrentPlaybackSampleRate (sampleRate);
+    synth.refreshCurrentPlaybackSampleRate ();
 }
 
 void PlusAudioProcessor::initParameters()

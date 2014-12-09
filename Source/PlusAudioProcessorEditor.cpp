@@ -1543,7 +1543,7 @@ void PlusAudioProcessorEditor::comboBoxChanged (ComboBox* comboBox)
     if (comboBox == &numberOfVoices)
     {
         processor.getIntParam(NUMBER_OF_VOICES)->updateProcessorAndHostFromUi(comboBox->getSelectedId());
-//        processor.initVoices();
+        processor.initVoices();
     }
     if (comboBox == &scale)
         processor.getIntParam(SCALE)->updateProcessorAndHostFromUi(comboBox->getSelectedId() - 1);
