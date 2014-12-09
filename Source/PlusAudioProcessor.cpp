@@ -370,7 +370,7 @@ void PlusAudioProcessor::changeProgramName (int index, const String& newName)
 
 void PlusAudioProcessor::runAfterParamChange(int paramIndex,UpdateFromFlags updateFromFlag)
 {
-  getParam(paramIndex)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(paramIndex)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
 }
 
 void PlusAudioProcessor::runAfterParamGroupUpdate()
