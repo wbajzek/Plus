@@ -144,6 +144,8 @@ PlusAudioProcessor::PlusAudioProcessor()
     parameters[LFO_FREQ] = 20.0;
     parameters[LFO_SHAPE] = SINE_WAVE_TABLE;
     parameters[NUMBER_OF_VOICES] = 8;
+    parameters[SCALE] = 1;
+    parameters[SCALE_ROOT] = 1;
 
     initAllParameters();
     initVoices();
@@ -163,7 +165,7 @@ void PlusAudioProcessor::initVoices()
     synth.clearVoices();
     
     for (int i = 0; i < numberOfVoices; i++)
-        synth.addVoice(new AdditiveSynthVoice(parameters, &lfoShape));
+        synth.addVoice(new AdditiveSynthVoice(parameters, &lfoShape, &scale, &scaleRoot));
     
     // make sure all the voices know the current sample rate
     double sampleRate = synth.getSampleRate();
@@ -311,6 +313,8 @@ void PlusAudioProcessor::initParameters()
     addFloatParam(LFO_FREQ, "Lfo_Frequency", true, SAVE, &parameters[LFO_FREQ], 0.0, 1000.0);
     addIntParam(LFO_SHAPE, "Lfo_Shape", true, SAVE, &lfoShape, SINE_WAVE_TABLE, NUMBER_OF_WAVE_TABLES);
     addIntParam(NUMBER_OF_VOICES, "Number_Of_Voices", true, SAVE, &numberOfVoices, 1, 20);
+    addIntParam(SCALE, "Scale", true, SAVE, &scale, 1, numberOfScales+1);
+    addIntParam(SCALE_ROOT, "Scale_Root", true, SAVE, &scaleRoot, 1, 12);
 }
 
 
@@ -366,7 +370,6 @@ void PlusAudioProcessor::changeProgramName (int index, const String& newName)
 
 void PlusAudioProcessor::runAfterParamChange(int paramIndex,UpdateFromFlags updateFromFlag)
 {
-  runAfterParamGroupUpdate();
   getParam(paramIndex)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
 }
 
@@ -511,6 +514,8 @@ void PlusAudioProcessor::runAfterParamGroupUpdate()
     getParam(LFO_FREQ)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(LFO_SHAPE)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
     getParam(NUMBER_OF_VOICES)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(SCALE)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    getParam(SCALE_ROOT)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
 }
 
 const String PlusAudioProcessor::getParameterText (int index)

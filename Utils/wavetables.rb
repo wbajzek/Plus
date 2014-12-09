@@ -19,7 +19,7 @@ const unsigned int waveTableLength = #{wavetable_length.to_i};
 const unsigned long i32waveTableLength = waveTableLength << 16;
 
 enum WaveTables {
-  SINE_WAVE_TABLE = 1,
+  SINE_WAVE_TABLE = 0,
   TRIANGLE_WAVE_TABLE,
   SAW_WAVE_TABLE,
   RAMP_WAVE_TABLE,

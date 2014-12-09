@@ -164,7 +164,7 @@ const int PartialLfoAmtToParamMapping[numPartials] =
 class AdditiveSynthVoice : public SynthesiserVoice
 {
 public:
-    AdditiveSynthVoice(float* parameters, int* lfoShape);
+    AdditiveSynthVoice(float* parameters, int* lfoShape, int* scale, int* scaleRoot);
     ~AdditiveSynthVoice();
     float getParameter(int index);
 
@@ -194,6 +194,8 @@ private:
     
     float* localParameters;
     int* localLfoShape;
+    int* localScale;
+    int* localScaleRoot;
     double freq = 110.0;
     int noteNumber;
     double velocity = 0.0;
@@ -231,6 +233,13 @@ private:
         return (in / ((oldMax - oldMin) / (newMax - newMin))) + newMin;
     }
 
+    Scale getScale() {
+        return scales[*localScale - 1];
+    }
+    
+    int getScaleRoot() {
+        return *localScaleRoot - 1;
+    }
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AdditiveSynthVoice);
 };

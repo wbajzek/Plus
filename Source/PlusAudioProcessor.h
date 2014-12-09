@@ -64,6 +64,8 @@ private:
     float parameters[NUMBER_OF_PARAMETERS];
     int lfoShape = 0;
     int numberOfVoices = 8;
+    int scale = 1;
+    int scaleRoot = 1;
     AdditiveSynthesiser synth;
     MidiKeyboardState keyboardState;
 

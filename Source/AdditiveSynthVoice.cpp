@@ -8,10 +8,12 @@
 
 #include "AdditiveSynth.h"
 
-AdditiveSynthVoice::AdditiveSynthVoice(float* parameters, int* lfoShape)
+AdditiveSynthVoice::AdditiveSynthVoice(float* parameters, int* lfoShape, int* scale, int* scaleRoot)
 {
     localParameters = parameters;
     localLfoShape = lfoShape;
+    localScale = scale;
+    localScaleRoot = scaleRoot;
 }
 
 AdditiveSynthVoice::~AdditiveSynthVoice()
@@ -64,7 +66,11 @@ void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
 float AdditiveSynthVoice::calculateFrequency(int currentPitchWheelPosition)
 {
     float pbCents = ( (float)currentPitchWheelPosition / 16383.0) * (400.0) + -200.0;
-    return MidiMessage::getMidiNoteInHertz(noteNumber) * pow(2, pbCents/1200);
+    float baseFreq = MidiMessage::getMidiNoteInHertz(noteNumber) * pow(2, pbCents/1200);
+    Scale scale = getScale();
+    int octaveNote = (noteNumber - getScaleRoot()) % 12;
+    float adjustedFreq = baseFreq * scale.offsets[octaveNote];
+    return adjustedFreq;
 }
 
 void AdditiveSynthVoice::pitchWheelMoved (const int currentPitchWheelPosition)

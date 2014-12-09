@@ -153,6 +153,8 @@ enum Params
     LFO_FREQ,
     LFO_SHAPE,
     NUMBER_OF_VOICES,
+    SCALE,
+    SCALE_ROOT,
     NUMBER_OF_PARAMETERS
 };
 
@@ -165,6 +167,7 @@ enum MidiControls {
 #include "AdditiveSynthSound.h"
 #include "AdditiveSynthesiser.h"
 #include "WaveTables.h"
+#include "Scales.h"
 #include "AdditiveSynthVoice.h"
 
 #endif

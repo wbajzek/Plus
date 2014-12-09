@@ -52,10 +52,10 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     lfoFrequency.setValue(1.0);
     addAndMakeVisible(lfoFrequency);
 
-    lfoShape.addItem("Sine",SINE_WAVE_TABLE);
-    lfoShape.addItem("Triangle",TRIANGLE_WAVE_TABLE);
-    lfoShape.addItem("Saw",SAW_WAVE_TABLE);
-    lfoShape.addItem("Ramp",RAMP_WAVE_TABLE);
+    lfoShape.addItem("Sine",SINE_WAVE_TABLE + 1);
+    lfoShape.addItem("Triangle",TRIANGLE_WAVE_TABLE + 1);
+    lfoShape.addItem("Saw",SAW_WAVE_TABLE + 1);
+    lfoShape.addItem("Ramp",RAMP_WAVE_TABLE + 1);
     lfoShape.setWantsKeyboardFocus(false);
     lfoShape.setItemEnabled(0, false);
     lfoShape.setEditableText(false);
@@ -76,6 +76,34 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     numberOfVoices.setEditableText(false);
     numberOfVoices.setSelectedId(8);
     addAndMakeVisible(numberOfVoices);
+
+    for (int i = 0; i < numberOfScales; i++)
+    {
+        jassert(scales[i].description.isNotEmpty());
+        scale.addItem(scales[i].description, i+1);
+    }
+    scale.setWantsKeyboardFocus(false);
+    scale.setEditableText(false);
+    scale.setSelectedId(1);
+    addAndMakeVisible(scale);
+    
+    scaleRoot.addItem("C",1);
+    scaleRoot.addItem("C#",2);
+    scaleRoot.addItem("D",3);
+    scaleRoot.addItem("D#",4);
+    scaleRoot.addItem("E",5);
+    scaleRoot.addItem("F",6);
+    scaleRoot.addItem("F#",7);
+    scaleRoot.addItem("G",8);
+    scaleRoot.addItem("G#",9);
+    scaleRoot.addItem("A",10);
+    scaleRoot.addItem("A#",11);
+    scaleRoot.addItem("B",12);
+    scaleRoot.setWantsKeyboardFocus(false);
+    scaleRoot.setItemEnabled(0, false);
+    scaleRoot.setEditableText(false);
+    scaleRoot.setSelectedId(1);
+    addAndMakeVisible(scaleRoot);
 
     partialStretch.setSliderStyle(Slider::LinearBarVertical);
     partialStretch.setRange(-1.0, 1.0, 0.01);
@@ -1043,8 +1071,10 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
 
     lfoFrequency.addListener(this);
     lfoShape.addListener(this);
-
+    
     numberOfVoices.addListener(this);
+    scale.addListener(this);
+    scaleRoot.addListener(this);
 
     partialStretch.addListener(this);
     partialStretchFine.addListener(this);
@@ -1181,7 +1211,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
 
     timerCallback();
     startTimer(50);
-    setSize (910, 340);
+    setSize (910, 370);
 }
 
 PlusAudioProcessorEditor::~PlusAudioProcessorEditor()
@@ -1204,6 +1234,7 @@ void PlusAudioProcessorEditor::paint (Graphics& g)
     g.drawFittedText ("LFO Freq", 20, 238, 60, 30, Justification::centred, 1);
     g.drawFittedText ("LFO Shape", 20, 268, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Voices", 20, 298, 60, 30, Justification::centred, 1);
+    g.drawFittedText ("Scale", 20, 328, 60, 30, Justification::centred, 1);
 }
 
 void PlusAudioProcessorEditor::resized()
@@ -1216,6 +1247,8 @@ void PlusAudioProcessorEditor::resized()
     int tuneRowHeight = 20;
     int panRowTop = 305;
     int panRowHeight = 20;
+    int scaleRowTop = 335;
+    int scaleRowHeight = 20;
 
     globalAttack.setBounds (20, topRowTop, 20, topRowHeight);
     globalDecay.setBounds (40, topRowTop, 20, topRowHeight);
@@ -1356,6 +1389,8 @@ void PlusAudioProcessorEditor::resized()
     lfoFrequency.setBounds (90, lfoRowTop, 20, lfoRowHeight);
     lfoShape.setBounds (90, tuneRowTop, 90, tuneRowHeight);
     numberOfVoices.setBounds (90, panRowTop, 90, panRowHeight);
+    scale.setBounds (90, scaleRowTop, 90, scaleRowHeight);
+    scaleRoot.setBounds (182, scaleRowTop, 60, scaleRowHeight);
 }
 
 void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
@@ -1646,12 +1681,16 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
 void PlusAudioProcessorEditor::comboBoxChanged (ComboBox* comboBox)
 {
     if (comboBox == &lfoShape)
-        processor.getIntParam(LFO_SHAPE)->updateProcessorAndHostFromUi(comboBox->getSelectedId());
+        processor.getIntParam(LFO_SHAPE)->updateProcessorAndHostFromUi(comboBox->getSelectedId() - 1);
     if (comboBox == &numberOfVoices)
     {
         processor.getIntParam(NUMBER_OF_VOICES)->updateProcessorAndHostFromUi(comboBox->getSelectedId());
-        processor.initVoices();
+//        processor.initVoices();
     }
+    if (comboBox == &scale)
+        processor.getIntParam(SCALE)->updateProcessorAndHostFromUi(comboBox->getSelectedId() - 1);
+    if (comboBox == &scaleRoot)
+        processor.getIntParam(SCALE_ROOT)->updateProcessorAndHostFromUi(comboBox->getSelectedId() - 1);
 }
 
 
@@ -2207,10 +2246,18 @@ void PlusAudioProcessorEditor::timerCallback()
     }
     IntParam *intParam= processor.getIntParam(LFO_SHAPE);
     if (&lfoShape && param->updateUiRequested()){
-        lfoShape.setSelectedId(intParam->uiGet(), dontSendNotification);
+        lfoShape.setSelectedId(intParam->uiGet() + 1, dontSendNotification);
     }
     intParam = processor.getIntParam(NUMBER_OF_VOICES);
     if (&numberOfVoices && param->updateUiRequested()){
         numberOfVoices.setSelectedId(intParam->uiGet(), dontSendNotification);
+    }
+    intParam = processor.getIntParam(SCALE);
+    if (&scale && param->updateUiRequested()){
+        scale.setSelectedId(intParam->uiGet() + 1, dontSendNotification);
+    }
+    intParam = processor.getIntParam(SCALE_ROOT);
+    if (&scaleRoot && param->updateUiRequested()){
+        scaleRoot.setSelectedId(intParam->uiGet() + 1, dontSendNotification);
     }
 }
