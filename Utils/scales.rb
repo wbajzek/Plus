@@ -9,8 +9,8 @@ def with_parsed(file, &block)
       lines = f.readlines.map { |l| l.strip }.reject { |l| l.start_with? '!' }
       description, steps, *intervals = lines
       yield description, steps.to_i, intervals
-    rescue
-      puts "scale failed: #{file}"
+    rescue Exception => e
+      puts "scale failed: #{file}: #{ e }"
     end
   end
 end
@@ -49,14 +49,14 @@ files.each do |file|
       intervals.each do |interval|
         note *= (2.0 ** (100.0 / 1200.0))
         adjusted = interpreted(BASE_FREQUENCY.to_f, interval)
-        puts "#{ note } / #{ adjusted }"
         scale[:offsets] << adjusted / note.to_f
       end
       begin
-        scale[:description].encode!(Encoding::ISO_8859_1)
+        scale[:description].scrub!
         scales << scale
-      rescue
-        puts "scale failed: #{scale[:file]}"
+      rescue Exception => e
+        puts "scale failed: #{scale[:file]}: #{ e.message }"
+        puts "  #{scale[:description]}"
       end
     end
   end
@@ -102,7 +102,7 @@ END
     f.write <<END
   {
     #{ scale[:file].inspect },
-    #{ scale[:description].inspect },
+    String(CharPointer_UTF8 (#{ scale[:description].inspect })),
     #{ scale[:steps] },
     { #{ scale[:offsets].join(', ') } }
   },
