@@ -207,11 +207,7 @@ private:
     float modWheel = 0.0;
 
     unsigned long samplesSinceTrigger = 0;
-    float coefficient = 0.0;
-    double minPartialLevel = 0.0;
-    double maxPartialLevel = 0.0;
-    double partialLevels[numPartials] = { 0.0 };
-    double partialStretchAmounts[numPartials] = { 0.0 };
+    
     long stretchedIndices[numPartials] = { 0 };
     unsigned int lfoIndex = 0;
 
@@ -220,6 +216,7 @@ private:
     float sustainLevel = 0.0;
     int release = 0;
     double envIncrement = 0.0;
+    float envCoefficient = 0.0;
 
     float calculateFrequency(int currentPitchWheelPosition);
     void tick();

@@ -40,17 +40,8 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
     sustainLevel = localParameters[SUSTAIN] * velocity;
     release = localParameters[RELEASE] * sampleRate;
 
-    // precompute normalization of partials
-    minPartialLevel = maxPartialLevel = 0.0;
     for (int i = 0; i < numPartials; i++)
     {
-        if (localParameters[PartialLevelToParamMapping[i]] < minPartialLevel)
-            minPartialLevel = localParameters[PartialLevelToParamMapping[i]];
-        if (localParameters[PartialLevelToParamMapping[i]] > maxPartialLevel)
-            maxPartialLevel = localParameters[PartialLevelToParamMapping[i]];
-
-        partialLevels[i] = scaleRange(localParameters[PartialLevelToParamMapping[i]], minPartialLevel, maxPartialLevel, 0.0, 1.0);
-
         stretchedIndices[i] = 0.0;
     }
 
@@ -80,7 +71,8 @@ void AdditiveSynthVoice::pitchWheelMoved (const int currentPitchWheelPosition)
 
 void AdditiveSynthVoice::controllerMoved (const int controllerNumber, const int newValue)
 {
-    switch (controllerNumber) {
+    switch (controllerNumber)
+    {
         case MOD_WHEEL_CONTROL:
             modWheel = (float)newValue / 3.0 / 127.0;
             break;
@@ -143,7 +135,8 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 
             if (numChannels == 1)
                 outputBuffer.addSample(0, startSample, currentSampleLeft * masterAmplitude);
-            else {
+            else
+            {
                 outputBuffer.addSample(0, startSample, currentSampleLeft * masterAmplitude);
                 outputBuffer.addSample(1, startSample, currentSampleRight * masterAmplitude);
             }
@@ -154,11 +147,6 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
     }
 }
 
-float getSegmentCoefficient(float startLevel, float endLevel, int durationInSamples) {
-    // add a tiny fudge factor when calculating the end level because it doesn't work
-    // when it's exactly 0.0
-    return (log((endLevel) + 0.0001) - log(startLevel)) / durationInSamples;
-}
 
 void AdditiveSynthVoice::aftertouchChanged (int newAftertouchValue)
 {
@@ -192,7 +180,8 @@ void AdditiveSynthVoice::tick()
 
 void AdditiveSynthVoice::getLfo()
 {
-    switch (*localLfoShape) {
+    switch (*localLfoShape)
+    {
         case SINE_WAVE_TABLE:
             lfoLevel = sineWaveTable[lfoIndex];
             break;
@@ -215,17 +204,25 @@ void AdditiveSynthVoice::getLfo()
         lfoIndex -= waveTableLength;
 }
 
+inline float getSegmentCoefficient(float startLevel, float endLevel, int durationInSamples)
+{
+    // add a tiny fudge factor when calculating the end level because it doesn't work
+    // when it's exactly 0.0
+    return (log((endLevel) + 0.0001) - log(startLevel)) / durationInSamples;
+}
+
 void AdditiveSynthVoice::getAmplitude()
 {
     bool keyIsDown = isKeyDown();
-    switch (envelopeState) {
+    switch (envelopeState)
+    {
         case ATTACK_STATE:
             if (samplesSinceTrigger == 0)
                 envIncrement = velocity / attack;
             else if (samplesSinceTrigger > attack)
             {
                 envelopeState = DECAY_STATE;
-                coefficient = getSegmentCoefficient(envLevel, sustainLevel * velocity, decay);
+                envCoefficient = getSegmentCoefficient(envLevel, sustainLevel * velocity, decay);
             }
             
             if (attack == 0.0)
@@ -240,7 +237,7 @@ void AdditiveSynthVoice::getAmplitude()
             if (!keyIsDown)
             {
                 envelopeState = RELEASE_STATE;
-                coefficient = getSegmentCoefficient(envLevel, 0.0, release);
+                envCoefficient = getSegmentCoefficient(envLevel, 0.0, release);
             }
             break;
         case DECAY_STATE:
@@ -249,21 +246,21 @@ void AdditiveSynthVoice::getAmplitude()
             else if (!keyIsDown)
             {
                 envelopeState = RELEASE_STATE;
-                coefficient = getSegmentCoefficient(envLevel, 0.0, release);
+                envCoefficient = getSegmentCoefficient(envLevel, 0.0, release);
             }
             else
-                envLevel += coefficient * envLevel;
+                envLevel += envCoefficient * envLevel;
             break;
         case SUSTAIN_STATE:
             envLevel = sustainLevel * velocity;
             if (!keyIsDown)
             {
                 envelopeState = RELEASE_STATE;
-                coefficient = getSegmentCoefficient(envLevel, 0.0, release);
+                envCoefficient = getSegmentCoefficient(envLevel, 0.0, release);
             }
             break;
         case RELEASE_STATE:
-            envLevel += coefficient * envLevel;
+            envLevel += envCoefficient * envLevel;
             if (envLevel < 0.001)
             {
                 envLevel = 0.0;
