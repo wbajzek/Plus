@@ -160,7 +160,62 @@ float getSegmentCoefficient(float startLevel, float endLevel, int durationInSamp
     return (log((endLevel) + 0.0001) - log(startLevel)) / durationInSamples;
 }
 
-float AdditiveSynthVoice::getAmplitude()
+void AdditiveSynthVoice::aftertouchChanged (int newAftertouchValue)
+{
+
+}
+
+void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
+{
+    sampleRate = newRate;
+    nyquist = sampleRate/2.0;
+    frqTI = waveTableLength/sampleRate;
+}
+
+bool AdditiveSynthVoice::isPlayingChannel (int midiChannel) const
+{
+    return true;
+}
+
+bool AdditiveSynthVoice::isVoiceActive() const
+{
+    return envLevel > 0.0;
+}
+
+void AdditiveSynthVoice::tick()
+{
+    getAmplitude();
+    getLfo();
+
+    ++samplesSinceTrigger;
+}
+
+void AdditiveSynthVoice::getLfo()
+{
+    switch (*localLfoShape) {
+        case SINE_WAVE_TABLE:
+            lfoLevel = sineWaveTable[lfoIndex];
+            break;
+        case TRIANGLE_WAVE_TABLE:
+            lfoLevel = triangleWaveTable[lfoIndex];
+            break;
+        case SAW_WAVE_TABLE:
+            lfoLevel = sawWaveTable[lfoIndex];
+            break;
+        case RAMP_WAVE_TABLE:
+            lfoLevel = rampWaveTable[lfoIndex];
+            break;
+        default:
+            break;
+    }
+    
+    lfoIndex += frqTI * localParameters[LFO_FREQ];
+    
+    while (lfoIndex >= waveTableLength)
+        lfoIndex -= waveTableLength;
+}
+
+void AdditiveSynthVoice::getAmplitude()
 {
     bool keyIsDown = isKeyDown();
     switch (envelopeState) {
@@ -172,7 +227,7 @@ float AdditiveSynthVoice::getAmplitude()
                 envelopeState = DECAY_STATE;
                 coefficient = getSegmentCoefficient(envLevel, sustainLevel * velocity, decay);
             }
-
+            
             if (attack == 0.0)
             {
                 envLevel = velocity;
@@ -181,7 +236,7 @@ float AdditiveSynthVoice::getAmplitude()
             }
             else
                 envLevel += envIncrement;
-
+            
             if (!keyIsDown)
             {
                 envelopeState = RELEASE_STATE;
@@ -216,55 +271,5 @@ float AdditiveSynthVoice::getAmplitude()
             }
             break;
     }
-    return envLevel;
 }
 
-void AdditiveSynthVoice::aftertouchChanged (int newAftertouchValue)
-{
-
-}
-
-void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
-{
-    sampleRate = newRate;
-    nyquist = sampleRate/2.0;
-    frqTI = waveTableLength/sampleRate;
-}
-
-bool AdditiveSynthVoice::isPlayingChannel (int midiChannel) const
-{
-    return true;
-}
-
-bool AdditiveSynthVoice::isVoiceActive() const
-{
-    return envLevel > 0.0;
-}
-
-void AdditiveSynthVoice::tick()
-{
-    getAmplitude();
-
-    switch (*localLfoShape) {
-        case SINE_WAVE_TABLE:
-            lfoLevel = sineWaveTable[lfoIndex];
-            break;
-        case TRIANGLE_WAVE_TABLE:
-            lfoLevel = triangleWaveTable[lfoIndex];
-            break;
-        case SAW_WAVE_TABLE:
-            lfoLevel = sawWaveTable[lfoIndex];
-            break;
-        case RAMP_WAVE_TABLE:
-            lfoLevel = rampWaveTable[lfoIndex];
-            break;
-        default:
-            break;
-    }
-    
-    lfoIndex += frqTI * localParameters[LFO_FREQ];
-    while (lfoIndex >= waveTableLength)
-        lfoIndex -= waveTableLength;
-
-    ++samplesSinceTrigger;
-}

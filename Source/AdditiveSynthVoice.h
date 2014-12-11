@@ -188,8 +188,6 @@ public:
 
     bool isVoiceActive() const;
 
-    float getAmplitude();
-
 private:
     
     float* localParameters;
@@ -240,7 +238,11 @@ private:
     int getScaleRoot() {
         return *localScaleRoot - 1;
     }
-
+    
+    void getAmplitude();
+    
+    void getLfo();
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AdditiveSynthVoice);
 };
 
