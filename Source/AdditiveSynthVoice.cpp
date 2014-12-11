@@ -243,7 +243,6 @@ bool AdditiveSynthVoice::isVoiceActive() const
 
 void AdditiveSynthVoice::tick()
 {
-    setCurrentPlaybackSampleRate(getSampleRate());
     getAmplitude();
 
     switch (*localLfoShape) {
