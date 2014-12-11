@@ -163,6 +163,7 @@ enum MidiControls {
 };
 #define AU_LOGGING
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "Synth/Synth.h"
 #include "PluginParameters.h"
 #include "AdditiveSynthSound.h"
 #include "AdditiveSynthesiser.h"
