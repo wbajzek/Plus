@@ -94,7 +94,9 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
     if (envLevel > 0.000 && sampleRate > 0 && nyquist > 0)
     {
         const float stretchEnvAmtInc = localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
-
+        const int numChannels = outputBuffer.getNumChannels();
+        jassert(numChannels == 1 || numChannels == 2);
+        
         while (--numSamples >= 0)
         {
             float currentSampleLeft = 0.0;
@@ -120,13 +122,18 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         // and oh boy, does it improve performance.
                         const long increment = (long)(frqTI * partialFreq) << 16;
 
-                        float panRight = (1.0 + localParameters[PartialPanToParamMapping[i]]) / 2.0;
-                        float panLeft  = 1.0 - panRight;
                         double value = sineWaveTable[((stretchedIndices[i]+0x8000) >> 16)]
                             * (localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]]));
 
-                        currentSampleLeft += value * panLeft;
-                        currentSampleRight += value * panRight;
+                        if (numChannels == 1)
+                            currentSampleLeft += value;
+                        else
+                        {
+                            float panRight = (1.0 + localParameters[PartialPanToParamMapping[i]]) / 2.0;
+                            float panLeft  = 1.0 - panRight;
+                            currentSampleLeft += value * panLeft;
+                            currentSampleRight += value * panRight;
+                        }
 
                         stretchedIndices[i] = stretchedIndices[i] + increment & ((waveTableLength << 16) - 1);
                     }
@@ -134,8 +141,12 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                 stretch += stretch;
             }
 
-            outputBuffer.addSample(0, startSample, currentSampleLeft * masterAmplitude);
-            outputBuffer.addSample(1, startSample, currentSampleRight * masterAmplitude);
+            if (numChannels == 1)
+                outputBuffer.addSample(0, startSample, currentSampleLeft * masterAmplitude);
+            else {
+                outputBuffer.addSample(0, startSample, currentSampleLeft * masterAmplitude);
+                outputBuffer.addSample(1, startSample, currentSampleRight * masterAmplitude);
+            }
 
             ++startSample;
             tick();
