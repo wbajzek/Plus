@@ -382,6 +382,12 @@ void PlusAudioProcessor::runAfterParamChange(int paramIndex,UpdateFromFlags upda
         case LFO_SHAPE:
             sendActionMessage("LFO Shape");
             break;
+        case ATTACK:
+        case DECAY:
+        case SUSTAIN:
+        case RELEASE:
+            sendActionMessage("Envelope");
+            break;
         default:
             break;
     }

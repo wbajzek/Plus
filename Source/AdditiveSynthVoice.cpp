@@ -183,4 +183,6 @@ void AdditiveSynthVoice::actionListenerCallback (const String &message)
         lfo.setFrequency(localParameters[LFO_FREQ]);
     else if (message.equalsIgnoreCase("LFO Shape"))
         lfo.setWaveTable(*localLfoShape);
+    else if (message.equalsIgnoreCase("Envelope"))
+        envelope.setAdsr(localParameters[ATTACK], localParameters[DECAY], localParameters[SUSTAIN], localParameters[RELEASE]);
 }
