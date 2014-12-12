@@ -42,7 +42,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     addAndMakeVisible(globalRelease);
 
     lfoFrequency.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
-    lfoFrequency.setRange(0.01, 1000.0, 0.01);
+    lfoFrequency.setRange(0.01, 100.0, 0.01);
     lfoFrequency.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     lfoFrequency.setPopupDisplayEnabled(true, this);
     addAndMakeVisible(lfoFrequency);
