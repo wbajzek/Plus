@@ -42,7 +42,7 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
 
     for (int i = 0; i < numPartials; i++)
     {
-        stretchedIndices[i] = 0.0;
+        partialIndices[i] = 0.0;
     }
 }
 
@@ -111,7 +111,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         // and oh boy, does it improve performance.
                         const long increment = (long)(frqTI * partialFreq) << 16;
 
-                        double value = sineWaveTable[((stretchedIndices[i]+0x8000) >> 16)]
+                        double value = sineWaveTable[((partialIndices[i]+0x8000) >> 16)]
                             * (localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]]));
 
                         if (numChannels == 1)
@@ -124,7 +124,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                             currentSampleRight += value * panRight;
                         }
 
-                        stretchedIndices[i] = stretchedIndices[i] + increment & ((waveTableLength << 16) - 1);
+                        partialIndices[i] = partialIndices[i] + increment & ((waveTableLength << 16) - 1);
                     }
                 }
                 stretch += stretch;

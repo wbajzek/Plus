@@ -209,7 +209,7 @@ private:
 
     unsigned long samplesSinceTrigger = 0;
     
-    long stretchedIndices[numPartials] = { 0 };
+    long partialIndices[numPartials] = { 0 };
     unsigned int lfoIndex = 0;
 
     float calculateFrequency(int currentPitchWheelPosition);
