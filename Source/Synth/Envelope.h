@@ -25,6 +25,23 @@ public:
     {
     }
     
+    void setSampleRate(float newRate)
+    {
+        sampleRate = newRate;
+        convertSecondsToSamples();
+    }
+    
+    // parameters in seconds
+    void setAdsr(float newAttack, float newDecay, float newSustainLevel, float newRelease)
+    {
+        attack = newAttack;
+        decay = newDecay;
+        sustainLevel = newSustainLevel;
+        release = newRelease;
+        convertSecondsToSamples();
+    }
+    
+    // velocity scaled [0,1]
     void trigger(float newVelocity)
     {
         velocity = newVelocity;
@@ -37,14 +54,14 @@ public:
         {
             case ATTACK_STATE:
                 if (samplesSinceTrigger == 0)
-                    envIncrement = velocity / attack;
-                else if (samplesSinceTrigger > attack)
+                    envIncrement = velocity / attackSamples;
+                else if (samplesSinceTrigger > attackSamples)
                 {
                     envelopeState = DECAY_STATE;
-                    envCoefficient = getSegmentCoefficient(envLevel, sustainLevel * velocity, decay);
+                    envCoefficient = getSegmentCoefficient(envLevel, sustainLevel * velocity, decaySamples);
                 }
                 
-                if (attack == 0.0)
+                if (attackSamples == 0)
                 {
                     envLevel = velocity;
                     envIncrement = 0.0;
@@ -56,16 +73,16 @@ public:
                 if (!keyIsDown)
                 {
                     envelopeState = RELEASE_STATE;
-                    envCoefficient = getSegmentCoefficient(envLevel, 0.0, release);
+                    envCoefficient = getSegmentCoefficient(envLevel, 0.0, releaseSamples);
                 }
                 break;
             case DECAY_STATE:
-                if (samplesSinceTrigger > attack + decay)
+                if (samplesSinceTrigger > attackSamples + decaySamples)
                     envelopeState = SUSTAIN_STATE;
                 else if (!keyIsDown)
                 {
                     envelopeState = RELEASE_STATE;
-                    envCoefficient = getSegmentCoefficient(envLevel, 0.0, release);
+                    envCoefficient = getSegmentCoefficient(envLevel, 0.0, releaseSamples);
                 }
                 else
                     envLevel += envCoefficient * envLevel;
@@ -75,7 +92,7 @@ public:
                 if (!keyIsDown)
                 {
                     envelopeState = RELEASE_STATE;
-                    envCoefficient = getSegmentCoefficient(envLevel, 0.0, release);
+                    envCoefficient = getSegmentCoefficient(envLevel, 0.0, releaseSamples);
                 }
                 break;
             case RELEASE_STATE:
@@ -92,15 +109,23 @@ public:
     }
 private:
     
-    inline float getSegmentCoefficient(float startLevel, float endLevel, int durationInSamples)
+    inline float getSegmentCoefficient(float startLevel, float endLevel, int durationInSamples) const
     {
         // add a tiny fudge factor when calculating the end level because it doesn't work
         // when it's exactly 0.0
         return (log((endLevel) + 0.0001) - log(startLevel)) / durationInSamples;
     }
     
+    void convertSecondsToSamples()
+    {
+        attackSamples = sampleRate * attack;
+        decaySamples = sampleRate * decay;
+        releaseSamples = sampleRate * release;
+    }
+    
     int envelopeState;
     unsigned long samplesSinceTrigger = 0;
+    float sampleRate = 0.0;
     float velocity = 0.0;
     float envLevel = 0.0;
     float envCoefficient = 0.0;
@@ -110,6 +135,10 @@ private:
     float decay = 0.0;
     float sustainLevel = 0.0;
     float release = 0.0;
+
+    unsigned long attackSamples = 0;
+    unsigned long decaySamples = 0;
+    unsigned long releaseSamples = 0;
     
     enum EnvelopeState {
         ATTACK_STATE,

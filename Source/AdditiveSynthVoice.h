@@ -190,6 +190,8 @@ public:
 
 private:
     
+    Envelope envelope;
+    
     float* localParameters;
     int* localLfoShape;
     int* localScale;
@@ -199,24 +201,15 @@ private:
     double velocity = 0.0;
     double envLevel = 0.0;
     double lfoLevel = 0.0;
-    double releaseEnvLevel = 0.0;
     double nyquist;
     double sampleRate;
     double frqTI;
-    int envelopeState = 0;
     float modWheel = 0.0;
 
     unsigned long samplesSinceTrigger = 0;
     
     long stretchedIndices[numPartials] = { 0 };
     unsigned int lfoIndex = 0;
-
-    int attack = 0;
-    int decay = 0;
-    float sustainLevel = 0.0;
-    int release = 0;
-    double envIncrement = 0.0;
-    float envCoefficient = 0.0;
 
     float calculateFrequency(int currentPitchWheelPosition);
     void tick();
@@ -235,8 +228,6 @@ private:
     int getScaleRoot() {
         return *localScaleRoot - 1;
     }
-    
-    void getAmplitude();
     
     void getLfo();
     

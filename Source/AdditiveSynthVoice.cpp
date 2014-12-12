@@ -32,26 +32,20 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
     lfoIndex = 0;
     velocity = midiVelocity;
     envLevel = 0.001;
-    releaseEnvLevel = envLevel;
     samplesSinceTrigger = 0;
-
-    attack = localParameters[ATTACK] * sampleRate;
-    decay = localParameters[DECAY] * sampleRate;
-    sustainLevel = localParameters[SUSTAIN] * velocity;
-    release = localParameters[RELEASE] * sampleRate;
-
+    
+    envelope.setAdsr(localParameters[ATTACK], localParameters[DECAY], localParameters[SUSTAIN], localParameters[RELEASE]);
+    envelope.trigger(velocity);
+    
     for (int i = 0; i < numPartials; i++)
     {
         stretchedIndices[i] = 0.0;
     }
-
-    envelopeState = ATTACK_STATE;
 }
 
 void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
 {
     samplesSinceTrigger = 0;
-    releaseEnvLevel = envLevel;
 }
 
 float AdditiveSynthVoice::calculateFrequency(int currentPitchWheelPosition)
@@ -156,6 +150,7 @@ void AdditiveSynthVoice::aftertouchChanged (int newAftertouchValue)
 void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
 {
     sampleRate = newRate;
+    envelope.setSampleRate(sampleRate);
     nyquist = sampleRate/2.0;
     frqTI = waveTableLength/sampleRate;
 }
@@ -172,7 +167,8 @@ bool AdditiveSynthVoice::isVoiceActive() const
 
 void AdditiveSynthVoice::tick()
 {
-    getAmplitude();
+    envLevel = envelope.tick(isKeyDown());
+    
     getLfo();
 
     ++samplesSinceTrigger;
@@ -202,71 +198,5 @@ void AdditiveSynthVoice::getLfo()
     
     while (lfoIndex >= waveTableLength)
         lfoIndex -= waveTableLength;
-}
-
-inline float getSegmentCoefficient(float startLevel, float endLevel, int durationInSamples)
-{
-    // add a tiny fudge factor when calculating the end level because it doesn't work
-    // when it's exactly 0.0
-    return (log((endLevel) + 0.0001) - log(startLevel)) / durationInSamples;
-}
-
-void AdditiveSynthVoice::getAmplitude()
-{
-    bool keyIsDown = isKeyDown();
-    switch (envelopeState)
-    {
-        case ATTACK_STATE:
-            if (samplesSinceTrigger == 0)
-                envIncrement = velocity / attack;
-            else if (samplesSinceTrigger > attack)
-            {
-                envelopeState = DECAY_STATE;
-                envCoefficient = getSegmentCoefficient(envLevel, sustainLevel * velocity, decay);
-            }
-            
-            if (attack == 0.0)
-            {
-                envLevel = velocity;
-                envIncrement = 0.0;
-                envelopeState = DECAY_STATE;
-            }
-            else
-                envLevel += envIncrement;
-            
-            if (!keyIsDown)
-            {
-                envelopeState = RELEASE_STATE;
-                envCoefficient = getSegmentCoefficient(envLevel, 0.0, release);
-            }
-            break;
-        case DECAY_STATE:
-            if (samplesSinceTrigger > attack + decay)
-                envelopeState = SUSTAIN_STATE;
-            else if (!keyIsDown)
-            {
-                envelopeState = RELEASE_STATE;
-                envCoefficient = getSegmentCoefficient(envLevel, 0.0, release);
-            }
-            else
-                envLevel += envCoefficient * envLevel;
-            break;
-        case SUSTAIN_STATE:
-            envLevel = sustainLevel * velocity;
-            if (!keyIsDown)
-            {
-                envelopeState = RELEASE_STATE;
-                envCoefficient = getSegmentCoefficient(envLevel, 0.0, release);
-            }
-            break;
-        case RELEASE_STATE:
-            envLevel += envCoefficient * envLevel;
-            if (envLevel < 0.001)
-            {
-                envLevel = 0.0;
-                clearCurrentNote();
-            }
-            break;
-    }
 }
 
