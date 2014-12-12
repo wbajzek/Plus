@@ -191,6 +191,7 @@ public:
 private:
     
     Envelope envelope;
+    Oscillator lfo;
     
     float* localParameters;
     int* localLfoShape;
@@ -228,8 +229,6 @@ private:
     int getScaleRoot() {
         return *localScaleRoot - 1;
     }
-    
-    void getLfo();
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AdditiveSynthVoice);
 };

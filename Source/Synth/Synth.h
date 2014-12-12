@@ -11,9 +11,8 @@
 #ifndef SYNTH_H_INCLUDED
 #define SYNTH_H_INCLUDED
 
+#include "WaveTables.h"
 #include "Oscillator.h"
 #include "Envelope.h"
-
-
 
 #endif  // SYNTH_H_INCLUDED

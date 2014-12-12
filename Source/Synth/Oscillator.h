@@ -11,7 +11,6 @@
 #ifndef OSCILLATOR_H_INCLUDED
 #define OSCILLATOR_H_INCLUDED
 
-
 class Oscillator
 {
 public:
@@ -22,45 +21,62 @@ public:
 
     ~Oscillator()
     {
-        waveTable = nullptr;
     }
     
     void setFrequency(double newFrequency)
     {
         frequency = newFrequency;
+        increment = frqTI * frequency;
     }
     
     void setSampleRate(float newSampleRate)
     {
+        sampleRate = newSampleRate;
         frqTI = waveTableLength/sampleRate;
     }
     
-    void setWavetable(double *newWaveTable)
+    void setWaveTable(int newWaveTableShape)
     {
-        waveTable = newWaveTable;
-        waveTableLength = sizeof(waveTable) / sizeof(waveTable[0]);
+        waveTableShape = newWaveTableShape;
     }
 
     float tick()
     {
-        double value = waveTable[lfoIndex];
-        lfoIndex += frqTI * frequency;
+        jassert(sampleRate > 0);
+        jassert(frqTI > 0);
+        float value = 0.0;
+        switch (waveTableShape)
+        {
+            case SINE_WAVE_TABLE:
+                value += sineWaveTable[index];
+                break;
+            case TRIANGLE_WAVE_TABLE:
+                value += triangleWaveTable[index];
+                break;
+            case SAW_WAVE_TABLE:
+                value += sawWaveTable[index];
+                break;
+            case RAMP_WAVE_TABLE:
+                value += rampWaveTable[index];
+                break;
+            default:
+                break;
+        }
+        index += increment;
         
-        while (lfoIndex >= waveTableLength)
-            lfoIndex -= waveTableLength;
+        while (index >= waveTableLength)
+            index -= waveTableLength;
         
         return value;
     }
     
 private:
-    double *waveTable;
-    int waveTableLength = 0;
     float sampleRate = 0.0;
     double frqTI = 0.0;
     double frequency = 0.0;
     double increment = 0.0;
-    unsigned int lfoIndex = 0;
-    int localLfoShape = 0;
+    unsigned int index = 0;
+    int waveTableShape = 0;
 };
 
 

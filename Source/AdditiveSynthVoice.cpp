@@ -37,6 +37,9 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
     envelope.setAdsr(localParameters[ATTACK], localParameters[DECAY], localParameters[SUSTAIN], localParameters[RELEASE]);
     envelope.trigger(velocity);
     
+    lfo.setFrequency(localParameters[LFO_FREQ]);
+    lfo.setWaveTable(*localLfoShape);
+
     for (int i = 0; i < numPartials; i++)
     {
         stretchedIndices[i] = 0.0;
@@ -153,6 +156,7 @@ void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
     envelope.setSampleRate(sampleRate);
     nyquist = sampleRate/2.0;
     frqTI = waveTableLength/sampleRate;
+    lfo.setSampleRate(sampleRate);
 }
 
 bool AdditiveSynthVoice::isPlayingChannel (int midiChannel) const
@@ -168,35 +172,7 @@ bool AdditiveSynthVoice::isVoiceActive() const
 void AdditiveSynthVoice::tick()
 {
     envLevel = envelope.tick(isKeyDown());
+    lfoLevel = lfo.tick();
     
-    getLfo();
-
     ++samplesSinceTrigger;
 }
-
-void AdditiveSynthVoice::getLfo()
-{
-    switch (*localLfoShape)
-    {
-        case SINE_WAVE_TABLE:
-            lfoLevel = sineWaveTable[lfoIndex];
-            break;
-        case TRIANGLE_WAVE_TABLE:
-            lfoLevel = triangleWaveTable[lfoIndex];
-            break;
-        case SAW_WAVE_TABLE:
-            lfoLevel = sawWaveTable[lfoIndex];
-            break;
-        case RAMP_WAVE_TABLE:
-            lfoLevel = rampWaveTable[lfoIndex];
-            break;
-        default:
-            break;
-    }
-    
-    lfoIndex += frqTI * localParameters[LFO_FREQ];
-    
-    while (lfoIndex >= waveTableLength)
-        lfoIndex -= waveTableLength;
-}
-
