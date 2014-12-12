@@ -17,7 +17,7 @@
 //==============================================================================
 /**
 */
-class PlusAudioProcessor  : public PluginProcessor
+class PlusAudioProcessor  : public PluginProcessor, public ActionBroadcaster
 {
 public:
     //==============================================================================

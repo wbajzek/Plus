@@ -9,13 +9,6 @@
 #ifndef __Plus__AdditiveSynthVoice__
 #define __Plus__AdditiveSynthVoice__
 
-enum EnvelopeState {
-    ATTACK_STATE,
-    DECAY_STATE,
-    SUSTAIN_STATE,
-    RELEASE_STATE
-};
-
 const int PartialLevelToParamMapping[numPartials] =
 {
     PARTIAL_1,
@@ -161,7 +154,7 @@ const int PartialLfoAmtToParamMapping[numPartials] =
 };
 
 
-class AdditiveSynthVoice : public SynthesiserVoice
+class AdditiveSynthVoice : public SynthesiserVoice, public ActionListener
 {
 public:
     AdditiveSynthVoice(float* parameters, int* lfoShape, int* scale, int* scaleRoot);
@@ -187,6 +180,8 @@ public:
     bool isPlayingChannel (int midiChannel) const;
 
     bool isVoiceActive() const;
+    
+    void actionListenerCallback (const String &message);
 
 private:
     

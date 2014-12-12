@@ -163,9 +163,14 @@ PlusAudioProcessor::~PlusAudioProcessor()
 void PlusAudioProcessor::initVoices()
 {
     synth.clearVoices();
+    removeAllActionListeners();
     
     for (int i = 0; i < numberOfVoices; i++)
-        synth.addVoice(new AdditiveSynthVoice(parameters, &lfoShape, &scale, &scaleRoot));
+    {
+        AdditiveSynthVoice *voice = new AdditiveSynthVoice(parameters, &lfoShape, &scale, &scaleRoot);
+        addActionListener(voice);
+        synth.addVoice(voice);
+    }
     
     // make sure all the voices know the current sample rate
     synth.refreshCurrentPlaybackSampleRate ();
@@ -370,6 +375,16 @@ void PlusAudioProcessor::changeProgramName (int index, const String& newName)
 void PlusAudioProcessor::runAfterParamChange(int paramIndex,UpdateFromFlags updateFromFlag)
 {
     getParam(paramIndex)->updateHostAndUi(false,UPDATE_FROM_PROCESSOR);
+    switch (paramIndex) {
+        case LFO_FREQ:
+            sendActionMessage("LFO Frequency");
+            break;
+        case LFO_SHAPE:
+            sendActionMessage("LFO Shape");
+            break;
+        default:
+            break;
+    }
 }
 
 void PlusAudioProcessor::runAfterParamGroupUpdate()

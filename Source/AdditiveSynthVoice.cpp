@@ -176,3 +176,11 @@ void AdditiveSynthVoice::tick()
     
     ++samplesSinceTrigger;
 }
+
+void AdditiveSynthVoice::actionListenerCallback (const String &message)
+{
+    if (message.equalsIgnoreCase("LFO Frequency"))
+        lfo.setFrequency(localParameters[LFO_FREQ]);
+    else if (message.equalsIgnoreCase("LFO Shape"))
+        lfo.setWaveTable(*localLfoShape);
+}
