@@ -141,11 +141,11 @@ PlusAudioProcessor::PlusAudioProcessor()
     parameters[PARTIAL_LFO_AMT_30] = 0.0;
     parameters[PARTIAL_LFO_AMT_31] = 0.0;
     parameters[PARTIAL_LFO_AMT_32] = 0.0;
-    parameters[LFO_FREQ] = 20.0;
-    parameters[LFO_SHAPE] = SINE_WAVE_TABLE;
-    parameters[NUMBER_OF_VOICES] = 8;
-    parameters[SCALE] = 1;
-    parameters[SCALE_ROOT] = 1;
+    parameters[LFO_FREQ] = 7.0;
+    lfoShape = SINE_WAVE_TABLE;
+    numberOfVoices = 8;
+    scale = 1;
+    scaleRoot = 1;
 
     initAllParameters();
     initVoices();

@@ -21,35 +21,30 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     globalAttack.setRange(0.01, 10.0, 0.01);
     globalAttack.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalAttack.setPopupDisplayEnabled(true, this);
-    globalAttack.setValue(processor.getFloatParam(ATTACK)->getValue());
     addAndMakeVisible(globalAttack);
 
     globalDecay.setSliderStyle(Slider::LinearBarVertical);
     globalDecay.setRange(0.01, 20.0, 0.01);
     globalDecay.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalDecay.setPopupDisplayEnabled(true, this);
-    globalDecay.setValue(processor.getFloatParam(DECAY)->getValue());
     addAndMakeVisible(globalDecay);
 
     globalSustain.setSliderStyle(Slider::LinearBarVertical);
     globalSustain.setRange(0.0, 1.0, 0.01);
     globalSustain.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalSustain.setPopupDisplayEnabled(true, this);
-    globalSustain.setValue(processor.getFloatParam(SUSTAIN)->getValue());
     addAndMakeVisible(globalSustain);
 
     globalRelease.setSliderStyle(Slider::LinearBarVertical);
     globalRelease.setRange(0.01, 20.0, 0.01);
     globalRelease.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalRelease.setPopupDisplayEnabled(true, this);
-    globalRelease.setValue(processor.getFloatParam(RELEASE)->getValue());
     addAndMakeVisible(globalRelease);
 
     lfoFrequency.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     lfoFrequency.setRange(0.01, 1000.0, 0.01);
     lfoFrequency.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     lfoFrequency.setPopupDisplayEnabled(true, this);
-    lfoFrequency.setValue(processor.getFloatParam(LFO_FREQ)->getValue());
     addAndMakeVisible(lfoFrequency);
 
     lfoShape.addItem("Sine",SINE_WAVE_TABLE + 1);
@@ -59,7 +54,6 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     lfoShape.setWantsKeyboardFocus(false);
     lfoShape.setItemEnabled(0, false);
     lfoShape.setEditableText(false);
-    lfoShape.setSelectedId(processor.lfoShape + 1);
     addAndMakeVisible(lfoShape);
 
     numberOfVoices.addItem("1",1);
@@ -74,7 +68,6 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     numberOfVoices.setWantsKeyboardFocus(false);
     numberOfVoices.setItemEnabled(0, false);
     numberOfVoices.setEditableText(false);
-    numberOfVoices.setSelectedId(processor.numberOfVoices);
     addAndMakeVisible(numberOfVoices);
 
     for (int i = 0; i < numberOfScales; i++)
@@ -84,7 +77,6 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     }
     scale.setWantsKeyboardFocus(false);
     scale.setEditableText(false);
-    scale.setSelectedId(processor.scale);
     addAndMakeVisible(scale);
 
     scaleRoot.addItem("C",1);
@@ -102,931 +94,798 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     scaleRoot.setWantsKeyboardFocus(false);
     scaleRoot.setItemEnabled(0, false);
     scaleRoot.setEditableText(false);
-    scaleRoot.setSelectedId(processor.scaleRoot);
     addAndMakeVisible(scaleRoot);
 
     partialStretch.setSliderStyle(Slider::LinearBarVertical);
     partialStretch.setRange(-1.0, 1.0, 0.01);
     partialStretch.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretch.setPopupDisplayEnabled(true, this);
-    partialStretch.setValue(processor.getFloatParam(STRETCH)->getValue());
     addAndMakeVisible(partialStretch);
 
     partialStretchFine.setSliderStyle(Slider::LinearBarVertical);
     partialStretchFine.setRange(-0.01, 0.01, 0.0001);
     partialStretchFine.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretchFine.setPopupDisplayEnabled(true, this);
-    partialStretchFine.setValue(processor.getFloatParam(STRETCH_FINE)->getValue());
     addAndMakeVisible(partialStretchFine);
 
     partialStretchEnvAmt.setSliderStyle(Slider::LinearBarVertical);
     partialStretchEnvAmt.setRange(0.0, 2.0, 0.01);
     partialStretchEnvAmt.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretchEnvAmt.setPopupDisplayEnabled(true, this);
-    partialStretchEnvAmt.setValue(processor.getFloatParam(STRETCH_ENV_AMT)->getValue());
     addAndMakeVisible(partialStretchEnvAmt);
 
     partialStretchEnvAmtFine.setSliderStyle(Slider::LinearBarVertical);
     partialStretchEnvAmtFine.setRange(-0.0, 0.1, 0.0001);
     partialStretchEnvAmtFine.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretchEnvAmtFine.setPopupDisplayEnabled(true, this);
-    partialStretchEnvAmtFine.setValue(processor.getFloatParam(STRETCH_ENV_AMT_FINE)->getValue());
     addAndMakeVisible(partialStretchEnvAmtFine);
 
     partialLevel_1.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_1.setRange(0.0, 1.0, 0.001);
     partialLevel_1.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_1.setPopupDisplayEnabled(true, this);
-    partialLevel_1.setValue(processor.getFloatParam(PARTIAL_1)->getValue());
     addAndMakeVisible(partialLevel_1);
 
     partialLevel_2.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_2.setRange(0.0, 1.0, 0.001);
     partialLevel_2.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_2.setPopupDisplayEnabled(true, this);
-    partialLevel_2.setValue(processor.getFloatParam(PARTIAL_2)->getValue());
     addAndMakeVisible(partialLevel_2);
 
     partialLevel_3.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_3.setRange(0.0, 1.0, 0.001);
     partialLevel_3.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_3.setPopupDisplayEnabled(true, this);
-    partialLevel_3.setValue(processor.getFloatParam(PARTIAL_3)->getValue());
     addAndMakeVisible(partialLevel_3);
 
     partialLevel_4.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_4.setRange(0.0, 1.0, 0.001);
     partialLevel_4.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_4.setPopupDisplayEnabled(true, this);
-    partialLevel_4.setValue(processor.getFloatParam(PARTIAL_4)->getValue());
     addAndMakeVisible(partialLevel_4);
 
     partialLevel_5.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_5.setRange(0.0, 1.0, 0.001);
     partialLevel_5.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_5.setPopupDisplayEnabled(true, this);
-    partialLevel_5.setValue(processor.getFloatParam(PARTIAL_5)->getValue());
     addAndMakeVisible(partialLevel_5);
 
     partialLevel_6.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_6.setRange(0.0, 1.0, 0.001);
     partialLevel_6.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_6.setPopupDisplayEnabled(true, this);
-    partialLevel_6.setValue(processor.getFloatParam(PARTIAL_6)->getValue());
     addAndMakeVisible(partialLevel_6);
 
     partialLevel_7.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_7.setRange(0.0, 1.0, 0.001);
     partialLevel_7.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_7.setPopupDisplayEnabled(true, this);
-    partialLevel_7.setValue(processor.getFloatParam(PARTIAL_7)->getValue());
     addAndMakeVisible(partialLevel_7);
 
     partialLevel_8.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_8.setRange(0.0, 1.0, 0.001);
     partialLevel_8.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_8.setPopupDisplayEnabled(true, this);
-    partialLevel_8.setValue(processor.getFloatParam(PARTIAL_8)->getValue());
     addAndMakeVisible(partialLevel_8);
 
     partialLevel_9.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_9.setRange(0.0, 1.0, 0.001);
     partialLevel_9.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_9.setPopupDisplayEnabled(true, this);
-    partialLevel_9.setValue(processor.getFloatParam(PARTIAL_9)->getValue());
     addAndMakeVisible(partialLevel_9);
 
     partialLevel_10.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_10.setRange(0.0, 1.0, 0.001);
     partialLevel_10.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_10.setPopupDisplayEnabled(true, this);
-    partialLevel_10.setValue(processor.getFloatParam(PARTIAL_10)->getValue());
     addAndMakeVisible(partialLevel_10);
 
     partialLevel_11.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_11.setRange(0.0, 1.0, 0.001);
     partialLevel_11.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_11.setPopupDisplayEnabled(true, this);
-    partialLevel_11.setValue(processor.getFloatParam(PARTIAL_11)->getValue());
     addAndMakeVisible(partialLevel_11);
 
     partialLevel_12.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_12.setRange(0.0, 1.0, 0.001);
     partialLevel_12.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_12.setPopupDisplayEnabled(true, this);
-    partialLevel_12.setValue(processor.getFloatParam(PARTIAL_12)->getValue());
     addAndMakeVisible(partialLevel_12);
 
     partialLevel_13.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_13.setRange(0.0, 1.0, 0.001);
     partialLevel_13.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_13.setPopupDisplayEnabled(true, this);
-    partialLevel_13.setValue(processor.getFloatParam(PARTIAL_13)->getValue());
     addAndMakeVisible(partialLevel_13);
 
     partialLevel_14.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_14.setRange(0.0, 1.0, 0.001);
     partialLevel_14.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_14.setPopupDisplayEnabled(true, this);
-    partialLevel_14.setValue(processor.getFloatParam(PARTIAL_14)->getValue());
     addAndMakeVisible(partialLevel_14);
 
     partialLevel_15.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_15.setRange(0.0, 1.0, 0.001);
     partialLevel_15.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_15.setPopupDisplayEnabled(true, this);
-    partialLevel_15.setValue(processor.getFloatParam(PARTIAL_15)->getValue());
     addAndMakeVisible(partialLevel_15);
 
     partialLevel_16.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_16.setRange(0.0, 1.0, 0.001);
     partialLevel_16.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_16.setPopupDisplayEnabled(true, this);
-    partialLevel_16.setValue(processor.getFloatParam(PARTIAL_16)->getValue());
     addAndMakeVisible(partialLevel_16);
 
     partialLevel_17.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_17.setRange(0.0, 1.0, 0.001);
     partialLevel_17.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_17.setPopupDisplayEnabled(true, this);
-    partialLevel_17.setValue(processor.getFloatParam(PARTIAL_17)->getValue());
     addAndMakeVisible(partialLevel_17);
 
     partialLevel_18.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_18.setRange(0.0, 1.0, 0.001);
     partialLevel_18.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_18.setPopupDisplayEnabled(true, this);
-    partialLevel_18.setValue(processor.getFloatParam(PARTIAL_18)->getValue());
     addAndMakeVisible(partialLevel_18);
 
     partialLevel_19.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_19.setRange(0.0, 1.0, 0.001);
     partialLevel_19.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_19.setPopupDisplayEnabled(true, this);
-    partialLevel_19.setValue(processor.getFloatParam(PARTIAL_19)->getValue());
     addAndMakeVisible(partialLevel_19);
 
     partialLevel_20.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_20.setRange(0.0, 1.0, 0.001);
     partialLevel_20.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_20.setPopupDisplayEnabled(true, this);
-    partialLevel_20.setValue(processor.getFloatParam(PARTIAL_20)->getValue());
     addAndMakeVisible(partialLevel_20);
 
     partialLevel_21.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_21.setRange(0.0, 1.0, 0.001);
     partialLevel_21.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_21.setPopupDisplayEnabled(true, this);
-    partialLevel_21.setValue(processor.getFloatParam(PARTIAL_21)->getValue());
     addAndMakeVisible(partialLevel_21);
 
     partialLevel_22.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_22.setRange(0.0, 1.0, 0.001);
     partialLevel_22.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_22.setPopupDisplayEnabled(true, this);
-    partialLevel_22.setValue(processor.getFloatParam(PARTIAL_22)->getValue());
     addAndMakeVisible(partialLevel_22);
 
     partialLevel_23.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_23.setRange(0.0, 1.0, 0.001);
     partialLevel_23.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_23.setPopupDisplayEnabled(true, this);
-    partialLevel_23.setValue(processor.getFloatParam(PARTIAL_23)->getValue());
     addAndMakeVisible(partialLevel_23);
 
     partialLevel_24.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_24.setRange(0.0, 1.0, 0.001);
     partialLevel_24.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_24.setPopupDisplayEnabled(true, this);
-    partialLevel_24.setValue(processor.getFloatParam(PARTIAL_24)->getValue());
     addAndMakeVisible(partialLevel_24);
 
     partialLevel_25.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_25.setRange(0.0, 1.0, 0.001);
     partialLevel_25.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_25.setPopupDisplayEnabled(true, this);
-    partialLevel_25.setValue(processor.getFloatParam(PARTIAL_25)->getValue());
     addAndMakeVisible(partialLevel_25);
 
     partialLevel_26.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_26.setRange(0.0, 1.0, 0.001);
     partialLevel_26.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_26.setPopupDisplayEnabled(true, this);
-    partialLevel_26.setValue(processor.getFloatParam(PARTIAL_26)->getValue());
     addAndMakeVisible(partialLevel_26);
 
     partialLevel_27.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_27.setRange(0.0, 1.0, 0.001);
     partialLevel_27.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_27.setPopupDisplayEnabled(true, this);
-    partialLevel_27.setValue(processor.getFloatParam(PARTIAL_27)->getValue());
     addAndMakeVisible(partialLevel_27);
 
     partialLevel_28.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_28.setRange(0.0, 1.0, 0.001);
     partialLevel_28.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_28.setPopupDisplayEnabled(true, this);
-    partialLevel_28.setValue(processor.getFloatParam(PARTIAL_28)->getValue());
     addAndMakeVisible(partialLevel_28);
 
     partialLevel_29.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_29.setRange(0.0, 1.0, 0.001);
     partialLevel_29.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_29.setPopupDisplayEnabled(true, this);
-    partialLevel_29.setValue(processor.getFloatParam(PARTIAL_29)->getValue());
     addAndMakeVisible(partialLevel_29);
 
     partialLevel_30.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_30.setRange(0.0, 1.0, 0.001);
     partialLevel_30.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_30.setPopupDisplayEnabled(true, this);
-    partialLevel_30.setValue(processor.getFloatParam(PARTIAL_30)->getValue());
     addAndMakeVisible(partialLevel_30);
 
     partialLevel_31.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_31.setRange(0.0, 1.0, 0.001);
     partialLevel_31.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_31.setPopupDisplayEnabled(true, this);
-    partialLevel_31.setValue(processor.getFloatParam(PARTIAL_31)->getValue());
     addAndMakeVisible(partialLevel_31);
 
     partialLevel_32.setSliderStyle(Slider::LinearBarVertical);
     partialLevel_32.setRange(0.0, 1.0, 0.001);
     partialLevel_32.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLevel_32.setPopupDisplayEnabled(true, this);
-    partialLevel_32.setValue(processor.getFloatParam(PARTIAL_32)->getValue());
     addAndMakeVisible(partialLevel_32);
 
     partialTune_1.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_1.setRange(-1.0, 1.0, 0.001);
     partialTune_1.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_1.setPopupDisplayEnabled(true, this);
-    partialTune_1.setValue(processor.getFloatParam(PARTIAL_TUNE_1)->getValue());
     addAndMakeVisible(partialTune_1);
 
     partialTune_2.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_2.setRange(-1.0, 1.0, 0.001);
     partialTune_2.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_2.setPopupDisplayEnabled(true, this);
-    partialTune_2.setValue(processor.getFloatParam(PARTIAL_TUNE_2)->getValue());
     addAndMakeVisible(partialTune_2);
 
     partialTune_3.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_3.setRange(-1.0, 1.0, 0.001);
     partialTune_3.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_3.setPopupDisplayEnabled(true, this);
-    partialTune_3.setValue(processor.getFloatParam(PARTIAL_TUNE_3)->getValue());
     addAndMakeVisible(partialTune_3);
 
     partialTune_4.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_4.setRange(-1.0, 1.0, 0.001);
     partialTune_4.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_4.setPopupDisplayEnabled(true, this);
-    partialTune_4.setValue(processor.getFloatParam(PARTIAL_TUNE_4)->getValue());
     addAndMakeVisible(partialTune_4);
 
     partialTune_5.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_5.setRange(-1.0, 1.0, 0.001);
     partialTune_5.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_5.setPopupDisplayEnabled(true, this);
-    partialTune_5.setValue(processor.getFloatParam(PARTIAL_TUNE_5)->getValue());
     addAndMakeVisible(partialTune_5);
 
     partialTune_6.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_6.setRange(-1.0, 1.0, 0.001);
     partialTune_6.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_6.setPopupDisplayEnabled(true, this);
-    partialTune_6.setValue(processor.getFloatParam(PARTIAL_TUNE_6)->getValue());
     addAndMakeVisible(partialTune_6);
 
     partialTune_7.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_7.setRange(-1.0, 1.0, 0.001);
     partialTune_7.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_7.setPopupDisplayEnabled(true, this);
-    partialTune_7.setValue(processor.getFloatParam(PARTIAL_TUNE_7)->getValue());
     addAndMakeVisible(partialTune_7);
 
     partialTune_8.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_8.setRange(-1.0, 1.0, 0.001);
     partialTune_8.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_8.setPopupDisplayEnabled(true, this);
-    partialTune_8.setValue(processor.getFloatParam(PARTIAL_TUNE_8)->getValue());
     addAndMakeVisible(partialTune_8);
 
     partialTune_9.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_9.setRange(-1.0, 1.0, 0.001);
     partialTune_9.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_9.setPopupDisplayEnabled(true, this);
-    partialTune_9.setValue(processor.getFloatParam(PARTIAL_TUNE_9)->getValue());
     addAndMakeVisible(partialTune_9);
 
     partialTune_10.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_10.setRange(-1.0, 1.0, 0.001);
     partialTune_10.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_10.setPopupDisplayEnabled(true, this);
-    partialTune_10.setValue(processor.getFloatParam(PARTIAL_TUNE_10)->getValue());
     addAndMakeVisible(partialTune_10);
 
     partialTune_11.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_11.setRange(-1.0, 1.0, 0.001);
     partialTune_11.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_11.setPopupDisplayEnabled(true, this);
-    partialTune_11.setValue(processor.getFloatParam(PARTIAL_TUNE_11)->getValue());
     addAndMakeVisible(partialTune_11);
 
     partialTune_12.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_12.setRange(-1.0, 1.0, 0.001);
     partialTune_12.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_12.setPopupDisplayEnabled(true, this);
-    partialTune_12.setValue(processor.getFloatParam(PARTIAL_TUNE_12)->getValue());
     addAndMakeVisible(partialTune_12);
 
     partialTune_13.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_13.setRange(-1.0, 1.0, 0.001);
     partialTune_13.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_13.setPopupDisplayEnabled(true, this);
-    partialTune_13.setValue(processor.getFloatParam(PARTIAL_TUNE_13)->getValue());
     addAndMakeVisible(partialTune_13);
 
     partialTune_14.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_14.setRange(-1.0, 1.0, 0.001);
     partialTune_14.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_14.setPopupDisplayEnabled(true, this);
-    partialTune_14.setValue(processor.getFloatParam(PARTIAL_TUNE_14)->getValue());
     addAndMakeVisible(partialTune_14);
 
     partialTune_15.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_15.setRange(-1.0, 1.0, 0.001);
     partialTune_15.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_15.setPopupDisplayEnabled(true, this);
-    partialTune_15.setValue(processor.getFloatParam(PARTIAL_TUNE_15)->getValue());
     addAndMakeVisible(partialTune_15);
 
     partialTune_16.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_16.setRange(-1.0, 1.0, 0.001);
     partialTune_16.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_16.setPopupDisplayEnabled(true, this);
-    partialTune_16.setValue(processor.getFloatParam(PARTIAL_TUNE_16)->getValue());
     addAndMakeVisible(partialTune_16);
 
     partialTune_17.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_17.setRange(-1.0, 1.0, 0.001);
     partialTune_17.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_17.setPopupDisplayEnabled(true, this);
-    partialTune_17.setValue(processor.getFloatParam(PARTIAL_TUNE_17)->getValue());
     addAndMakeVisible(partialTune_17);
 
     partialTune_18.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_18.setRange(-1.0, 1.0, 0.001);
     partialTune_18.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_18.setPopupDisplayEnabled(true, this);
-    partialTune_18.setValue(processor.getFloatParam(PARTIAL_TUNE_18)->getValue());
     addAndMakeVisible(partialTune_18);
 
     partialTune_19.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_19.setRange(-1.0, 1.0, 0.001);
     partialTune_19.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_19.setPopupDisplayEnabled(true, this);
-    partialTune_19.setValue(processor.getFloatParam(PARTIAL_TUNE_19)->getValue());
     addAndMakeVisible(partialTune_19);
 
     partialTune_20.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_20.setRange(-1.0, 1.0, 0.001);
     partialTune_20.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_20.setPopupDisplayEnabled(true, this);
-    partialTune_20.setValue(processor.getFloatParam(PARTIAL_TUNE_20)->getValue());
     addAndMakeVisible(partialTune_20);
 
     partialTune_21.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_21.setRange(-1.0, 1.0, 0.001);
     partialTune_21.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_21.setPopupDisplayEnabled(true, this);
-    partialTune_21.setValue(processor.getFloatParam(PARTIAL_TUNE_21)->getValue());
     addAndMakeVisible(partialTune_21);
 
     partialTune_22.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_22.setRange(-1.0, 1.0, 0.001);
     partialTune_22.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_22.setPopupDisplayEnabled(true, this);
-    partialTune_22.setValue(processor.getFloatParam(PARTIAL_TUNE_22)->getValue());
     addAndMakeVisible(partialTune_22);
 
     partialTune_23.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_23.setRange(-1.0, 1.0, 0.001);
     partialTune_23.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_23.setPopupDisplayEnabled(true, this);
-    partialTune_23.setValue(processor.getFloatParam(PARTIAL_TUNE_23)->getValue());
     addAndMakeVisible(partialTune_23);
 
     partialTune_24.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_24.setRange(-1.0, 1.0, 0.001);
     partialTune_24.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_24.setPopupDisplayEnabled(true, this);
-    partialTune_24.setValue(processor.getFloatParam(PARTIAL_TUNE_24)->getValue());
     addAndMakeVisible(partialTune_24);
 
     partialTune_25.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_25.setRange(-1.0, 1.0, 0.001);
     partialTune_25.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_25.setPopupDisplayEnabled(true, this);
-    partialTune_25.setValue(processor.getFloatParam(PARTIAL_TUNE_25)->getValue());
     addAndMakeVisible(partialTune_25);
 
     partialTune_26.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_26.setRange(-1.0, 1.0, 0.001);
     partialTune_26.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_26.setPopupDisplayEnabled(true, this);
-    partialTune_26.setValue(processor.getFloatParam(PARTIAL_TUNE_26)->getValue());
     addAndMakeVisible(partialTune_26);
 
     partialTune_27.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_27.setRange(-1.0, 1.0, 0.001);
     partialTune_27.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_27.setPopupDisplayEnabled(true, this);
-    partialTune_27.setValue(processor.getFloatParam(PARTIAL_TUNE_27)->getValue());
     addAndMakeVisible(partialTune_27);
 
     partialTune_28.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_28.setRange(-1.0, 1.0, 0.001);
     partialTune_28.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_28.setPopupDisplayEnabled(true, this);
-    partialTune_28.setValue(processor.getFloatParam(PARTIAL_TUNE_28)->getValue());
     addAndMakeVisible(partialTune_28);
 
     partialTune_29.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_29.setRange(-1.0, 1.0, 0.001);
     partialTune_29.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_29.setPopupDisplayEnabled(true, this);
-    partialTune_29.setValue(processor.getFloatParam(PARTIAL_TUNE_29)->getValue());
     addAndMakeVisible(partialTune_29);
 
     partialTune_30.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_30.setRange(-1.0, 1.0, 0.001);
     partialTune_30.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_30.setPopupDisplayEnabled(true, this);
-    partialTune_30.setValue(processor.getFloatParam(PARTIAL_TUNE_30)->getValue());
     addAndMakeVisible(partialTune_30);
 
     partialTune_31.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_31.setRange(-1.0, 1.0, 0.001);
     partialTune_31.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_31.setPopupDisplayEnabled(true, this);
-    partialTune_31.setValue(processor.getFloatParam(PARTIAL_TUNE_31)->getValue());
     addAndMakeVisible(partialTune_31);
 
     partialTune_32.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialTune_32.setRange(-1.0, 1.0, 0.001);
     partialTune_32.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialTune_32.setPopupDisplayEnabled(true, this);
-    partialTune_32.setValue(processor.getFloatParam(PARTIAL_TUNE_32)->getValue());
     addAndMakeVisible(partialTune_32);
 
     partialPan_1.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_1.setRange(-1.0, 1.0, 0.001);
     partialPan_1.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_1.setPopupDisplayEnabled(true, this);
-    partialPan_1.setValue(processor.getFloatParam(PARTIAL_PAN_1)->getValue());
     addAndMakeVisible(partialPan_1);
 
     partialPan_2.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_2.setRange(-1.0, 1.0, 0.001);
     partialPan_2.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_2.setPopupDisplayEnabled(true, this);
-    partialPan_2.setValue(processor.getFloatParam(PARTIAL_PAN_2)->getValue());
     addAndMakeVisible(partialPan_2);
 
     partialPan_3.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_3.setRange(-1.0, 1.0, 0.001);
     partialPan_3.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_3.setPopupDisplayEnabled(true, this);
-    partialPan_3.setValue(processor.getFloatParam(PARTIAL_PAN_3)->getValue());
     addAndMakeVisible(partialPan_3);
 
     partialPan_4.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_4.setRange(-1.0, 1.0, 0.001);
     partialPan_4.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_4.setPopupDisplayEnabled(true, this);
-    partialPan_4.setValue(processor.getFloatParam(PARTIAL_PAN_4)->getValue());
     addAndMakeVisible(partialPan_4);
 
     partialPan_5.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_5.setRange(-1.0, 1.0, 0.001);
     partialPan_5.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_5.setPopupDisplayEnabled(true, this);
-    partialPan_5.setValue(processor.getFloatParam(PARTIAL_PAN_5)->getValue());
     addAndMakeVisible(partialPan_5);
 
     partialPan_6.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_6.setRange(-1.0, 1.0, 0.001);
     partialPan_6.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_6.setPopupDisplayEnabled(true, this);
-    partialPan_6.setValue(processor.getFloatParam(PARTIAL_PAN_6)->getValue());
     addAndMakeVisible(partialPan_6);
 
     partialPan_7.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_7.setRange(-1.0, 1.0, 0.001);
     partialPan_7.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_7.setPopupDisplayEnabled(true, this);
-    partialPan_7.setValue(processor.getFloatParam(PARTIAL_PAN_7)->getValue());
     addAndMakeVisible(partialPan_7);
 
     partialPan_8.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_8.setRange(-1.0, 1.0, 0.001);
     partialPan_8.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_8.setPopupDisplayEnabled(true, this);
-    partialPan_8.setValue(processor.getFloatParam(PARTIAL_PAN_8)->getValue());
     addAndMakeVisible(partialPan_8);
 
     partialPan_9.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_9.setRange(-1.0, 1.0, 0.001);
     partialPan_9.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_9.setPopupDisplayEnabled(true, this);
-    partialPan_9.setValue(processor.getFloatParam(PARTIAL_PAN_9)->getValue());
     addAndMakeVisible(partialPan_9);
 
     partialPan_10.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_10.setRange(-1.0, 1.0, 0.001);
     partialPan_10.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_10.setPopupDisplayEnabled(true, this);
-    partialPan_10.setValue(processor.getFloatParam(PARTIAL_PAN_10)->getValue());
     addAndMakeVisible(partialPan_10);
 
     partialPan_11.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_11.setRange(-1.0, 1.0, 0.001);
     partialPan_11.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_11.setPopupDisplayEnabled(true, this);
-    partialPan_11.setValue(processor.getFloatParam(PARTIAL_PAN_11)->getValue());
     addAndMakeVisible(partialPan_11);
 
     partialPan_12.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_12.setRange(-1.0, 1.0, 0.001);
     partialPan_12.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_12.setPopupDisplayEnabled(true, this);
-    partialPan_12.setValue(processor.getFloatParam(PARTIAL_PAN_12)->getValue());
     addAndMakeVisible(partialPan_12);
 
     partialPan_13.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_13.setRange(-1.0, 1.0, 0.001);
     partialPan_13.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_13.setPopupDisplayEnabled(true, this);
-    partialPan_13.setValue(processor.getFloatParam(PARTIAL_PAN_13)->getValue());
     addAndMakeVisible(partialPan_13);
 
     partialPan_14.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_14.setRange(-1.0, 1.0, 0.001);
     partialPan_14.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_14.setPopupDisplayEnabled(true, this);
-    partialPan_14.setValue(processor.getFloatParam(PARTIAL_PAN_14)->getValue());
     addAndMakeVisible(partialPan_14);
 
     partialPan_15.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_15.setRange(-1.0, 1.0, 0.001);
     partialPan_15.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_15.setPopupDisplayEnabled(true, this);
-    partialPan_15.setValue(processor.getFloatParam(PARTIAL_PAN_15)->getValue());
     addAndMakeVisible(partialPan_15);
 
     partialPan_16.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_16.setRange(-1.0, 1.0, 0.001);
     partialPan_16.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_16.setPopupDisplayEnabled(true, this);
-    partialPan_16.setValue(processor.getFloatParam(PARTIAL_PAN_16)->getValue());
     addAndMakeVisible(partialPan_16);
 
     partialPan_17.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_17.setRange(-1.0, 1.0, 0.001);
     partialPan_17.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_17.setPopupDisplayEnabled(true, this);
-    partialPan_17.setValue(processor.getFloatParam(PARTIAL_PAN_17)->getValue());
     addAndMakeVisible(partialPan_17);
 
     partialPan_18.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_18.setRange(-1.0, 1.0, 0.001);
     partialPan_18.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_18.setPopupDisplayEnabled(true, this);
-    partialPan_18.setValue(processor.getFloatParam(PARTIAL_PAN_18)->getValue());
     addAndMakeVisible(partialPan_18);
 
     partialPan_19.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_19.setRange(-1.0, 1.0, 0.001);
     partialPan_19.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_19.setPopupDisplayEnabled(true, this);
-    partialPan_19.setValue(processor.getFloatParam(PARTIAL_PAN_19)->getValue());
     addAndMakeVisible(partialPan_19);
 
     partialPan_20.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_20.setRange(-1.0, 1.0, 0.001);
     partialPan_20.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_20.setPopupDisplayEnabled(true, this);
-    partialPan_20.setValue(processor.getFloatParam(PARTIAL_PAN_20)->getValue());
     addAndMakeVisible(partialPan_20);
 
     partialPan_21.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_21.setRange(-1.0, 1.0, 0.001);
     partialPan_21.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_21.setPopupDisplayEnabled(true, this);
-    partialPan_21.setValue(processor.getFloatParam(PARTIAL_PAN_21)->getValue());
     addAndMakeVisible(partialPan_21);
 
     partialPan_22.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_22.setRange(-1.0, 1.0, 0.001);
     partialPan_22.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_22.setPopupDisplayEnabled(true, this);
-    partialPan_22.setValue(processor.getFloatParam(PARTIAL_PAN_22)->getValue());
     addAndMakeVisible(partialPan_22);
 
     partialPan_23.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_23.setRange(-1.0, 1.0, 0.001);
     partialPan_23.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_23.setPopupDisplayEnabled(true, this);
-    partialPan_23.setValue(processor.getFloatParam(PARTIAL_PAN_23)->getValue());
     addAndMakeVisible(partialPan_23);
 
     partialPan_24.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_24.setRange(-1.0, 1.0, 0.001);
     partialPan_24.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_24.setPopupDisplayEnabled(true, this);
-    partialPan_24.setValue(processor.getFloatParam(PARTIAL_PAN_24)->getValue());
     addAndMakeVisible(partialPan_24);
 
     partialPan_25.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_25.setRange(-1.0, 1.0, 0.001);
     partialPan_25.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_25.setPopupDisplayEnabled(true, this);
-    partialPan_25.setValue(processor.getFloatParam(PARTIAL_PAN_25)->getValue());
     addAndMakeVisible(partialPan_25);
 
     partialPan_26.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_26.setRange(-1.0, 1.0, 0.001);
     partialPan_26.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_26.setPopupDisplayEnabled(true, this);
-    partialPan_26.setValue(processor.getFloatParam(PARTIAL_PAN_26)->getValue());
     addAndMakeVisible(partialPan_26);
 
     partialPan_27.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_27.setRange(-1.0, 1.0, 0.001);
     partialPan_27.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_27.setPopupDisplayEnabled(true, this);
-    partialPan_27.setValue(processor.getFloatParam(PARTIAL_PAN_27)->getValue());
     addAndMakeVisible(partialPan_27);
 
     partialPan_28.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_28.setRange(-1.0, 1.0, 0.001);
     partialPan_28.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_28.setPopupDisplayEnabled(true, this);
-    partialPan_28.setValue(processor.getFloatParam(PARTIAL_PAN_28)->getValue());
     addAndMakeVisible(partialPan_28);
 
     partialPan_29.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_29.setRange(-1.0, 1.0, 0.001);
     partialPan_29.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_29.setPopupDisplayEnabled(true, this);
-    partialPan_29.setValue(processor.getFloatParam(PARTIAL_PAN_29)->getValue());
     addAndMakeVisible(partialPan_29);
 
     partialPan_30.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_30.setRange(-1.0, 1.0, 0.001);
     partialPan_30.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_30.setPopupDisplayEnabled(true, this);
-    partialPan_30.setValue(processor.getFloatParam(PARTIAL_PAN_30)->getValue());
     addAndMakeVisible(partialPan_30);
 
     partialPan_31.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_31.setRange(-1.0, 1.0, 0.001);
     partialPan_31.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_31.setPopupDisplayEnabled(true, this);
-    partialPan_31.setValue(processor.getFloatParam(PARTIAL_PAN_31)->getValue());
     addAndMakeVisible(partialPan_31);
 
     partialPan_32.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialPan_32.setRange(-1.0, 1.0, 0.001);
     partialPan_32.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialPan_32.setPopupDisplayEnabled(true, this);
-    partialPan_32.setValue(processor.getFloatParam(PARTIAL_PAN_32)->getValue());
     addAndMakeVisible(partialPan_32);
 
     partialLfoAmt_1.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_1.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_1.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_1.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_1.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_1)->getValue());
     addAndMakeVisible(partialLfoAmt_1);
 
     partialLfoAmt_2.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_2.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_2.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_2.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_2.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_2)->getValue());
     addAndMakeVisible(partialLfoAmt_2);
 
     partialLfoAmt_3.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_3.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_3.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_3.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_3.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_3)->getValue());
     addAndMakeVisible(partialLfoAmt_3);
 
     partialLfoAmt_4.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_4.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_4.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_4.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_4.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_4)->getValue());
     addAndMakeVisible(partialLfoAmt_4);
 
     partialLfoAmt_5.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_5.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_5.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_5.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_5.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_5)->getValue());
     addAndMakeVisible(partialLfoAmt_5);
 
     partialLfoAmt_6.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_6.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_6.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_6.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_6.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_6)->getValue());
     addAndMakeVisible(partialLfoAmt_6);
 
     partialLfoAmt_7.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_7.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_7.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_7.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_7.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_7)->getValue());
     addAndMakeVisible(partialLfoAmt_7);
 
     partialLfoAmt_8.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_8.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_8.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_8.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_8.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_8)->getValue());
     addAndMakeVisible(partialLfoAmt_8);
 
     partialLfoAmt_9.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_9.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_9.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_9.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_9.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_9)->getValue());
     addAndMakeVisible(partialLfoAmt_9);
 
     partialLfoAmt_10.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_10.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_10.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_10.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_10.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_10)->getValue());
     addAndMakeVisible(partialLfoAmt_10);
 
     partialLfoAmt_11.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_11.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_11.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_11.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_11.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_11)->getValue());
     addAndMakeVisible(partialLfoAmt_11);
 
     partialLfoAmt_12.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_12.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_12.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_12.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_12.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_12)->getValue());
     addAndMakeVisible(partialLfoAmt_12);
 
     partialLfoAmt_13.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_13.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_13.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_13.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_13.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_13)->getValue());
     addAndMakeVisible(partialLfoAmt_13);
 
     partialLfoAmt_14.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_14.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_14.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_14.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_14.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_14)->getValue());
     addAndMakeVisible(partialLfoAmt_14);
 
     partialLfoAmt_15.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_15.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_15.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_15.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_15.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_15)->getValue());
     addAndMakeVisible(partialLfoAmt_15);
 
     partialLfoAmt_16.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_16.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_16.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_16.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_16.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_16)->getValue());
     addAndMakeVisible(partialLfoAmt_16);
 
     partialLfoAmt_17.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_17.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_17.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_17.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_17.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_17)->getValue());
     addAndMakeVisible(partialLfoAmt_17);
 
     partialLfoAmt_18.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_18.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_18.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_18.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_18.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_18)->getValue());
     addAndMakeVisible(partialLfoAmt_18);
 
     partialLfoAmt_19.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_19.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_19.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_19.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_19.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_19)->getValue());
     addAndMakeVisible(partialLfoAmt_19);
 
     partialLfoAmt_20.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_20.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_20.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_20.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_20.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_20)->getValue());
     addAndMakeVisible(partialLfoAmt_20);
 
     partialLfoAmt_21.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_21.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_21.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_21.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_21.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_21)->getValue());
     addAndMakeVisible(partialLfoAmt_21);
 
     partialLfoAmt_22.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_22.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_22.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_22.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_22.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_22)->getValue());
     addAndMakeVisible(partialLfoAmt_22);
 
     partialLfoAmt_23.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_23.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_23.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_23.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_23.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_23)->getValue());
     addAndMakeVisible(partialLfoAmt_23);
 
     partialLfoAmt_24.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_24.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_24.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_24.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_24.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_24)->getValue());
     addAndMakeVisible(partialLfoAmt_24);
 
     partialLfoAmt_25.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_25.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_25.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_25.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_25.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_25)->getValue());
     addAndMakeVisible(partialLfoAmt_25);
 
     partialLfoAmt_26.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_26.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_26.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_26.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_26.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_26)->getValue());
     addAndMakeVisible(partialLfoAmt_26);
 
     partialLfoAmt_27.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_27.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_27.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_27.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_27.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_27)->getValue());
     addAndMakeVisible(partialLfoAmt_27);
 
     partialLfoAmt_28.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_28.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_28.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_28.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_28.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_28)->getValue());
     addAndMakeVisible(partialLfoAmt_28);
 
     partialLfoAmt_29.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_29.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_29.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_29.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_29.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_29)->getValue());
     addAndMakeVisible(partialLfoAmt_29);
 
     partialLfoAmt_30.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_30.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_30.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_30.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_30.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_30)->getValue());
     addAndMakeVisible(partialLfoAmt_30);
 
     partialLfoAmt_31.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_31.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_31.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_31.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_31.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_31)->getValue());
     addAndMakeVisible(partialLfoAmt_31);
 
     partialLfoAmt_32.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     partialLfoAmt_32.setRange(0.0, 1.0, 0.001);
     partialLfoAmt_32.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialLfoAmt_32.setPopupDisplayEnabled(true, this);
-    partialLfoAmt_32.setValue(processor.getFloatParam(PARTIAL_LFO_AMT_32)->getValue());
     addAndMakeVisible(partialLfoAmt_32);
 
     globalAttack.addListener(this);
@@ -1174,6 +1033,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialLfoAmt_31.addListener(this);
     partialLfoAmt_32.addListener(this);
 
+    processor.updateUi(true,true);
     timerCallback();
     startTimer(50);
     setSize (910, 370);
@@ -2210,19 +2070,19 @@ void PlusAudioProcessorEditor::timerCallback()
         partialLfoAmt_32.setValue (param->uiGet(), dontSendNotification);
     }
     IntParam *intParam = processor.getIntParam(LFO_SHAPE);
-    if (&lfoShape && param->updateUiRequested()){
+    if (&lfoShape && intParam->updateUiRequested()){
         lfoShape.setSelectedId(intParam->uiGet() + 1, dontSendNotification);
     }
     intParam = processor.getIntParam(NUMBER_OF_VOICES);
-    if (&numberOfVoices && param->updateUiRequested()){
+    if (&numberOfVoices && intParam->updateUiRequested()){
         numberOfVoices.setSelectedId(intParam->uiGet(), dontSendNotification);
     }
     intParam = processor.getIntParam(SCALE);
-    if (&scale && param->updateUiRequested()){
-        scale.setSelectedId(intParam->uiGet() + 1, dontSendNotification);
+    if (&scale && intParam->updateUiRequested()){
+        scale.setSelectedId(intParam->uiGet(), dontSendNotification);
     }
     intParam = processor.getIntParam(SCALE_ROOT);
-    if (&scaleRoot && param->updateUiRequested()){
-        scaleRoot.setSelectedId(intParam->uiGet() + 1, dontSendNotification);
+    if (&scaleRoot && intParam->updateUiRequested()){
+        scaleRoot.setSelectedId(intParam->uiGet(), dontSendNotification);
     }
 }
