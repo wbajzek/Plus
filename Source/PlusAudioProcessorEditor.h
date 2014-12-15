@@ -179,6 +179,8 @@ private:
     Slider partialLfoAmt_32;
     Slider partialLevelEnvAmt;
 
+    void setupPartialComponents(Slider *level, Slider *tune, Slider *pan, Slider *lfoAmt);
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlusAudioProcessorEditor)
 };
 
