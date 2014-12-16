@@ -153,6 +153,150 @@ const int PartialLfoAmtToParamMapping[numPartials] =
     PARTIAL_LFO_AMT_32,
 };
 
+const int PartialAttackToParamMapping[numPartials] =
+{
+    PARTIAL_ATTACK_1,
+    PARTIAL_ATTACK_2,
+    PARTIAL_ATTACK_3,
+    PARTIAL_ATTACK_4,
+    PARTIAL_ATTACK_5,
+    PARTIAL_ATTACK_6,
+    PARTIAL_ATTACK_7,
+    PARTIAL_ATTACK_8,
+    PARTIAL_ATTACK_9,
+    PARTIAL_ATTACK_10,
+    PARTIAL_ATTACK_11,
+    PARTIAL_ATTACK_12,
+    PARTIAL_ATTACK_13,
+    PARTIAL_ATTACK_14,
+    PARTIAL_ATTACK_15,
+    PARTIAL_ATTACK_16,
+    PARTIAL_ATTACK_17,
+    PARTIAL_ATTACK_18,
+    PARTIAL_ATTACK_19,
+    PARTIAL_ATTACK_20,
+    PARTIAL_ATTACK_21,
+    PARTIAL_ATTACK_22,
+    PARTIAL_ATTACK_23,
+    PARTIAL_ATTACK_24,
+    PARTIAL_ATTACK_25,
+    PARTIAL_ATTACK_26,
+    PARTIAL_ATTACK_27,
+    PARTIAL_ATTACK_28,
+    PARTIAL_ATTACK_29,
+    PARTIAL_ATTACK_30,
+    PARTIAL_ATTACK_31,
+    PARTIAL_ATTACK_32,
+};
+
+const int PartialDecayToParamMapping[numPartials] =
+{
+    PARTIAL_DECAY_1,
+    PARTIAL_DECAY_2,
+    PARTIAL_DECAY_3,
+    PARTIAL_DECAY_4,
+    PARTIAL_DECAY_5,
+    PARTIAL_DECAY_6,
+    PARTIAL_DECAY_7,
+    PARTIAL_DECAY_8,
+    PARTIAL_DECAY_9,
+    PARTIAL_DECAY_10,
+    PARTIAL_DECAY_11,
+    PARTIAL_DECAY_12,
+    PARTIAL_DECAY_13,
+    PARTIAL_DECAY_14,
+    PARTIAL_DECAY_15,
+    PARTIAL_DECAY_16,
+    PARTIAL_DECAY_17,
+    PARTIAL_DECAY_18,
+    PARTIAL_DECAY_19,
+    PARTIAL_DECAY_20,
+    PARTIAL_DECAY_21,
+    PARTIAL_DECAY_22,
+    PARTIAL_DECAY_23,
+    PARTIAL_DECAY_24,
+    PARTIAL_DECAY_25,
+    PARTIAL_DECAY_26,
+    PARTIAL_DECAY_27,
+    PARTIAL_DECAY_28,
+    PARTIAL_DECAY_29,
+    PARTIAL_DECAY_30,
+    PARTIAL_DECAY_31,
+    PARTIAL_DECAY_32,
+};
+
+const int PartialSustainToParamMapping[numPartials] =
+{
+    PARTIAL_SUSTAIN_1,
+    PARTIAL_SUSTAIN_2,
+    PARTIAL_SUSTAIN_3,
+    PARTIAL_SUSTAIN_4,
+    PARTIAL_SUSTAIN_5,
+    PARTIAL_SUSTAIN_6,
+    PARTIAL_SUSTAIN_7,
+    PARTIAL_SUSTAIN_8,
+    PARTIAL_SUSTAIN_9,
+    PARTIAL_SUSTAIN_10,
+    PARTIAL_SUSTAIN_11,
+    PARTIAL_SUSTAIN_12,
+    PARTIAL_SUSTAIN_13,
+    PARTIAL_SUSTAIN_14,
+    PARTIAL_SUSTAIN_15,
+    PARTIAL_SUSTAIN_16,
+    PARTIAL_SUSTAIN_17,
+    PARTIAL_SUSTAIN_18,
+    PARTIAL_SUSTAIN_19,
+    PARTIAL_SUSTAIN_20,
+    PARTIAL_SUSTAIN_21,
+    PARTIAL_SUSTAIN_22,
+    PARTIAL_SUSTAIN_23,
+    PARTIAL_SUSTAIN_24,
+    PARTIAL_SUSTAIN_25,
+    PARTIAL_SUSTAIN_26,
+    PARTIAL_SUSTAIN_27,
+    PARTIAL_SUSTAIN_28,
+    PARTIAL_SUSTAIN_29,
+    PARTIAL_SUSTAIN_30,
+    PARTIAL_SUSTAIN_31,
+    PARTIAL_SUSTAIN_32,
+};
+
+const int PartialReleaseToParamMapping[numPartials] =
+{
+    PARTIAL_RELEASE_1,
+    PARTIAL_RELEASE_2,
+    PARTIAL_RELEASE_3,
+    PARTIAL_RELEASE_4,
+    PARTIAL_RELEASE_5,
+    PARTIAL_RELEASE_6,
+    PARTIAL_RELEASE_7,
+    PARTIAL_RELEASE_8,
+    PARTIAL_RELEASE_9,
+    PARTIAL_RELEASE_10,
+    PARTIAL_RELEASE_11,
+    PARTIAL_RELEASE_12,
+    PARTIAL_RELEASE_13,
+    PARTIAL_RELEASE_14,
+    PARTIAL_RELEASE_15,
+    PARTIAL_RELEASE_16,
+    PARTIAL_RELEASE_17,
+    PARTIAL_RELEASE_18,
+    PARTIAL_RELEASE_19,
+    PARTIAL_RELEASE_20,
+    PARTIAL_RELEASE_21,
+    PARTIAL_RELEASE_22,
+    PARTIAL_RELEASE_23,
+    PARTIAL_RELEASE_24,
+    PARTIAL_RELEASE_25,
+    PARTIAL_RELEASE_26,
+    PARTIAL_RELEASE_27,
+    PARTIAL_RELEASE_28,
+    PARTIAL_RELEASE_29,
+    PARTIAL_RELEASE_30,
+    PARTIAL_RELEASE_31,
+    PARTIAL_RELEASE_32,
+};
+
 
 class AdditiveSynthVoice : public SynthesiserVoice, public ActionListener
 {
@@ -174,20 +318,20 @@ public:
     void renderNextBlock (AudioSampleBuffer& outputBuffer, int startSample, int numSamples);
 
     void aftertouchChanged (int newAftertouchValue);
-    
+
     void setCurrentPlaybackSampleRate (double newRate);
-    
+
     bool isPlayingChannel (int midiChannel) const;
 
     bool isVoiceActive() const;
-    
+
     void actionListenerCallback (const String &message);
 
 private:
-    
+
     Envelope envelope;
     Oscillator lfo;
-    
+
     float* localParameters;
     int* localLfoShape;
     int* localScale;

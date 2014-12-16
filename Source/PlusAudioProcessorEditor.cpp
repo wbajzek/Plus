@@ -137,46 +137,46 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialStretchEnvAmt.addListener(this);
     partialStretchEnvAmtFine.addListener(this);
 
-    setupPartialComponents(&partialLevel_1, &partialTune_1, &partialPan_1, &partialLfoAmt_1);
-    setupPartialComponents(&partialLevel_2, &partialTune_2, &partialPan_2, &partialLfoAmt_2);
-    setupPartialComponents(&partialLevel_3, &partialTune_3, &partialPan_3, &partialLfoAmt_3);
-    setupPartialComponents(&partialLevel_4, &partialTune_4, &partialPan_4, &partialLfoAmt_4);
-    setupPartialComponents(&partialLevel_5, &partialTune_5, &partialPan_5, &partialLfoAmt_5);
-    setupPartialComponents(&partialLevel_6, &partialTune_6, &partialPan_6, &partialLfoAmt_6);
-    setupPartialComponents(&partialLevel_7, &partialTune_7, &partialPan_7, &partialLfoAmt_7);
-    setupPartialComponents(&partialLevel_8, &partialTune_8, &partialPan_8, &partialLfoAmt_8);
-    setupPartialComponents(&partialLevel_9, &partialTune_9, &partialPan_9, &partialLfoAmt_9);
-    setupPartialComponents(&partialLevel_10, &partialTune_10, &partialPan_10, &partialLfoAmt_10);
-    setupPartialComponents(&partialLevel_11, &partialTune_11, &partialPan_11, &partialLfoAmt_11);
-    setupPartialComponents(&partialLevel_12, &partialTune_12, &partialPan_12, &partialLfoAmt_12);
-    setupPartialComponents(&partialLevel_13, &partialTune_13, &partialPan_13, &partialLfoAmt_13);
-    setupPartialComponents(&partialLevel_14, &partialTune_14, &partialPan_14, &partialLfoAmt_14);
-    setupPartialComponents(&partialLevel_15, &partialTune_15, &partialPan_15, &partialLfoAmt_15);
-    setupPartialComponents(&partialLevel_16, &partialTune_16, &partialPan_16, &partialLfoAmt_16);
-    setupPartialComponents(&partialLevel_17, &partialTune_17, &partialPan_17, &partialLfoAmt_17);
-    setupPartialComponents(&partialLevel_18, &partialTune_18, &partialPan_18, &partialLfoAmt_18);
-    setupPartialComponents(&partialLevel_19, &partialTune_19, &partialPan_19, &partialLfoAmt_19);
-    setupPartialComponents(&partialLevel_20, &partialTune_20, &partialPan_20, &partialLfoAmt_20);
-    setupPartialComponents(&partialLevel_21, &partialTune_21, &partialPan_21, &partialLfoAmt_21);
-    setupPartialComponents(&partialLevel_22, &partialTune_22, &partialPan_22, &partialLfoAmt_22);
-    setupPartialComponents(&partialLevel_23, &partialTune_23, &partialPan_23, &partialLfoAmt_23);
-    setupPartialComponents(&partialLevel_24, &partialTune_24, &partialPan_24, &partialLfoAmt_24);
-    setupPartialComponents(&partialLevel_25, &partialTune_25, &partialPan_25, &partialLfoAmt_25);
-    setupPartialComponents(&partialLevel_26, &partialTune_26, &partialPan_26, &partialLfoAmt_26);
-    setupPartialComponents(&partialLevel_27, &partialTune_27, &partialPan_27, &partialLfoAmt_27);
-    setupPartialComponents(&partialLevel_28, &partialTune_28, &partialPan_28, &partialLfoAmt_28);
-    setupPartialComponents(&partialLevel_29, &partialTune_29, &partialPan_29, &partialLfoAmt_29);
-    setupPartialComponents(&partialLevel_30, &partialTune_30, &partialPan_30, &partialLfoAmt_30);
-    setupPartialComponents(&partialLevel_31, &partialTune_31, &partialPan_31, &partialLfoAmt_31);
-    setupPartialComponents(&partialLevel_32, &partialTune_32, &partialPan_32, &partialLfoAmt_32);
+    setupPartialComponents(&partialLevel_1, &partialTune_1, &partialPan_1, &partialLfoAmt_1, &partialAttack_1, &partialDecay_1, &partialSustain_1, &partialRelease_1);
+    setupPartialComponents(&partialLevel_2, &partialTune_2, &partialPan_2, &partialLfoAmt_2, &partialAttack_2, &partialDecay_2, &partialSustain_2, &partialRelease_2);
+    setupPartialComponents(&partialLevel_3, &partialTune_3, &partialPan_3, &partialLfoAmt_3, &partialAttack_3, &partialDecay_3, &partialSustain_3, &partialRelease_3);
+    setupPartialComponents(&partialLevel_4, &partialTune_4, &partialPan_4, &partialLfoAmt_4, &partialAttack_4, &partialDecay_4, &partialSustain_4, &partialRelease_4);
+    setupPartialComponents(&partialLevel_5, &partialTune_5, &partialPan_5, &partialLfoAmt_5, &partialAttack_5, &partialDecay_5, &partialSustain_5, &partialRelease_5);
+    setupPartialComponents(&partialLevel_6, &partialTune_6, &partialPan_6, &partialLfoAmt_6, &partialAttack_6, &partialDecay_6, &partialSustain_6, &partialRelease_6);
+    setupPartialComponents(&partialLevel_7, &partialTune_7, &partialPan_7, &partialLfoAmt_7, &partialAttack_7, &partialDecay_7, &partialSustain_7, &partialRelease_7);
+    setupPartialComponents(&partialLevel_8, &partialTune_8, &partialPan_8, &partialLfoAmt_8, &partialAttack_8, &partialDecay_8, &partialSustain_8, &partialRelease_8);
+    setupPartialComponents(&partialLevel_9, &partialTune_9, &partialPan_9, &partialLfoAmt_9, &partialAttack_9, &partialDecay_9, &partialSustain_9, &partialRelease_9);
+    setupPartialComponents(&partialLevel_10, &partialTune_10, &partialPan_10, &partialLfoAmt_10, &partialAttack_10, &partialDecay_10, &partialSustain_10, &partialRelease_10);
+    setupPartialComponents(&partialLevel_11, &partialTune_11, &partialPan_11, &partialLfoAmt_11, &partialAttack_11, &partialDecay_11, &partialSustain_11, &partialRelease_11);
+    setupPartialComponents(&partialLevel_12, &partialTune_12, &partialPan_12, &partialLfoAmt_12, &partialAttack_12, &partialDecay_12, &partialSustain_12, &partialRelease_12);
+    setupPartialComponents(&partialLevel_13, &partialTune_13, &partialPan_13, &partialLfoAmt_13, &partialAttack_13, &partialDecay_13, &partialSustain_13, &partialRelease_13);
+    setupPartialComponents(&partialLevel_14, &partialTune_14, &partialPan_14, &partialLfoAmt_14, &partialAttack_14, &partialDecay_14, &partialSustain_14, &partialRelease_14);
+    setupPartialComponents(&partialLevel_15, &partialTune_15, &partialPan_15, &partialLfoAmt_15, &partialAttack_15, &partialDecay_15, &partialSustain_15, &partialRelease_15);
+    setupPartialComponents(&partialLevel_16, &partialTune_16, &partialPan_16, &partialLfoAmt_16, &partialAttack_16, &partialDecay_16, &partialSustain_16, &partialRelease_16);
+    setupPartialComponents(&partialLevel_17, &partialTune_17, &partialPan_17, &partialLfoAmt_17, &partialAttack_17, &partialDecay_17, &partialSustain_17, &partialRelease_17);
+    setupPartialComponents(&partialLevel_18, &partialTune_18, &partialPan_18, &partialLfoAmt_18, &partialAttack_18, &partialDecay_18, &partialSustain_18, &partialRelease_18);
+    setupPartialComponents(&partialLevel_19, &partialTune_19, &partialPan_19, &partialLfoAmt_19, &partialAttack_19, &partialDecay_19, &partialSustain_19, &partialRelease_19);
+    setupPartialComponents(&partialLevel_20, &partialTune_20, &partialPan_20, &partialLfoAmt_20, &partialAttack_20, &partialDecay_20, &partialSustain_20, &partialRelease_20);
+    setupPartialComponents(&partialLevel_21, &partialTune_21, &partialPan_21, &partialLfoAmt_21, &partialAttack_21, &partialDecay_21, &partialSustain_21, &partialRelease_21);
+    setupPartialComponents(&partialLevel_22, &partialTune_22, &partialPan_22, &partialLfoAmt_22, &partialAttack_22, &partialDecay_22, &partialSustain_22, &partialRelease_22);
+    setupPartialComponents(&partialLevel_23, &partialTune_23, &partialPan_23, &partialLfoAmt_23, &partialAttack_23, &partialDecay_23, &partialSustain_23, &partialRelease_23);
+    setupPartialComponents(&partialLevel_24, &partialTune_24, &partialPan_24, &partialLfoAmt_24, &partialAttack_24, &partialDecay_24, &partialSustain_24, &partialRelease_24);
+    setupPartialComponents(&partialLevel_25, &partialTune_25, &partialPan_25, &partialLfoAmt_25, &partialAttack_25, &partialDecay_25, &partialSustain_25, &partialRelease_25);
+    setupPartialComponents(&partialLevel_26, &partialTune_26, &partialPan_26, &partialLfoAmt_26, &partialAttack_26, &partialDecay_26, &partialSustain_26, &partialRelease_26);
+    setupPartialComponents(&partialLevel_27, &partialTune_27, &partialPan_27, &partialLfoAmt_27, &partialAttack_27, &partialDecay_27, &partialSustain_27, &partialRelease_27);
+    setupPartialComponents(&partialLevel_28, &partialTune_28, &partialPan_28, &partialLfoAmt_28, &partialAttack_28, &partialDecay_28, &partialSustain_28, &partialRelease_28);
+    setupPartialComponents(&partialLevel_29, &partialTune_29, &partialPan_29, &partialLfoAmt_29, &partialAttack_29, &partialDecay_29, &partialSustain_29, &partialRelease_29);
+    setupPartialComponents(&partialLevel_30, &partialTune_30, &partialPan_30, &partialLfoAmt_30, &partialAttack_30, &partialDecay_30, &partialSustain_30, &partialRelease_30);
+    setupPartialComponents(&partialLevel_31, &partialTune_31, &partialPan_31, &partialLfoAmt_31, &partialAttack_31, &partialDecay_31, &partialSustain_31, &partialRelease_31);
+    setupPartialComponents(&partialLevel_32, &partialTune_32, &partialPan_32, &partialLfoAmt_32, &partialAttack_32, &partialDecay_32, &partialSustain_32, &partialRelease_32);
 
     processor.updateUi(true,true);
     timerCallback();
     startTimer(50);
-    setSize (910, 370);
+    setSize (910, 520);
 }
 
-void PlusAudioProcessorEditor::setupPartialComponents(Slider *level, Slider *tune, Slider *pan, Slider *lfoAmt)
+void PlusAudioProcessorEditor::setupPartialComponents(Slider *level, Slider *tune, Slider *pan, Slider *lfoAmt, Slider *attack, Slider *decay, Slider *sustain, Slider *release)
 {
     level->setSliderStyle(Slider::LinearBarVertical);
     level->setRange(0.0, 1.0, 0.001);
@@ -205,6 +205,34 @@ void PlusAudioProcessorEditor::setupPartialComponents(Slider *level, Slider *tun
     lfoAmt->setPopupDisplayEnabled(true, this);
     lfoAmt->addListener(this);
     addAndMakeVisible(lfoAmt);
+
+    attack->setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    attack->setRange(0.001, 10.0, 0.001);
+    attack->setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    attack->setPopupDisplayEnabled(true, this);
+    attack->addListener(this);
+    addAndMakeVisible(attack);
+
+    decay->setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    decay->setRange(0.001, 10.0, 0.001);
+    decay->setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    decay->setPopupDisplayEnabled(true, this);
+    decay->addListener(this);
+    addAndMakeVisible(decay);
+
+    sustain->setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    sustain->setRange(0.0, 1.0, 0.01);
+    sustain->setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    sustain->setPopupDisplayEnabled(true, this);
+    sustain->addListener(this);
+    addAndMakeVisible(sustain);
+
+    release->setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+    release->setRange(0.001, 10.0, 0.001);
+    release->setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    release->setPopupDisplayEnabled(true, this);
+    release->addListener(this);
+    addAndMakeVisible(release);
 }
 
 PlusAudioProcessorEditor::~PlusAudioProcessorEditor()
@@ -252,38 +280,38 @@ void PlusAudioProcessorEditor::resized()
     partialStretchEnvAmt.setBounds (190, topRowTop, 20, topRowHeight);
     partialStretchEnvAmtFine.setBounds (210, topRowTop, 20, topRowHeight);
 
-    layoutPartialComponents(250, topRowTop, &partialLevel_1, &partialTune_1, &partialPan_1, &partialLfoAmt_1);
-    layoutPartialComponents(270, topRowTop, &partialLevel_2, &partialTune_2, &partialPan_2, &partialLfoAmt_2);
-    layoutPartialComponents(290, topRowTop, &partialLevel_3, &partialTune_3, &partialPan_3, &partialLfoAmt_3);
-    layoutPartialComponents(310, topRowTop, &partialLevel_4, &partialTune_4, &partialPan_4, &partialLfoAmt_4);
-    layoutPartialComponents(330, topRowTop, &partialLevel_5, &partialTune_5, &partialPan_5, &partialLfoAmt_5);
-    layoutPartialComponents(350, topRowTop, &partialLevel_6, &partialTune_6, &partialPan_6, &partialLfoAmt_6);
-    layoutPartialComponents(370, topRowTop, &partialLevel_7, &partialTune_7, &partialPan_7, &partialLfoAmt_7);
-    layoutPartialComponents(390, topRowTop, &partialLevel_8, &partialTune_8, &partialPan_8, &partialLfoAmt_8);
-    layoutPartialComponents(410, topRowTop, &partialLevel_9, &partialTune_9, &partialPan_9, &partialLfoAmt_9);
-    layoutPartialComponents(430, topRowTop, &partialLevel_10, &partialTune_10, &partialPan_10, &partialLfoAmt_10);
-    layoutPartialComponents(450, topRowTop, &partialLevel_11, &partialTune_11, &partialPan_11, &partialLfoAmt_11);
-    layoutPartialComponents(470, topRowTop, &partialLevel_12, &partialTune_12, &partialPan_12, &partialLfoAmt_12);
-    layoutPartialComponents(490, topRowTop, &partialLevel_13, &partialTune_13, &partialPan_13, &partialLfoAmt_13);
-    layoutPartialComponents(510, topRowTop, &partialLevel_14, &partialTune_14, &partialPan_14, &partialLfoAmt_14);
-    layoutPartialComponents(530, topRowTop, &partialLevel_15, &partialTune_15, &partialPan_15, &partialLfoAmt_15);
-    layoutPartialComponents(550, topRowTop, &partialLevel_16, &partialTune_16, &partialPan_16, &partialLfoAmt_16);
-    layoutPartialComponents(570, topRowTop, &partialLevel_17, &partialTune_17, &partialPan_17, &partialLfoAmt_17);
-    layoutPartialComponents(590, topRowTop, &partialLevel_18, &partialTune_18, &partialPan_18, &partialLfoAmt_18);
-    layoutPartialComponents(610, topRowTop, &partialLevel_19, &partialTune_19, &partialPan_19, &partialLfoAmt_19);
-    layoutPartialComponents(630, topRowTop, &partialLevel_20, &partialTune_20, &partialPan_20, &partialLfoAmt_20);
-    layoutPartialComponents(650, topRowTop, &partialLevel_21, &partialTune_21, &partialPan_21, &partialLfoAmt_21);
-    layoutPartialComponents(670, topRowTop, &partialLevel_22, &partialTune_22, &partialPan_22, &partialLfoAmt_22);
-    layoutPartialComponents(690, topRowTop, &partialLevel_23, &partialTune_23, &partialPan_23, &partialLfoAmt_23);
-    layoutPartialComponents(710, topRowTop, &partialLevel_24, &partialTune_24, &partialPan_24, &partialLfoAmt_24);
-    layoutPartialComponents(730, topRowTop, &partialLevel_25, &partialTune_25, &partialPan_25, &partialLfoAmt_25);
-    layoutPartialComponents(750, topRowTop, &partialLevel_26, &partialTune_26, &partialPan_26, &partialLfoAmt_26);
-    layoutPartialComponents(770, topRowTop, &partialLevel_27, &partialTune_27, &partialPan_27, &partialLfoAmt_27);
-    layoutPartialComponents(790, topRowTop, &partialLevel_28, &partialTune_28, &partialPan_28, &partialLfoAmt_28);
-    layoutPartialComponents(810, topRowTop, &partialLevel_29, &partialTune_29, &partialPan_29, &partialLfoAmt_29);
-    layoutPartialComponents(830, topRowTop, &partialLevel_30, &partialTune_30, &partialPan_30, &partialLfoAmt_30);
-    layoutPartialComponents(850, topRowTop, &partialLevel_31, &partialTune_31, &partialPan_31, &partialLfoAmt_31);
-    layoutPartialComponents(870, topRowTop, &partialLevel_32, &partialTune_32, &partialPan_32, &partialLfoAmt_32);
+    layoutPartialComponents(250, topRowTop, &partialLevel_1, &partialTune_1, &partialPan_1, &partialLfoAmt_1, &partialAttack_1, &partialDecay_1, &partialSustain_1, &partialRelease_1);
+    layoutPartialComponents(270, topRowTop, &partialLevel_2, &partialTune_2, &partialPan_2, &partialLfoAmt_2, &partialAttack_2, &partialDecay_2, &partialSustain_2, &partialRelease_2);
+    layoutPartialComponents(290, topRowTop, &partialLevel_3, &partialTune_3, &partialPan_3, &partialLfoAmt_3, &partialAttack_3, &partialDecay_3, &partialSustain_3, &partialRelease_3);
+    layoutPartialComponents(310, topRowTop, &partialLevel_4, &partialTune_4, &partialPan_4, &partialLfoAmt_4, &partialAttack_4, &partialDecay_4, &partialSustain_4, &partialRelease_4);
+    layoutPartialComponents(330, topRowTop, &partialLevel_5, &partialTune_5, &partialPan_5, &partialLfoAmt_5, &partialAttack_5, &partialDecay_5, &partialSustain_5, &partialRelease_5);
+    layoutPartialComponents(350, topRowTop, &partialLevel_6, &partialTune_6, &partialPan_6, &partialLfoAmt_6, &partialAttack_6, &partialDecay_6, &partialSustain_6, &partialRelease_6);
+    layoutPartialComponents(370, topRowTop, &partialLevel_7, &partialTune_7, &partialPan_7, &partialLfoAmt_7, &partialAttack_7, &partialDecay_7, &partialSustain_7, &partialRelease_7);
+    layoutPartialComponents(390, topRowTop, &partialLevel_8, &partialTune_8, &partialPan_8, &partialLfoAmt_8, &partialAttack_8, &partialDecay_8, &partialSustain_8, &partialRelease_8);
+    layoutPartialComponents(410, topRowTop, &partialLevel_9, &partialTune_9, &partialPan_9, &partialLfoAmt_9, &partialAttack_9, &partialDecay_9, &partialSustain_9, &partialRelease_9);
+    layoutPartialComponents(430, topRowTop, &partialLevel_10, &partialTune_10, &partialPan_10, &partialLfoAmt_10, &partialAttack_10, &partialDecay_10, &partialSustain_10, &partialRelease_10);
+    layoutPartialComponents(450, topRowTop, &partialLevel_11, &partialTune_11, &partialPan_11, &partialLfoAmt_11, &partialAttack_11, &partialDecay_11, &partialSustain_11, &partialRelease_11);
+    layoutPartialComponents(470, topRowTop, &partialLevel_12, &partialTune_12, &partialPan_12, &partialLfoAmt_12, &partialAttack_12, &partialDecay_12, &partialSustain_12, &partialRelease_12);
+    layoutPartialComponents(490, topRowTop, &partialLevel_13, &partialTune_13, &partialPan_13, &partialLfoAmt_13, &partialAttack_13, &partialDecay_13, &partialSustain_13, &partialRelease_13);
+    layoutPartialComponents(510, topRowTop, &partialLevel_14, &partialTune_14, &partialPan_14, &partialLfoAmt_14, &partialAttack_14, &partialDecay_14, &partialSustain_14, &partialRelease_14);
+    layoutPartialComponents(530, topRowTop, &partialLevel_15, &partialTune_15, &partialPan_15, &partialLfoAmt_15, &partialAttack_15, &partialDecay_15, &partialSustain_15, &partialRelease_15);
+    layoutPartialComponents(550, topRowTop, &partialLevel_16, &partialTune_16, &partialPan_16, &partialLfoAmt_16, &partialAttack_16, &partialDecay_16, &partialSustain_16, &partialRelease_16);
+    layoutPartialComponents(570, topRowTop, &partialLevel_17, &partialTune_17, &partialPan_17, &partialLfoAmt_17, &partialAttack_17, &partialDecay_17, &partialSustain_17, &partialRelease_17);
+    layoutPartialComponents(590, topRowTop, &partialLevel_18, &partialTune_18, &partialPan_18, &partialLfoAmt_18, &partialAttack_18, &partialDecay_18, &partialSustain_18, &partialRelease_18);
+    layoutPartialComponents(610, topRowTop, &partialLevel_19, &partialTune_19, &partialPan_19, &partialLfoAmt_19, &partialAttack_19, &partialDecay_19, &partialSustain_19, &partialRelease_19);
+    layoutPartialComponents(630, topRowTop, &partialLevel_20, &partialTune_20, &partialPan_20, &partialLfoAmt_20, &partialAttack_20, &partialDecay_20, &partialSustain_20, &partialRelease_20);
+    layoutPartialComponents(650, topRowTop, &partialLevel_21, &partialTune_21, &partialPan_21, &partialLfoAmt_21, &partialAttack_21, &partialDecay_21, &partialSustain_21, &partialRelease_21);
+    layoutPartialComponents(670, topRowTop, &partialLevel_22, &partialTune_22, &partialPan_22, &partialLfoAmt_22, &partialAttack_22, &partialDecay_22, &partialSustain_22, &partialRelease_22);
+    layoutPartialComponents(690, topRowTop, &partialLevel_23, &partialTune_23, &partialPan_23, &partialLfoAmt_23, &partialAttack_23, &partialDecay_23, &partialSustain_23, &partialRelease_23);
+    layoutPartialComponents(710, topRowTop, &partialLevel_24, &partialTune_24, &partialPan_24, &partialLfoAmt_24, &partialAttack_24, &partialDecay_24, &partialSustain_24, &partialRelease_24);
+    layoutPartialComponents(730, topRowTop, &partialLevel_25, &partialTune_25, &partialPan_25, &partialLfoAmt_25, &partialAttack_25, &partialDecay_25, &partialSustain_25, &partialRelease_25);
+    layoutPartialComponents(750, topRowTop, &partialLevel_26, &partialTune_26, &partialPan_26, &partialLfoAmt_26, &partialAttack_26, &partialDecay_26, &partialSustain_26, &partialRelease_26);
+    layoutPartialComponents(770, topRowTop, &partialLevel_27, &partialTune_27, &partialPan_27, &partialLfoAmt_27, &partialAttack_27, &partialDecay_27, &partialSustain_27, &partialRelease_27);
+    layoutPartialComponents(790, topRowTop, &partialLevel_28, &partialTune_28, &partialPan_28, &partialLfoAmt_28, &partialAttack_28, &partialDecay_28, &partialSustain_28, &partialRelease_28);
+    layoutPartialComponents(810, topRowTop, &partialLevel_29, &partialTune_29, &partialPan_29, &partialLfoAmt_29, &partialAttack_29, &partialDecay_29, &partialSustain_29, &partialRelease_29);
+    layoutPartialComponents(830, topRowTop, &partialLevel_30, &partialTune_30, &partialPan_30, &partialLfoAmt_30, &partialAttack_30, &partialDecay_30, &partialSustain_30, &partialRelease_30);
+    layoutPartialComponents(850, topRowTop, &partialLevel_31, &partialTune_31, &partialPan_31, &partialLfoAmt_31, &partialAttack_31, &partialDecay_31, &partialSustain_31, &partialRelease_31);
+    layoutPartialComponents(870, topRowTop, &partialLevel_32, &partialTune_32, &partialPan_32, &partialLfoAmt_32, &partialAttack_32, &partialDecay_32, &partialSustain_32, &partialRelease_32);
 
     lfoFrequency.setBounds (90, lfoRowTop, 20, lfoRowHeight);
     lfoShape.setBounds (90, tuneRowTop, 90, tuneRowHeight);
@@ -292,7 +320,7 @@ void PlusAudioProcessorEditor::resized()
     scaleRoot.setBounds (182, scaleRowTop, 60, scaleRowHeight);
 }
 
-void PlusAudioProcessorEditor::layoutPartialComponents(int left, int top, Slider *level, Slider *tune, Slider *pan, Slider *lfoAmt)
+void PlusAudioProcessorEditor::layoutPartialComponents(int left, int top, Slider *level, Slider *tune, Slider *pan, Slider *lfoAmt, Slider *attack, Slider *decay, Slider *sustain, Slider *release)
 {
     int levelHeight = 200;
     int knobHeight = 20;
@@ -301,6 +329,10 @@ void PlusAudioProcessorEditor::layoutPartialComponents(int left, int top, Slider
     lfoAmt->setBounds (left, top + 215, 20, knobHeight);
     tune->setBounds (left, top + 245, 20, knobHeight);
     pan->setBounds (left, top + 275, 20, knobHeight);
+    attack->setBounds (left, top + 305, 20, knobHeight);
+    decay->setBounds (left, top + 335, 20, knobHeight);
+    sustain->setBounds (left, top + 365, 20, knobHeight);
+    release->setBounds (left, top + 395, 20, knobHeight);
 }
 
 void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
@@ -585,6 +617,266 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
         processor.getFloatParam(PARTIAL_LFO_AMT_31)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialLfoAmt_32)
         processor.getFloatParam(PARTIAL_LFO_AMT_32)->updateProcessorAndHostFromUi(slider->getValue());
+
+    if (slider == &partialAttack_1)
+        processor.getFloatParam(PARTIAL_ATTACK_1)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_2)
+        processor.getFloatParam(PARTIAL_ATTACK_2)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_3)
+        processor.getFloatParam(PARTIAL_ATTACK_3)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_4)
+        processor.getFloatParam(PARTIAL_ATTACK_4)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_5)
+        processor.getFloatParam(PARTIAL_ATTACK_5)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_6)
+        processor.getFloatParam(PARTIAL_ATTACK_6)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_7)
+        processor.getFloatParam(PARTIAL_ATTACK_7)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_8)
+        processor.getFloatParam(PARTIAL_ATTACK_8)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_9)
+        processor.getFloatParam(PARTIAL_ATTACK_9)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_10)
+        processor.getFloatParam(PARTIAL_ATTACK_10)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_11)
+        processor.getFloatParam(PARTIAL_ATTACK_11)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_12)
+        processor.getFloatParam(PARTIAL_ATTACK_12)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_13)
+        processor.getFloatParam(PARTIAL_ATTACK_13)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_14)
+        processor.getFloatParam(PARTIAL_ATTACK_14)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_15)
+        processor.getFloatParam(PARTIAL_ATTACK_15)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_16)
+        processor.getFloatParam(PARTIAL_ATTACK_16)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_17)
+        processor.getFloatParam(PARTIAL_ATTACK_17)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_18)
+        processor.getFloatParam(PARTIAL_ATTACK_18)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_19)
+        processor.getFloatParam(PARTIAL_ATTACK_19)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_20)
+        processor.getFloatParam(PARTIAL_ATTACK_20)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_21)
+        processor.getFloatParam(PARTIAL_ATTACK_21)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_22)
+        processor.getFloatParam(PARTIAL_ATTACK_22)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_23)
+        processor.getFloatParam(PARTIAL_ATTACK_23)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_24)
+        processor.getFloatParam(PARTIAL_ATTACK_24)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_25)
+        processor.getFloatParam(PARTIAL_ATTACK_25)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_26)
+        processor.getFloatParam(PARTIAL_ATTACK_26)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_27)
+        processor.getFloatParam(PARTIAL_ATTACK_27)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_28)
+        processor.getFloatParam(PARTIAL_ATTACK_28)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_29)
+        processor.getFloatParam(PARTIAL_ATTACK_29)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_30)
+        processor.getFloatParam(PARTIAL_ATTACK_30)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_31)
+        processor.getFloatParam(PARTIAL_ATTACK_31)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialAttack_32)
+        processor.getFloatParam(PARTIAL_ATTACK_32)->updateProcessorAndHostFromUi(slider->getValue());
+
+    if (slider == &partialDecay_1)
+        processor.getFloatParam(PARTIAL_DECAY_1)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_2)
+        processor.getFloatParam(PARTIAL_DECAY_2)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_3)
+        processor.getFloatParam(PARTIAL_DECAY_3)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_4)
+        processor.getFloatParam(PARTIAL_DECAY_4)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_5)
+        processor.getFloatParam(PARTIAL_DECAY_5)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_6)
+        processor.getFloatParam(PARTIAL_DECAY_6)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_7)
+        processor.getFloatParam(PARTIAL_DECAY_7)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_8)
+        processor.getFloatParam(PARTIAL_DECAY_8)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_9)
+        processor.getFloatParam(PARTIAL_DECAY_9)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_10)
+        processor.getFloatParam(PARTIAL_DECAY_10)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_11)
+        processor.getFloatParam(PARTIAL_DECAY_11)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_12)
+        processor.getFloatParam(PARTIAL_DECAY_12)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_13)
+        processor.getFloatParam(PARTIAL_DECAY_13)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_14)
+        processor.getFloatParam(PARTIAL_DECAY_14)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_15)
+        processor.getFloatParam(PARTIAL_DECAY_15)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_16)
+        processor.getFloatParam(PARTIAL_DECAY_16)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_17)
+        processor.getFloatParam(PARTIAL_DECAY_17)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_18)
+        processor.getFloatParam(PARTIAL_DECAY_18)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_19)
+        processor.getFloatParam(PARTIAL_DECAY_19)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_20)
+        processor.getFloatParam(PARTIAL_DECAY_20)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_21)
+        processor.getFloatParam(PARTIAL_DECAY_21)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_22)
+        processor.getFloatParam(PARTIAL_DECAY_22)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_23)
+        processor.getFloatParam(PARTIAL_DECAY_23)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_24)
+        processor.getFloatParam(PARTIAL_DECAY_24)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_25)
+        processor.getFloatParam(PARTIAL_DECAY_25)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_26)
+        processor.getFloatParam(PARTIAL_DECAY_26)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_27)
+        processor.getFloatParam(PARTIAL_DECAY_27)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_28)
+        processor.getFloatParam(PARTIAL_DECAY_28)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_29)
+        processor.getFloatParam(PARTIAL_DECAY_29)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_30)
+        processor.getFloatParam(PARTIAL_DECAY_30)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_31)
+        processor.getFloatParam(PARTIAL_DECAY_31)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialDecay_32)
+        processor.getFloatParam(PARTIAL_DECAY_32)->updateProcessorAndHostFromUi(slider->getValue());
+
+    if (slider == &partialSustain_1)
+        processor.getFloatParam(PARTIAL_SUSTAIN_1)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_2)
+        processor.getFloatParam(PARTIAL_SUSTAIN_2)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_3)
+        processor.getFloatParam(PARTIAL_SUSTAIN_3)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_4)
+        processor.getFloatParam(PARTIAL_SUSTAIN_4)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_5)
+        processor.getFloatParam(PARTIAL_SUSTAIN_5)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_6)
+        processor.getFloatParam(PARTIAL_SUSTAIN_6)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_7)
+        processor.getFloatParam(PARTIAL_SUSTAIN_7)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_8)
+        processor.getFloatParam(PARTIAL_SUSTAIN_8)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_9)
+        processor.getFloatParam(PARTIAL_SUSTAIN_9)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_10)
+        processor.getFloatParam(PARTIAL_SUSTAIN_10)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_11)
+        processor.getFloatParam(PARTIAL_SUSTAIN_11)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_12)
+        processor.getFloatParam(PARTIAL_SUSTAIN_12)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_13)
+        processor.getFloatParam(PARTIAL_SUSTAIN_13)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_14)
+        processor.getFloatParam(PARTIAL_SUSTAIN_14)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_15)
+        processor.getFloatParam(PARTIAL_SUSTAIN_15)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_16)
+        processor.getFloatParam(PARTIAL_SUSTAIN_16)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_17)
+        processor.getFloatParam(PARTIAL_SUSTAIN_17)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_18)
+        processor.getFloatParam(PARTIAL_SUSTAIN_18)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_19)
+        processor.getFloatParam(PARTIAL_SUSTAIN_19)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_20)
+        processor.getFloatParam(PARTIAL_SUSTAIN_20)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_21)
+        processor.getFloatParam(PARTIAL_SUSTAIN_21)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_22)
+        processor.getFloatParam(PARTIAL_SUSTAIN_22)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_23)
+        processor.getFloatParam(PARTIAL_SUSTAIN_23)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_24)
+        processor.getFloatParam(PARTIAL_SUSTAIN_24)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_25)
+        processor.getFloatParam(PARTIAL_SUSTAIN_25)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_26)
+        processor.getFloatParam(PARTIAL_SUSTAIN_26)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_27)
+        processor.getFloatParam(PARTIAL_SUSTAIN_27)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_28)
+        processor.getFloatParam(PARTIAL_SUSTAIN_28)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_29)
+        processor.getFloatParam(PARTIAL_SUSTAIN_29)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_30)
+        processor.getFloatParam(PARTIAL_SUSTAIN_30)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_31)
+        processor.getFloatParam(PARTIAL_SUSTAIN_31)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialSustain_32)
+        processor.getFloatParam(PARTIAL_SUSTAIN_32)->updateProcessorAndHostFromUi(slider->getValue());
+
+    if (slider == &partialRelease_1)
+        processor.getFloatParam(PARTIAL_RELEASE_1)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_2)
+        processor.getFloatParam(PARTIAL_RELEASE_2)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_3)
+        processor.getFloatParam(PARTIAL_RELEASE_3)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_4)
+        processor.getFloatParam(PARTIAL_RELEASE_4)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_5)
+        processor.getFloatParam(PARTIAL_RELEASE_5)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_6)
+        processor.getFloatParam(PARTIAL_RELEASE_6)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_7)
+        processor.getFloatParam(PARTIAL_RELEASE_7)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_8)
+        processor.getFloatParam(PARTIAL_RELEASE_8)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_9)
+        processor.getFloatParam(PARTIAL_RELEASE_9)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_10)
+        processor.getFloatParam(PARTIAL_RELEASE_10)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_11)
+        processor.getFloatParam(PARTIAL_RELEASE_11)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_12)
+        processor.getFloatParam(PARTIAL_RELEASE_12)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_13)
+        processor.getFloatParam(PARTIAL_RELEASE_13)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_14)
+        processor.getFloatParam(PARTIAL_RELEASE_14)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_15)
+        processor.getFloatParam(PARTIAL_RELEASE_15)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_16)
+        processor.getFloatParam(PARTIAL_RELEASE_16)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_17)
+        processor.getFloatParam(PARTIAL_RELEASE_17)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_18)
+        processor.getFloatParam(PARTIAL_RELEASE_18)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_19)
+        processor.getFloatParam(PARTIAL_RELEASE_19)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_20)
+        processor.getFloatParam(PARTIAL_RELEASE_20)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_21)
+        processor.getFloatParam(PARTIAL_RELEASE_21)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_22)
+        processor.getFloatParam(PARTIAL_RELEASE_22)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_23)
+        processor.getFloatParam(PARTIAL_RELEASE_23)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_24)
+        processor.getFloatParam(PARTIAL_RELEASE_24)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_25)
+        processor.getFloatParam(PARTIAL_RELEASE_25)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_26)
+        processor.getFloatParam(PARTIAL_RELEASE_26)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_27)
+        processor.getFloatParam(PARTIAL_RELEASE_27)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_28)
+        processor.getFloatParam(PARTIAL_RELEASE_28)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_29)
+        processor.getFloatParam(PARTIAL_RELEASE_29)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_30)
+        processor.getFloatParam(PARTIAL_RELEASE_30)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_31)
+        processor.getFloatParam(PARTIAL_RELEASE_31)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &partialRelease_32)
+        processor.getFloatParam(PARTIAL_RELEASE_32)->updateProcessorAndHostFromUi(slider->getValue());
 
 }
 
@@ -1154,6 +1446,520 @@ void PlusAudioProcessorEditor::timerCallback()
     if (&partialLfoAmt_32 && param->updateUiRequested()){
         partialLfoAmt_32.setValue (param->uiGet(), dontSendNotification);
     }
+    param=processor.getFloatParam(PARTIAL_ATTACK_1);
+    if (&partialAttack_1 && param->updateUiRequested()){
+        partialAttack_1.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_2);
+    if (&partialAttack_2 && param->updateUiRequested()){
+        partialAttack_2.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_3);
+    if (&partialAttack_3 && param->updateUiRequested()){
+        partialAttack_3.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_4);
+    if (&partialAttack_4 && param->updateUiRequested()){
+        partialAttack_4.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_5);
+    if (&partialAttack_5 && param->updateUiRequested()){
+        partialAttack_5.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_6);
+    if (&partialAttack_6 && param->updateUiRequested()){
+        partialAttack_6.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_7);
+    if (&partialAttack_7 && param->updateUiRequested()){
+        partialAttack_7.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_8);
+    if (&partialAttack_8 && param->updateUiRequested()){
+        partialAttack_8.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_9);
+    if (&partialAttack_9 && param->updateUiRequested()){
+        partialAttack_9.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_10);
+    if (&partialAttack_10 && param->updateUiRequested()){
+        partialAttack_10.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_11);
+    if (&partialAttack_11 && param->updateUiRequested()){
+        partialAttack_11.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_12);
+    if (&partialAttack_12 && param->updateUiRequested()){
+        partialAttack_12.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_13);
+    if (&partialAttack_13 && param->updateUiRequested()){
+        partialAttack_13.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_14);
+    if (&partialAttack_14 && param->updateUiRequested()){
+        partialAttack_14.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_15);
+    if (&partialAttack_15 && param->updateUiRequested()){
+        partialAttack_15.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_16);
+    if (&partialAttack_16 && param->updateUiRequested()){
+        partialAttack_16.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_17);
+    if (&partialAttack_17 && param->updateUiRequested()){
+        partialAttack_17.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_18);
+    if (&partialAttack_18 && param->updateUiRequested()){
+        partialAttack_18.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_19);
+    if (&partialAttack_19 && param->updateUiRequested()){
+        partialAttack_19.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_20);
+    if (&partialAttack_20 && param->updateUiRequested()){
+        partialAttack_20.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_21);
+    if (&partialAttack_21 && param->updateUiRequested()){
+        partialAttack_21.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_22);
+    if (&partialAttack_22 && param->updateUiRequested()){
+        partialAttack_22.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_23);
+    if (&partialAttack_23 && param->updateUiRequested()){
+        partialAttack_23.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_24);
+    if (&partialAttack_24 && param->updateUiRequested()){
+        partialAttack_24.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_25);
+    if (&partialAttack_25 && param->updateUiRequested()){
+        partialAttack_25.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_26);
+    if (&partialAttack_26 && param->updateUiRequested()){
+        partialAttack_26.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_27);
+    if (&partialAttack_27 && param->updateUiRequested()){
+        partialAttack_27.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_28);
+    if (&partialAttack_28 && param->updateUiRequested()){
+        partialAttack_28.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_29);
+    if (&partialAttack_29 && param->updateUiRequested()){
+        partialAttack_29.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_30);
+    if (&partialAttack_30 && param->updateUiRequested()){
+        partialAttack_30.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_31);
+    if (&partialAttack_31 && param->updateUiRequested()){
+        partialAttack_31.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_ATTACK_32);
+    if (&partialAttack_32 && param->updateUiRequested()){
+        partialAttack_32.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_1);
+    if (&partialDecay_1 && param->updateUiRequested()){
+        partialDecay_1.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_2);
+    if (&partialDecay_2 && param->updateUiRequested()){
+        partialDecay_2.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_3);
+    if (&partialDecay_3 && param->updateUiRequested()){
+        partialDecay_3.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_4);
+    if (&partialDecay_4 && param->updateUiRequested()){
+        partialDecay_4.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_5);
+    if (&partialDecay_5 && param->updateUiRequested()){
+        partialDecay_5.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_6);
+    if (&partialDecay_6 && param->updateUiRequested()){
+        partialDecay_6.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_7);
+    if (&partialDecay_7 && param->updateUiRequested()){
+        partialDecay_7.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_8);
+    if (&partialDecay_8 && param->updateUiRequested()){
+        partialDecay_8.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_9);
+    if (&partialDecay_9 && param->updateUiRequested()){
+        partialDecay_9.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_10);
+    if (&partialDecay_10 && param->updateUiRequested()){
+        partialDecay_10.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_11);
+    if (&partialDecay_11 && param->updateUiRequested()){
+        partialDecay_11.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_12);
+    if (&partialDecay_12 && param->updateUiRequested()){
+        partialDecay_12.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_13);
+    if (&partialDecay_13 && param->updateUiRequested()){
+        partialDecay_13.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_14);
+    if (&partialDecay_14 && param->updateUiRequested()){
+        partialDecay_14.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_15);
+    if (&partialDecay_15 && param->updateUiRequested()){
+        partialDecay_15.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_16);
+    if (&partialDecay_16 && param->updateUiRequested()){
+        partialDecay_16.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_17);
+    if (&partialDecay_17 && param->updateUiRequested()){
+        partialDecay_17.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_18);
+    if (&partialDecay_18 && param->updateUiRequested()){
+        partialDecay_18.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_19);
+    if (&partialDecay_19 && param->updateUiRequested()){
+        partialDecay_19.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_20);
+    if (&partialDecay_20 && param->updateUiRequested()){
+        partialDecay_20.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_21);
+    if (&partialDecay_21 && param->updateUiRequested()){
+        partialDecay_21.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_22);
+    if (&partialDecay_22 && param->updateUiRequested()){
+        partialDecay_22.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_23);
+    if (&partialDecay_23 && param->updateUiRequested()){
+        partialDecay_23.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_24);
+    if (&partialDecay_24 && param->updateUiRequested()){
+        partialDecay_24.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_25);
+    if (&partialDecay_25 && param->updateUiRequested()){
+        partialDecay_25.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_26);
+    if (&partialDecay_26 && param->updateUiRequested()){
+        partialDecay_26.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_27);
+    if (&partialDecay_27 && param->updateUiRequested()){
+        partialDecay_27.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_28);
+    if (&partialDecay_28 && param->updateUiRequested()){
+        partialDecay_28.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_29);
+    if (&partialDecay_29 && param->updateUiRequested()){
+        partialDecay_29.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_30);
+    if (&partialDecay_30 && param->updateUiRequested()){
+        partialDecay_30.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_31);
+    if (&partialDecay_31 && param->updateUiRequested()){
+        partialDecay_31.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_DECAY_32);
+    if (&partialDecay_32 && param->updateUiRequested()){
+        partialDecay_32.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_1);
+    if (&partialSustain_1 && param->updateUiRequested()){
+        partialSustain_1.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_2);
+    if (&partialSustain_2 && param->updateUiRequested()){
+        partialSustain_2.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_3);
+    if (&partialSustain_3 && param->updateUiRequested()){
+        partialSustain_3.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_4);
+    if (&partialSustain_4 && param->updateUiRequested()){
+        partialSustain_4.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_5);
+    if (&partialSustain_5 && param->updateUiRequested()){
+        partialSustain_5.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_6);
+    if (&partialSustain_6 && param->updateUiRequested()){
+        partialSustain_6.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_7);
+    if (&partialSustain_7 && param->updateUiRequested()){
+        partialSustain_7.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_8);
+    if (&partialSustain_8 && param->updateUiRequested()){
+        partialSustain_8.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_9);
+    if (&partialSustain_9 && param->updateUiRequested()){
+        partialSustain_9.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_10);
+    if (&partialSustain_10 && param->updateUiRequested()){
+        partialSustain_10.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_11);
+    if (&partialSustain_11 && param->updateUiRequested()){
+        partialSustain_11.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_12);
+    if (&partialSustain_12 && param->updateUiRequested()){
+        partialSustain_12.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_13);
+    if (&partialSustain_13 && param->updateUiRequested()){
+        partialSustain_13.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_14);
+    if (&partialSustain_14 && param->updateUiRequested()){
+        partialSustain_14.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_15);
+    if (&partialSustain_15 && param->updateUiRequested()){
+        partialSustain_15.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_16);
+    if (&partialSustain_16 && param->updateUiRequested()){
+        partialSustain_16.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_17);
+    if (&partialSustain_17 && param->updateUiRequested()){
+        partialSustain_17.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_18);
+    if (&partialSustain_18 && param->updateUiRequested()){
+        partialSustain_18.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_19);
+    if (&partialSustain_19 && param->updateUiRequested()){
+        partialSustain_19.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_20);
+    if (&partialSustain_20 && param->updateUiRequested()){
+        partialSustain_20.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_21);
+    if (&partialSustain_21 && param->updateUiRequested()){
+        partialSustain_21.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_22);
+    if (&partialSustain_22 && param->updateUiRequested()){
+        partialSustain_22.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_23);
+    if (&partialSustain_23 && param->updateUiRequested()){
+        partialSustain_23.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_24);
+    if (&partialSustain_24 && param->updateUiRequested()){
+        partialSustain_24.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_25);
+    if (&partialSustain_25 && param->updateUiRequested()){
+        partialSustain_25.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_26);
+    if (&partialSustain_26 && param->updateUiRequested()){
+        partialSustain_26.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_27);
+    if (&partialSustain_27 && param->updateUiRequested()){
+        partialSustain_27.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_28);
+    if (&partialSustain_28 && param->updateUiRequested()){
+        partialSustain_28.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_29);
+    if (&partialSustain_29 && param->updateUiRequested()){
+        partialSustain_29.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_30);
+    if (&partialSustain_30 && param->updateUiRequested()){
+        partialSustain_30.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_31);
+    if (&partialSustain_31 && param->updateUiRequested()){
+        partialSustain_31.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_SUSTAIN_32);
+    if (&partialSustain_32 && param->updateUiRequested()){
+        partialSustain_32.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_1);
+    if (&partialRelease_1 && param->updateUiRequested()){
+        partialRelease_1.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_2);
+    if (&partialRelease_2 && param->updateUiRequested()){
+        partialRelease_2.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_3);
+    if (&partialRelease_3 && param->updateUiRequested()){
+        partialRelease_3.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_4);
+    if (&partialRelease_4 && param->updateUiRequested()){
+        partialRelease_4.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_5);
+    if (&partialRelease_5 && param->updateUiRequested()){
+        partialRelease_5.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_6);
+    if (&partialRelease_6 && param->updateUiRequested()){
+        partialRelease_6.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_7);
+    if (&partialRelease_7 && param->updateUiRequested()){
+        partialRelease_7.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_8);
+    if (&partialRelease_8 && param->updateUiRequested()){
+        partialRelease_8.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_9);
+    if (&partialRelease_9 && param->updateUiRequested()){
+        partialRelease_9.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_10);
+    if (&partialRelease_10 && param->updateUiRequested()){
+        partialRelease_10.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_11);
+    if (&partialRelease_11 && param->updateUiRequested()){
+        partialRelease_11.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_12);
+    if (&partialRelease_12 && param->updateUiRequested()){
+        partialRelease_12.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_13);
+    if (&partialRelease_13 && param->updateUiRequested()){
+        partialRelease_13.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_14);
+    if (&partialRelease_14 && param->updateUiRequested()){
+        partialRelease_14.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_15);
+    if (&partialRelease_15 && param->updateUiRequested()){
+        partialRelease_15.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_16);
+    if (&partialRelease_16 && param->updateUiRequested()){
+        partialRelease_16.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_17);
+    if (&partialRelease_17 && param->updateUiRequested()){
+        partialRelease_17.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_18);
+    if (&partialRelease_18 && param->updateUiRequested()){
+        partialRelease_18.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_19);
+    if (&partialRelease_19 && param->updateUiRequested()){
+        partialRelease_19.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_20);
+    if (&partialRelease_20 && param->updateUiRequested()){
+        partialRelease_20.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_21);
+    if (&partialRelease_21 && param->updateUiRequested()){
+        partialRelease_21.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_22);
+    if (&partialRelease_22 && param->updateUiRequested()){
+        partialRelease_22.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_23);
+    if (&partialRelease_23 && param->updateUiRequested()){
+        partialRelease_23.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_24);
+    if (&partialRelease_24 && param->updateUiRequested()){
+        partialRelease_24.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_25);
+    if (&partialRelease_25 && param->updateUiRequested()){
+        partialRelease_25.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_26);
+    if (&partialRelease_26 && param->updateUiRequested()){
+        partialRelease_26.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_27);
+    if (&partialRelease_27 && param->updateUiRequested()){
+        partialRelease_27.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_28);
+    if (&partialRelease_28 && param->updateUiRequested()){
+        partialRelease_28.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_29);
+    if (&partialRelease_29 && param->updateUiRequested()){
+        partialRelease_29.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_30);
+    if (&partialRelease_30 && param->updateUiRequested()){
+        partialRelease_30.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_31);
+    if (&partialRelease_31 && param->updateUiRequested()){
+        partialRelease_31.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(PARTIAL_RELEASE_32);
+    if (&partialRelease_32 && param->updateUiRequested()){
+        partialRelease_32.setValue (param->uiGet(), dontSendNotification);
+    }
+
+
     IntParam *intParam = processor.getIntParam(LFO_SHAPE);
     if (&lfoShape && intParam->updateUiRequested()){
         lfoShape.setSelectedId(intParam->uiGet() + 1, dontSendNotification);
