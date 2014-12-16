@@ -33,10 +33,17 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
     velocity = midiVelocity;
     envLevel = 0.001;
     samplesSinceTrigger = 0;
-    
+
     envelope.setAdsr(localParameters[ATTACK], localParameters[DECAY], localParameters[SUSTAIN], localParameters[RELEASE]);
     envelope.trigger(velocity);
-    
+    for (int i = 0; i < numPartials; i++)
+    {
+        partialEnvelopeLevels[i] = 0.0;
+        partialEnvelopes[i].setAdsr(localParameters[PartialAttackToParamMapping[i]], localParameters[PartialDecayToParamMapping[i]], localParameters[PartialSustainToParamMapping[i]], localParameters[PartialReleaseToParamMapping[i]]);
+        partialEnvelopes[i].trigger(velocity);
+        voiceIsActive = true;
+    }
+
     lfo.setFrequency(localParameters[LFO_FREQ]);
     lfo.setWaveTable(*localLfoShape);
 
@@ -80,12 +87,12 @@ void AdditiveSynthVoice::controllerMoved (const int controllerNumber, const int 
 
 void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int startSample, int numSamples)
 {
-    if (envLevel > 0.000 && sampleRate > 0 && nyquist > 0)
+    if (voiceIsActive && sampleRate > 0 && nyquist > 0)
     {
         const float stretchEnvAmtInc = localParameters[STRETCH_ENV_AMT] + localParameters[STRETCH_ENV_AMT_FINE];
         const int numChannels = outputBuffer.getNumChannels();
         jassert(numChannels == 1 || numChannels == 2);
-        
+
         while (--numSamples >= 0)
         {
             float currentSampleLeft = 0.0;
@@ -97,7 +104,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 
             for (int i = 0; i < numPartials; i++)
             {
-                if (localParameters[PartialLevelToParamMapping[i]] > 0.0)
+                if (localParameters[PartialLevelToParamMapping[i]] > 0.0 && partialEnvelopeLevels[i] > 0.0)
                 {
                     float partialFreq = localFreq + (localFreq * localParameters[PartialTuneToParamMapping[i]]);
                     if (i > 0)
@@ -112,7 +119,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         const long increment = (long)(frqTI * partialFreq) << 16;
 
                         double value = sineWaveTable[((partialIndices[i]+0x8000) >> 16)]
-                            * (localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]]));
+                            * partialEnvelopeLevels[i] * (localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]]));
 
                         if (numChannels == 1)
                             currentSampleLeft += value;
@@ -131,11 +138,11 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             }
 
             if (numChannels == 1)
-                outputBuffer.addSample(0, startSample, currentSampleLeft * masterAmplitude);
+                outputBuffer.addSample(0, startSample, currentSampleLeft / 8);
             else
             {
-                outputBuffer.addSample(0, startSample, currentSampleLeft * masterAmplitude);
-                outputBuffer.addSample(1, startSample, currentSampleRight * masterAmplitude);
+                outputBuffer.addSample(0, startSample, currentSampleLeft / 8);
+                outputBuffer.addSample(1, startSample, currentSampleRight / 8);
             }
 
             ++startSample;
@@ -154,6 +161,8 @@ void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
 {
     sampleRate = newRate;
     envelope.setSampleRate(sampleRate);
+    for (int i = 0; i < numPartials; i++)
+        partialEnvelopes[i].setSampleRate(sampleRate);
     nyquist = sampleRate/2.0;
     frqTI = waveTableLength/sampleRate;
     lfo.setSampleRate(sampleRate);
@@ -166,14 +175,22 @@ bool AdditiveSynthVoice::isPlayingChannel (int midiChannel) const
 
 bool AdditiveSynthVoice::isVoiceActive() const
 {
-    return envLevel > 0.0;
+
+    return voiceIsActive;
 }
 
 void AdditiveSynthVoice::tick()
 {
-    envLevel = envelope.tick(isKeyDown());
+    bool keyIsDown = isKeyDown();
+    envLevel = envelope.tick(keyIsDown);
+    voiceIsActive = false;
+    for (int i = 0; i < numPartials; i++)
+    {
+        partialEnvelopeLevels[i] = partialEnvelopes[i].tick(keyIsDown);
+        voiceIsActive |= (partialEnvelopeLevels[i] != 0.0);
+    }
     lfoLevel = lfo.tick();
-    
+
     ++samplesSinceTrigger;
 }
 

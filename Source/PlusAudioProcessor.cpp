@@ -277,7 +277,7 @@ PlusAudioProcessor::PlusAudioProcessor()
 
     initAllParameters();
     initVoices();
-    
+
     synth.addSound(new AdditiveSynthSound());
     synth.setNoteStealingEnabled(true);
 }
@@ -292,14 +292,14 @@ void PlusAudioProcessor::initVoices()
 {
     synth.clearVoices();
     removeAllActionListeners();
-    
+
     for (int i = 0; i < numberOfVoices; i++)
     {
         AdditiveSynthVoice *voice = new AdditiveSynthVoice(parameters, &lfoShape, &scale, &scaleRoot);
         addActionListener(voice);
         synth.addVoice(voice);
     }
-    
+
     // make sure all the voices know the current sample rate
     synth.refreshCurrentPlaybackSampleRate ();
 }

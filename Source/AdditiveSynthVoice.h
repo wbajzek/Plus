@@ -340,6 +340,7 @@ private:
     int noteNumber;
     double velocity = 0.0;
     double envLevel = 0.0;
+    bool voiceIsActive = false;
     double lfoLevel = 0.0;
     double nyquist;
     double sampleRate;
@@ -347,8 +348,11 @@ private:
     float modWheel = 0.0;
 
     unsigned long samplesSinceTrigger = 0;
-    
+
     long partialIndices[numPartials] = { 0 };
+    Envelope partialEnvelopes[numPartials];
+    float partialEnvelopeLevels[numPartials] = { 0.0 };
+
     unsigned int lfoIndex = 0;
 
     float calculateFrequency(int currentPitchWheelPosition);
@@ -364,11 +368,11 @@ private:
     Scale getScale() {
         return scales[*localScale - 1];
     }
-    
+
     int getScaleRoot() {
         return *localScaleRoot - 1;
     }
-    
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AdditiveSynthVoice);
 };
 
