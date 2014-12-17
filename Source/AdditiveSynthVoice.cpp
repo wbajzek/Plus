@@ -133,7 +133,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                 }
                 stretch += stretch;
             }
-
+            
             if (numChannels == 1)
                 outputBuffer.addSample(0, startSample, currentSampleLeft / 8);
             else

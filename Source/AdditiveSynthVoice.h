@@ -346,8 +346,6 @@ private:
     double sampleRate;
     double frqTI;
     float modWheel = 0.0;
-    Amplitude previousSampleLeft = 0.0;
-    Amplitude previousSampleRight = 0.0;
 
     unsigned long samplesSinceTrigger = 0;
 
