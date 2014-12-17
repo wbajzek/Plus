@@ -183,8 +183,11 @@ void AdditiveSynthVoice::tick()
     voiceIsActive = false;
     for (int i = 0; i < numPartials; i++)
     {
-        partialEnvelopeLevels[i] = partialEnvelopes[i].tick(keyIsDown);
-        voiceIsActive |= (partialEnvelopeLevels[i] != 0.0);
+        if (localParameters[PartialLevelToParamMapping[i]] > 0.0)
+        {
+            partialEnvelopeLevels[i] = partialEnvelopes[i].tick(keyIsDown);
+            voiceIsActive |= (partialEnvelopeLevels[i] != 0.0);            
+        }
     }
     lfoLevel = lfo.tick();
 
