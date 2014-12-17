@@ -187,7 +187,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     processor.updateUi(true,true);
     timerCallback();
     startTimer(50);
-    setSize (950, 520);
+    setSize (950, 460);
 }
 
 void PlusAudioProcessorEditor::setupPartialComponents(Slider *level, Slider *tune, Slider *pan, Slider *lfoAmt, Slider *attack, Slider *decay, Slider *sustain, Slider *release)
