@@ -890,9 +890,9 @@ void PlusAudioProcessorEditor::comboBoxChanged (ComboBox* comboBox)
         processor.initVoices();
     }
     if (comboBox == &scale)
-        processor.getIntParam(SCALE)->updateProcessorAndHostFromUi(comboBox->getSelectedId() - 1);
+        processor.getIntParam(SCALE)->updateProcessorAndHostFromUi(comboBox->getSelectedId());
     if (comboBox == &scaleRoot)
-        processor.getIntParam(SCALE_ROOT)->updateProcessorAndHostFromUi(comboBox->getSelectedId() - 1);
+        processor.getIntParam(SCALE_ROOT)->updateProcessorAndHostFromUi(comboBox->getSelectedId());
 }
 
 

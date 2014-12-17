@@ -23,8 +23,6 @@ sound)
 * midi CC
 
 ## Bugs ##
-* When you select a tuning, when the popup menu disappears, the previous tuning
-  will be selected.
 * Click at the end of notes getting cut off, if the amplitudes are
   significantly different.
 * Performance is poor.
