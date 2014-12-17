@@ -23,7 +23,7 @@ public:
     {
     }
     
-    void setFrequency(double newFrequency)
+    void setFrequency(Frequency newFrequency)
     {
         frequency = newFrequency;
         increment = frqTI * frequency;
@@ -40,11 +40,11 @@ public:
         waveTableShape = newWaveTableShape;
     }
 
-    float tick()
+    Amplitude tick()
     {
         jassert(sampleRate > 0);
         jassert(frqTI > 0);
-        float value = 0.0;
+        Amplitude value = 0.0;
         switch (waveTableShape)
         {
             case SINE_WAVE_TABLE:
@@ -73,7 +73,7 @@ public:
 private:
     float sampleRate = 0.0;
     double frqTI = 0.0;
-    double frequency = 0.0;
+    Frequency frequency = 0.0;
     double increment = 0.0;
     unsigned int index = 0;
     int waveTableShape = 0;

@@ -29,7 +29,6 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
 {
     noteNumber = midiNoteNumber;
     freq = calculateFrequency(currentPitchWheelPosition);
-    lfoIndex = 0;
     velocity = midiVelocity;
     envLevel = 0.001;
     samplesSinceTrigger = 0;
@@ -58,14 +57,13 @@ void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
     samplesSinceTrigger = 0;
 }
 
-float AdditiveSynthVoice::calculateFrequency(int currentPitchWheelPosition)
+Frequency AdditiveSynthVoice::calculateFrequency(int currentPitchWheelPosition)
 {
     float pbCents = ( (float)currentPitchWheelPosition / 16383.0) * (400.0) + -200.0;
-    float baseFreq = MidiMessage::getMidiNoteInHertz(noteNumber) * pow(2, pbCents/1200);
+    Frequency baseFreq = MidiMessage::getMidiNoteInHertz(noteNumber) * pow(2, pbCents/1200);
     Scale scale = getScale();
     int octaveNote = (noteNumber - getScaleRoot()) % 12;
-    float adjustedFreq = baseFreq * scale.offsets[octaveNote];
-    return adjustedFreq;
+    return baseFreq * scale.offsets[octaveNote];
 }
 
 void AdditiveSynthVoice::pitchWheelMoved (const int currentPitchWheelPosition)
@@ -95,18 +93,17 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 
         while (--numSamples >= 0)
         {
-            float currentSampleLeft = 0.0;
-            float currentSampleRight = 0.0;
-            const float masterAmplitude = envLevel / numPartials * 4; // * 4 fudge factor to make the synth reasonably louder
+            Amplitude currentSampleLeft = 0.0;
+            Amplitude currentSampleRight = 0.0;
             float stretchEnvAmt = stretchEnvAmtInc * envLevel;
             float stretch = localParameters[STRETCH] + localParameters[STRETCH_FINE];
-            float localFreq = freq + (freq * modWheel * lfoLevel);
+            Frequency localFreq = freq + (freq * modWheel * lfoLevel);
 
             for (int i = 0; i < numPartials; i++)
             {
                 if (localParameters[PartialLevelToParamMapping[i]] > 0.0 && partialEnvelopeLevels[i] > 0.0)
                 {
-                    float partialFreq = localFreq + (localFreq * localParameters[PartialTuneToParamMapping[i]]);
+                    Frequency partialFreq = localFreq + (localFreq * localParameters[PartialTuneToParamMapping[i]]);
                     if (i > 0)
                     {
                         partialFreq += (localFreq * ((float)i + stretch));
@@ -118,15 +115,15 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         // and oh boy, does it improve performance.
                         const long increment = (long)(frqTI * partialFreq) << 16;
 
-                        double value = sineWaveTable[((partialIndices[i]+0x8000) >> 16)]
+                        Amplitude value = sineWaveTable[((partialIndices[i]+0x8000) >> 16)]
                             * partialEnvelopeLevels[i] * (localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]]));
 
                         if (numChannels == 1)
                             currentSampleLeft += value;
                         else
                         {
-                            float panRight = (1.0 + localParameters[PartialPanToParamMapping[i]]) / 2.0;
-                            float panLeft  = 1.0 - panRight;
+                            Amplitude panRight = (1.0 + localParameters[PartialPanToParamMapping[i]]) / 2.0;
+                            Amplitude panLeft  = 1.0 - panRight;
                             currentSampleLeft += value * panLeft;
                             currentSampleRight += value * panRight;
                         }

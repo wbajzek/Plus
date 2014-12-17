@@ -11,6 +11,10 @@
 #ifndef SYNTH_H_INCLUDED
 #define SYNTH_H_INCLUDED
 
+typedef double Amplitude;
+typedef double Frequency;
+typedef double Seconds;
+
 #include "WaveTables.h"
 #include "Oscillator.h"
 #include "Envelope.h"

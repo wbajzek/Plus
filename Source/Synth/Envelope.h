@@ -32,7 +32,7 @@ public:
     }
     
     // parameters in seconds
-    void setAdsr(float newAttack, float newDecay, float newSustainLevel, float newRelease)
+    void setAdsr(Seconds newAttack, Seconds newDecay, Amplitude newSustainLevel, Seconds newRelease)
     {
         attack = newAttack;
         decay = newDecay;
@@ -49,7 +49,7 @@ public:
         samplesSinceTrigger = 0;
     }
 
-    float tick(bool keyIsDown) {
+    Amplitude tick(bool keyIsDown) {
         switch (envelopeState)
         {
             case ATTACK_STATE:
@@ -109,7 +109,7 @@ public:
     }
 private:
     
-    inline float getSegmentCoefficient(float startLevel, float endLevel, int durationInSamples) const
+    inline Amplitude getSegmentCoefficient(Amplitude startLevel, Amplitude endLevel, int durationInSamples) const
     {
         // add a tiny fudge factor when calculating the end level because it doesn't work
         // when it's exactly 0.0
@@ -126,15 +126,15 @@ private:
     int envelopeState;
     unsigned long samplesSinceTrigger = 0;
     float sampleRate = 0.0;
-    float velocity = 0.0;
-    float envLevel = 0.0;
+    Amplitude velocity = 0.0;
+    Amplitude envLevel = 0.0;
     float envCoefficient = 0.0;
     float envIncrement = 0.0;
 
-    float attack = 0.0;
-    float decay = 0.0;
-    float sustainLevel = 0.0;
-    float release = 0.0;
+    Seconds attack = 0.0;
+    Seconds decay = 0.0;
+    Amplitude sustainLevel = 0.0;
+    Seconds release = 0.0;
 
     unsigned long attackSamples = 0;
     unsigned long decaySamples = 0;
