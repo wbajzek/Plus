@@ -5,18 +5,17 @@
 * velocity sensitivity control
 * keyboard scaling of partial levels
 * LFO tempo sync
-* don't calculate envelopes for partials not in use, but if they are turned on
-  in mid-note, jump straight to the sustain portion of the envelope
 * aftertouch/velocity options:
   * stretch
   * partial scale (ie, pressing harder or using more velocity gives brighter
 sound)
 * Mono legato mode
+  * portamento
+  * note priority
 * ADSR range switch (short/long) to make editing easier.
 * ADSR helper buttons
   * reset
   * treat first partial ADSR as global (only one envelope)
-* portamento
 * Phase control per partial
 * LFO Phase control per partial
 * less ghetto UI
@@ -32,6 +31,6 @@ sound)
 * Missing labels
 * scroll wheel sucks on ALL controls
 * stretch ADSR knobs should look like other ADSR knobs
-* make undo/redo don't work, possibly without buying a commercial license for
+* make undo/redo work, possibly without buying a commercial license for
   PluginParameters
 * voice stealing: prefer to steal unheld notes before held?
