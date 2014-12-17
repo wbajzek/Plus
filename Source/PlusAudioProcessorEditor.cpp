@@ -21,30 +21,35 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     globalAttack.setRange(0.01, 10.0, 0.01);
     globalAttack.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalAttack.setPopupDisplayEnabled(true, this);
+    globalAttack.setScrollWheelEnabled(false);
     addAndMakeVisible(globalAttack);
 
     globalDecay.setSliderStyle(Slider::LinearBarVertical);
     globalDecay.setRange(0.01, 20.0, 0.01);
     globalDecay.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalDecay.setPopupDisplayEnabled(true, this);
+    globalDecay.setScrollWheelEnabled(false);
     addAndMakeVisible(globalDecay);
 
     globalSustain.setSliderStyle(Slider::LinearBarVertical);
     globalSustain.setRange(0.0, 1.0, 0.01);
     globalSustain.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalSustain.setPopupDisplayEnabled(true, this);
+    globalSustain.setScrollWheelEnabled(false);
     addAndMakeVisible(globalSustain);
 
     globalRelease.setSliderStyle(Slider::LinearBarVertical);
     globalRelease.setRange(0.01, 20.0, 0.01);
     globalRelease.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     globalRelease.setPopupDisplayEnabled(true, this);
+    globalRelease.setScrollWheelEnabled(false);
     addAndMakeVisible(globalRelease);
 
     lfoFrequency.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     lfoFrequency.setRange(0.01, 100.0, 0.01);
     lfoFrequency.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     lfoFrequency.setPopupDisplayEnabled(true, this);
+    lfoFrequency.setScrollWheelEnabled(false);
     addAndMakeVisible(lfoFrequency);
 
     lfoShape.addItem("Sine",SINE_WAVE_TABLE + 1);
@@ -54,6 +59,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     lfoShape.setWantsKeyboardFocus(false);
     lfoShape.setItemEnabled(0, false);
     lfoShape.setEditableText(false);
+    lfoShape.setScrollWheelEnabled(false);
     addAndMakeVisible(lfoShape);
 
     numberOfVoices.addItem("1",1);
@@ -68,6 +74,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     numberOfVoices.setWantsKeyboardFocus(false);
     numberOfVoices.setItemEnabled(0, false);
     numberOfVoices.setEditableText(false);
+    numberOfVoices.setScrollWheelEnabled(false);
     addAndMakeVisible(numberOfVoices);
 
     for (int i = 0; i < numberOfScales; i++)
@@ -77,6 +84,7 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     }
     scale.setWantsKeyboardFocus(false);
     scale.setEditableText(false);
+    scale.setScrollWheelEnabled(false);
     addAndMakeVisible(scale);
 
     scaleRoot.addItem("C",1);
@@ -94,30 +102,35 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     scaleRoot.setWantsKeyboardFocus(false);
     scaleRoot.setItemEnabled(0, false);
     scaleRoot.setEditableText(false);
+    scaleRoot.setScrollWheelEnabled(false);
     addAndMakeVisible(scaleRoot);
 
     partialStretch.setSliderStyle(Slider::LinearBarVertical);
     partialStretch.setRange(-1.0, 1.0, 0.01);
     partialStretch.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretch.setPopupDisplayEnabled(true, this);
+    partialStretch.setScrollWheelEnabled(false);
     addAndMakeVisible(partialStretch);
 
     partialStretchFine.setSliderStyle(Slider::LinearBarVertical);
     partialStretchFine.setRange(-0.01, 0.01, 0.0001);
     partialStretchFine.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretchFine.setPopupDisplayEnabled(true, this);
+    partialStretchFine.setScrollWheelEnabled(false);
     addAndMakeVisible(partialStretchFine);
 
     partialStretchEnvAmt.setSliderStyle(Slider::LinearBarVertical);
     partialStretchEnvAmt.setRange(0.0, 2.0, 0.01);
     partialStretchEnvAmt.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretchEnvAmt.setPopupDisplayEnabled(true, this);
+    partialStretchEnvAmt.setScrollWheelEnabled(false);
     addAndMakeVisible(partialStretchEnvAmt);
 
     partialStretchEnvAmtFine.setSliderStyle(Slider::LinearBarVertical);
     partialStretchEnvAmtFine.setRange(-0.0, 0.1, 0.0001);
     partialStretchEnvAmtFine.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     partialStretchEnvAmtFine.setPopupDisplayEnabled(true, this);
+    partialStretchEnvAmtFine.setScrollWheelEnabled(false);
     addAndMakeVisible(partialStretchEnvAmtFine);
 
     globalAttack.addListener(this);
@@ -184,6 +197,7 @@ void PlusAudioProcessorEditor::setupPartialComponents(Slider *level, Slider *tun
     level->setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     level->setPopupDisplayEnabled(true, this);
     level->addListener(this);
+    level->setScrollWheelEnabled(false);
     addAndMakeVisible(level);
 
     if (tune != nullptr)
@@ -193,6 +207,7 @@ void PlusAudioProcessorEditor::setupPartialComponents(Slider *level, Slider *tun
         tune->setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
         tune->setPopupDisplayEnabled(true, this);
         tune->addListener(this);
+        tune->setScrollWheelEnabled(false);
         addAndMakeVisible(tune);
     }
 
@@ -201,6 +216,7 @@ void PlusAudioProcessorEditor::setupPartialComponents(Slider *level, Slider *tun
     pan->setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     pan->setPopupDisplayEnabled(true, this);
     pan->addListener(this);
+    pan->setScrollWheelEnabled(false);
     addAndMakeVisible(pan);
 
     lfoAmt->setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
@@ -208,6 +224,7 @@ void PlusAudioProcessorEditor::setupPartialComponents(Slider *level, Slider *tun
     lfoAmt->setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     lfoAmt->setPopupDisplayEnabled(true, this);
     lfoAmt->addListener(this);
+    lfoAmt->setScrollWheelEnabled(false);
     addAndMakeVisible(lfoAmt);
 
     attack->setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
@@ -215,6 +232,7 @@ void PlusAudioProcessorEditor::setupPartialComponents(Slider *level, Slider *tun
     attack->setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     attack->setPopupDisplayEnabled(true, this);
     attack->addListener(this);
+    attack->setScrollWheelEnabled(false);
     addAndMakeVisible(attack);
 
     decay->setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
@@ -222,6 +240,7 @@ void PlusAudioProcessorEditor::setupPartialComponents(Slider *level, Slider *tun
     decay->setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     decay->setPopupDisplayEnabled(true, this);
     decay->addListener(this);
+    decay->setScrollWheelEnabled(false);
     addAndMakeVisible(decay);
 
     sustain->setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
@@ -229,6 +248,7 @@ void PlusAudioProcessorEditor::setupPartialComponents(Slider *level, Slider *tun
     sustain->setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     sustain->setPopupDisplayEnabled(true, this);
     sustain->addListener(this);
+    sustain->setScrollWheelEnabled(false);
     addAndMakeVisible(sustain);
 
     release->setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
@@ -236,6 +256,7 @@ void PlusAudioProcessorEditor::setupPartialComponents(Slider *level, Slider *tun
     release->setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
     release->setPopupDisplayEnabled(true, this);
     release->addListener(this);
+    release->setScrollWheelEnabled(false);
     addAndMakeVisible(release);
 }
 
@@ -890,7 +911,7 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
         processor.getFloatParam(PARTIAL_RELEASE_31)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialRelease_32)
         processor.getFloatParam(PARTIAL_RELEASE_32)->updateProcessorAndHostFromUi(slider->getValue());
-    
+
     if (slider == &noiseLevel)
         processor.getFloatParam(NOISE_LEVEL)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &noiseLfoAmt)

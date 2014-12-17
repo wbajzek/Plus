@@ -26,7 +26,6 @@ sound)
 * Click at the end of notes getting cut off, if the amplitudes are
   significantly different.
 * Performance is poor.
-* scroll wheel sucks on ALL controls
 * stretch ADSR knobs should look like other ADSR knobs
 * make undo/redo work, possibly without buying a commercial license for
   PluginParameters
