@@ -252,10 +252,15 @@ void PlusAudioProcessorEditor::paint (Graphics& g)
     g.drawFittedText ("LFO", 200, 238, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Tune", 200, 268, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Pan", 200, 298, 60, 30, Justification::centred, 1);
+    g.drawFittedText ("A", 200, 328, 60, 30, Justification::centred, 1);
+    g.drawFittedText ("D", 200, 358, 60, 30, Justification::centred, 1);
+    g.drawFittedText ("S", 200, 388, 60, 30, Justification::centred, 1);
+    g.drawFittedText ("R", 200, 418, 60, 30, Justification::centred, 1);
     g.drawFittedText ("LFO Freq", 20, 238, 60, 30, Justification::centred, 1);
     g.drawFittedText ("LFO Shape", 20, 268, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Voices", 20, 298, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Scale", 20, 328, 60, 30, Justification::centred, 1);
+    g.drawFittedText ("Scale Root", 20, 358, 60, 30, Justification::centred, 1);
 }
 
 void PlusAudioProcessorEditor::resized()
@@ -269,6 +274,7 @@ void PlusAudioProcessorEditor::resized()
     int panRowTop = 305;
     int panRowHeight = 20;
     int scaleRowTop = 335;
+    int scaleRootRowTop = 365;
     int scaleRowHeight = 20;
 
     globalAttack.setBounds (20, topRowTop, 20, topRowHeight);
@@ -317,7 +323,7 @@ void PlusAudioProcessorEditor::resized()
     lfoShape.setBounds (90, tuneRowTop, 90, tuneRowHeight);
     numberOfVoices.setBounds (90, panRowTop, 90, panRowHeight);
     scale.setBounds (90, scaleRowTop, 90, scaleRowHeight);
-    scaleRoot.setBounds (182, scaleRowTop, 60, scaleRowHeight);
+    scaleRoot.setBounds (90, scaleRootRowTop, 90, scaleRowHeight);
 }
 
 void PlusAudioProcessorEditor::layoutPartialComponents(int left, int top, Slider *level, Slider *tune, Slider *pan, Slider *lfoAmt, Slider *attack, Slider *decay, Slider *sustain, Slider *release)
