@@ -42,7 +42,8 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
         partialEnvelopes[i].trigger(velocity);
         voiceIsActive = true;
     }
-
+    noiseEnvelope.setAdsr(localParameters[NOISE_ATTACK], localParameters[NOISE_DECAY], localParameters[NOISE_SUSTAIN], localParameters[NOISE_RELEASE]);
+    noiseEnvelope.trigger(velocity);
     lfo.setFrequency(localParameters[LFO_FREQ]);
     lfo.setWaveTable(*localLfoShape);
 
@@ -134,6 +135,23 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                 stretch += stretch;
             }
             
+            if (localParameters[NOISE_LEVEL] > 0.0)
+            {
+                Amplitude value = ((rand() % 100) - 50) / 100.0;
+                value *= noiseLevel * (localParameters[NOISE_LEVEL] + (lfoLevel * localParameters[NOISE_LFO_AMT]));
+                
+                if (numChannels == 1)
+                    currentSampleLeft += value;
+                else
+                {
+                    Amplitude panRight = (1.0 + localParameters[NOISE_PAN]) / 2.0;
+                    Amplitude panLeft  = 1.0 - panRight;
+                    currentSampleLeft += value * panLeft;
+                    currentSampleRight += value * panRight;
+                }
+
+            }
+            
             if (numChannels == 1)
                 outputBuffer.addSample(0, startSample, currentSampleLeft / 8);
             else
@@ -160,6 +178,7 @@ void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
     envelope.setSampleRate(sampleRate);
     for (int i = 0; i < numPartials; i++)
         partialEnvelopes[i].setSampleRate(sampleRate);
+    noiseEnvelope.setSampleRate(sampleRate);
     nyquist = sampleRate/2.0;
     frqTI = waveTableLength/sampleRate;
     lfo.setSampleRate(sampleRate);
@@ -188,6 +207,11 @@ void AdditiveSynthVoice::tick()
             partialEnvelopeLevels[i] = partialEnvelopes[i].tick(keyIsDown);
             voiceIsActive |= (partialEnvelopeLevels[i] != 0.0);            
         }
+    }
+    if (localParameters[NOISE_LEVEL] > 0.0)
+    {
+        noiseLevel = noiseEnvelope.tick(keyIsDown);
+        voiceIsActive |= (noiseLevel != 0.0);
     }
     lfoLevel = lfo.tick();
 

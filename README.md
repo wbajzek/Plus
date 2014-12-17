@@ -1,7 +1,7 @@
 # Additive Synthesizer #
 
 ## Wishlist ##
-* noise 'partial'
+* color control for noise 'partial'
 * velocity sensitivity control
 * keyboard scaling of partial levels
 * LFO tempo sync

@@ -352,6 +352,8 @@ private:
     long partialIndices[numPartials] = { 0 };
     Envelope partialEnvelopes[numPartials];
     Amplitude partialEnvelopeLevels[numPartials] = { 0.0 };
+    Envelope noiseEnvelope;
+    Amplitude noiseLevel;
 
     Frequency calculateFrequency(int currentPitchWheelPosition);
     void tick();

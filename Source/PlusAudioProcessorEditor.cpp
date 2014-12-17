@@ -169,11 +169,12 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     setupPartialComponents(&partialLevel_30, &partialTune_30, &partialPan_30, &partialLfoAmt_30, &partialAttack_30, &partialDecay_30, &partialSustain_30, &partialRelease_30);
     setupPartialComponents(&partialLevel_31, &partialTune_31, &partialPan_31, &partialLfoAmt_31, &partialAttack_31, &partialDecay_31, &partialSustain_31, &partialRelease_31);
     setupPartialComponents(&partialLevel_32, &partialTune_32, &partialPan_32, &partialLfoAmt_32, &partialAttack_32, &partialDecay_32, &partialSustain_32, &partialRelease_32);
+    setupPartialComponents(&noiseLevel, nullptr, &noisePan, &noiseLfoAmt, &noiseAttack, &noiseDecay, &noiseSustain, &noiseRelease);
 
     processor.updateUi(true,true);
     timerCallback();
     startTimer(50);
-    setSize (910, 520);
+    setSize (950, 520);
 }
 
 void PlusAudioProcessorEditor::setupPartialComponents(Slider *level, Slider *tune, Slider *pan, Slider *lfoAmt, Slider *attack, Slider *decay, Slider *sustain, Slider *release)
@@ -185,12 +186,15 @@ void PlusAudioProcessorEditor::setupPartialComponents(Slider *level, Slider *tun
     level->addListener(this);
     addAndMakeVisible(level);
 
-    tune->setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
-    tune->setRange(-1.0, 1.0, 0.001);
-    tune->setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
-    tune->setPopupDisplayEnabled(true, this);
-    tune->addListener(this);
-    addAndMakeVisible(tune);
+    if (tune != nullptr)
+    {
+        tune->setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
+        tune->setRange(-1.0, 1.0, 0.001);
+        tune->setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+        tune->setPopupDisplayEnabled(true, this);
+        tune->addListener(this);
+        addAndMakeVisible(tune);
+    }
 
     pan->setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     pan->setRange(-1.0, 1.0, 0.001);
@@ -261,6 +265,7 @@ void PlusAudioProcessorEditor::paint (Graphics& g)
     g.drawFittedText ("Voices", 20, 298, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Scale", 20, 328, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Scale Root", 20, 358, 60, 30, Justification::centred, 1);
+    g.drawFittedText ("Noise", 890, 0, 60, 30, Justification::centred, 1);
 }
 
 void PlusAudioProcessorEditor::resized()
@@ -318,6 +323,7 @@ void PlusAudioProcessorEditor::resized()
     layoutPartialComponents(830, topRowTop, &partialLevel_30, &partialTune_30, &partialPan_30, &partialLfoAmt_30, &partialAttack_30, &partialDecay_30, &partialSustain_30, &partialRelease_30);
     layoutPartialComponents(850, topRowTop, &partialLevel_31, &partialTune_31, &partialPan_31, &partialLfoAmt_31, &partialAttack_31, &partialDecay_31, &partialSustain_31, &partialRelease_31);
     layoutPartialComponents(870, topRowTop, &partialLevel_32, &partialTune_32, &partialPan_32, &partialLfoAmt_32, &partialAttack_32, &partialDecay_32, &partialSustain_32, &partialRelease_32);
+    layoutPartialComponents(910, topRowTop, &noiseLevel, nullptr, &noisePan, &noiseLfoAmt, &noiseAttack, &noiseDecay, &noiseSustain, &noiseRelease);
 
     lfoFrequency.setBounds (90, lfoRowTop, 20, lfoRowHeight);
     lfoShape.setBounds (90, tuneRowTop, 90, tuneRowHeight);
@@ -333,7 +339,8 @@ void PlusAudioProcessorEditor::layoutPartialComponents(int left, int top, Slider
 
     level->setBounds (left, top, 20, levelHeight);
     lfoAmt->setBounds (left, top + 215, 20, knobHeight);
-    tune->setBounds (left, top + 245, 20, knobHeight);
+    if (tune != nullptr)
+        tune->setBounds (left, top + 245, 20, knobHeight);
     pan->setBounds (left, top + 275, 20, knobHeight);
     attack->setBounds (left, top + 305, 20, knobHeight);
     decay->setBounds (left, top + 335, 20, knobHeight);
@@ -883,6 +890,21 @@ void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
         processor.getFloatParam(PARTIAL_RELEASE_31)->updateProcessorAndHostFromUi(slider->getValue());
     if (slider == &partialRelease_32)
         processor.getFloatParam(PARTIAL_RELEASE_32)->updateProcessorAndHostFromUi(slider->getValue());
+    
+    if (slider == &noiseLevel)
+        processor.getFloatParam(NOISE_LEVEL)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &noiseLfoAmt)
+        processor.getFloatParam(NOISE_LFO_AMT)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &noisePan)
+        processor.getFloatParam(NOISE_PAN)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &noiseAttack)
+        processor.getFloatParam(NOISE_ATTACK)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &noiseDecay)
+        processor.getFloatParam(NOISE_DECAY)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &noiseSustain)
+        processor.getFloatParam(NOISE_SUSTAIN)->updateProcessorAndHostFromUi(slider->getValue());
+    if (slider == &noiseRelease)
+        processor.getFloatParam(NOISE_RELEASE)->updateProcessorAndHostFromUi(slider->getValue());
 
 }
 
@@ -1963,6 +1985,34 @@ void PlusAudioProcessorEditor::timerCallback()
     param=processor.getFloatParam(PARTIAL_RELEASE_32);
     if (&partialRelease_32 && param->updateUiRequested()){
         partialRelease_32.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(NOISE_LEVEL);
+    if (&noiseLevel && param->updateUiRequested()){
+        noiseLevel.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(NOISE_LFO_AMT);
+    if (&noiseLfoAmt && param->updateUiRequested()){
+        noiseLfoAmt.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(NOISE_PAN);
+    if (&noisePan && param->updateUiRequested()){
+        noisePan.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(NOISE_ATTACK);
+    if (&noiseAttack && param->updateUiRequested()){
+        noiseAttack.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(NOISE_DECAY);
+    if (&noiseDecay && param->updateUiRequested()){
+        noiseDecay.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(NOISE_SUSTAIN);
+    if (&noiseSustain && param->updateUiRequested()){
+        noiseSustain.setValue (param->uiGet(), dontSendNotification);
+    }
+    param=processor.getFloatParam(NOISE_RELEASE);
+    if (&noiseRelease && param->updateUiRequested()){
+        noiseRelease.setValue (param->uiGet(), dontSendNotification);
     }
 
     IntParam *intParam = processor.getIntParam(LFO_SHAPE);

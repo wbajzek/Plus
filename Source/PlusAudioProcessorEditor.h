@@ -305,6 +305,14 @@ private:
     Slider partialRelease_30;
     Slider partialRelease_31;
     Slider partialRelease_32;
+    Slider noiseLevel;
+    Slider noiseLfoAmt;
+    Slider noisePan;
+    Slider noiseAttack;
+    Slider noiseDecay;
+    Slider noiseSustain;
+    Slider noiseRelease;
+    
 
     void setupPartialComponents(Slider *level, Slider *tune, Slider *pan, Slider *lfoAmt, Slider *attack, Slider *decay, Slider *sustain, Slider *release);
     void layoutPartialComponents(int left, int top, Slider *level, Slider *tune, Slider *pan, Slider *lfoAmt, Slider *attack, Slider *decay, Slider *sustain, Slider *release);
