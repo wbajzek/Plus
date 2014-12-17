@@ -572,7 +572,7 @@ void PlusAudioProcessor::initParameters()
     addFloatParam(PARTIAL_RELEASE_32, "Partial_Release32", true, SAVE, &parameters[PARTIAL_RELEASE_32], 0.001, 10.0);
     addFloatParam(LFO_FREQ, "Lfo_Frequency", true, SAVE, &parameters[LFO_FREQ], 0.0, 100.0);
     addIntParam(LFO_SHAPE, "Lfo_Shape", true, SAVE, &lfoShape, SINE_WAVE_TABLE, NUMBER_OF_WAVE_TABLES);
-    addIntParam(NUMBER_OF_VOICES, "Number_Of_Voices", true, SAVE, &numberOfVoices, 1, 20);
+    addIntParam(NUMBER_OF_VOICES, "Number_Of_Voices", true, SAVE, &numberOfVoices, 1, 16);
     addIntParam(SCALE, "Scale", true, SAVE, &scale, 1, numberOfScales+1);
     addIntParam(SCALE_ROOT, "Scale_Root", true, SAVE, &scaleRoot, 1, 12);
 }
@@ -852,6 +852,7 @@ void PlusAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
         readXml(xmlState, true);
         //Update the parameter values from the preloaded XML values
         updateProcessorHostAndUiFromXml(true,true,true);
+        initVoices();
     }
 }
 

@@ -1959,7 +1959,6 @@ void PlusAudioProcessorEditor::timerCallback()
         partialRelease_32.setValue (param->uiGet(), dontSendNotification);
     }
 
-
     IntParam *intParam = processor.getIntParam(LFO_SHAPE);
     if (&lfoShape && intParam->updateUiRequested()){
         lfoShape.setSelectedId(intParam->uiGet() + 1, dontSendNotification);
