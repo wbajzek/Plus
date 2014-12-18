@@ -47,6 +47,7 @@ public:
         velocity = newVelocity;
         envelopeState = ATTACK_STATE;
         samplesSinceTrigger = 0;
+        envLevel = 0.0;
     }
 
     Amplitude tick(bool keyIsDown) {
