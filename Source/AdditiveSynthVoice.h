@@ -352,6 +352,8 @@ private:
     long partialIndices[numPartials] = { 0 };
     Envelope partialEnvelopes[numPartials];
     Amplitude partialEnvelopeLevels[numPartials] = { 0.0 };
+    
+    Oscillator noiseOscillator;
     Envelope noiseEnvelope;
     Amplitude noiseLevel;
 

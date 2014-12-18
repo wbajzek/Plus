@@ -23,6 +23,7 @@ enum WaveTables {
   TRIANGLE_WAVE_TABLE,
   SAW_WAVE_TABLE,
   RAMP_WAVE_TABLE,
+  NOISE_WAVE_TABLE,
   NUMBER_OF_WAVE_TABLES
 };
 
@@ -30,6 +31,7 @@ enum WaveTables {
 #include "TriangleWaveTable.h"
 #include "SawWaveTable.h"
 #include "RampWaveTable.h"
+#include "NoiseWaveTable.h"
 
 #endif  // WAVETABLES_H_INCLUDED
 HEADER
@@ -175,5 +177,32 @@ HEADER
   f.write "};\n"
 
   f.write "#endif  // RAMPWAVETABLE_H_INCLUDED\n"
+end
+
+
+File.open('../Source/WaveTables/NoiseWaveTable.h','w') do |f|
+  f.write <<HEADER
+/*
+  ==============================================================================
+
+    NoiseWavetable.h
+    Created: 6 Dec 2014 3:02:24pm
+    Author:  William Bajzek
+
+  ==============================================================================
+*/
+
+#ifndef NOISEWAVETABLE_H_INCLUDED
+#define NOISEWAVETABLE_H_INCLUDED
+HEADER
+
+  f.write "const double noiseWaveTable[] = {\n"
+
+  wavetable_length.to_i.times do
+    f.write "#{ rand(-1.0..1.0) },\n"
+  end
+  f.write "};\n"
+
+  f.write "#endif  // NOISEWAVETABLE_H_INCLUDED\n"
 end
 

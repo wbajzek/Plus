@@ -137,7 +137,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             
             if (localParameters[NOISE_LEVEL] > 0.0)
             {
-                Amplitude value = ((rand() % 100) - 50) / 100.0;
+                Amplitude value = noiseOscillator.tick();
                 value *= noiseLevel * (localParameters[NOISE_LEVEL] + (lfoLevel * localParameters[NOISE_LFO_AMT]));
                 
                 if (numChannels == 1)
@@ -178,6 +178,9 @@ void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
     for (int i = 0; i < numPartials; i++)
         partialEnvelopes[i].setSampleRate(sampleRate);
     noiseEnvelope.setSampleRate(sampleRate);
+    noiseOscillator.setSampleRate(sampleRate);
+    noiseOscillator.setFrequency(sampleRate);
+    noiseOscillator.setWaveTable(NOISE_WAVE_TABLE);
     nyquist = sampleRate/2.0;
     frqTI = waveTableLength/sampleRate;
     lfo.setSampleRate(sampleRate);

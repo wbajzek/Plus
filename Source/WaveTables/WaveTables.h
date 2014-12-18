@@ -19,6 +19,7 @@ enum WaveTables {
   TRIANGLE_WAVE_TABLE,
   SAW_WAVE_TABLE,
   RAMP_WAVE_TABLE,
+  NOISE_WAVE_TABLE,
   NUMBER_OF_WAVE_TABLES
 };
 
@@ -26,5 +27,6 @@ enum WaveTables {
 #include "TriangleWaveTable.h"
 #include "SawWaveTable.h"
 #include "RampWaveTable.h"
+#include "NoiseWaveTable.h"
 
 #endif  // WAVETABLES_H_INCLUDED

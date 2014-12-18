@@ -18,6 +18,8 @@
     <GROUP id="{400499B6-E5F0-E43E-4081-6377AEF3EFD4}" name="Source">
       <GROUP id="{53B5F086-5EE5-DCC5-238A-EA69576A03AA}" name="Synth">
         <GROUP id="{1C9A9DCF-3246-3101-8F3A-47D424470EC0}" name="WaveTables">
+          <FILE id="IGw2no" name="NoiseWaveTable.h" compile="0" resource="0"
+                file="Source/WaveTables/NoiseWaveTable.h"/>
           <FILE id="LqYz2v" name="TriangleWaveTable.h" compile="0" resource="0"
                 file="Source/WaveTables/TriangleWaveTable.h"/>
           <FILE id="UcX3Bm" name="RampWaveTable.h" compile="0" resource="0" file="Source/WaveTables/RampWaveTable.h"/>
