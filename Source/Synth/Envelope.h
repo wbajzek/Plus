@@ -47,7 +47,6 @@ public:
         velocity = newVelocity;
         envelopeState = ATTACK_STATE;
         samplesSinceTrigger = 0;
-        envLevel = 0.0;
     }
 
     Amplitude tick(bool keyIsDown) {
@@ -75,6 +74,7 @@ public:
                 {
                     envelopeState = RELEASE_STATE;
                     envCoefficient = getSegmentCoefficient(envLevel, 0.0, releaseSamples);
+                    jassert(envCoefficient != INFINITY);
                 }
                 break;
             case DECAY_STATE:
@@ -84,6 +84,7 @@ public:
                 {
                     envelopeState = RELEASE_STATE;
                     envCoefficient = getSegmentCoefficient(envLevel, 0.0, releaseSamples);
+                    jassert(envCoefficient != INFINITY);
                 }
                 else
                     envLevel += envCoefficient * envLevel;
@@ -94,6 +95,7 @@ public:
                 {
                     envelopeState = RELEASE_STATE;
                     envCoefficient = getSegmentCoefficient(envLevel, 0.0, releaseSamples);
+                    jassert(envCoefficient != INFINITY);
                 }
                 break;
             case RELEASE_STATE:
@@ -105,6 +107,11 @@ public:
                 }
                 break;
         }
+        if (envLevel > 1.0)
+            envLevel = 1.0;
+        if (envLevel < 0.0)
+            envLevel = 0.0;
+        
         samplesSinceTrigger++;
         jassert(envLevel != NAN);
         jassert(envLevel <= 1.0);
@@ -115,9 +122,8 @@ private:
     
     inline Amplitude getSegmentCoefficient(Amplitude startLevel, Amplitude endLevel, int durationInSamples) const
     {
-        // add a tiny fudge factor when calculating the end level because it doesn't work
-        // when it's exactly 0.0
-        return (log((endLevel) + 0.0001) - log(startLevel)) / durationInSamples;
+        // add a tiny fudge factor when calculating because it doesn't work when levels are exactly 0.0
+        return (log((endLevel + 0.0001)) - log(startLevel + 0.0001)) / durationInSamples;
     }
     
     void convertSecondsToSamples()
