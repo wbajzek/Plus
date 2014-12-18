@@ -105,6 +105,9 @@ public:
                 break;
         }
         samplesSinceTrigger++;
+        jassert(envLevel != NAN);
+        jassert(envLevel <= 1.0);
+        jassert(envLevel >= 0.0);
         return envLevel;
     }
 private:

@@ -149,7 +149,6 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                     currentSampleLeft += value * panLeft;
                     currentSampleRight += value * panRight;
                 }
-
             }
             
             if (numChannels == 1)
