@@ -59,8 +59,8 @@ public:
             case RAMP_WAVE_TABLE:
                 value += rampWaveTable[index];
                 break;
-            case NOISE_WAVE_TABLE:
-                value += noiseWaveTable[index];
+            case WHITE_NOISE_WAVE_TABLE:
+                value += whiteNoiseWaveTable[index];
                 break;
             default:
                 break;

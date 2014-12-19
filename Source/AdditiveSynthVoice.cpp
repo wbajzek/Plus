@@ -180,7 +180,7 @@ void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
     noiseEnvelope.setSampleRate(sampleRate);
     noiseOscillator.setSampleRate(sampleRate);
     noiseOscillator.setFrequency(sampleRate);
-    noiseOscillator.setWaveTable(NOISE_WAVE_TABLE);
+    noiseOscillator.setWaveTable(WHITE_NOISE_WAVE_TABLE);
     nyquist = sampleRate/2.0;
     frqTI = waveTableLength/sampleRate;
     lfo.setSampleRate(sampleRate);

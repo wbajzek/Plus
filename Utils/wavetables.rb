@@ -23,7 +23,7 @@ enum WaveTables {
   TRIANGLE_WAVE_TABLE,
   SAW_WAVE_TABLE,
   RAMP_WAVE_TABLE,
-  NOISE_WAVE_TABLE,
+  WHITE_NOISE_WAVE_TABLE,
   NUMBER_OF_WAVE_TABLES
 };
 
@@ -31,7 +31,7 @@ enum WaveTables {
 #include "TriangleWaveTable.h"
 #include "SawWaveTable.h"
 #include "RampWaveTable.h"
-#include "NoiseWaveTable.h"
+#include "WhiteNoiseWaveTable.h"
 
 #endif  // WAVETABLES_H_INCLUDED
 HEADER
@@ -180,29 +180,29 @@ HEADER
 end
 
 
-File.open('../Source/WaveTables/NoiseWaveTable.h','w') do |f|
+File.open('../Source/WaveTables/WhiteNoiseWaveTable.h','w') do |f|
   f.write <<HEADER
 /*
   ==============================================================================
 
-    NoiseWavetable.h
+    WhiteNoiseWavetable.h
     Created: 6 Dec 2014 3:02:24pm
     Author:  William Bajzek
 
   ==============================================================================
 */
 
-#ifndef NOISEWAVETABLE_H_INCLUDED
-#define NOISEWAVETABLE_H_INCLUDED
+#ifndef WHITENOISEWAVETABLE_H_INCLUDED
+#define WHITENOISEWAVETABLE_H_INCLUDED
 HEADER
 
-  f.write "const double noiseWaveTable[] = {\n"
+  f.write "const double whiteNoiseWaveTable[] = {\n"
 
   wavetable_length.to_i.times do
     f.write "#{ rand(-1.0..1.0) },\n"
   end
   f.write "};\n"
 
-  f.write "#endif  // NOISEWAVETABLE_H_INCLUDED\n"
+  f.write "#endif  // WHITENOISEWAVETABLE_H_INCLUDED\n"
 end
 
