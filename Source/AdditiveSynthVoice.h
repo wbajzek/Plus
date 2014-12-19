@@ -344,7 +344,6 @@ private:
     Amplitude lfoLevel = 0.0;
     Frequency nyquist;
     double sampleRate;
-    double frqTI;
     float modWheel = 0.0;
 
     unsigned long samplesSinceTrigger = 0;
