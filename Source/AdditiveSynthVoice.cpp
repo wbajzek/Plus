@@ -14,6 +14,8 @@ AdditiveSynthVoice::AdditiveSynthVoice(float* parameters, int* lfoShape, int* sc
     localLfoShape = lfoShape;
     localScale = scale;
     localScaleRoot = scaleRoot;
+    for (int i = 0; i < numPartials; i++)
+        partials[i].setWaveTable(SINE_WAVE_TABLE);
 }
 
 AdditiveSynthVoice::~AdditiveSynthVoice()
@@ -109,14 +111,12 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                     {
                         partialFreq += (localFreq * ((float)i + stretch));
                         partialFreq += partialFreq * stretch * stretchEnvAmt;
+                        partials[i].setFrequency(partialFreq);
                     }
                     if (20 < partialFreq && partialFreq < nyquist)
                     {
-                        // this '16' business is converting floating point to fixed for the sake of performance.
-                        // and oh boy, does it improve performance.
-                        const long increment = (long)(frqTI * partialFreq) << 16;
 
-                        Amplitude value = sineWaveTable[((partialIndices[i]+0x8000) >> 16)]
+                        Amplitude value = partials[i].tick()
                             * partialEnvelopeLevels[i] * (localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]]));
 
                         if (numChannels == 1)
@@ -129,7 +129,6 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                             currentSampleRight += value * panRight;
                         }
 
-                        partialIndices[i] = partialIndices[i] + increment & ((waveTableLength << 16) - 1);
                     }
                 }
                 stretch += stretch;
@@ -176,7 +175,10 @@ void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
     sampleRate = newRate;
     envelope.setSampleRate(sampleRate);
     for (int i = 0; i < numPartials; i++)
+    {
+        partials[i].setSampleRate(sampleRate);
         partialEnvelopes[i].setSampleRate(sampleRate);
+    }
     noiseEnvelope.setSampleRate(sampleRate);
     noiseOscillator.setSampleRate(sampleRate);
     noiseOscillator.setFrequency(sampleRate);

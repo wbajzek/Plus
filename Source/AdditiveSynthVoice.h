@@ -350,6 +350,7 @@ private:
     unsigned long samplesSinceTrigger = 0;
 
     long partialIndices[numPartials] = { 0 };
+    Oscillator partials[numPartials];
     Envelope partialEnvelopes[numPartials];
     Amplitude partialEnvelopeLevels[numPartials] = { 0.0 };
     
