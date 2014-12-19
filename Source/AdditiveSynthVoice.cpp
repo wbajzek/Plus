@@ -16,6 +16,7 @@ AdditiveSynthVoice::AdditiveSynthVoice(float* parameters, int* lfoShape, int* sc
     localScaleRoot = scaleRoot;
     for (int i = 0; i < numPartials; i++)
         partials[i].setWaveTable(SINE_WAVE_TABLE);
+    noiseOscillator.setWaveTable(WHITE_NOISE_WAVE_TABLE);
 }
 
 AdditiveSynthVoice::~AdditiveSynthVoice()
@@ -182,7 +183,6 @@ void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
     noiseEnvelope.setSampleRate(sampleRate);
     noiseOscillator.setSampleRate(sampleRate);
     noiseOscillator.setFrequency(sampleRate);
-    noiseOscillator.setWaveTable(WHITE_NOISE_WAVE_TABLE);
     nyquist = sampleRate/2.0;
     lfo.setSampleRate(sampleRate);
 }
