@@ -33,11 +33,10 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
     noteNumber = midiNoteNumber;
     freq = calculateFrequency(currentPitchWheelPosition);
     velocity = midiVelocity;
-    envLevel = 0.001;
-    samplesSinceTrigger = 0;
+    stretchEnvLevel = 0.001;
 
-    envelope.setAdsr(localParameters[ATTACK], localParameters[DECAY], localParameters[SUSTAIN], localParameters[RELEASE]);
-    envelope.trigger(velocity);
+    stretchEnvelope.setAdsr(localParameters[ATTACK], localParameters[DECAY], localParameters[SUSTAIN], localParameters[RELEASE]);
+    stretchEnvelope.trigger(velocity);
     for (int i = 0; i < numPartials; i++)
     {
         partialEnvelopeLevels[i] = 0.0;
@@ -49,16 +48,10 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
     noiseEnvelope.trigger(velocity);
     lfo.setFrequency(localParameters[LFO_FREQ]);
     lfo.setWaveTable(*localLfoShape);
-
-    for (int i = 0; i < numPartials; i++)
-    {
-        partialIndices[i] = 0.0;
-    }
 }
 
 void AdditiveSynthVoice::stopNote (float velocity, const bool allowTailOff)
 {
-    samplesSinceTrigger = 0;
 }
 
 Frequency AdditiveSynthVoice::calculateFrequency(int currentPitchWheelPosition)
@@ -99,7 +92,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
         {
             Amplitude currentSampleLeft = 0.0;
             Amplitude currentSampleRight = 0.0;
-            float stretchEnvAmt = stretchEnvAmtInc * envLevel;
+            float stretchEnvAmt = stretchEnvAmtInc * stretchEnvLevel;
             float stretch = localParameters[STRETCH] + localParameters[STRETCH_FINE];
             Frequency localFreq = freq + (freq * modWheel * lfoLevel);
 
@@ -174,7 +167,7 @@ void AdditiveSynthVoice::aftertouchChanged (int newAftertouchValue)
 void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
 {
     sampleRate = newRate;
-    envelope.setSampleRate(sampleRate);
+    stretchEnvelope.setSampleRate(sampleRate);
     for (int i = 0; i < numPartials; i++)
     {
         partials[i].setSampleRate(sampleRate);
@@ -201,7 +194,7 @@ bool AdditiveSynthVoice::isVoiceActive() const
 void AdditiveSynthVoice::tick()
 {
     bool keyIsDown = isKeyDown();
-    envLevel = envelope.tick(keyIsDown);
+    stretchEnvLevel = stretchEnvelope.tick(keyIsDown);
     voiceIsActive = false;
     for (int i = 0; i < numPartials; i++)
     {
@@ -217,8 +210,6 @@ void AdditiveSynthVoice::tick()
         voiceIsActive |= (noiseLevel != 0.0);
     }
     lfoLevel = lfo.tick();
-
-    ++samplesSinceTrigger;
 }
 
 void AdditiveSynthVoice::actionListenerCallback (const String &message)
@@ -228,5 +219,5 @@ void AdditiveSynthVoice::actionListenerCallback (const String &message)
     else if (message.equalsIgnoreCase("LFO Shape"))
         lfo.setWaveTable(*localLfoShape);
     else if (message.equalsIgnoreCase("Envelope"))
-        envelope.setAdsr(localParameters[ATTACK], localParameters[DECAY], localParameters[SUSTAIN], localParameters[RELEASE]);
+        stretchEnvelope.setAdsr(localParameters[ATTACK], localParameters[DECAY], localParameters[SUSTAIN], localParameters[RELEASE]);
 }

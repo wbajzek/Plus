@@ -80,6 +80,8 @@ private:
     long increment = 0.0;
     unsigned long index = 0;
     int waveTableShape = 0;
+    
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Oscillator)
 };
 
 

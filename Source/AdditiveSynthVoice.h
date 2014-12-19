@@ -329,33 +329,28 @@ public:
 
 private:
 
-    Envelope envelope;
+    Oscillator partials[numPartials];
+    Envelope partialEnvelopes[numPartials];
+    Amplitude partialEnvelopeLevels[numPartials] = { 0.0 };
+    Oscillator noiseOscillator;
+    Envelope noiseEnvelope;
+    Amplitude noiseLevel;
+    Envelope stretchEnvelope;
     Oscillator lfo;
 
     float* localParameters;
     int* localLfoShape;
     int* localScale;
     int* localScaleRoot;
-    Frequency freq = 110.0;
+    Frequency freq = 0.0;
     int noteNumber;
     Amplitude velocity = 0.0;
-    Amplitude envLevel = 0.0;
+    Amplitude stretchEnvLevel = 0.0;
     bool voiceIsActive = false;
     Amplitude lfoLevel = 0.0;
     Frequency nyquist;
     double sampleRate;
     float modWheel = 0.0;
-
-    unsigned long samplesSinceTrigger = 0;
-
-    long partialIndices[numPartials] = { 0 };
-    Oscillator partials[numPartials];
-    Envelope partialEnvelopes[numPartials];
-    Amplitude partialEnvelopeLevels[numPartials] = { 0.0 };
-    
-    Oscillator noiseOscillator;
-    Envelope noiseEnvelope;
-    Amplitude noiseLevel;
 
     Frequency calculateFrequency(int currentPitchWheelPosition);
     void tick();
