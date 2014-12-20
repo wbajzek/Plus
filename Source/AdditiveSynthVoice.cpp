@@ -167,7 +167,7 @@ void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
     for (int i = 0; i < numPartials; i++)
         partials[i].setSampleRate(sampleRate);
     noiseVoice.setSampleRate(sampleRate);
-    noiseVoice.setFrequency(sampleRate);
+    noiseVoice.setFrequency(sampleRate / waveTableLength);
     nyquist = sampleRate/2.0;
     lfo.setSampleRate(sampleRate);
 }
