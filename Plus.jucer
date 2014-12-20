@@ -28,6 +28,7 @@
           <FILE id="sLeiNE" name="WaveTables.h" compile="0" resource="0" file="Source/WaveTables/WaveTables.h"/>
         </GROUP>
         <FILE id="lON7zi" name="Synth.h" compile="0" resource="0" file="Source/Synth/Synth.h"/>
+        <FILE id="NuVZ4s" name="SynthVoice.h" compile="0" resource="0" file="Source/Synth/SynthVoice.h"/>
         <FILE id="mGuCdo" name="Envelope.h" compile="0" resource="0" file="Source/Synth/Envelope.h"/>
         <FILE id="yunvAP" name="Oscillator.h" compile="0" resource="0" file="Source/Synth/Oscillator.h"/>
       </GROUP>

@@ -42,7 +42,7 @@ public:
     }
     
     // velocity scaled [0,1]
-    void trigger(float newVelocity)
+    void trigger(Amplitude newVelocity)
     {
         velocity = newVelocity;
         envelopeState = ATTACK_STATE;
@@ -118,6 +118,12 @@ public:
         jassert(envLevel >= 0.0);
         return envLevel;
     }
+    
+    Amplitude amplitude()
+    {
+        return envLevel;
+    }
+    
 private:
     
     inline Amplitude getSegmentCoefficient(Amplitude startLevel, Amplitude endLevel, int durationInSamples) const
@@ -135,7 +141,7 @@ private:
     
     int envelopeState;
     unsigned long samplesSinceTrigger = 0;
-    float sampleRate = 0.0;
+    Frequency sampleRate = 0.0;
     Amplitude velocity = 0.0;
     Amplitude envLevel = 0.0;
     float envCoefficient = 0.0;

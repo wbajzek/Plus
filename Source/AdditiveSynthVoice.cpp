@@ -32,20 +32,18 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
 {
     noteNumber = midiNoteNumber;
     freq = calculateFrequency(currentPitchWheelPosition);
-    velocity = midiVelocity;
     stretchEnvLevel = 0.001;
 
     stretchEnvelope.setAdsr(localParameters[ATTACK], localParameters[DECAY], localParameters[SUSTAIN], localParameters[RELEASE]);
-    stretchEnvelope.trigger(velocity);
+    stretchEnvelope.trigger(midiVelocity);
     for (int i = 0; i < numPartials; i++)
     {
-        partialEnvelopeLevels[i] = 0.0;
-        partialEnvelopes[i].setAdsr(localParameters[PartialAttackToParamMapping[i]], localParameters[PartialDecayToParamMapping[i]], localParameters[PartialSustainToParamMapping[i]], localParameters[PartialReleaseToParamMapping[i]]);
-        partialEnvelopes[i].trigger(velocity);
+        partials[i].setAdsr(localParameters[PartialAttackToParamMapping[i]], localParameters[PartialDecayToParamMapping[i]], localParameters[PartialSustainToParamMapping[i]], localParameters[PartialReleaseToParamMapping[i]]);
+        partials[i].trigger(midiVelocity);
         voiceIsActive = true;
     }
     noiseEnvelope.setAdsr(localParameters[NOISE_ATTACK], localParameters[NOISE_DECAY], localParameters[NOISE_SUSTAIN], localParameters[NOISE_RELEASE]);
-    noiseEnvelope.trigger(velocity);
+    noiseEnvelope.trigger(midiVelocity);
     lfo.setFrequency(localParameters[LFO_FREQ]);
     lfo.setWaveTable(*localLfoShape);
 }
@@ -98,7 +96,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 
             for (int i = 0; i < numPartials; i++)
             {
-                if (localParameters[PartialLevelToParamMapping[i]] > 0.0 && partialEnvelopeLevels[i] > 0.0)
+                if (localParameters[PartialLevelToParamMapping[i]] > 0.0 && partials[i].amplitude() > 0.0)
                 {
                     Frequency partialFreq = localFreq + (localFreq * localParameters[PartialTuneToParamMapping[i]]);
                     if (i > 0)
@@ -110,8 +108,8 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                     if (20 < partialFreq && partialFreq < nyquist)
                     {
 
-                        Amplitude value = partials[i].tick()
-                            * partialEnvelopeLevels[i] * (localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]]));
+                        Amplitude value = partials[i].output()
+                        * (localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]]));
 
                         if (numChannels == 1)
                             currentSampleLeft += value;
@@ -169,10 +167,7 @@ void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
     sampleRate = newRate;
     stretchEnvelope.setSampleRate(sampleRate);
     for (int i = 0; i < numPartials; i++)
-    {
         partials[i].setSampleRate(sampleRate);
-        partialEnvelopes[i].setSampleRate(sampleRate);
-    }
     noiseEnvelope.setSampleRate(sampleRate);
     noiseOscillator.setSampleRate(sampleRate);
     noiseOscillator.setFrequency(sampleRate);
@@ -200,8 +195,8 @@ void AdditiveSynthVoice::tick()
     {
         if (localParameters[PartialLevelToParamMapping[i]] > 0.0)
         {
-            partialEnvelopeLevels[i] = partialEnvelopes[i].tick(keyIsDown);
-            voiceIsActive |= (partialEnvelopeLevels[i] != 0.0);            
+            partials[i].tick(keyIsDown);
+            voiceIsActive |= (partials[i].amplitude() != 0.0);
         }
     }
     if (localParameters[NOISE_LEVEL] > 0.0)

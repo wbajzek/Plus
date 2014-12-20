@@ -74,7 +74,7 @@ public:
     }
     
 private:
-    float sampleRate = 0.0;
+    Frequency sampleRate = 0.0;
     double frqTI = 0.0;
     Frequency frequency = 0.0;
     long increment = 0.0;

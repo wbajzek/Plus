@@ -18,5 +18,6 @@ typedef double Seconds;
 #include "WaveTables.h"
 #include "Oscillator.h"
 #include "Envelope.h"
+#include "SynthVoice.h"
 
 #endif  // SYNTH_H_INCLUDED

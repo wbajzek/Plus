@@ -329,9 +329,7 @@ public:
 
 private:
 
-    Oscillator partials[numPartials];
-    Envelope partialEnvelopes[numPartials];
-    Amplitude partialEnvelopeLevels[numPartials] = { 0.0 };
+    SynthVoice partials[numPartials];
     Oscillator noiseOscillator;
     Envelope noiseEnvelope;
     Amplitude noiseLevel;
@@ -344,7 +342,6 @@ private:
     int* localScaleRoot;
     Frequency freq = 0.0;
     int noteNumber;
-    Amplitude velocity = 0.0;
     Amplitude stretchEnvLevel = 0.0;
     bool voiceIsActive = false;
     Amplitude lfoLevel = 0.0;
