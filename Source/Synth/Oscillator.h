@@ -40,28 +40,28 @@ public:
         waveTableShape = newWaveTableShape;
     }
 
-    Amplitude tick()
+    void tick()
     {
         jassert(sampleRate > 0);
         jassert(frqTI > 0);
-        Amplitude value = 0.0;
+
         int scaledIndex = ((index+0x8000) >> 16);
         switch (waveTableShape)
         {
             case SINE_WAVE_TABLE:
-                value += sineWaveTable[scaledIndex];
+                value = sineWaveTable[scaledIndex];
                 break;
             case TRIANGLE_WAVE_TABLE:
-                value += triangleWaveTable[scaledIndex];
+                value = triangleWaveTable[scaledIndex];
                 break;
             case SAW_WAVE_TABLE:
-                value += sawWaveTable[scaledIndex];
+                value = sawWaveTable[scaledIndex];
                 break;
             case RAMP_WAVE_TABLE:
-                value += rampWaveTable[scaledIndex];
+                value = rampWaveTable[scaledIndex];
                 break;
             case WHITE_NOISE_WAVE_TABLE:
-                value += whiteNoiseWaveTable[scaledIndex];
+                value = whiteNoiseWaveTable[scaledIndex];
                 break;
             default:
                 break;
@@ -69,7 +69,10 @@ public:
         index += increment;
         
         index = index + increment & ((waveTableLength << 16) - 1);
-        
+    }
+    
+    Amplitude output()
+    {
         return value;
     }
     
@@ -80,6 +83,7 @@ private:
     long increment = 0.0;
     unsigned long index = 0;
     int waveTableShape = 0;
+    Amplitude value = 0.0;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Oscillator)
 };

@@ -340,9 +340,7 @@ private:
     int* localScaleRoot;
     Frequency freq = 0.0;
     int noteNumber;
-    Amplitude stretchEnvLevel = 0.0;
     bool voiceIsActive = false;
-    Amplitude lfoLevel = 0.0;
     Frequency nyquist;
     double sampleRate;
     float modWheel = 0.0;

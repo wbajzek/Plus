@@ -32,8 +32,6 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
 {
     noteNumber = midiNoteNumber;
     freq = calculateFrequency(currentPitchWheelPosition);
-    stretchEnvLevel = 0.001;
-
     stretchEnvelope.setAdsr(localParameters[ATTACK], localParameters[DECAY], localParameters[SUSTAIN], localParameters[RELEASE]);
     stretchEnvelope.trigger(midiVelocity);
     for (int i = 0; i < numPartials; i++)
@@ -90,7 +88,8 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
         {
             Amplitude currentSampleLeft = 0.0;
             Amplitude currentSampleRight = 0.0;
-            float stretchEnvAmt = stretchEnvAmtInc * stretchEnvLevel;
+            Amplitude lfoLevel = lfo.output();
+            float stretchEnvAmt = stretchEnvAmtInc * stretchEnvelope.amplitude();
             float stretch = localParameters[STRETCH] + localParameters[STRETCH_FINE];
             Frequency localFreq = freq + (freq * modWheel * lfoLevel);
 
@@ -187,7 +186,7 @@ bool AdditiveSynthVoice::isVoiceActive() const
 void AdditiveSynthVoice::tick()
 {
     bool keyIsDown = isKeyDown();
-    stretchEnvLevel = stretchEnvelope.tick(keyIsDown);
+    stretchEnvelope.tick(keyIsDown);
     voiceIsActive = false;
     for (int i = 0; i < numPartials; i++)
     {
@@ -202,7 +201,7 @@ void AdditiveSynthVoice::tick()
         noiseVoice.tick(keyIsDown);
         voiceIsActive |= (noiseVoice.amplitude() != 0.0);
     }
-    lfoLevel = lfo.tick();
+    lfo.tick();
 }
 
 void AdditiveSynthVoice::actionListenerCallback (const String &message)

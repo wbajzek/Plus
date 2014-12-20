@@ -49,7 +49,7 @@ public:
         samplesSinceTrigger = 0;
     }
 
-    Amplitude tick(bool keyIsDown) {
+    void tick(bool keyIsDown) {
         switch (envelopeState)
         {
             case ATTACK_STATE:
@@ -116,7 +116,6 @@ public:
         jassert(envLevel != NAN);
         jassert(envLevel <= 1.0);
         jassert(envLevel >= 0.0);
-        return envLevel;
     }
     
     Amplitude amplitude()

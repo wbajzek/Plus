@@ -49,12 +49,13 @@ public:
     
     void tick(bool keyIsDown)
     {
-        value = oscillator.tick() * envelope.tick(keyIsDown);
+        oscillator.tick();
+        envelope.tick(keyIsDown);
     }
     
     Amplitude output()
     {
-        return value;
+        return oscillator.output() * envelope.amplitude();
     }
     
     Amplitude amplitude()
@@ -66,7 +67,6 @@ private:
     Oscillator oscillator;
     Envelope envelope;
     Frequency sampleRate;
-    float value = 0.0;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SynthVoice)
 };
