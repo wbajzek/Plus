@@ -330,9 +330,7 @@ public:
 private:
 
     SynthVoice partials[numPartials];
-    Oscillator noiseOscillator;
-    Envelope noiseEnvelope;
-    Amplitude noiseLevel;
+    SynthVoice noiseVoice;
     Envelope stretchEnvelope;
     Oscillator lfo;
 

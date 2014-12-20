@@ -16,7 +16,7 @@ AdditiveSynthVoice::AdditiveSynthVoice(float* parameters, int* lfoShape, int* sc
     localScaleRoot = scaleRoot;
     for (int i = 0; i < numPartials; i++)
         partials[i].setWaveTable(SINE_WAVE_TABLE);
-    noiseOscillator.setWaveTable(WHITE_NOISE_WAVE_TABLE);
+    noiseVoice.setWaveTable(WHITE_NOISE_WAVE_TABLE);
 }
 
 AdditiveSynthVoice::~AdditiveSynthVoice()
@@ -42,8 +42,8 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
         partials[i].trigger(midiVelocity);
         voiceIsActive = true;
     }
-    noiseEnvelope.setAdsr(localParameters[NOISE_ATTACK], localParameters[NOISE_DECAY], localParameters[NOISE_SUSTAIN], localParameters[NOISE_RELEASE]);
-    noiseEnvelope.trigger(midiVelocity);
+    noiseVoice.setAdsr(localParameters[NOISE_ATTACK], localParameters[NOISE_DECAY], localParameters[NOISE_SUSTAIN], localParameters[NOISE_RELEASE]);
+    noiseVoice.trigger(midiVelocity);
     lfo.setFrequency(localParameters[LFO_FREQ]);
     lfo.setWaveTable(*localLfoShape);
 }
@@ -128,8 +128,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             
             if (localParameters[NOISE_LEVEL] > 0.0)
             {
-                Amplitude value = noiseOscillator.tick();
-                value *= noiseLevel * (localParameters[NOISE_LEVEL] + (lfoLevel * localParameters[NOISE_LFO_AMT]));
+                Amplitude value = noiseVoice.output() * (localParameters[NOISE_LEVEL] + (lfoLevel * localParameters[NOISE_LFO_AMT]));
                 
                 if (numChannels == 1)
                     currentSampleLeft += value;
@@ -168,9 +167,8 @@ void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
     stretchEnvelope.setSampleRate(sampleRate);
     for (int i = 0; i < numPartials; i++)
         partials[i].setSampleRate(sampleRate);
-    noiseEnvelope.setSampleRate(sampleRate);
-    noiseOscillator.setSampleRate(sampleRate);
-    noiseOscillator.setFrequency(sampleRate);
+    noiseVoice.setSampleRate(sampleRate);
+    noiseVoice.setFrequency(sampleRate);
     nyquist = sampleRate/2.0;
     lfo.setSampleRate(sampleRate);
 }
@@ -201,8 +199,8 @@ void AdditiveSynthVoice::tick()
     }
     if (localParameters[NOISE_LEVEL] > 0.0)
     {
-        noiseLevel = noiseEnvelope.tick(keyIsDown);
-        voiceIsActive |= (noiseLevel != 0.0);
+        noiseVoice.tick(keyIsDown);
+        voiceIsActive |= (noiseVoice.amplitude() != 0.0);
     }
     lfoLevel = lfo.tick();
 }
