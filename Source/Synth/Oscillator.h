@@ -66,8 +66,6 @@ public:
             default:
                 break;
         }
-        index += increment;
-        
         index = index + increment & ((waveTableLength << 16) - 1);
     }
     
