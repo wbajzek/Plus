@@ -17,33 +17,33 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
 
-    globalAttack.setSliderStyle(Slider::LinearBarVertical);
-    globalAttack.setRange(0.01, 10.0, 0.01);
-    globalAttack.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
-    globalAttack.setPopupDisplayEnabled(true, this);
-    globalAttack.setScrollWheelEnabled(false);
-    addAndMakeVisible(globalAttack);
+    stretchAttack.setSliderStyle(Slider::LinearBarVertical);
+    stretchAttack.setRange(0.01, 10.0, 0.01);
+    stretchAttack.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    stretchAttack.setPopupDisplayEnabled(true, this);
+    stretchAttack.setScrollWheelEnabled(false);
+    addAndMakeVisible(stretchAttack);
 
-    globalDecay.setSliderStyle(Slider::LinearBarVertical);
-    globalDecay.setRange(0.01, 20.0, 0.01);
-    globalDecay.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
-    globalDecay.setPopupDisplayEnabled(true, this);
-    globalDecay.setScrollWheelEnabled(false);
-    addAndMakeVisible(globalDecay);
+    stretchDecay.setSliderStyle(Slider::LinearBarVertical);
+    stretchDecay.setRange(0.01, 20.0, 0.01);
+    stretchDecay.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    stretchDecay.setPopupDisplayEnabled(true, this);
+    stretchDecay.setScrollWheelEnabled(false);
+    addAndMakeVisible(stretchDecay);
 
-    globalSustain.setSliderStyle(Slider::LinearBarVertical);
-    globalSustain.setRange(0.0, 1.0, 0.01);
-    globalSustain.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
-    globalSustain.setPopupDisplayEnabled(true, this);
-    globalSustain.setScrollWheelEnabled(false);
-    addAndMakeVisible(globalSustain);
+    stretchSustain.setSliderStyle(Slider::LinearBarVertical);
+    stretchSustain.setRange(0.0, 1.0, 0.01);
+    stretchSustain.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    stretchSustain.setPopupDisplayEnabled(true, this);
+    stretchSustain.setScrollWheelEnabled(false);
+    addAndMakeVisible(stretchSustain);
 
-    globalRelease.setSliderStyle(Slider::LinearBarVertical);
-    globalRelease.setRange(0.01, 20.0, 0.01);
-    globalRelease.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
-    globalRelease.setPopupDisplayEnabled(true, this);
-    globalRelease.setScrollWheelEnabled(false);
-    addAndMakeVisible(globalRelease);
+    stretchRelease.setSliderStyle(Slider::LinearBarVertical);
+    stretchRelease.setRange(0.01, 20.0, 0.01);
+    stretchRelease.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+    stretchRelease.setPopupDisplayEnabled(true, this);
+    stretchRelease.setScrollWheelEnabled(false);
+    addAndMakeVisible(stretchRelease);
 
     lfoFrequency.setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     lfoFrequency.setRange(0.01, 100.0, 0.01);
@@ -133,10 +133,10 @@ PlusAudioProcessorEditor::PlusAudioProcessorEditor (PlusAudioProcessor& p)
     partialStretchEnvAmtFine.setScrollWheelEnabled(false);
     addAndMakeVisible(partialStretchEnvAmtFine);
 
-    globalAttack.addListener(this);
-    globalDecay.addListener(this);
-    globalSustain.addListener(this);
-    globalRelease.addListener(this);
+    stretchAttack.addListener(this);
+    stretchDecay.addListener(this);
+    stretchSustain.addListener(this);
+    stretchRelease.addListener(this);
 
     lfoFrequency.addListener(this);
     lfoShape.addListener(this);
@@ -276,10 +276,10 @@ void PlusAudioProcessorEditor::resized()
     int scaleRootRowTop = 365;
     int scaleRowHeight = 20;
 
-    globalAttack.setBounds (20, topRowTop, 20, topRowHeight);
-    globalDecay.setBounds (40, topRowTop, 20, topRowHeight);
-    globalSustain.setBounds (60, topRowTop, 20, topRowHeight);
-    globalRelease.setBounds (80, topRowTop, 20, topRowHeight);
+    stretchAttack.setBounds (20, topRowTop, 20, topRowHeight);
+    stretchDecay.setBounds (40, topRowTop, 20, topRowHeight);
+    stretchSustain.setBounds (60, topRowTop, 20, topRowHeight);
+    stretchRelease.setBounds (80, topRowTop, 20, topRowHeight);
     partialStretch.setBounds (130, topRowTop, 20, topRowHeight);
     partialStretchFine.setBounds (150, topRowTop, 20, topRowHeight);
     partialStretchEnvAmt.setBounds (190, topRowTop, 20, topRowHeight);
@@ -317,13 +317,13 @@ void PlusAudioProcessorEditor::layoutPartialComponents(int left, int top, Slider
 
 void PlusAudioProcessorEditor::sliderValueChanged(Slider* slider)
 {
-    if (slider == &globalAttack)
+    if (slider == &stretchAttack)
         processor.getFloatParam(ATTACK)->updateProcessorAndHostFromUi(slider->getValue());
-    if (slider == &globalDecay)
+    if (slider == &stretchDecay)
         processor.getFloatParam(DECAY)->updateProcessorAndHostFromUi(slider->getValue());
-    if (slider == &globalSustain)
+    if (slider == &stretchSustain)
         processor.getFloatParam(SUSTAIN)->updateProcessorAndHostFromUi(slider->getValue());
-    if (slider == &globalRelease)
+    if (slider == &stretchRelease)
         processor.getFloatParam(RELEASE)->updateProcessorAndHostFromUi(slider->getValue());
 
     if (slider == &lfoFrequency)
@@ -394,20 +394,20 @@ void PlusAudioProcessorEditor::comboBoxChanged (ComboBox* comboBox)
 void PlusAudioProcessorEditor::timerCallback()
 {
     FloatParam *param=processor.getFloatParam(ATTACK);
-    if (&globalAttack && param->updateUiRequested()){
-        globalAttack.setValue (param->uiGet(), dontSendNotification);
+    if (&stretchAttack && param->updateUiRequested()){
+        stretchAttack.setValue (param->uiGet(), dontSendNotification);
     }
     param=processor.getFloatParam(DECAY);
-    if (&globalDecay && param->updateUiRequested()){
-        globalDecay.setValue (param->uiGet(), dontSendNotification);
+    if (&stretchDecay && param->updateUiRequested()){
+        stretchDecay.setValue (param->uiGet(), dontSendNotification);
     }
     param=processor.getFloatParam(SUSTAIN);
-    if (&globalSustain && param->updateUiRequested()){
-        globalSustain.setValue (param->uiGet(), dontSendNotification);
+    if (&stretchSustain && param->updateUiRequested()){
+        stretchSustain.setValue (param->uiGet(), dontSendNotification);
     }
     param=processor.getFloatParam(RELEASE);
-    if (&globalRelease && param->updateUiRequested()){
-        globalRelease.setValue (param->uiGet(), dontSendNotification);
+    if (&stretchRelease && param->updateUiRequested()){
+        stretchRelease.setValue (param->uiGet(), dontSendNotification);
     }
     param=processor.getFloatParam(LFO_FREQ);
     if (&lfoFrequency && param->updateUiRequested()){

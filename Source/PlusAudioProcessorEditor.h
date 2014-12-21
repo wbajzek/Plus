@@ -36,10 +36,10 @@ private:
     // access the processor object that created it.
     PlusAudioProcessor& processor;
 
-    Slider globalAttack;
-    Slider globalDecay;
-    Slider globalSustain;
-    Slider globalRelease;
+    Slider stretchAttack;
+    Slider stretchDecay;
+    Slider stretchSustain;
+    Slider stretchRelease;
     Slider lfoFrequency;
     ComboBox lfoShape;
     ComboBox numberOfVoices;
