@@ -90,7 +90,6 @@ public:
                     envLevel += envCoefficient * envLevel;
                 break;
             case SUSTAIN_STATE:
-                envLevel = sustainLevel * velocity;
                 if (!keyIsDown)
                 {
                     envelopeState = RELEASE_STATE;
