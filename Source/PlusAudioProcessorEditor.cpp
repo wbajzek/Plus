@@ -247,13 +247,15 @@ void PlusAudioProcessorEditor::paint (Graphics& g)
     g.drawFittedText ("Stretch", 120, 0, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Env", 180, 0, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Partial Levels", 250, 0, 640, 30, Justification::centred, 1);
-    g.drawFittedText ("LFO", 200, 238, 60, 30, Justification::centred, 1);
-    g.drawFittedText ("Tune", 200, 268, 60, 30, Justification::centred, 1);
-    g.drawFittedText ("Pan", 200, 298, 60, 30, Justification::centred, 1);
-    g.drawFittedText ("A", 200, 328, 60, 30, Justification::centred, 1);
-    g.drawFittedText ("D", 200, 358, 60, 30, Justification::centred, 1);
-    g.drawFittedText ("S", 200, 388, 60, 30, Justification::centred, 1);
-    g.drawFittedText ("R", 200, 418, 60, 30, Justification::centred, 1);
+
+    int partialControlLabelLeft = 180;
+    g.drawFittedText ("LFO", partialControlLabelLeft, 238, 60, 30, Justification::right, 1);
+    g.drawFittedText ("Tune", partialControlLabelLeft, 268, 60, 30, Justification::right, 1);
+    g.drawFittedText ("Pan", partialControlLabelLeft, 298, 60, 30, Justification::right, 1);
+    g.drawFittedText ("A", partialControlLabelLeft, 328, 60, 30, Justification::right, 1);
+    g.drawFittedText ("D", partialControlLabelLeft, 358, 60, 30, Justification::right, 1);
+    g.drawFittedText ("S", partialControlLabelLeft, 388, 60, 30, Justification::right, 1);
+    g.drawFittedText ("R", partialControlLabelLeft, 418, 60, 30, Justification::right, 1);
     g.drawFittedText ("LFO Freq", 20, 238, 60, 30, Justification::centred, 1);
     g.drawFittedText ("LFO Shape", 20, 268, 60, 30, Justification::centred, 1);
     g.drawFittedText ("Voices", 20, 298, 60, 30, Justification::centred, 1);
@@ -287,7 +289,7 @@ void PlusAudioProcessorEditor::resized()
 
     int partialAreaLeft = 250;
     for (int i = 0; i < numPartials; ++i)
-        layoutPartialComponents(partialAreaLeft += 20, topRowTop, &partialLevel[i], &partialTune[i], &partialPan[i],
+        layoutPartialComponents(partialAreaLeft + (i * 20), topRowTop, &partialLevel[i], &partialTune[i], &partialPan[i],
                                 &partialLfoAmt[i], &partialAttack[i], &partialDecay[i], &partialSustain[i], &partialRelease[i]);
 
     layoutPartialComponents(910, topRowTop, &noiseLevel, nullptr, &noisePan, &noiseLfoAmt, &noiseAttack, &noiseDecay, &noiseSustain, &noiseRelease);
