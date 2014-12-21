@@ -102,8 +102,8 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                     {
                         partialFreq += (localFreq * ((float)i + stretch));
                         partialFreq += partialFreq * stretch * stretchEnvAmt;
-                        partials[i].setFrequency(partialFreq);
                     }
+                    partials[i].setFrequency(partialFreq);
                     if (20 < partialFreq && partialFreq < nyquist)
                     {
 

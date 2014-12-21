@@ -15,8 +15,8 @@ PlusAudioProcessor::PlusAudioProcessor()
     parameters[STRETCH_ENV_AMT_FINE] = 0.0;
     parameters[PARTIAL_1] = 1.0;
 
-    for (int i = 0; i < numPartials - 1; ++i)
-        parameters[PARTIAL_2 + i] = 0.0;
+    for (int i = 1; i < numPartials; ++i)
+        parameters[PARTIAL_1 + i] = 0.0;
 
     for (int i = 0; i < numPartials; ++i)
         parameters[PARTIAL_TUNE_1 + i] = 0.0;
