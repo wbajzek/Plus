@@ -114,7 +114,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                             currentSampleLeft += value;
                         else
                         {
-                            Amplitude panRight = (1.0 + localParameters[PartialPanToParamMapping[i]]) / 2.0;
+                            Amplitude panRight = (1.0 + localParameters[PartialPanToParamMapping[i]]) * 0.5;
                             Amplitude panLeft  = 1.0 - panRight;
                             currentSampleLeft += value * panLeft;
                             currentSampleRight += value * panRight;
@@ -133,7 +133,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                     currentSampleLeft += value;
                 else
                 {
-                    Amplitude panRight = (1.0 + localParameters[NOISE_PAN]) / 2.0;
+                    Amplitude panRight = (1.0 + localParameters[NOISE_PAN]) * 0.5;
                     Amplitude panLeft  = 1.0 - panRight;
                     currentSampleLeft += value * panLeft;
                     currentSampleRight += value * panRight;
@@ -141,11 +141,11 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             }
             
             if (numChannels == 1)
-                outputBuffer.addSample(0, startSample, currentSampleLeft / 8);
+                outputBuffer.addSample(0, startSample, currentSampleLeft * 0.125);
             else
             {
-                outputBuffer.addSample(0, startSample, currentSampleLeft / 8);
-                outputBuffer.addSample(1, startSample, currentSampleRight / 8);
+                outputBuffer.addSample(0, startSample, currentSampleLeft * 0.125);
+                outputBuffer.addSample(1, startSample, currentSampleRight * 0.125);
             }
 
             ++startSample;
