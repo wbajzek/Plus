@@ -48,7 +48,7 @@ public:
         samplesSinceTrigger = 0;
     }
 
-    void tick(bool keyIsDown) {
+    Amplitude tick(bool keyIsDown) {
         switch (envelopeState)
         {
             case ATTACK_STATE:
@@ -113,6 +113,7 @@ public:
             envLevel = 0.0;
         
         samplesSinceTrigger++;
+        return envLevel;
     }
     
     Amplitude amplitude()

@@ -40,7 +40,7 @@ public:
         waveTableShape = newWaveTableShape;
     }
 
-    void tick()
+    Amplitude tick()
     {
         jassert(sampleRate > 0);
         jassert(frqTI > 0);
@@ -67,6 +67,7 @@ public:
                 break;
         }
         index = index + increment & ((waveTableLength << 16) - 1);
+        return value;
     }
     
     Amplitude output()

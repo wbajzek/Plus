@@ -107,7 +107,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                     if (20 < partialFreq && partialFreq < nyquist)
                     {
 
-                        Amplitude value = partials[i].output()
+                        Amplitude value = partials[i].currentSample
                         * (localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]]));
 
                         if (numChannels == 1)
@@ -127,7 +127,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             
             if (localParameters[NOISE_LEVEL] > 0.0)
             {
-                Amplitude value = noiseVoice.output() * (localParameters[NOISE_LEVEL] + (lfoLevel * localParameters[NOISE_LFO_AMT]));
+                Amplitude value = noiseVoice.currentSample * (localParameters[NOISE_LEVEL] + (lfoLevel * localParameters[NOISE_LFO_AMT]));
                 
                 if (numChannels == 1)
                     currentSampleLeft += value;
@@ -193,13 +193,13 @@ void AdditiveSynthVoice::tick()
         if (localParameters[PartialLevelToParamMapping[i]] > 0.0 && partials[i].isActive())
         {
             partials[i].tick(keyIsDown);
-            voiceIsActive |= (partials[i].amplitude() != 0.0);
+            voiceIsActive = true;
         }
     }
-    if (localParameters[NOISE_LEVEL] > 0.0)
+    if (localParameters[NOISE_LEVEL] > 0.0 && noiseVoice.isActive())
     {
         noiseVoice.tick(keyIsDown);
-        voiceIsActive |= (noiseVoice.amplitude() != 0.0);
+        voiceIsActive = true;
     }
     lfo.tick();
 }

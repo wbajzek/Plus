@@ -50,25 +50,20 @@ public:
     
     void tick(bool keyIsDown)
     {
-        envelope.tick(keyIsDown);
-        oscillator.tick();
+        currentAmplitude = envelope.tick(keyIsDown);
+        if (currentAmplitude > 0.0)
+            if ((currentAmplitude *= velocity) > 0.0)
+                currentSample = oscillator.tick() * currentAmplitude;
     }
-    
-    Amplitude output()
-    {
-        return oscillator.output() * amplitude();
-    }
-    
-    Amplitude amplitude()
-    {
-        return envelope.amplitude() * velocity;
-    }
-    
+        
     bool isActive()
     {
         return envelope.isActive();
     }
-    
+
+    Amplitude currentSample = 0.0;
+    Amplitude currentAmplitude = 0.0;
+
 private:
     Oscillator oscillator;
     Envelope envelope;
