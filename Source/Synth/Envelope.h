@@ -42,9 +42,8 @@ public:
     }
     
     // velocity scaled [0,1]
-    void trigger(Amplitude newVelocity)
+    void trigger()
     {
-        velocity = newVelocity;
         envelopeState = ATTACK_STATE;
         samplesSinceTrigger = 0;
     }
@@ -53,29 +52,30 @@ public:
         switch (envelopeState)
         {
             case ATTACK_STATE:
-                if (samplesSinceTrigger == 0)
-                    envIncrement = velocity / attackSamples;
-                else if (samplesSinceTrigger > attackSamples)
-                {
-                    envelopeState = DECAY_STATE;
-                    envCoefficient = getSegmentCoefficient(envLevel, sustainLevel * velocity, decaySamples);
-                }
-                
                 if (attackSamples == 0)
                 {
-                    envLevel = velocity;
+                    envLevel = 1.0;
                     envIncrement = 0.0;
                     envelopeState = DECAY_STATE;
                 }
                 else
-                    envLevel += envIncrement;
-                
-                if (!keyIsDown)
                 {
-                    envelopeState = RELEASE_STATE;
-                    envCoefficient = getSegmentCoefficient(envLevel, 0.0, releaseSamples);
-                    jassert(envCoefficient != INFINITY);
+                    if (samplesSinceTrigger == 0)
+                        envIncrement = 1.0 / attackSamples;
+                    else if (samplesSinceTrigger > attackSamples)
+                    {
+                        envelopeState = DECAY_STATE;
+                        envCoefficient = getSegmentCoefficient(envLevel, sustainLevel, decaySamples);
+                    }
+
+                    if (!keyIsDown)
+                    {
+                        envelopeState = RELEASE_STATE;
+                        envCoefficient = getSegmentCoefficient(envLevel, 0.0, releaseSamples);
+                    }
+                    envLevel += envIncrement;
                 }
+                
                 break;
             case DECAY_STATE:
                 if (samplesSinceTrigger > attackSamples + decaySamples)
@@ -84,7 +84,6 @@ public:
                 {
                     envelopeState = RELEASE_STATE;
                     envCoefficient = getSegmentCoefficient(envLevel, 0.0, releaseSamples);
-                    jassert(envCoefficient != INFINITY);
                 }
                 else
                     envLevel += envCoefficient * envLevel;
@@ -94,16 +93,18 @@ public:
                 {
                     envelopeState = RELEASE_STATE;
                     envCoefficient = getSegmentCoefficient(envLevel, 0.0, releaseSamples);
-                    jassert(envCoefficient != INFINITY);
                 }
                 break;
             case RELEASE_STATE:
                 envLevel += envCoefficient * envLevel;
                 if (envLevel < 0.001)
                 {
+                    envelopeState = DEAD_STATE;
                     envLevel = 0.0;
                     // caller will need to clear current note
                 }
+                break;
+            case DEAD_STATE:
                 break;
         }
         if (envLevel > 1.0)
@@ -112,14 +113,16 @@ public:
             envLevel = 0.0;
         
         samplesSinceTrigger++;
-        jassert(envLevel != NAN);
-        jassert(envLevel <= 1.0);
-        jassert(envLevel >= 0.0);
     }
     
     Amplitude amplitude()
     {
         return envLevel;
+    }
+    
+    bool isActive()
+    {
+        return envelopeState;
     }
     
 private:
@@ -140,7 +143,6 @@ private:
     int envelopeState;
     unsigned long samplesSinceTrigger = 0;
     Frequency sampleRate = 0.0;
-    Amplitude velocity = 0.0;
     Amplitude envLevel = 0.0;
     float envCoefficient = 0.0;
     float envIncrement = 0.0;
@@ -155,10 +157,11 @@ private:
     unsigned long releaseSamples = 0;
     
     enum EnvelopeState {
+        DEAD_STATE,
         ATTACK_STATE,
         DECAY_STATE,
         SUSTAIN_STATE,
-        RELEASE_STATE
+        RELEASE_STATE,
     };
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Envelope)

@@ -33,7 +33,7 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
     noteNumber = midiNoteNumber;
     freq = calculateFrequency(currentPitchWheelPosition);
     stretchEnvelope.setAdsr(localParameters[ATTACK], localParameters[DECAY], localParameters[SUSTAIN], localParameters[RELEASE]);
-    stretchEnvelope.trigger(midiVelocity);
+    stretchEnvelope.trigger();
     for (int i = 0; i < numPartials; i++)
     {
         partials[i].setAdsr(localParameters[PartialAttackToParamMapping[i]], localParameters[PartialDecayToParamMapping[i]], localParameters[PartialSustainToParamMapping[i]], localParameters[PartialReleaseToParamMapping[i]]);
@@ -95,7 +95,7 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
 
             for (int i = 0; i < numPartials; i++)
             {
-                if (localParameters[PartialLevelToParamMapping[i]] > 0.0 && partials[i].amplitude() > 0.0)
+                if (localParameters[PartialLevelToParamMapping[i]] > 0.0 && partials[i].isActive())
                 {
                     Frequency partialFreq = localFreq + (localFreq * localParameters[PartialTuneToParamMapping[i]]);
                     if (i > 0)
@@ -190,7 +190,7 @@ void AdditiveSynthVoice::tick()
     voiceIsActive = false;
     for (int i = 0; i < numPartials; i++)
     {
-        if (localParameters[PartialLevelToParamMapping[i]] > 0.0)
+        if (localParameters[PartialLevelToParamMapping[i]] > 0.0 && partials[i].isActive())
         {
             partials[i].tick(keyIsDown);
             voiceIsActive |= (partials[i].amplitude() != 0.0);

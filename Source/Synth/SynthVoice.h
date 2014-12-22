@@ -39,7 +39,8 @@ public:
     }
 
     void trigger(Amplitude newVelocity) {
-        envelope.trigger(newVelocity);
+        velocity = newVelocity;
+        envelope.trigger();
     }
 
     void setFrequency(Frequency newFrequency)
@@ -49,24 +50,30 @@ public:
     
     void tick(bool keyIsDown)
     {
-        oscillator.tick();
         envelope.tick(keyIsDown);
+        oscillator.tick();
     }
     
     Amplitude output()
     {
-        return oscillator.output() * envelope.amplitude();
+        return oscillator.output() * amplitude();
     }
     
     Amplitude amplitude()
     {
-        return envelope.amplitude();
+        return envelope.amplitude() * velocity;
+    }
+    
+    bool isActive()
+    {
+        return envelope.isActive();
     }
     
 private:
     Oscillator oscillator;
     Envelope envelope;
     Frequency sampleRate;
+    Amplitude velocity;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SynthVoice)
 };
