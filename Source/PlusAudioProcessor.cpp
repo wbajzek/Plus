@@ -79,6 +79,7 @@ void PlusAudioProcessor::initVoices()
 
     // make sure all the voices know the current sample rate
     synth.refreshCurrentPlaybackSampleRate ();
+    sendActionMessage("Amplitudes");
 }
 
 void PlusAudioProcessor::initParameters()
@@ -91,28 +92,28 @@ void PlusAudioProcessor::initParameters()
     addFloatParam(STRETCH_FINE, "Stretch_Fine", true, SAVE, &parameters[STRETCH_FINE], -0.01, 0.01);
     addFloatParam(STRETCH_ENV_AMT, "Stretch_Env_Amt", true, SAVE, &parameters[STRETCH_ENV_AMT], 0.0, 2.0);
     addFloatParam(STRETCH_ENV_AMT_FINE, "Stretch_Env_Amt_Fine", true, SAVE, &parameters[STRETCH_ENV_AMT_FINE], 0.0, 0.1);
-    
+
     for (int i = 0; i < numPartials; ++i)
     {
         char xmlName[30];
         sprintf(xmlName, "Partial_%i", i + 1);
         addFloatParam(PARTIAL_1 + i, xmlName, true, SAVE, &parameters[PARTIAL_1 + i], 0.0, 1.0);
     }
-    
+
     for (int i = 0; i < numPartials; ++i)
     {
         char xmlName[30];
         sprintf(xmlName, "Partial_Tune%i", i + 1);
         addFloatParam(PARTIAL_TUNE_1 + i, xmlName, true, SAVE, &parameters[PARTIAL_TUNE_1 + i], -1.0, 1.0);
     }
-    
+
     for (int i = 0; i < numPartials; ++i)
     {
         char xmlName[30];
         sprintf(xmlName, "Partial_Pan%i", i + 1);
         addFloatParam(PARTIAL_PAN_1 + i, xmlName, true, SAVE, &parameters[PARTIAL_PAN_1 + i], -1.0, 1.0);
     }
-    
+
     for (int i = 0; i < numPartials; ++i)
     {
         char xmlName[30];
@@ -228,6 +229,40 @@ void PlusAudioProcessor::runAfterParamChange(int paramIndex,UpdateFromFlags upda
         case SUSTAIN:
         case RELEASE:
             sendActionMessage("Envelope");
+            break;
+        case PARTIAL_1:
+        case PARTIAL_2:
+        case PARTIAL_3:
+        case PARTIAL_4:
+        case PARTIAL_5:
+        case PARTIAL_6:
+        case PARTIAL_7:
+        case PARTIAL_8:
+        case PARTIAL_9:
+        case PARTIAL_10:
+        case PARTIAL_11:
+        case PARTIAL_12:
+        case PARTIAL_13:
+        case PARTIAL_14:
+        case PARTIAL_15:
+        case PARTIAL_16:
+        case PARTIAL_17:
+        case PARTIAL_18:
+        case PARTIAL_19:
+        case PARTIAL_20:
+        case PARTIAL_21:
+        case PARTIAL_22:
+        case PARTIAL_23:
+        case PARTIAL_24:
+        case PARTIAL_25:
+        case PARTIAL_26:
+        case PARTIAL_27:
+        case PARTIAL_28:
+        case PARTIAL_29:
+        case PARTIAL_30:
+        case PARTIAL_31:
+        case PARTIAL_32:
+            sendActionMessage("Amplitudes");
             break;
         default:
             break;

@@ -66,7 +66,7 @@ public:
         samplesSinceTrigger = 0;
     }
     
-    void tick(bool keyIsDown, Amplitude amplitudes[32])
+    void tick(bool keyIsDown)
     {
         for (int i = 0; i < 32; ++i)
         {

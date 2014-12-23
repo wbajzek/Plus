@@ -111,7 +111,6 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             Frequency partialFrequencies[numPartials] = { 0.0 };
             for (int i = 0; i < numPartials; i++)
             {
-                amplitudes[i] = localParameters[PartialLevelToParamMapping[i]];
                 if (localParameters[PartialLevelToParamMapping[i]] > 0.0)
                 {
                     Frequency partialFreq = localFreq + (localFreq * localParameters[PartialTuneToParamMapping[i]]);
@@ -207,7 +206,7 @@ void AdditiveSynthVoice::tick()
     bool keyIsDown = isKeyDown();
     stretchEnvelope.tick(keyIsDown);
     voiceIsActive = false;
-    voice.tick(keyIsDown, amplitudes);
+    voice.tick(keyIsDown);
     voiceIsActive = voice.isActive();
     if (localParameters[NOISE_LEVEL] > 0.0 && noiseVoice.isActive())
     {
@@ -232,4 +231,7 @@ void AdditiveSynthVoice::actionListenerCallback (const String &message)
         adsr.release = localParameters[RELEASE];
         stretchEnvelope.setAdsr(adsr);
     }
+    else if (message.equalsIgnoreCase("Amplitudes"))
+        for (int i = 0; i < numPartials; ++i)
+            voice.amplitudes[i] = amplitudes[i] = localParameters[PartialLevelToParamMapping[i]];
 }
