@@ -33,9 +33,9 @@ public:
         oscillator.setWaveTable(newWaveTableShape);
     }
     
-    void setAdsr(Seconds newAttack, Seconds newDecay, Amplitude newSustainLevel, Seconds newRelease)
+    void setAdsr(Adsr newAdsr)
     {
-        envelope.setAdsr(newAttack, newDecay, newSustainLevel, newRelease);
+        envelope.setAdsr(newAdsr);
     }
 
     void trigger(Amplitude newVelocity) {
@@ -63,9 +63,9 @@ public:
 
     Amplitude currentSample = 0.0;
     Amplitude currentAmplitude = 0.0;
+    Oscillator oscillator;
 
 private:
-    Oscillator oscillator;
     Envelope envelope;
     Frequency sampleRate;
     Amplitude velocity;

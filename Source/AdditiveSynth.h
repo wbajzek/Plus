@@ -303,6 +303,8 @@ enum MidiControls {
 #include "AdditiveSynthSound.h"
 #include "AdditiveSynthesiser.h"
 #include "Scales.h"
+#include "Additive32Voice.h"
 #include "AdditiveSynthVoice.h"
+
 
 #endif

@@ -40,32 +40,36 @@ public:
         waveTableShape = newWaveTableShape;
     }
 
+    static Amplitude ValueFromTable(int index, int waveTableShape)
+    {
+        int scaledIndex = ((index+0x8000) >> 16);
+        switch (waveTableShape)
+        {
+            case SINE_WAVE_TABLE:
+                return sineWaveTable[scaledIndex];
+                break;
+            case TRIANGLE_WAVE_TABLE:
+                return triangleWaveTable[scaledIndex];
+                break;
+            case SAW_WAVE_TABLE:
+                return sawWaveTable[scaledIndex];
+                break;
+            case RAMP_WAVE_TABLE:
+                return rampWaveTable[scaledIndex];
+                break;
+            case WHITE_NOISE_WAVE_TABLE:
+                return whiteNoiseWaveTable[scaledIndex];
+                break;
+        }
+        return 0.0;
+    }
+    
     Amplitude tick()
     {
         jassert(sampleRate > 0);
         jassert(frqTI > 0);
 
-        int scaledIndex = ((index+0x8000) >> 16);
-        switch (waveTableShape)
-        {
-            case SINE_WAVE_TABLE:
-                value = sineWaveTable[scaledIndex];
-                break;
-            case TRIANGLE_WAVE_TABLE:
-                value = triangleWaveTable[scaledIndex];
-                break;
-            case SAW_WAVE_TABLE:
-                value = sawWaveTable[scaledIndex];
-                break;
-            case RAMP_WAVE_TABLE:
-                value = rampWaveTable[scaledIndex];
-                break;
-            case WHITE_NOISE_WAVE_TABLE:
-                value = whiteNoiseWaveTable[scaledIndex];
-                break;
-            default:
-                break;
-        }
+        value = ValueFromTable(index, waveTableShape);
         index = index + increment & ((waveTableLength << 16) - 1);
         return value;
     }
@@ -74,11 +78,12 @@ public:
     {
         return value;
     }
+
+    Frequency frequency = 0.0;
     
 private:
     Frequency sampleRate = 0.0;
     double frqTI = 0.0;
-    Frequency frequency = 0.0;
     long increment = 0.0;
     unsigned long index = 0;
     int waveTableShape = 0;

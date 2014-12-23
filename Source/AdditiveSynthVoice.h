@@ -329,7 +329,7 @@ public:
 
 private:
 
-    SynthVoice partials[numPartials];
+    Additive32Voice voice;
     SynthVoice noiseVoice;
     Envelope stretchEnvelope;
     Oscillator lfo;

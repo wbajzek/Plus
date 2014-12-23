@@ -14,8 +14,6 @@ AdditiveSynthVoice::AdditiveSynthVoice(float* parameters, int* lfoShape, int* sc
     localLfoShape = lfoShape;
     localScale = scale;
     localScaleRoot = scaleRoot;
-    for (int i = 0; i < numPartials; i++)
-        partials[i].setWaveTable(SINE_WAVE_TABLE);
     noiseVoice.setWaveTable(WHITE_NOISE_WAVE_TABLE);
 }
 
@@ -32,15 +30,32 @@ void AdditiveSynthVoice::startNote (const int midiNoteNumber, const float midiVe
 {
     noteNumber = midiNoteNumber;
     freq = calculateFrequency(currentPitchWheelPosition);
-    stretchEnvelope.setAdsr(localParameters[ATTACK], localParameters[DECAY], localParameters[SUSTAIN], localParameters[RELEASE]);
+    Adsr adsr;
+    adsr.attack = localParameters[ATTACK];
+    adsr.decay = localParameters[DECAY];
+    adsr.sustainLevel = localParameters[SUSTAIN];
+    adsr.release = localParameters[RELEASE];
+    stretchEnvelope.setAdsr(adsr);
     stretchEnvelope.trigger();
+    Adsr partialEnvelopes[numPartials];
     for (int i = 0; i < numPartials; i++)
     {
-        partials[i].setAdsr(localParameters[PartialAttackToParamMapping[i]], localParameters[PartialDecayToParamMapping[i]], localParameters[PartialSustainToParamMapping[i]], localParameters[PartialReleaseToParamMapping[i]]);
-        partials[i].trigger(midiVelocity);
+        Adsr adsr;
+        adsr.attack = localParameters[PartialAttackToParamMapping[i]];
+        adsr.decay = localParameters[PartialDecayToParamMapping[i]];
+        adsr.sustainLevel = localParameters[PartialSustainToParamMapping[i]];
+        adsr.release = localParameters[PartialReleaseToParamMapping[i]];
+        partialEnvelopes[i] = adsr;
+        voice.trigger(midiVelocity);
         voiceIsActive = true;
     }
-    noiseVoice.setAdsr(localParameters[NOISE_ATTACK], localParameters[NOISE_DECAY], localParameters[NOISE_SUSTAIN], localParameters[NOISE_RELEASE]);
+    voice.setAdsrs(partialEnvelopes);
+    Adsr noiseAdsr;
+    noiseAdsr.attack = localParameters[NOISE_ATTACK];
+    noiseAdsr.decay = localParameters[NOISE_DECAY];
+    noiseAdsr.sustainLevel = localParameters[NOISE_SUSTAIN];
+    noiseAdsr.release = localParameters[NOISE_RELEASE];
+    noiseVoice.setAdsr(adsr);
     noiseVoice.trigger(midiVelocity);
     lfo.setFrequency(localParameters[LFO_FREQ]);
     lfo.setWaveTable(*localLfoShape);
@@ -93,9 +108,10 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             float stretch = localParameters[STRETCH] + localParameters[STRETCH_FINE];
             Frequency localFreq = freq + (freq * modWheel * lfoLevel);
 
+            Frequency partialFrequencies[numPartials] = { 0.0 };
             for (int i = 0; i < numPartials; i++)
             {
-                if (localParameters[PartialLevelToParamMapping[i]] > 0.0 && partials[i].isActive())
+                if (localParameters[PartialLevelToParamMapping[i]] > 0.0)
                 {
                     Frequency partialFreq = localFreq + (localFreq * localParameters[PartialTuneToParamMapping[i]]);
                     if (i > 0)
@@ -103,26 +119,30 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
                         partialFreq += (localFreq * ((float)i + stretch));
                         partialFreq += partialFreq * stretch * stretchEnvAmt;
                     }
-                    partials[i].setFrequency(partialFreq);
-                    if (20 < partialFreq && partialFreq < nyquist)
-                    {
-
-                        Amplitude value = partials[i].currentSample
-                        * (localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]]));
-
-                        if (numChannels == 1)
-                            currentSampleLeft += value;
-                        else
-                        {
-                            Amplitude panRight = (1.0 + localParameters[PartialPanToParamMapping[i]]) * 0.5;
-                            Amplitude panLeft  = 1.0 - panRight;
-                            currentSampleLeft += value * panLeft;
-                            currentSampleRight += value * panRight;
-                        }
-
-                    }
+                    partialFrequencies[i] += partialFreq;
                 }
                 stretch += stretch;
+            }
+            voice.setFrequencies(partialFrequencies);
+            tick();
+            
+            for (int i = 0; i < numPartials; i++)
+            {
+                if (20 < partialFrequencies[i] && partialFrequencies[i] < nyquist)
+                {
+                    Amplitude value = voice.samples[i]
+                    * (localParameters[PartialLevelToParamMapping[i]] + (lfoLevel * localParameters[PartialLfoAmtToParamMapping[i]]));
+
+                    if (numChannels == 1)
+                        currentSampleLeft += value;
+                    else
+                    {
+                        Amplitude panRight = (1.0 + localParameters[PartialPanToParamMapping[i]]) * 0.5;
+                        Amplitude panLeft  = 1.0 - panRight;
+                        currentSampleLeft += value * panLeft;
+                        currentSampleRight += value * panRight;
+                    }
+                }
             }
             
             if (localParameters[NOISE_LEVEL] > 0.0)
@@ -149,7 +169,6 @@ void AdditiveSynthVoice::renderNextBlock (AudioSampleBuffer& outputBuffer, int s
             }
 
             ++startSample;
-            tick();
         }
     }
 }
@@ -164,8 +183,7 @@ void AdditiveSynthVoice::setCurrentPlaybackSampleRate (double newRate)
 {
     sampleRate = newRate;
     stretchEnvelope.setSampleRate(sampleRate);
-    for (int i = 0; i < numPartials; i++)
-        partials[i].setSampleRate(sampleRate);
+    voice.setSampleRate(sampleRate);
     noiseVoice.setSampleRate(sampleRate);
     noiseVoice.setFrequency(sampleRate / waveTableLength);
     nyquist = sampleRate/2.0;
@@ -188,14 +206,8 @@ void AdditiveSynthVoice::tick()
     bool keyIsDown = isKeyDown();
     stretchEnvelope.tick(keyIsDown);
     voiceIsActive = false;
-    for (int i = 0; i < numPartials; i++)
-    {
-        if (localParameters[PartialLevelToParamMapping[i]] > 0.0 && partials[i].isActive())
-        {
-            partials[i].tick(keyIsDown);
-            voiceIsActive = true;
-        }
-    }
+    voice.tick(keyIsDown);
+    voiceIsActive = voice.isActive();
     if (localParameters[NOISE_LEVEL] > 0.0 && noiseVoice.isActive())
     {
         noiseVoice.tick(keyIsDown);
@@ -211,5 +223,12 @@ void AdditiveSynthVoice::actionListenerCallback (const String &message)
     else if (message.equalsIgnoreCase("LFO Shape"))
         lfo.setWaveTable(*localLfoShape);
     else if (message.equalsIgnoreCase("Envelope"))
-        stretchEnvelope.setAdsr(localParameters[ATTACK], localParameters[DECAY], localParameters[SUSTAIN], localParameters[RELEASE]);
+    {
+        Adsr adsr;
+        adsr.attack = localParameters[ATTACK];
+        adsr.decay = localParameters[DECAY];
+        adsr.sustainLevel = localParameters[SUSTAIN];
+        adsr.release = localParameters[RELEASE];
+        stretchEnvelope.setAdsr(adsr);
+    }
 }

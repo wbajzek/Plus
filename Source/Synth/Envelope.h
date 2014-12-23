@@ -11,7 +11,13 @@
 #ifndef ENVELOPE_H_INCLUDED
 #define ENVELOPE_H_INCLUDED
 
-
+struct Adsr
+{
+    Seconds attack = 0.0;
+    Seconds decay = 0.0;
+    Amplitude sustainLevel = 1.0;
+    Seconds release = 0.0;
+};
 
 class Envelope
 {
@@ -32,12 +38,9 @@ public:
     }
     
     // parameters in seconds
-    void setAdsr(Seconds newAttack, Seconds newDecay, Amplitude newSustainLevel, Seconds newRelease)
+    void setAdsr(Adsr newAdsr)
     {
-        attack = newAttack;
-        decay = newDecay;
-        sustainLevel = newSustainLevel;
-        release = newRelease;
+        adsr = newAdsr;
         convertSecondsToSamples();
     }
     
@@ -65,7 +68,7 @@ public:
                     else if (samplesSinceTrigger > attackSamples)
                     {
                         envelopeState = DECAY_STATE;
-                        envCoefficient = getSegmentCoefficient(envLevel, sustainLevel, decaySamples);
+                        envCoefficient = getSegmentCoefficient(envLevel, adsr.sustainLevel, decaySamples);
                     }
 
                     if (!keyIsDown)
@@ -136,9 +139,9 @@ private:
     
     void convertSecondsToSamples()
     {
-        attackSamples = sampleRate * attack;
-        decaySamples = sampleRate * decay;
-        releaseSamples = sampleRate * release;
+        attackSamples = sampleRate * adsr.attack;
+        decaySamples = sampleRate * adsr.decay;
+        releaseSamples = sampleRate * adsr.release;
     }
     
     int envelopeState;
@@ -148,10 +151,7 @@ private:
     float envCoefficient = 0.0;
     float envIncrement = 0.0;
 
-    Seconds attack = 0.0;
-    Seconds decay = 0.0;
-    Amplitude sustainLevel = 0.0;
-    Seconds release = 0.0;
+    Adsr adsr;
 
     unsigned long attackSamples = 0;
     unsigned long decaySamples = 0;
