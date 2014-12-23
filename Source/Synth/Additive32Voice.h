@@ -16,10 +16,27 @@
 class Additive32Voice : public SynthVoice
 {
 public:
+    struct PartialEnvelope {
+        Amplitude amplitude;
+        unsigned int attackSamples;
+        unsigned int decaySamples;
+        unsigned int releaseSamples;
+        float coefficient;
+        float increment;
+        Amplitude sustainLevel;
+        Envelope::EnvelopeState state;
+    };
+
     void setAdsrs(Adsr newAdsr[32])
     {
         for (int i = 0; i < 32; ++i)
-            envelopes[i].setAdsr(newAdsr[i]);
+        {
+            envelopes[i].attackSamples = newAdsr[i].attack * sampleRate;
+            envelopes[i].decaySamples = newAdsr[i].decay * sampleRate;
+            envelopes[i].releaseSamples = newAdsr[i].release * sampleRate;
+            envelopes[i].sustainLevel = newAdsr[i].sustainLevel;
+            envelopes[i].releaseSamples = newAdsr[i].release * sampleRate;
+        }
     }
 
     void setSampleRate(float newSampleRate)
@@ -27,8 +44,6 @@ public:
         sampleRate = newSampleRate;
         nyquist = sampleRate * 0.5;
         frqTI = waveTableLength/sampleRate;
-        for (int i = 0; i < 32; ++i)
-            envelopes[i].setSampleRate(newSampleRate);
     }
     
     void setFrequencies(Frequency newFrequencies[32])
@@ -40,50 +55,122 @@ public:
         }
     }
     
-    void trigger(Amplitude newVelocity) {
+    void trigger(Amplitude newVelocity)
+    {
         velocity = newVelocity;
         for (int i = 0; i < 32; ++i)
-            envelopes[i].trigger();
+        {
+            envelopes[i].state = Envelope::ATTACK_STATE;
+            envelopes[i].amplitude = 0.0;
+        }
+        samplesSinceTrigger = 0;
     }
     
     void tick(bool keyIsDown)
     {
         for (int i = 0; i < 32; ++i)
         {
-            if (envelopes[i].envelopeState != Envelope::DEAD_STATE && frequencies[i] < nyquist)
+            if (envelopes[i].state != Envelope::DEAD_STATE && frequencies[i] < nyquist)
             {
-                amplitudes[i] = envelopes[i].tick(keyIsDown);
-                samples[i] = sineWaveTable[((indices[i]+0x8000) >> 16)] * amplitudes[i] * velocity;
+                envelopeTick(i, keyIsDown);
+                samples[i] = sineWaveTable[((indices[i]+0x8000) >> 16)] * envelopes[i].amplitude * velocity;
                 indices[i] = indices[i] + increments[i] & ((waveTableLength << 16) - 1);
-                jassert(samples[i] <= 1.0);
             }
             else
             {
                 samples[i] = 0.0;
             }
         }
+        samplesSinceTrigger++;
+    }
+    
+    void envelopeTick(int partial, bool keyIsDown)
+    {
+        switch (envelopes[partial].state)
+        {
+            case Envelope::ATTACK_STATE:
+                if (envelopes[partial].attackSamples == 0)
+                {
+                    envelopes[partial].amplitude = 1.0;
+                    envelopes[partial].increment = 0.0;
+                    envelopes[partial].state = Envelope::DECAY_STATE;
+                }
+                else
+                {
+                    if (samplesSinceTrigger == 0)
+                        envelopes[partial].increment = 1.0 / envelopes[partial].attackSamples;
+                    else if (samplesSinceTrigger > envelopes[partial].attackSamples)
+                    {
+                        envelopes[partial].state = Envelope::DECAY_STATE;
+                        envelopes[partial].coefficient = getSegmentCoefficient(envelopes[partial].amplitude, envelopes[partial].sustainLevel, envelopes[partial].decaySamples);
+                    }
+                    
+                    if (!keyIsDown)
+                    {
+                        envelopes[partial].state = Envelope::RELEASE_STATE;
+                        envelopes[partial].coefficient = getSegmentCoefficient(envelopes[partial].amplitude, 0.0, envelopes[partial].releaseSamples);
+                    }
+                    envelopes[partial].amplitude += envelopes[partial].increment;
+                }
+                
+                break;
+            case Envelope::DECAY_STATE:
+                if (samplesSinceTrigger > envelopes[partial].attackSamples + envelopes[partial].decaySamples)
+                    envelopes[partial].state = Envelope::SUSTAIN_STATE;
+                else if (!keyIsDown)
+                {
+                    envelopes[partial].state = Envelope::RELEASE_STATE;
+                    envelopes[partial].coefficient = getSegmentCoefficient(envelopes[partial].amplitude, 0.0, envelopes[partial].releaseSamples);
+                }
+                else
+                    envelopes[partial].amplitude += envelopes[partial].coefficient * envelopes[partial].amplitude;
+                break;
+            case Envelope::SUSTAIN_STATE:
+                if (!keyIsDown)
+                {
+                    envelopes[partial].state = Envelope::RELEASE_STATE;
+                    envelopes[partial].coefficient = getSegmentCoefficient(envelopes[partial].amplitude, 0.0, envelopes[partial].releaseSamples);
+                }
+                break;
+            case Envelope::RELEASE_STATE:
+                envelopes[partial].amplitude += envelopes[partial].coefficient * envelopes[partial].amplitude;
+                if (envelopes[partial].amplitude < 0.001)
+                {
+                    envelopes[partial].state = Envelope::DEAD_STATE;
+                    envelopes[partial].amplitude = 0.0;
+                    // caller will need to clear current note
+                }
+                break;
+            case Envelope::DEAD_STATE:
+                break;
+        }
     }
     
     bool isActive()
     {
         for (int i = 0; i < 32; ++i)
-            if (amplitudes[i] != 0.0)
+            if (envelopes[i].amplitude != 0.0)
                 return true;
         return false;
     }
 
     Frequency frequencies[32];
-    Amplitude amplitudes[32];
     Amplitude samples[32];
-    
+
 private:
     Frequency sampleRate = 0.0;
     Frequency nyquist;
     Amplitude velocity;
     double frqTI = 0.0;
-    Envelope envelopes[32];
+    PartialEnvelope envelopes[32];
     unsigned long indices[32];
     unsigned int increments[32];
+    inline Amplitude getSegmentCoefficient(Amplitude startLevel, Amplitude endLevel, int durationInSamples) const
+    {
+        // add a tiny fudge factor when calculating because it doesn't work when levels are exactly 0.0
+        return (log((endLevel + 0.0001)) - log(startLevel + 0.0001)) / durationInSamples;
+    }
+    unsigned long samplesSinceTrigger = 0;
 };
 
 #endif  // ADDITIVE32VOICE_H_INCLUDED
