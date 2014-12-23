@@ -53,8 +53,9 @@ public:
             if (envelopes[i].envelopeState != Envelope::DEAD_STATE && frequencies[i] < nyquist)
             {
                 amplitudes[i] = envelopes[i].tick(keyIsDown);
-                samples[i] = Oscillator::ValueFromTable(indices[i], SINE_WAVE_TABLE) * amplitudes[i] * velocity;
+                samples[i] = sineWaveTable[((indices[i]+0x8000) >> 16)] * amplitudes[i] * velocity;
                 indices[i] = indices[i] + increments[i] & ((waveTableLength << 16) - 1);
+                jassert(samples[i] <= 1.0);
             }
             else
             {
@@ -81,8 +82,8 @@ private:
     Amplitude velocity;
     double frqTI = 0.0;
     Envelope envelopes[32];
-    int indices[32];
-    int increments[32];
+    unsigned long indices[32];
+    unsigned int increments[32];
 };
 
 #endif  // ADDITIVE32VOICE_H_INCLUDED
