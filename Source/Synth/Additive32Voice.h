@@ -69,18 +69,19 @@ public:
     void tick(bool keyIsDown)
     {
         for (int i = 0; i < 32; ++i)
-        {
             if (amplitudes[i] > 0.0 && envelopes[i].state != Envelope::DEAD_STATE && frequencies[i] < nyquist)
-            {
                 envelopeTick(i, keyIsDown);
+                
+        for (int i = 0; i < 32; ++i)
+            if (amplitudes[i] > 0.0 && envelopes[i].state != Envelope::DEAD_STATE && frequencies[i] < nyquist)
                 samples[i] = sineWaveTable[((indices[i]+0x8000) >> 16)] * envelopes[i].amplitude * velocity;
-                indices[i] = indices[i] + increments[i] & ((waveTableLength << 16) - 1);
-            }
             else
-            {
                 samples[i] = 0.0;
-            }
-        }
+        
+        for (int i = 0; i < 32; ++i)
+            if (amplitudes[i] > 0.0 && envelopes[i].state != Envelope::DEAD_STATE && frequencies[i] < nyquist)
+                indices[i] = indices[i] + increments[i] & ((waveTableLength << 16) - 1);
+
         ++samplesSinceTrigger;
     }
     
