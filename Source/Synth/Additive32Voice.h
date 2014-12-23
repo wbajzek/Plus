@@ -17,14 +17,14 @@ class Additive32Voice : public SynthVoice
 {
 public:
     struct PartialEnvelope {
+        Envelope::EnvelopeState state;
         Amplitude amplitude;
+        float coefficient;
+        float increment;
         unsigned int attackSamples;
         unsigned int decaySamples;
         unsigned int releaseSamples;
-        float coefficient;
-        float increment;
         Amplitude sustainLevel;
-        Envelope::EnvelopeState state;
     };
 
     void setAdsrs(Adsr newAdsr[32])
@@ -66,11 +66,11 @@ public:
         samplesSinceTrigger = 0;
     }
     
-    void tick(bool keyIsDown)
+    void tick(bool keyIsDown, Amplitude amplitudes[32])
     {
         for (int i = 0; i < 32; ++i)
         {
-            if (envelopes[i].state != Envelope::DEAD_STATE && frequencies[i] < nyquist)
+            if (amplitudes[i] > 0.0 && envelopes[i].state != Envelope::DEAD_STATE && frequencies[i] < nyquist)
             {
                 envelopeTick(i, keyIsDown);
                 samples[i] = sineWaveTable[((indices[i]+0x8000) >> 16)] * envelopes[i].amplitude * velocity;
@@ -81,7 +81,7 @@ public:
                 samples[i] = 0.0;
             }
         }
-        samplesSinceTrigger++;
+        ++samplesSinceTrigger;
     }
     
     void envelopeTick(int partial, bool keyIsDown)
@@ -156,13 +156,14 @@ public:
 
     Frequency frequencies[32];
     Amplitude samples[32];
+    PartialEnvelope envelopes[32];
+    Amplitude amplitudes[32];
 
 private:
     Frequency sampleRate = 0.0;
     Frequency nyquist;
     Amplitude velocity;
     double frqTI = 0.0;
-    PartialEnvelope envelopes[32];
     unsigned long indices[32];
     unsigned int increments[32];
     inline Amplitude getSegmentCoefficient(Amplitude startLevel, Amplitude endLevel, int durationInSamples) const

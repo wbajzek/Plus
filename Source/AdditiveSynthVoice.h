@@ -333,6 +333,7 @@ private:
     SynthVoice noiseVoice;
     Envelope stretchEnvelope;
     Oscillator lfo;
+    Amplitude amplitudes[numPartials];
 
     float* localParameters;
     int* localLfoShape;
