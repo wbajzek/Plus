@@ -64,9 +64,9 @@ public:
     Amplitude currentSample = 0.0;
     Amplitude currentAmplitude = 0.0;
     Oscillator oscillator;
+    Envelope envelope;
 
 private:
-    Envelope envelope;
     Frequency sampleRate;
     Amplitude velocity;
     

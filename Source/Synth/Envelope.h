@@ -128,6 +128,16 @@ public:
     {
         return envelopeState;
     }
+
+    int envelopeState = DEAD_STATE;
+    
+    enum EnvelopeState {
+        DEAD_STATE,
+        ATTACK_STATE,
+        DECAY_STATE,
+        SUSTAIN_STATE,
+        RELEASE_STATE,
+    };
     
 private:
     
@@ -144,7 +154,6 @@ private:
         releaseSamples = sampleRate * adsr.release;
     }
     
-    int envelopeState;
     unsigned long samplesSinceTrigger = 0;
     Frequency sampleRate = 0.0;
     Amplitude envLevel = 0.0;
@@ -156,14 +165,6 @@ private:
     unsigned long attackSamples = 0;
     unsigned long decaySamples = 0;
     unsigned long releaseSamples = 0;
-    
-    enum EnvelopeState {
-        DEAD_STATE,
-        ATTACK_STATE,
-        DECAY_STATE,
-        SUSTAIN_STATE,
-        RELEASE_STATE,
-    };
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Envelope)
 };

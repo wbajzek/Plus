@@ -16,7 +16,6 @@
 class Additive32Voice : public SynthVoice
 {
 public:
-
     void setAdsrs(Adsr newAdsr[32])
     {
         for (int i = 0; i < 32; ++i)
@@ -26,6 +25,7 @@ public:
     void setSampleRate(float newSampleRate)
     {
         sampleRate = newSampleRate;
+        nyquist = sampleRate * 0.5;
         frqTI = waveTableLength/sampleRate;
         for (int i = 0; i < 32; ++i)
             envelopes[i].setSampleRate(newSampleRate);
@@ -50,16 +50,23 @@ public:
     {
         for (int i = 0; i < 32; ++i)
         {
-            amplitudes[i] = envelopes[i].tick(keyIsDown);
-            samples[i] = Oscillator::ValueFromTable(indices[i], SINE_WAVE_TABLE) * amplitudes[i] * velocity;
-            indices[i] = indices[i] + increments[i] & ((waveTableLength << 16) - 1);
+            if (envelopes[i].envelopeState != Envelope::DEAD_STATE && frequencies[i] < nyquist)
+            {
+                amplitudes[i] = envelopes[i].tick(keyIsDown);
+                samples[i] = Oscillator::ValueFromTable(indices[i], SINE_WAVE_TABLE) * amplitudes[i] * velocity;
+                indices[i] = indices[i] + increments[i] & ((waveTableLength << 16) - 1);
+            }
+            else
+            {
+                samples[i] = 0.0;
+            }
         }
     }
     
     bool isActive()
     {
         for (int i = 0; i < 32; ++i)
-            if (amplitudes[i] > 0.0)
+            if (amplitudes[i] != 0.0)
                 return true;
         return false;
     }
@@ -70,23 +77,12 @@ public:
     
 private:
     Frequency sampleRate = 0.0;
+    Frequency nyquist;
     Amplitude velocity;
     double frqTI = 0.0;
     Envelope envelopes[32];
     int indices[32];
     int increments[32];
-};
-
-class Additive32Oscillator
-{
-public:
-private:
-};
-
-class Additive32Envelope
-{
-public:
-private:
 };
 
 #endif  // ADDITIVE32VOICE_H_INCLUDED
