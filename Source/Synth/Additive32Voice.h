@@ -36,6 +36,8 @@ public:
             envelopes[i].releaseSamples = newAdsr[i].release * sampleRate;
             envelopes[i].sustainLevel = newAdsr[i].sustainLevel;
             envelopes[i].releaseSamples = newAdsr[i].release * sampleRate;
+            envelopes[i].increment = 1.0 / envelopes[i].attackSamples;
+
         }
     }
 
@@ -90,41 +92,33 @@ public:
         switch (envelopes[partial].state)
         {
             case Envelope::ATTACK_STATE:
-                if (envelopes[partial].attackSamples == 0)
+                envelopes[partial].amplitude += envelopes[partial].increment;
+                if (envelopes[partial].amplitude >= 1.0)
                 {
                     envelopes[partial].amplitude = 1.0;
-                    envelopes[partial].increment = 0.0;
                     envelopes[partial].state = Envelope::DECAY_STATE;
+                    envelopes[partial].coefficient = getSegmentCoefficient(envelopes[partial].amplitude, envelopes[partial].sustainLevel, envelopes[partial].decaySamples);
                 }
-                else
-                {
-                    if (samplesSinceTrigger == 0)
-                        envelopes[partial].increment = 1.0 / envelopes[partial].attackSamples;
-                    else if (samplesSinceTrigger > envelopes[partial].attackSamples)
-                    {
-                        envelopes[partial].state = Envelope::DECAY_STATE;
-                        envelopes[partial].coefficient = getSegmentCoefficient(envelopes[partial].amplitude, envelopes[partial].sustainLevel, envelopes[partial].decaySamples);
-                    }
                     
-                    if (!keyIsDown)
-                    {
-                        envelopes[partial].state = Envelope::RELEASE_STATE;
-                        envelopes[partial].coefficient = getSegmentCoefficient(envelopes[partial].amplitude, 0.0, envelopes[partial].releaseSamples);
-                    }
-                    envelopes[partial].amplitude += envelopes[partial].increment;
+                if (!keyIsDown)
+                {
+                    envelopes[partial].state = Envelope::RELEASE_STATE;
+                    envelopes[partial].coefficient = getSegmentCoefficient(envelopes[partial].amplitude, 0.0, envelopes[partial].releaseSamples);
                 }
-                
                 break;
             case Envelope::DECAY_STATE:
-                if (samplesSinceTrigger > envelopes[partial].attackSamples + envelopes[partial].decaySamples)
+                envelopes[partial].amplitude += envelopes[partial].coefficient * envelopes[partial].amplitude;
+
+                if (envelopes[partial].amplitude <= envelopes[partial].sustainLevel && keyIsDown)
+                {
+                    envelopes[partial].amplitude = envelopes[partial].sustainLevel;
                     envelopes[partial].state = Envelope::SUSTAIN_STATE;
+                }
                 else if (!keyIsDown)
                 {
                     envelopes[partial].state = Envelope::RELEASE_STATE;
                     envelopes[partial].coefficient = getSegmentCoefficient(envelopes[partial].amplitude, 0.0, envelopes[partial].releaseSamples);
                 }
-                else
-                    envelopes[partial].amplitude += envelopes[partial].coefficient * envelopes[partial].amplitude;
                 break;
             case Envelope::SUSTAIN_STATE:
                 if (!keyIsDown)
@@ -137,9 +131,8 @@ public:
                 envelopes[partial].amplitude += envelopes[partial].coefficient * envelopes[partial].amplitude;
                 if (envelopes[partial].amplitude < 0.001)
                 {
-                    envelopes[partial].state = Envelope::DEAD_STATE;
                     envelopes[partial].amplitude = 0.0;
-                    // caller will need to clear current note
+                    envelopes[partial].state = Envelope::DEAD_STATE;
                 }
                 break;
             case Envelope::DEAD_STATE:
