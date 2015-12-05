@@ -1,5 +1,8 @@
 # Additive Synthesizer #
 
+This was my first c++ project and needs some drastic reworking. But
+here it is on Github, mainly for my own convenience.
+
 ## Wishlist ##
 * color control for noise 'partial'
 * velocity sensitivity control
